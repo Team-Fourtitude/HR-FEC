@@ -25,3 +25,19 @@ Run the following commands to initialize this repo:
   - npm install
   - npm run build
   - npm start
+
+
+## IF YOU PLAN TO MAKE API REQUESTS FOR TESTING WITH LIVE DATA
+Locate the example.config.js file @ client/env/example.config.js
+
+MAKE SURE TO CHANGE THE FILE NAME TO config.js
+If done correctly, the file should appear greyed out.
+
+Make sure it is ignored before pushing commits,
+failure to do so WILL COMPROMISE your key!!!
+
+Replace the string with your github api token.
+
+To receive data, simply visit http://localhost:3000/[path] as indicated in the path handlers
+
+Optionally, you may integrate ajax/axios requests in your component to handle the data directly.
