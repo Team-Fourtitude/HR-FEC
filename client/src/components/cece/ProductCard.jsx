@@ -8,21 +8,16 @@ import RelatedProductContext from '../context/RelatedProductContext.jsx';
 
 
 const ProductCard = ({item, defaults}) => {
-  // console.log(item)
   const { product, setProduct } = useContext(ProductContext);
   const { style, setStyle } = useContext(StyleContext);
-  const [styles, setStyles]  = useContext(StylesContext);
+  // const [styles, setStyles]  = useContext(StylesContext);
   const [ relatedProduct, setRelatedProduct] = useContext(RelatedProductContext);
 
   const [viewModal, setViewModal] = useState(false);
 
-  console.log('PC', style)
+  // console.log('PC', style)
 
-  const oneStyle = () => {
-    for (var i = 0; i < defaults.length; i++) {
-        return defaults[i]
-      }
-  }
+
 
   const modalInfoClick = (e) => {
     setViewModal(prevState => !prevState);

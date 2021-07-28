@@ -1,32 +1,29 @@
 import React, { useState, useRef, useContext } from 'react';
 import ProductCard from './ProductCard.jsx';
-import ComparisonModal from './ComparisonModal.jsx';
-import ProductContext from '../context/ProductContext.jsx';
-import StylesContext from '../context/StylesContext.jsx';
-import StyleContext from '../context/StyleContext.jsx';
 import RelatedProductContext from '../context/RelatedProductContext.jsx';
+import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
 
 
 
 const RelatedProductList = () => {
-  const { product, setProduct } = useContext(ProductContext);
-  const { style, setStyle } = useContext(StyleContext);
-  const [ styles, setStyles ] = useContext(StylesContext);
   const [ relatedProduct, setRelatedProduct ] = useContext(RelatedProductContext);
-  const [state, setState] = useState([]);
+  const [ relatedStyles, setRelatedStyles ] = useContext(RelatedStylesContext);
 
-console.log('styles', styles)
+console.log('styles', relatedStyles)
 
 // console.log('rel', relatedProduct)
+// console.log('def', relatedStyles)
 
 
-  const deStyle = styles.map((style) => {
-    let newStyle = style.results.filter((def) => {
-      return def[`default?`];
-    })
-    return newStyle;
-  })
 
+  // const deStyle = relatedStyles.defaults.map((style) => {
+  //   let newStyle = style.defaults.results.filter((def) => {
+  //     return def[`default?`];
+  //   })
+  //   return newStyle;
+  // })
+
+  // console.log(deStyle)
 
 
 
@@ -46,7 +43,7 @@ console.log('styles', styles)
     <>
         <div className="container" ref={ref} >
           {relatedProduct ? relatedProduct.map((item) => {
-            return <ProductCard item={item} defaults={deStyle} key={item.id}/>
+            return <ProductCard item={item}  key={item.id}/>
           }) : null}
         </div>
         <div>

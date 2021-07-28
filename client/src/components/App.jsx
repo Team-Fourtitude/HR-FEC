@@ -17,10 +17,7 @@ const App = () => {
   const [style, setStyle] = useState({});
   const [relatedIds, setRelatedIds] = useState([]);
   const [relatedProduct, setRelatedProduct] = useState([])
-  const [relatedStyles, setRelatedStyles] = useState({
-    related: [],
-    default: []
-  });
+  const [relatedStyles, setRelatedStyles] = useState([]);
 
   //initial Data
   const getInitialData = () => {
@@ -75,28 +72,19 @@ const App = () => {
 
 
       axios.all(relatedStyles).then(axios.spread((...res) => {
-        // console.log('res', res)
         let relatedStylesMap = res.map((data) => {
           return data.data;
         })
-        // console.log('map', relatedStylesMap);
+
 
         let defaultStyleMap = res.flatMap((data) => {
           let defaultStyle = data.data.results.filter((style) => {
             return style[`default?`];
             })
-          // console.log('def', defaultStyle)
           return defaultStyle;
         })
-        setRelatedStyles({
-          related: relatedStylesMap,
-          default: defaultStyleMap})
-        return res;
+        return setRelatedStyles({related: relatedStylesMap, defaults: defaultStyleMap})
       }))
-      // .then(axios.spread((...res) => {
-
-      //   setStyles([...styles, {default: defaultStyleMap}]);
-      // }))
       .catch(err => console.log(err))
     }
   }
@@ -143,6 +131,7 @@ const App = () => {
           <StylesContext.Provider value={{styles, setStyles}}>
             <StyleContext.Provider value={{style, setStyle}}>
               <Test />
+              {/* {console.log(relatedStyles)} */}
               <RelatedProductList />
               <OutfitList />
             </StyleContext.Provider>
