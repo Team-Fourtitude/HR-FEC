@@ -102,8 +102,13 @@ export const QuestionsProvider = ({children}) => {
     }
   }
 
+  const getAnswersByQuestion = (qid) => {
+    for (let question of questions ){
+      if (question.question_id === qid) return question.answers;
+    }
+  }
+
   useEffect(() => {
-    console.log(product.id)
     getQuestions(product.id)
     if (query.length > 2) {
       queryQuestions(query)
@@ -117,7 +122,8 @@ export const QuestionsProvider = ({children}) => {
         addQuestion,
         reportQuestion,
         queryQuestions,
-        markQuestionHelpful
+        markQuestionHelpful,
+        getAnswersByQuestion
         }}>
       {children}
       </QuestionsUpdateContext.Provider>

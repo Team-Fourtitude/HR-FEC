@@ -83,7 +83,7 @@ module.exports = {
 
   getAnswers: (question_id) => {
     return axios({
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/${questions}/answers`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/${question_id}/answers`,
       method: 'get',
       headers: {Authorization: apiKey},
     });

@@ -9,8 +9,10 @@ const PictureGallery = (props) => {
 
   const style = {
     height: 'auto',
-    maxWidth: 100,
-    cursor: 'pointer'
+    maxWidth: 150,
+    cursor: 'pointer',
+    borderRadius: 15,
+    border: 10,
   }
 
   const popImage = (src) => {

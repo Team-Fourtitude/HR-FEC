@@ -5,7 +5,7 @@ import Modal from './Modal.jsx';
 import AnswerItem from './AnswerItem.jsx';
 import AddQuestion from './AddQuestion.jsx';
 import QuestionContext from './QuestionContext.jsx';
-import { useAnswersUpdate } from './AnswersContext.jsx';
+import { useAnswers, useAnswersUpdate } from './AnswersContext.jsx';
 import { LoadMoreAnswersButton } from './StyleHelpers.jsx'
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
 
@@ -20,10 +20,13 @@ const QuestionItem = (props) => {
   const [isOpen, setOpen] = useState(false);
 
   const questionUpdaters = useQuestionsUpdate();
-  const answerUpdaters = useAnswersUpdate();
+
   const currentQuestion = useContext(QuestionContext);
+  const { answers } = useAnswers();
+  const currentQuestionId = currentQuestion.question_id;
 
   useEffect(() => {
+    console.log(`Ans: ${answers}`)
     setAllAns(sortAnswers());
   }, [])
 
@@ -38,34 +41,36 @@ const QuestionItem = (props) => {
   }
 
   const sortAnswers = () => {
-    // Need to Update for
     let ansByKeys = Object.keys(props.question.answers);
     const sortedAnswers = ansByKeys.sort((a, b) => {
       return props.question.answers[b].helpfulness - props.question.answers[a].helpfulness
     })
-    //console.log(`This is the sorted array ${sortedAnswers}`)
     return sortedAnswers;
   }
 
-  return(<div className="question-item">
-    <div className="question-title">
-      <h3>Q: {currentQuestion.question_body}</h3>
-      <div className="question-sub-text">
-        by {currentQuestion.asker_name} | Helpful?  <u
-        onClick={() => {
-          questionUpdaters.markQuestionHelpful(currentQuestion.question_id, hasHelped);
-          setHasHelped(true);
-        }}
-        style={{cursor: "pointer"}}>
-           Yes</u>
-        <span> ({currentQuestion.question_helpfulness}) | </span>
-        <u className="add-answer-link"
-          style={{cursor: "pointer"}}
-          onClick={ () => setOpen(true) }
-        >Add Answer</u>
+
+  return(
+  <div className="question-item">
+    <div className={`question-container${ hasHelped ? "-helpful" : ""}`}>
+      <div className="question-title">
+        <h3>Q: {currentQuestion.question_body}</h3>
+        <div className="question-sub-text">
+          by {currentQuestion.asker_name} | Helpful?  <u
+          onClick={() => {
+            questionUpdaters.markQuestionHelpful(currentQuestion.question_id, hasHelped);
+            setHasHelped(true);
+          }}
+          style={{cursor: "pointer"}}>
+            Yes</u>
+          <span> ({currentQuestion.question_helpfulness}) | </span>
+          <u className="add-answer-link"
+            style={{cursor: "pointer"}}
+            onClick={ () => setOpen(true) }
+          >Add Answer</u>
+        </div>
       </div>
-    </div>
     {' '}
+
     <div
       className="answer-list"
       style={{margin: 10}}>
@@ -88,6 +93,7 @@ const QuestionItem = (props) => {
             <AddQuestion />
         </Modal>
       </div>
+    </div>
   </div>)
 }
 

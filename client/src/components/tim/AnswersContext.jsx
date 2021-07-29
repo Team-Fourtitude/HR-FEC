@@ -18,20 +18,26 @@ export const useAnswersUpdate = () => {
 export const AnswersProvider = ({children}) => {
   const [answers, setAnswers] = useState([]);
   const [sortedAnswers, setSortedAnswers] = useState([]);
+  const [isLoaded, setLoaded] = useState(false);
 
   const currentQuestion = useContext(QuestionContext);
   const currentQuestionId = currentQuestion.question_id;
 
   // API fetch current answers for question
-  const getAnswers = () => {
-    console.log(`Current Question Id: ${currentQuestionId}`);
-    axios.get(`/qa/questions/${currentQuestionId}/answers`, {
+  const getAnswers = (qid) => {
+    axios.get(`/qa/questions/${qid}/answers`, {
         params: {
-          question_id: currentQuestionId,
+          question_id: qid,
         },
       })
     .then(data => {
-      setAnswers(data.data.results)
+    setAnswers(data.data.results)
+    })
+    .then(() => {
+      sortAnswers()
+    })
+    .then(() => {
+      setLoaded(true);
     })
     .catch(error => console.log(error));
   }
@@ -49,7 +55,6 @@ export const AnswersProvider = ({children}) => {
     axios.put(`/qa/answers/${answer_id}/helpful`)
       .then(() => {
         console.log(`Marked Answer Helpful: ${answer_id}`)
-        getAnswers()
       })
       .catch(error => console.log(error));
   }
@@ -59,24 +64,44 @@ export const AnswersProvider = ({children}) => {
     axios.put(`/qa/answers/${answer_id}/report`)
       .then(() => {
         console.log(`Reported Answer: ${answer_id}`)
-        getAnswers()
       })
       .catch(error => console.log(error));
   }
 
+  const submitAnswer = (qid, newAnswer) => {
+    axios.post(`/qa/questions/${qid}/answers`, {
+      body: {
+        answerBody: newAnswer.questionBody,
+        email: newAnswer.email,
+        photos: newAnswer.photos,
+        name: newAnswer.name,
+      }
+    })
+    .then(() => {
+      console.log(`Added Answer from ${newAnswer.name}`)
+    })
+    .catch(error => console.log(error));
+  }
+
+  // /qa/questions/:question_id/answers
+
   useEffect(() => {
-    getAnswers()
-  }, [currentQuestionId])
+    setLoaded(false);
+    getAnswers(currentQuestionId);
+  }, [currentQuestion])
 
   return (
     <AnswersContext.Provider value={
       {answers,
-      sortedAnswers}}>
+      sortedAnswers,
+      isLoaded,
+      }}>
         <AnswersUpdateContext.Provider value={{
           getAnswers,
           sortAnswers,
           reportAnswer,
           markAnswerHelpful,
+          submitAnswer,
         }}>
           {children}
         </AnswersUpdateContext.Provider>

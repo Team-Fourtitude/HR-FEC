@@ -1,6 +1,4 @@
 import React from 'react';
-
-import QuestionSearch from './QuestionSearch.jsx'
 import QuestionsList from './QuestionsList.jsx';
 import { QuestionsProvider } from './QuestionsContext.jsx'
 
@@ -16,7 +14,6 @@ const QuestionsAnswers = () => {
       "margin": "50px",
       }}>
         <QuestionsProvider>
-          <QuestionSearch />
           <QuestionsList />
         </QuestionsProvider>
     </div>

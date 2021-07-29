@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PictureGallery from './PictureGallery.jsx';
+import { useAnswers, useAnswersUpdate } from './AnswersContext.jsx';
 import axios from 'axios';
+import QuestionContext from './QuestionContext.jsx';
+import { useQuestionsUpdate } from './QuestionsContext.jsx';
 
 //import { useQuestions } from './QuestionsContext.jsx';
 /* eslint react/prop-types: 0 */
 
 const AnswerItem = (props) => {
-  // const { questions } = useQuestions();
- //const [answer, setAnswer] = useState({});
- const [isHelpful, setHelped] = useState(false);
+  const [answer, setAnswer] = useState({});
+  const [isHelpful, setHelped] = useState(false);
+  const [willReport, setWillReport] = useState(false);
+  const { isLoaded, sortedAnswers } = useAnswers();
+  const { reportAnswer, markAnswerHelpful } = useAnswersUpdate();
+  const currentQuestionId = useContext(QuestionContext).question_id;
+  const answersByQuestion = useQuestionsUpdate().getAnswersByQuestion;
 
-  // useEffect(() => {
-  //   console.log(`please`)
-  //   //setAnswer(props.answer)
-  // }, [])
+
+  useEffect(() => {
+    let answers = answersByQuestion(currentQuestionId);
+    setAnswer(answers[props.answer.id])
+  }, [isLoaded])
 
   const convertDate = (date) => {
     const dateFormat = {
@@ -26,46 +34,51 @@ const AnswerItem = (props) => {
     return `${newdate[1]} ${newdate[0]} ${newdate[2]}`;
   }
 
-  const reportAnswer = (answer_id) => {
-    // PUT reported question
-    axios.put(`/qa/answers/${answer_id}/report`)
-      .then(() => console.log(`Reported Answer: ${answer_id}`))
-      .catch(error => console.log(error));
-  }
+  // const reportAnswer = (answer_id) => {
+  //   // PUT reported question
+  //   axios.put(`/qa/answers/${answer_id}/report`)
+  //     .then(() => console.log(`Reported Answer: ${answer_id}`))
+  //     .catch(error => console.log(error));
+  // }
 
-  const markAnswerHelpful = (answer_id) => {
-    // PUT upvoted answer
-    axios.put(`/qa/answers/${answer_id}/helpful`)
-      .then(() => console.log(`Marked Answer Helpful: ${answer_id}`))
-      .catch(error => console.log(error));
-  }
+  // const markAnswerHelpful = (answer_id) => {
+  //   // PUT upvoted answer
+  //   axios.put(`/qa/answers/${answer_id}/helpful`)
+  //     .then(() => console.log(`Marked Answer Helpful: ${answer_id}`))
+  //     .catch(error => console.log(error));
+  // }
 
   return (
     <div className="answer-item">
-      <div className="answer-container">
+      <div className={`answer-container${willReport && !isHelpful ? "-reportable" : "" || isHelpful ? "-helpful" : ""}`}>
         <div className="answer-body">
-          <strong>A:</strong> {props.answer.body}
+          <strong>A:</strong> {answer.body}
         </div>
         <div
           className="answer-sub-text"
           style={{margin: 10}}>
-          by {props.answer.answerer_name}, {convertDate(props.answer.date)} | <span>Helpful? </span>
+          by {answer.answerer_name}, {convertDate(answer.date)} | <span>Helpful? </span>
           <u
-            onClick={() => {markAnswerHelpful(props.answer.id)}}
-            style={{cursor: 'pointer'}}>
+            onClick={(e) => {
+              markAnswerHelpful(answer.id, isHelpful)
+              setHelped(true);
+            }}
+            style={{cursor: !isHelpful && 'pointer'}}>
             Yes
           </u> {' '}
-          ({props.answer.helpfulness})
+          ({answer.helpfulness})
           <span> | </span>
           <u
             style={{cursor: 'pointer'}}
-            onClick={() => {reportAnswer(props.answer.id)}}>
+            onMouseEnter={() => {setWillReport(true)}}
+            onMouseLeave={() => {setWillReport(false)}}
+            onClick={() => {reportAnswer(answer.id)}}>
             Report
           </u>
         </div>
-        <PictureGallery photos={props.answer.photos}/>
+        <PictureGallery photos={answer.photos ? answer.photos : []}/>
       </div>
-      <hr></hr>
+      <hr className="answer-break"></hr>
     </div>
   )
 }
