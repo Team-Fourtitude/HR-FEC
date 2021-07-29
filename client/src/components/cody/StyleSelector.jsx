@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import Styles from './Styles.jsx';
 import ProductContext from '../context/ProductContext.jsx';
-// import StyleData from './StyleData.jsx';
 import StyleContext from '../context/StyleContext.jsx';
 
 const StyleSelector = () => {
@@ -19,9 +18,9 @@ const StyleSelector = () => {
     price = <p>null price</p>
   }
   return (
-  <div style={{"border": "1px solid orange", "width":"max-content"}}>
-    <p>{currentProduct.product.category}</p>
-    <h1>{currentProduct.product.name}</h1>
+  <div style={{"border": "1px solid orange", "width":"100%", "marginBottom":"1.5em"}}>
+    <div>{currentProduct.product.category}</div>
+    <h1 style={{"margin":"0", "padding":"0"}}>{currentProduct.product.name}</h1>
     {price || null}
     <div><b>STYLE</b> <b> &gt; </b> <span>{curStyle.style ? curStyle.style.name : null}</span></div>
     <Styles />

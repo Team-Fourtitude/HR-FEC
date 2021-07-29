@@ -140,7 +140,7 @@ const App = () => {
           <StylesContext.Provider value={{styles, setStyles}}>
             <StyleContext.Provider value={{style, setStyle}}>
               <Overview />
-              <div className="related" style={{"position":"relative", "height": "800"}}>
+              <div className="related" style={{"position":"relative", "height": "800px"}}>
                 <RelatedProductList />
                 <OutfitList />
               </div>

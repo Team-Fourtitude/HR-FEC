@@ -29,22 +29,22 @@ const Rating = () => {
       <>
       {/* current css settings: first space 6px, 15px to fill a star, space between next star 17px */}
       <div>{ratings}</div>
-      <div style={{"position":"relative", "height":"50px"}} onClick={ () => {
+      <div style={{"position":"relative", "height":"50px", "border":"1px solid blue"}} onClick={ () => {
           console.log('Jump to reviews!');
       }}>
         <div style={{"display":"flex", "width":`${(ratings * 33.5 + 6)}px`, "overflow":"hidden", "position":"absolute", "border":"1px solid red"}}>
-            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"2em"}}>★</div>
-            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"2em"}}>★</div>
-            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"2em"}}>★</div>
-            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"2em"}}>★</div>
-            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"2em"}}>★</div>
+            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>★</div>
+            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>★</div>
+            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>★</div>
+            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>★</div>
+            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>★</div>
         </div>
         <div style={{"display":"flex", "position":"absolute"}}>
-            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"2em"}}>☆</div>
-            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"2em"}}>☆</div>
-            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"2em"}}>☆</div>
-            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"2em"}}>☆</div>
-            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"2em"}}>☆</div>
+            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>☆</div>
+            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>☆</div>
+            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>☆</div>
+            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>☆</div>
+            <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>☆</div>
         </div>
       </div>
       </>
