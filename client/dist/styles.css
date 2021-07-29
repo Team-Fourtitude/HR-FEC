@@ -62,7 +62,6 @@ th, td {
   box-sizing: border-box;
 }
 
-#compare,
 #delete {
   align-self: flex-end;
 }
@@ -70,6 +69,24 @@ th, td {
 #next, #prev {
   position: absolute;
   top: 25%;
+  padding: 10px;
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transition-duration: 0.4s;
+
+}
+
+#next:hover,
+#prev:hover {
+  background-color: grey;
+}
+
+#next:disabled,
+#prev:disabled {
+  background-color: grey;
+  color: darkgray;
 }
 
 #next {
@@ -79,6 +96,14 @@ th, td {
 
 #prev {
   left: 20px;
+}
+
+#compare {
+  position: relative;
+  align-self:flex-end;
+  border: 1px solid black;
+  background-color: lightgrey;
+
 }
 
 .square {
