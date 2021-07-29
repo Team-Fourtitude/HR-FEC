@@ -9,7 +9,7 @@ const RelatedProductList = () => {
   const [ relatedProduct, setRelatedProduct ] = useContext(RelatedProductContext);
   const [ relatedStyles, setRelatedStyles ] = useContext(RelatedStylesContext);
 
-console.log('styles', relatedStyles)
+// console.log('styles', relatedStyles)
 
 // console.log('rel', relatedProduct)
 // console.log('def', relatedStyles)
@@ -42,9 +42,10 @@ console.log('styles', relatedStyles)
   return (
     <>
         <div className="container" ref={ref} >
-          {relatedProduct ? relatedProduct.map((item) => {
-            return <ProductCard item={item}  key={item.id}/>
-          }) : null}
+          {relatedStyles.related ? relatedStyles.related.map((item) => {
+            return <ProductCard item={item} key={item.product_id}/>
+          })
+          : null}
         </div>
         <div>
           <button id="prev" onClick={() => handleClick('left')}> {`<`} </button>

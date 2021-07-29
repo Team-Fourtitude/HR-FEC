@@ -109,7 +109,7 @@ const App = () => {
       axios.get(`http://localhost:3000/products/${id}/styles`)
       .then( (data) => {
         if (styles.product_id !== data.data.product_id) {
-          console.log(data.data);
+          // console.log(data.data);
           setStyles(data.data);
           return data.data.results[0];
         } else {
