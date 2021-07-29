@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import QuestionContext from './QuestionContext.jsx';
 import QuestionItem from './QuestionItem.jsx';
 import Modal from './Modal.jsx';
 import AddQuestion from './AddQuestion.jsx';
@@ -16,30 +16,28 @@ const QuestionsList = () => {
     newMax < questions.length ? setMaxQuestionsCount(newMax) : setMaxQuestionsCount(questions.length);
   }
 
-  const style = {
-    width: '80vw',
-    display: 'flex',
-    justifyContent: 'center',
-  }
-
   return (
-    <div className="QuestionsList" style={{style}}>
-      <h2>QUESTIONS & ANSWERS</h2>
+    <div className="QuestionsList" style={{
+      "gridColumn": "2",
+      "verticalAlign" : "center",
+    }}>
+      <h3>QUESTIONS & ANSWERS</h3>
       { questions &&
          questions.slice(0, maxQuestionsCount).map((item) =>
-          <QuestionItem question={item} key={item.question_id}/>
+         <QuestionContext.Provider value={item} key={item.question_id}>
+         <QuestionItem question={item} key={item.question_id}/></QuestionContext.Provider>
       )}
       <button
-        className="MoreQuestBtn"
+        className="more-question-btn"
         onClick={ () => loadMoreQuestions() }>
           MORE ANSWERED QUESTIONS
       </button>
       <button
-        className="AddQuestBtn"
+        className="add-question-btn"
         onClick={ () => setOpen(true) }>
           ADD A QUESTION
       </button>
-      <div style={{ transform: "translateX(50px)" }}>
+      <div className="add-question-modal">
         <Modal
           isOpen={ isOpen }
           close={ () => setOpen(false) }>

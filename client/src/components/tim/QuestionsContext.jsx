@@ -1,5 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
+
+import ProductContext from '../context/ProductContext.jsx';
 /* eslint react/prop-types: 0 */
 
 const QuestionsContext = createContext(null);
@@ -13,16 +15,15 @@ export const useQuestionsUpdate = () => {
   return useContext(QuestionsUpdateContext);
 }
 
-const product = {id: 25171}
-
 export const QuestionsProvider = ({children}) => {
   const [questions, setQuestions] = useState([]);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [query, setQuery] = useState('');
 
+  const currentProduct = useContext(ProductContext);
+  const product = currentProduct.product;
 
-
-  const getQuestions = (product_id) => {
+  const getQuestions = (product_id = 25171) => {
     axios.get(`/qa/questions/${product_id}`, {
         params: {
           id: product_id,
@@ -51,8 +52,9 @@ export const QuestionsProvider = ({children}) => {
     .catch(error => console.log(error));
   }
 
-  const markQuestionHelpful = (question_id) => {
+  const markQuestionHelpful = (question_id, hasHelped) => {
     // PUT upvoteed question
+    if (hasHelped) return;
     axios.put(`/qa/questions/${question_id}/helpful`)
       .then(() => {
         console.log(`Marked Question Helpful: ${question_id}`)
@@ -101,6 +103,7 @@ export const QuestionsProvider = ({children}) => {
   }
 
   useEffect(() => {
+    console.log(product.id)
     getQuestions(product.id)
     if (query.length > 2) {
       queryQuestions(query)
