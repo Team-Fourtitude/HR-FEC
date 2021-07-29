@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import Styles from './Styles.jsx';
 import ProductContext from '../context/ProductContext.jsx';
-// import StyleData from './StyleData.jsx';
 import StyleContext from '../context/StyleContext.jsx';
 
 const StyleSelector = () => {
