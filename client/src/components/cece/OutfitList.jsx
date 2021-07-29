@@ -27,11 +27,8 @@ const [add, setAdd] = useState(false);
   return (
 
     <div className="add-outfit-card-container">
-
       <div className='add-card'>
-        <div>
           <button className="add" onClick={handleClick}>+</button>
-        </div>
           <div className="add-to-outfit">Add To Outfit</div>
       </div>
         {add ? <OutFitCard product={product} style={card}/> : null}

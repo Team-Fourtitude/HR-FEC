@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { FaRegStar } from 'react-icons/fa';
 import ProductContext from '../context/ProductContext.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import StylesContext from '../context/StylesContext.jsx';
@@ -42,12 +43,14 @@ const ProductCard = ({item}) => {
     <>
 
       <div className="column" onClick={() => navToProduct(item.product_id)}>
-        <button id="compare" onClick={modalInfoClick}>☆</button>
+        {/* <button id="compare" onClick={modalInfoClick}>☆</button>
+         */}
+         <FaRegStar id="compare" onClick={modalInfoClick}/>
         {viewModal ? <ComparisonModal id={item.product_id} current={product.product} related={relatedProduct}/> : null}
         {item && item.results ? item.results.map((style) => {
 
           if (style[`default?`]) {
-            console.log(style)
+            // console.log(style)
             return (
               <div className="square">
                 <img className="relImg" src={style.photos[0].thumbnail_url} />
