@@ -5,13 +5,14 @@ const Description = () => {
   const currentProduct = useContext(ProductContext);
   return (
   <div style={{"border":"1px solid purple", "display":"flex", "flexDirection":"column", "width":"80%", "margin":"0 auto"}}>
-    <div style={{"display":"flex", "alignItems":"center"}}>
+    <div style={{"display":"flex"}}>
       <div>
         <h2>{currentProduct.product.slogan || null}</h2>
         <p>{currentProduct.product.description || null}</p>
       </div>
+      <div style={{"border": "1px solid gray", "margin": "0 1em", "height":"100px", "alignSelf":"center"}}></div>
       <ul>
-        {currentProduct.product.features ? currentProduct.product.features.map( (feature, index) => <li key={index}>{feature.value ? feature.value : null} {feature.feature}</li>) : null}
+        {currentProduct.product.features ? currentProduct.product.features.map( (feature, index) => <li style={{"marginBottom":"0.5em"}} key={index}>{feature.value ? feature.value : null} {feature.feature}</li>) : null}
       </ul>
     </div>
     <div style={{"display":"flex"}}>

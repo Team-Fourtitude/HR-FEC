@@ -3,6 +3,7 @@ import StyleContext from '../context/StyleContext.jsx';
 
 const AddCart = () => {
   const curStyle = useContext(StyleContext);
+  const [fav, setFav] = useState(false);
   const [currentSize, setCurrentSize] = useState(null);
   let styleSizes;
   if (curStyle.style) {
@@ -18,20 +19,20 @@ const AddCart = () => {
       for (let i = 1; i < 16; i++) {
         options.push(<option value={i} key={i}>{i}</option>);
       }
-      quantity = <select className='quantity'>{options}</select>;
+      quantity = <select className='quantity' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}}>{options}</select>;
     } else if (max > 0) {
       let options = [];
       for (let i = 1; i < max + 1; i++) {
         options.push(<option value={i} key={i}>{i}</option>);
       }
-      quantity = <select className='quantity'>{options}</select>;
+      quantity = <select className='quantity' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}}>{options}</select>;
     } else {
       let options = [<option key='0' value='0'>-</option>];
-      quantity = <select className='quantity' disabled>{options}</select>;
+      quantity = <select className='quantity' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}} disabled>{options}</select>;
     }
   } else {
     quantity = (
-      <select className='quantity' value='null' disabled>
+      <select className='quantity' value='null' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}} disabled>
       <option value='null'>-</option>
     </select>
     );
@@ -47,20 +48,20 @@ const AddCart = () => {
             if (styleSizes) {
               if (styleSizes[0] !== 'null') {
                 return (
-          <select className='size' value={currentSize ? currentSize : 'null'} onChange={(ev) => {
-            setCurrentSize(ev.target.value);
-            ev.target.parentElement.children[1].value = 1;
-          }}>
-            {<option value='null'>Select Size</option>}
-            {styleSizes ? styleSizes.map( (sizeID) => {
-              return (
-                <option key={sizeID} value={sizeID}>{curStyle.style.skus[sizeID].size}</option>
-              );
-            }) : null}
-          </select>
+                  <select style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}} className='size' value={currentSize ? currentSize : 'null'} onChange={(ev) => {
+                    setCurrentSize(ev.target.value);
+                    ev.target.parentElement.children[1].value = 1;
+                  }}>
+                    {<option value='null'>SELECT SIZE</option>}
+                    {styleSizes ? styleSizes.map( (sizeID) => {
+                      return (
+                        <option key={sizeID} value={sizeID}>{curStyle.style.skus[sizeID].size}</option>
+                        );
+                      }) : null}
+                  </select>
                 );
               } else {
-                return <select className='size' value='null' disabled><option value='null'>OUT OF STOCK</option></select>;
+                return <select style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}} className='size' value='null' disabled><option value='null'>OUT OF STOCK</option></select>;
               }
             }
           })()}
@@ -71,27 +72,32 @@ const AddCart = () => {
             if (styleSizes[0] !== 'null') {
               return (
                 <div>
-                <button type='submit' onClick={ (ev) => {
+                <button type='submit' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}} onClick={ (ev) => {
                   ev.preventDefault();
-                  let size = ev.target.parentElement.children[0].value;
+                  let size = ev.target.parentElement.parentElement.children[0].children[0].value;
                   if (size !== 'null') {
-                    console.log(ev.target.parentElement.children[0].value);
-                    console.log(ev.target.parentElement.children[1].value);
+                    console.log(ev.target.parentElement.parentElement.children[0].children[0].value);
+                    console.log(ev.target.parentElement.parentElement.children[0].children[1].value);
                   } else {
                     console.log('please select a size');
                   }
-                }}>Add to bag</button>
-                <button type='submit' onClick={ (ev) => {
+                }}>ADD TO BAG</button>
+                <button type='submit'style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}}  onClick={ (ev) => {
                   ev.preventDefault();
+                  if (fav) {
+                    setFav(false);
+                  } else {
+                    setFav(true);
+                  }
                   console.log(curStyle.style.name);
-                }}>Favorite</button>
+                }}>{ fav ? '★' : '☆'}</button>
                 </div>
               );
             } else {
               return (
                 <div>
-                <button type='submit' disabled>Add to bag</button>
-                <button type='submit' disabled>Favorite</button>
+                <button type='submit' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}} disabled>ADD TO BAG</button>
+                <button type='submit' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}}disabled>☆</button>
                 </div>
               );
               }

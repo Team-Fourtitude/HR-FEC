@@ -31,7 +31,7 @@ const Image = (props) => {
             "backgroundColor": "black",
             "overflow": "hidden",
             "cursor": zoom ? "url(\"https://i.imgur.com/spnFx5r.png\"), auto" : 'crosshair',
-            "z-index": "100",
+            "zIndex": "100",
           }}
           onMouseMove={ (e) => {
             if (zoom) {
@@ -124,7 +124,7 @@ const Image = (props) => {
         return (
           <div style={{
             "width": "65%",
-            "max-height": "900px",
+            "maxHeight": "900px",
             "cursor": "zoom-in",
             "position":"relative",
           }}>
