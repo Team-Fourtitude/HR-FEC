@@ -41,7 +41,7 @@ const AddCart = () => {
     }
   }
   return (
-    <div style={{"border":"1px solid red", "width":"100%"}}>
+    <div style={{"width":"100%"}}>
       <form id='cartData' style={{"display":"flex", "flexDirection":"column"}}>
         <div style={{"display":"flex", "justifyContent":"space-between"}}>
           {(() => {

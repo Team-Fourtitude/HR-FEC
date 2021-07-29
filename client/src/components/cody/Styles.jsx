@@ -15,7 +15,6 @@ const Styles = () => {
     {(oneStyle.style && allStyles.styles.results) ? allStyles.styles.results.map( (style) => {
       if (style.style_id === oneStyle.style.style_id) {
         return (<div style={{
-          "border": "1px solid red",
           "borderRadius": "50px",
           "width": "75px",
           "height": "75px",
@@ -31,7 +30,7 @@ const Styles = () => {
           () => {
             oneStyle.setStyle(style);
           }
-        } key={style.style_id}><img style={{"width":"100%", "height":"100%", "objectFit":"cover", "objectPosition":"50% 50%"}} src={style.photos[0].thumbnail_url} alt={style.name}/></div>);
+        } key={style.style_id}><img style={{"width":"100%", "height":"100%", "objectFit":"cover", "objectPosition":"50% 50%", "opacity":"0.5"}} src={style.photos[0].thumbnail_url} alt={style.name}/></div>);
       }
     }) : null}
   </div>

@@ -28,11 +28,10 @@ const Rating = () => {
   return (
       <>
       {/* current css settings: first space 6px, 15px to fill a star, space between next star 17px */}
-      <div>{ratings}</div>
-      <div style={{"position":"relative", "height":"50px", "border":"1px solid blue"}} onClick={ () => {
+      <div style={{"position":"relative", "height":"25px", "margin":"1em 0 0.5em 0"}} onClick={ () => {
           console.log('Jump to reviews!');
       }}>
-        <div style={{"display":"flex", "width":`${(ratings * 33.5 + 6)}px`, "overflow":"hidden", "position":"absolute", "border":"1px solid red"}}>
+        <div style={{"display":"flex", "width":`${(ratings * 16 + 3)}px`, "overflow":"hidden", "position":"absolute"}}>
             <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>★</div>
             <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>★</div>
             <div style={{"width":"max-content","height":"max-content","marginRight":"5px","fontSize":"1em"}}>★</div>
