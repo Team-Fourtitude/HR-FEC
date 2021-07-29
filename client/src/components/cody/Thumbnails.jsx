@@ -43,11 +43,11 @@ const Thumbnails = () => {
                 {curStyle.style ? curStyle.style.photos.map( (photo, index) => {
                   if (currentPic.name == index) {
                     return (
-                      <div id="selected" style={{"border":"1px solid red","width":"100%","height":"55px","overflow":"hidden", "backgroundColor":"#222", "marginBottom":"1em"}} key={index} onClick={ () => {
+                      <div id="selected" style={{"width":"100%","height":"55px","overflow":"hidden", "backgroundColor":"#222", "marginBottom":"1em"}} key={index} onClick={ () => {
                         setCurrentPic({url:photo.thumbnail_url, name:`${index}`, style:curStyle.style.style_id});
                         setIndex(index);
                       }}>
-                        <img style={{"width":"100%", "height":"100%", "objectFit":"cover"}} src={photo.thumbnail_url} alt={`${index}`} />
+                        <img style={{"width":"100%", "height":"100%", "objectFit":"cover", "opacity":"0.5"}} src={photo.thumbnail_url} alt={`${index}`} />
                       </div>
                     );
                   } else {
@@ -67,18 +67,19 @@ const Thumbnails = () => {
                       if (curStyle.style.photos.length === 1) {
                         return (
                           <>
-                            <button type='button' style={{"position":"absolute","left":"30%", "top": "1%"}} disabled>up</button>
-                            <button type='button' style={{"position":"absolute","left":"30%", "bottom": "1%"}} disabled>down</button>
+                            <button type='button' style={{"fontSize":"2em", "padding":"0", "backgroundColor":"transparent", "border":"1px solid transparent", "color":"#444", "position":"absolute","left":"30%", "top": "1%"}} disabled>🞁</button>
+                            <button type='button' style={{"fontSize":"2em", "padding":"0", "backgroundColor":"transparent", "border":"1px solid transparent", "color":"#444", "position":"absolute","left":"30%", "bottom": "1%"}} disabled>🞃</button>
                           </>
                         );
                       } else {
                         return (
                           <>
-                            <button type='button' style={{"position":"absolute","left":"30%", "top": "1%"}} disabled>up</button>
-                            <button type='button' style={{"position":"absolute","left":"30%", "bottom": "1%"}} onClick={() => {
+                            <button type='button' style={{"fontSize":"2em", "padding":"0", "backgroundColor":"transparent", "border":"1px solid transparent", "color":"#444", "position":"absolute","left":"30%", "top": "1%"}} disabled>🞁</button>
+                            <button type='button' style={{"fontSize":"2em", "padding":"0", "backgroundColor":"transparent", "border":"1px solid transparent", "color":"#444", "position":"absolute","left":"30%", "bottom": "1%"}} onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
+                            onClick={() => {
                               setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
                               setIndex(index + 1);
-                            }}>down</button>
+                            }}>🞃</button>
                           </>
                         );
                       }
@@ -88,24 +89,27 @@ const Thumbnails = () => {
                     if (index === photoMax) {
                       return (
                         <>
-                          <button type='button' style={{"position":"absolute","left":"30%", "top": "1%"}} onClick={() => {
+                          <button type='button' style={{"fontSize":"2em", "padding":"0", "backgroundColor":"transparent", "border":"1px solid transparent", "color":"#444", "position":"absolute","left":"30%", "top": "1%"}} onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
+                          onClick={() => {
                             setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
                             setIndex(index - 1);
-                          }}>up</button>
-                          <button type='button' style={{"position":"absolute","left":"30%", "bottom": "1%"}} disabled>down</button>
+                          }}>🞁</button>
+                          <button type='button' style={{"fontSize":"2em", "padding":"0", "backgroundColor":"transparent", "border":"1px solid transparent", "color":"#444", "position":"absolute","left":"30%", "bottom": "1%"}} disabled>🞃</button>
                         </>
                       );
                     } else {
                       return (
                         <>
-                          <button type='button' style={{"position":"absolute","left":"30%", "top": "1%"}} onClick={() => {
+                          <button type='button' style={{"fontSize":"2em", "padding":"0", "backgroundColor":"transparent", "border":"1px solid transparent", "color":"#444", "position":"absolute","left":"30%", "top": "1%"}} onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
+                          onClick={() => {
                             setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
                             setIndex(index - 1);
-                          }}>up</button>
-                          <button type='button' style={{"position":"absolute","left":"30%", "bottom": "1%"}} onClick={() => {
+                          }}>🞁</button>
+                          <button type='button' style={{"fontSize":"2em", "padding":"0", "backgroundColor":"transparent", "border":"1px solid transparent", "color":"#444", "position":"absolute","left":"30%", "bottom": "1%"}} onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
+                          onClick={() => {
                             setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
                             setIndex(index + 1);
-                        }}>down</button>
+                        }}>🞃</button>
                         </>
                       );
                     }
