@@ -22,7 +22,7 @@ const StyleSelector = () => {
     <div>{currentProduct.product.category}</div>
     <h1 style={{"margin":"0", "padding":"0"}}>{currentProduct.product.name}</h1>
     {price || null}
-    <div><b>STYLE</b> <b> &gt; </b> <span>{curStyle.style ? curStyle.style.name : null}</span></div>
+    <div style={{"marginBottom":"1em"}}><b>STYLE</b> <b> &gt; </b> <span>{curStyle.style ? curStyle.style.name : null}</span></div>
     <Styles />
   </div>
   );
