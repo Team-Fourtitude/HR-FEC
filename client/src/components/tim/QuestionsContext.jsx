@@ -2,8 +2,6 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 /* eslint react/prop-types: 0 */
 
-import { ProductContext } from '../ProductContext.jsx'
-
 const QuestionsContext = createContext(null);
 const QuestionsUpdateContext = createContext();
 
@@ -15,12 +13,14 @@ export const useQuestionsUpdate = () => {
   return useContext(QuestionsUpdateContext);
 }
 
+const product = {id: 25171}
+
 export const QuestionsProvider = ({children}) => {
   const [questions, setQuestions] = useState([]);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [query, setQuery] = useState('');
 
-  const product = useContext(ProductContext)
+
 
   const getQuestions = (product_id) => {
     axios.get(`/qa/questions/${product_id}`, {

@@ -59,10 +59,3 @@ const PictureGallery = (props) => {
 }
 
 export default PictureGallery;
-
-// onError={e => {
-//   e.target.onError = null; e.target.src = './image-not-found.svg'
-// }}
-// <Modal isOpen={isOpen} close={() => setOpen(false) }>
-// </Modal>
-//

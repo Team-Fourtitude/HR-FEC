@@ -3,6 +3,7 @@ import axios from 'axios';
 import ProductContext from './context/ProductContext.jsx';
 import StylesContext from './context/StylesContext.jsx';
 import StyleContext from './context/StyleContext.jsx';
+import QuestionsAnswers from './tim/QuestionsAnswers.jsx'
 
 // this file shows how to use context in your component
 import Test from './cody/Test.jsx';
@@ -46,7 +47,7 @@ const App = () => {
     <ProductContext.Provider value={{product, setProduct}}>
       <StylesContext.Provider value={{styles, setStyles}}>
         <StyleContext.Provider value={{style, setStyle}}>
-          <Test />
+          <QuestionsAnswers />
         </StyleContext.Provider>
       </StylesContext.Provider>
     </ProductContext.Provider>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 //import ReactDOM from 'react-dom';
 
 import Modal from './Modal.jsx';
-import AddAnswer from './AddAnswer.jsx';
 import AnswerItem from './AnswerItem.jsx';
 // import HelpfulFeedback from './HelpfulFeedback.jsx'
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
@@ -36,10 +35,6 @@ const QuestionItem = (props) => {
     })
     //console.log(`This is the sorted array ${sortedAnswers}`)
     return sortedAnswers;
-  }
-
-  const addAnswer = () => {
-
   }
 
   useEffect(() => {
