@@ -29,7 +29,7 @@ const Thumbnails = () => {
   });
 
   return (
-    <div style={{"position":"relative", "border":"1px solid pink", "overflow":"hidden"}}>
+    <div style={{"position":"relative", "overflow":"hidden"}}>
     {(() => {
       if (curStyle.style) {
         if (curStyle.style.photos) {

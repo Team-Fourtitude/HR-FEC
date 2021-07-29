@@ -4,7 +4,7 @@ import ProductContext from '../context/ProductContext.jsx';
 const Description = () => {
   const currentProduct = useContext(ProductContext);
   return (
-  <div style={{"border":"1px solid purple", "display":"flex", "flexDirection":"column", "width":"80%", "margin":"0 auto"}}>
+  <div style={{"display":"flex", "flexDirection":"column", "width":"80%", "margin":"0 auto"}}>
     <div style={{"display":"flex"}}>
       <div>
         <h2>{currentProduct.product.slogan || null}</h2>
