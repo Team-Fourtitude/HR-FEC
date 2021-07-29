@@ -71,9 +71,75 @@ app.get('/reviews/meta/:id', (req, res) => {
 });
 
 app.get('/qa/questions/:id', (req, res) => {
-  models.getQuestions(req.params.id)
+  console.log(`Fetching questions for product: ${req.params.id}`)
+  models.getQuestions({product_id: req.params.id})
   .then( (data) => {
     res.status(200).send(data.data);
+  })
+  .catch( (e) => {
+    console.log(e);
+  });
+});
+
+app.post('/qa/questions/', (req, res) => {
+  console.log(`Posting question for product: ${JSON.stringify(req.body)}`)
+  models.getQuestions({
+    product_id: req.body.product_id,
+    questionBody: req.body.questionBody,
+    email: req.body.email,
+    name: req.body.name,
+  })
+  .then( () => {
+    res.status(201).send();
+    console.log(`Succesful Question Posted!!!`)
+  })
+  .catch( (e) => {
+    console.log(e);
+  });
+});
+
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  console.log(`Put question as helpful: ${req.params.question_id}`)
+  models.putQuestionHelp(req.params.question_id)
+  .then( () => {
+    res.status(204).send();
+    console.log(`Succesful Marked Question Helpful!!! `)
+  })
+  .catch( (e) => {
+    console.log(e);
+  });
+});
+
+app.put('/qa/questions/:question_id/report', (req, res) => {
+  console.log(`Put question as reported: ${req.params.question_id}`)
+  models.putQuestionReport(req.params.question_id)
+  .then( () => {
+    res.status(204).send();
+    console.log(`Succesful Marked Question as MEAN!!! `)
+  })
+  .catch( (e) => {
+    console.log(e);
+  });
+});
+
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  console.log(`Put Answer as helpful: ${req.params.answer_id}`)
+  models.putAnswerHelp(req.params.answer_id)
+  .then( () => {
+    res.status(204).send();
+    console.log(`Succesful Marked Answer Helpful!!! `)
+  })
+  .catch( (e) => {
+    console.log(e);
+  });
+});
+
+app.put('/qa/answers/:answer_id/report', (req, res) => {
+  console.log(`Put Answer as reported: ${req.params.answer_id}`)
+  models.putAnswerReport(req.params.answer_id)
+  .then( () => {
+    res.status(204).send();
+    console.log(`Succesful Marked Answer as MEAN!!! `)
   })
   .catch( (e) => {
     console.log(e);
