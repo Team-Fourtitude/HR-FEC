@@ -1,5 +1,6 @@
 import React, { useState, useRef, useContext } from 'react';
 import ProductCard from './ProductCard.jsx';
+
 import RelatedProductContext from '../context/RelatedProductContext.jsx';
 import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
 
@@ -8,23 +9,6 @@ import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
 const RelatedProductList = () => {
   const [ relatedProduct, setRelatedProduct ] = useContext(RelatedProductContext);
   const [ relatedStyles, setRelatedStyles ] = useContext(RelatedStylesContext);
-
-// console.log('styles', relatedStyles)
-
-// console.log('rel', relatedProduct)
-// console.log('def', relatedStyles)
-
-
-
-  // const deStyle = relatedStyles.defaults.map((style) => {
-  //   let newStyle = style.defaults.results.filter((def) => {
-  //     return def[`default?`];
-  //   })
-  //   return newStyle;
-  // })
-
-  // console.log(deStyle)
-
 
 
   const ref = useRef(null);
@@ -38,12 +22,15 @@ const RelatedProductList = () => {
   }
 
 
-
   return (
     <>
         <div className="container" ref={ref} >
           {relatedStyles.related ? relatedStyles.related.map((item) => {
-            return <ProductCard item={item} key={item.product_id}/>
+            return (
+              <>
+                <ProductCard item={item} key={item.product_id} />
+              </>
+            )
           })
           : null}
         </div>

@@ -8,6 +8,7 @@ import StyleContext from './context/StyleContext.jsx';
 import RelatedProductList from './cece/RelatedProductList.jsx';
 import OutfitList from './cece/OutfitList.jsx';
 
+
 // this file shows how to use context in your component
 import Test from './cody/Test.jsx';
 
@@ -21,10 +22,13 @@ const App = () => {
 
   //initial Data
   const getInitialData = () => {
-    let productUrl = 'http://localhost:3000/products/25171';
+
+
+    let productUrl = `http://localhost:3000/products/25171`;
     const productInfo = axios.get(productUrl)
     .then( (data) => {
         if (product.id !== data.data.id) {
+          setProduct(data.data);
           return data.data;
         } else {
           console.log('same product');
@@ -95,32 +99,36 @@ const App = () => {
 
   useEffect( () => {
     getInitialData();
-    axios.get('http://localhost:3000/products/25171')
-    .then( (data) => {
-      if (product.id !== data.data.id) {
-        console.log(data.data);
-        setProduct(data.data);
-        return data.data.id;
-      } else {
-        console.log('same product');
-      }
-    })
-    .then( (id) => {
-      axios.get(`http://localhost:3000/products/${id}/styles`)
-      .then( (data) => {
-        if (styles.product_id !== data.data.product_id) {
-          // console.log(data.data);
-          setStyles(data.data);
-          return data.data.results[0];
-        } else {
-          console.log('same product/styles');
-        }
-      })
-      .then( (firstStyle) => setStyle(firstStyle) )
-      .catch( (e) => console.error(e) );
-    })
-    .catch( (e) => console.error(e) );
-  }, []); // An empty array as the second argument of useEffect makes this function run only once on startup, feel free to edit this for your purposes
+  }, [])
+
+  // useEffect( () => {
+  //   getInitialData();
+  //   axios.get('http://localhost:3000/products/25171')
+  //   .then( (data) => {
+  //     if (product.id !== data.data.id) {
+  //       console.log(data.data);
+  //       setProduct(data.data);
+  //       return data.data.id;
+  //     } else {
+  //       console.log('same product');
+  //     }
+  //   })
+  //   .then( (id) => {
+  //     axios.get(`http://localhost:3000/products/${id}/styles`)
+  //     .then( (data) => {
+  //       if (styles.product_id !== data.data.product_id) {
+  //         // console.log(data.data);
+  //         setStyles(data.data);
+  //         return data.data.results[0];
+  //       } else {
+  //         console.log('same product/styles');
+  //       }
+  //     })
+  //     .then( (firstStyle) => setStyle(firstStyle) )
+  //     .catch( (e) => console.error(e) );
+  //   })
+  //   .catch( (e) => console.error(e) );
+  //}, []); // An empty array as the second argument of useEffect makes this function run only once on startup, feel free to edit this for your purposes
 
   return (
     // Our context.Providers 'values' are linked to an object that contains our state hooks.
@@ -132,6 +140,7 @@ const App = () => {
             <StyleContext.Provider value={{style, setStyle}}>
               <Test />
               {/* {console.log(relatedStyles)} */}
+
               <RelatedProductList />
               <OutfitList />
             </StyleContext.Provider>
