@@ -5,7 +5,7 @@ import StylesContext from './context/StylesContext.jsx';
 import StyleContext from './context/StyleContext.jsx';
 
 // this file shows how to use context in your component
-import Test from './cody/Test.jsx';
+import Overview from './cody/Overview.jsx';
 
 const App = () => {
   const [product, setProduct] = useState({});
@@ -46,7 +46,7 @@ const App = () => {
     <ProductContext.Provider value={{product, setProduct}}>
       <StylesContext.Provider value={{styles, setStyles}}>
         <StyleContext.Provider value={{style, setStyle}}>
-          <Test />
+          <Overview />
         </StyleContext.Provider>
       </StylesContext.Provider>
     </ProductContext.Provider>
