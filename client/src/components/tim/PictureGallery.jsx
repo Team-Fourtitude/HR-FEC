@@ -30,6 +30,7 @@ const PictureGallery = (props) => {
   //   console.log('Popped')
   // }, [popSrc])
 
+  // modal is set to false currently for pictures hard crash
   return (
   <div className='AnsPhotos'>
     {props.photos.map((link, index) => {

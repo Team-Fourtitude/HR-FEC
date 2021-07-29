@@ -5,13 +5,10 @@ import RelatedProductContext from './context/RelatedProductContext.jsx';
 import RelatedStylesContext from './context/RelatedStylesContext.jsx';
 import StylesContext from './context/StylesContext.jsx';
 import StyleContext from './context/StyleContext.jsx';
-<<<<<<< HEAD
 import QuestionsAnswers from './tim/QuestionsAnswers.jsx'
-=======
 import RelatedProductList from './cece/RelatedProductList.jsx';
 import OutfitList from './cece/OutfitList.jsx';
 
->>>>>>> 57277c0a9247cc683293c966691f4b48029b4e3f
 
 // this file shows how to use context in your component
 import Overview from './cody/Overview.jsx';
@@ -138,27 +135,22 @@ const App = () => {
     // Our context.Providers 'values' are linked to an object that contains our state hooks.
     // Thus when the state changes, all children using that context value will rerender with the newly set state value.
     <ProductContext.Provider value={{product, setProduct}}>
-<<<<<<< HEAD
-      <StylesContext.Provider value={{styles, setStyles}}>
-        <StyleContext.Provider value={{style, setStyle}}>
-          <QuestionsAnswers />
-        </StyleContext.Provider>
-      </StylesContext.Provider>
-=======
       <RelatedProductContext.Provider value={[relatedProduct, setRelatedProduct]}>
         <RelatedStylesContext.Provider value={[relatedStyles, setRelatedStyles]}>
           <StylesContext.Provider value={{styles, setStyles}}>
             <StyleContext.Provider value={{style, setStyle}}>
               <Overview />
-              <div className="related" style={{"position":"relative"}}>
+              <div className="related" style={{"position":"relative", "height": "800"}}>
                 <RelatedProductList />
                 <OutfitList />
+              </div>
+              <div>
+                <QuestionsAnswers />
               </div>
             </StyleContext.Provider>
           </StylesContext.Provider>
         </RelatedStylesContext.Provider>
       </RelatedProductContext.Provider>
->>>>>>> 57277c0a9247cc683293c966691f4b48029b4e3f
     </ProductContext.Provider>
   );
 }
