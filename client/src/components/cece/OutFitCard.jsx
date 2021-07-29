@@ -14,15 +14,15 @@ const OutFitCard = ({product, style}) => {
     <>
     {canSee ?
     <div className="outfit-card">
-        <div className="delete">
           <button id="delete" value={outfit.product.product_id} onClick={handleDelete}>X</button>
-        </div>
-        <div>
-          {outfit && outfit.style.photos ? <img className="outfit-img" src={outfit.style.photos[0].thumbnail_url} /> : null}<br /><br />
-          {outfit ? outfit.product.category : null}<br /><br />
-          {outfit ? outfit.product.name : null}<br /><br />
+            {outfit && outfit.style.photos ?
+            <div className="square">
+              <img className="outfit-img" src={outfit.style.photos[0].thumbnail_url} />
+            </div>
+              : null}
+          {outfit ? outfit.product.category : null}<br />
+          {outfit ? outfit.product.name : null}<br />
           {outfit ? outfit.style.original_price : null}
-        </div>
         </div>
         : null}
         </>

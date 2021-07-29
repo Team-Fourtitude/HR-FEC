@@ -24,7 +24,7 @@ const QuestionItem = (props) => {
   const currentQuestion = useContext(QuestionContext);
 
   useEffect(() => {
-    answerUpdaters.sortAnswers();
+    setAllAns(sortAnswers());
   }, [])
 
   const loadMoreAnswers = () => {

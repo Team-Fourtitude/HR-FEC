@@ -36,7 +36,6 @@ console.log(compare)
             </thead>
             <tbody>
               {compare ? compare.current.features.map((feat, i) => {
-                console.log('hello')
                 return(
                 <tr key={i}>
                   <td>CheckBox</td>
@@ -48,7 +47,6 @@ console.log(compare)
               {/* {may have to refactor to compare the two} */}
               {/* {console.log(style)} */}
               {compare && style.features ? style.features.map((feat, i) => {
-                console.log('hi')
                 return(
                 <tr key={i}>
                   <td>CheckBox</td>
