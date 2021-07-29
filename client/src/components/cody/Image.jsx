@@ -10,7 +10,7 @@ const Image = (props) => {
   const {currentPic, setCurrentPic} = props.currentPicture;
 
   return (
-    <>
+  <div style={{"position":"relative"}}>
     <button type='button' style={{"display":"block", "margin":"0 auto"}} onClick={ () => {
       if (size) {
         setZoom(false);
@@ -202,7 +202,7 @@ const Image = (props) => {
         );
       }
     }) ()}
-    </>
+  </div>
   );
 };
 
