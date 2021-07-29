@@ -38,7 +38,8 @@ const Thumbnails = () => {
             <>
             <div style={{"position":"relative"}}>
             <Image current={currentPic ? currentPic : {url: '#', name: 'alt-name'}} context={curStyle} index={{index, setIndex}} currentPicture={{currentPic, setCurrentPic}}/>
-              <div id="thumbnailScroll" style={{"width":"75px", "maxHeight": "475px","height":"70%", "overflowY":"auto", "overflowX":"hidden", "position":"absolute", "top":"10%", "left":"1%", "display":"block", "backgroundColor":"rgba(0, 0, 0, 0.5)", "padding":"1.5em 1em", "borderRadius":"10px", "zIndex":"1000"}}>
+            <div style={{"width":"75px", "maxHeight": "475px","height":"max-content", "position":"absolute", "top":"10%", "left":"1%", "display":"block", "backgroundColor":"rgba(0, 0, 0, 0.5)", "padding":"2.5em 1em", "borderRadius":"10px", "zIndex":"1000"}}>
+              <div id="thumbnailScroll" style={{"width":"75px", "maxHeight": "400px","height":"80%", "overflowY":"auto", "overflowX":"hidden"}}>
                 {curStyle.style ? curStyle.style.photos.map( (photo, index) => {
                   if (currentPic.name == index) {
                     return (
@@ -60,22 +61,21 @@ const Thumbnails = () => {
                     );
                   }
                 }) : null}
-              </div>
                 {(() => {
                   if (index === 0) {
                     if (curStyle.style) {
                       if (curStyle.style.photos.length === 1) {
                         return (
                           <>
-                            <button type='button' style={{"position":"absolute","left":"3.5%", "top": "-2%"}} disabled>up</button>
-                            <button type='button' style={{"position":"absolute","left":"3.5%", "bottom": "-2%"}} disabled>down</button>
+                            <button type='button' style={{"position":"absolute","left":"30%", "top": "1%"}} disabled>up</button>
+                            <button type='button' style={{"position":"absolute","left":"30%", "bottom": "1%"}} disabled>down</button>
                           </>
                         );
                       } else {
                         return (
                           <>
-                            <button type='button' style={{"position":"absolute","left":"3.5%", "top": "-2%"}} disabled>up</button>
-                            <button type='button' style={{"position":"absolute","left":"3.5%", "bottom": "-2%"}} onClick={() => {
+                            <button type='button' style={{"position":"absolute","left":"30%", "top": "1%"}} disabled>up</button>
+                            <button type='button' style={{"position":"absolute","left":"30%", "bottom": "1%"}} onClick={() => {
                               setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
                               setIndex(index + 1);
                             }}>down</button>
@@ -88,21 +88,21 @@ const Thumbnails = () => {
                     if (index === photoMax) {
                       return (
                         <>
-                          <button type='button' style={{"position":"absolute","left":"3.5%", "top": "-2%"}} onClick={() => {
+                          <button type='button' style={{"position":"absolute","left":"30%", "top": "1%"}} onClick={() => {
                             setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
                             setIndex(index - 1);
                           }}>up</button>
-                          <button type='button' style={{"position":"absolute","left":"3.5%", "bottom": "-2%"}} disabled>down</button>
+                          <button type='button' style={{"position":"absolute","left":"30%", "bottom": "1%"}} disabled>down</button>
                         </>
                       );
                     } else {
                       return (
                         <>
-                          <button type='button' style={{"position":"absolute","left":"3.5%", "top": "-2%"}} onClick={() => {
+                          <button type='button' style={{"position":"absolute","left":"30%", "top": "1%"}} onClick={() => {
                             setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
                             setIndex(index - 1);
                           }}>up</button>
-                          <button type='button' style={{"position":"absolute","left":"3.5%", "bottom": "-2%"}} onClick={() => {
+                          <button type='button' style={{"position":"absolute","left":"30%", "bottom": "1%"}} onClick={() => {
                             setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
                             setIndex(index + 1);
                         }}>down</button>
@@ -111,6 +111,8 @@ const Thumbnails = () => {
                     }
                   }
                 })()}
+              </div>
+            </div>
             </div>
             </>
           );
