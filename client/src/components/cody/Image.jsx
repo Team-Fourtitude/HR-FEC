@@ -10,15 +10,7 @@ const Image = (props) => {
   const {currentPic, setCurrentPic} = props.currentPicture;
 
   return (
-  <div style={{"position":"relative"}}>
-    <button type='button' style={{"display":"block", "margin":"0 auto"}} onClick={ () => {
-      if (size) {
-        setZoom(false);
-        setSize(false);
-      } else {
-        setSize(true);
-      }
-    }}>{size ? 'contract' : 'expand'}</button>
+  <>
     {(() => {
       if (size) {
         return (
@@ -58,12 +50,20 @@ const Image = (props) => {
               }
             }}
             src={props.current.url} alt={props.current.name}/>
+            <button type='button' style={{"position":"absolute", "top":"0", "right":"0"}} onClick={ () => {
+              if (size) {
+                setZoom(false);
+                setSize(false);
+              } else {
+                setSize(true);
+              }
+            }}>{size ? 'contract' : 'expand'}</button>
             {(() => {
-      if (index === 0) {
-        if (curStyle.style) {
-          if (curStyle.style.photos.length === 1) {
-            return (
-              <>
+              if (index === 0) {
+                if (curStyle.style) {
+                  if (curStyle.style.photos.length === 1) {
+                    return (
+                      <>
                 <button type='button' style={{"position":"absolute", "left":"20%", "top": "50%"}} disabled>left</button>
                 <button type='button' style={{"position":"absolute", "right":"0", "top": "50%"}} disabled>right</button>
               </>
@@ -138,6 +138,14 @@ const Image = (props) => {
                 setSize(true);
               }
             }}/>
+            <button type='button' style={{"position":"absolute", "top":"0", "right":"0"}} onClick={ () => {
+              if (size) {
+                setZoom(false);
+                setSize(false);
+              } else {
+                setSize(true);
+              }
+            }}>{size ? 'contract' : 'expand'}</button>
             {(() => {
       if (index === 0) {
         if (curStyle.style) {
@@ -202,7 +210,7 @@ const Image = (props) => {
         );
       }
     }) ()}
-  </div>
+  </>
   );
 };
 
