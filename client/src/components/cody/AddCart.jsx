@@ -19,20 +19,20 @@ const AddCart = () => {
       for (let i = 1; i < 16; i++) {
         options.push(<option value={i} key={i}>{i}</option>);
       }
-      quantity = <select className='quantity' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}}>{options}</select>;
+      quantity = <select className='quantity' style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"30%"}}>{options}</select>;
     } else if (max > 0) {
       let options = [];
       for (let i = 1; i < max + 1; i++) {
         options.push(<option value={i} key={i}>{i}</option>);
       }
-      quantity = <select className='quantity' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}}>{options}</select>;
+      quantity = <select className='quantity' style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"30%"}}>{options}</select>;
     } else {
       let options = [<option key='0' value='0'>-</option>];
-      quantity = <select className='quantity' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}} disabled>{options}</select>;
+      quantity = <select className='quantity' style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"30%"}} disabled>{options}</select>;
     }
   } else {
     quantity = (
-      <select className='quantity' value='null' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}} disabled>
+      <select className='quantity' value='null' style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"30%"}} disabled>
       <option value='null'>-</option>
     </select>
     );
@@ -41,14 +41,14 @@ const AddCart = () => {
     }
   }
   return (
-    <div style={{"border":"1px solid red", "width":"max-content"}}>
+    <div style={{"border":"1px solid red", "width":"100%"}}>
       <form id='cartData' style={{"display":"flex", "flexDirection":"column"}}>
-        <div>
+        <div style={{"display":"flex", "justifyContent":"space-between"}}>
           {(() => {
             if (styleSizes) {
               if (styleSizes[0] !== 'null') {
                 return (
-                  <select style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}} className='size' value={currentSize ? currentSize : 'null'} onChange={(ev) => {
+                  <select style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"60%"}} className='size' value={currentSize ? currentSize : 'null'} onChange={(ev) => {
                     setCurrentSize(ev.target.value);
                     ev.target.parentElement.children[1].value = 1;
                   }}>
@@ -61,7 +61,7 @@ const AddCart = () => {
                   </select>
                 );
               } else {
-                return <select style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}} className='size' value='null' disabled><option value='null'>OUT OF STOCK</option></select>;
+                return <select style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"60%"}} className='size' value='null' disabled><option value='null'>OUT OF STOCK</option></select>;
               }
             }
           })()}
@@ -71,8 +71,8 @@ const AddCart = () => {
           if (styleSizes) {
             if (styleSizes[0] !== 'null') {
               return (
-                <div>
-                <button type='submit' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}} onClick={ (ev) => {
+                <div style={{"display":"flex", "justifyContent":"space-between"}}>
+                <button type='submit' style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"75%", "backgroundColor":"transparent"}} onClick={ (ev) => {
                   ev.preventDefault();
                   let size = ev.target.parentElement.parentElement.children[0].children[0].value;
                   if (size !== 'null') {
@@ -82,7 +82,7 @@ const AddCart = () => {
                     console.log('please select a size');
                   }
                 }}>ADD TO BAG</button>
-                <button type='submit'style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}}  onClick={ (ev) => {
+                <button type='submit'style={{"fontSize": "2em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0em", "width":"15%", "backgroundColor":"transparent"}}  onClick={ (ev) => {
                   ev.preventDefault();
                   if (fav) {
                     setFav(false);
@@ -95,9 +95,9 @@ const AddCart = () => {
               );
             } else {
               return (
-                <div>
-                <button type='submit' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}} disabled>ADD TO BAG</button>
-                <button type='submit' style={{"fontSize": "1em", "height":"50px", "color":"#333", "fontWeight":"bold", "padding":"0.5em"}}disabled>☆</button>
+                <div style={{"display":"flex", "justifyContent":"space-between"}}>
+                <button type='submit' style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"75%", "backgroundColor":"transparent"}} disabled>ADD TO BAG</button>
+                <button type='submit' style={{"fontSize": "2em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0em", "width":"15%", "backgroundColor":"transparent"}}disabled>☆</button>
                 </div>
               );
               }

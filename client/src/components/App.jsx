@@ -5,6 +5,7 @@ import RelatedProductContext from './context/RelatedProductContext.jsx';
 import RelatedStylesContext from './context/RelatedStylesContext.jsx';
 import StylesContext from './context/StylesContext.jsx';
 import StyleContext from './context/StyleContext.jsx';
+import QuestionsAnswers from './tim/QuestionsAnswers.jsx'
 import RelatedProductList from './cece/RelatedProductList.jsx';
 import OutfitList from './cece/OutfitList.jsx';
 
@@ -139,9 +140,12 @@ const App = () => {
           <StylesContext.Provider value={{styles, setStyles}}>
             <StyleContext.Provider value={{style, setStyle}}>
               <Overview />
-              <div className="related" style={{"position":"relative"}}>
+              <div className="related" style={{"position":"relative", "height": "800px"}}>
                 <RelatedProductList />
                 <OutfitList />
+              </div>
+              <div>
+                <QuestionsAnswers />
               </div>
             </StyleContext.Provider>
           </StylesContext.Provider>

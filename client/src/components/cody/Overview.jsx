@@ -12,10 +12,12 @@ const Overview = () => {
         <div style={{"border":"2px solid orange", "width":"100%"}}>
           <Thumbnails />
         </div>
-        <div style={{"position":"absolute","right":"0","top":"0","border":"2px solid purple", "width": "35%"}}>
-          <Rating />
-          <StyleSelector />
-          <AddCart />
+        <div style={{"position":"absolute","right":"0","top":"0","border":"2px solid purple", "width": "35%", "height":"100%"}}>
+          <div style={{"width":"90%", "margin":"0 auto"}}>
+            <Rating />
+            <StyleSelector />
+            <AddCart />
+          </div>
         </div>
       </div>
       <div>
