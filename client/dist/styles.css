@@ -1,0 +1,147 @@
+
+
+.related-products {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* justify-content: center; */
+}
+
+#close,
+#delete {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+
+.tbl-container {
+  background-color: rgba(255, 255, 255, 0.884);
+  position: fixed;
+  display: flex;
+  /* justify-content: center; */
+  align-content: center;
+  padding: 15px;
+  border: 1px solid white;
+  opacity: 5;
+  pointer-events: auto;
+  transition: 0.4s;
+  overflow-y: scroll;
+}
+
+
+table, th, td {
+  text-align: center;
+  border: 1px solid black;
+}
+th, td {
+  padding: 15px;
+}
+
+
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-evenly; */
+  width: 75%;
+  padding: 20px;
+  position: absolute;
+  /* top: 800px; */
+  left: 10%;
+  right:10%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+}
+
+.column {
+  width: 275px;
+  height: 400px;
+
+  background-color: aqua;
+  text-align: justify;
+  margin: 20px;
+  border: 2px solid black;
+  box-sizing: border-box;
+}
+
+#compare {
+  align-self: flex-start;
+}
+
+#next, #prev {
+  position: absolute;
+  top: 525px;
+}
+
+#next {
+  right: 20px;
+}
+
+#prev {
+  left: 20px;
+}
+
+.square {
+  position: relative;
+  width: 270px;
+  height: 300px;
+  overflow: hidden;
+}
+.relImg {
+  position: absolute;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate( -50%, -50%);
+}
+/* .relImg {
+  width: auto;
+  height: 200px;
+} */
+
+
+
+
+.add-outfit-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 800px;
+  left: 10%;
+  right: 10%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+
+}
+
+.add-card {
+  width: 275px;
+  height: 400px;
+  left: 10%;
+  border: 2px solid rgb(12, 12, 11);
+}
+
+
+
+
+.outfit-card {
+  float: left;
+  width: 275px;
+  height: 400px;
+  border: 2px solid rgb(10, 10, 10);
+}
+
+.outfit-img {
+  width: 275px;
+}
+
+
+
+.delete {
+  align-self: flex-end;
+}
