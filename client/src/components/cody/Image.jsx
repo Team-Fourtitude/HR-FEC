@@ -26,11 +26,12 @@ const Image = (props) => {
             "display": "flex",
             "position": "relative",
             "justifyContent": "center",
-            "width": "90%",
-            "height": "900px",
+            "width": "100%",
+            "maxHeight": "900px",
             "backgroundColor": "black",
             "overflow": "hidden",
             "cursor": zoom ? "url(\"https://i.imgur.com/spnFx5r.png\"), auto" : 'crosshair',
+            "z-index": "100",
           }}
           onMouseMove={ (e) => {
             if (zoom) {
@@ -122,8 +123,8 @@ const Image = (props) => {
       } else {
         return (
           <div style={{
-            "width": "50%",
-            "height": "900px",
+            "width": "65%",
+            "max-height": "900px",
             "cursor": "zoom-in",
             "position":"relative",
           }}>

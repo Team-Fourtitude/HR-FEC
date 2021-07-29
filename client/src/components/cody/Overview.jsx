@@ -7,12 +7,12 @@ import StyleSelector from './StyleSelector.jsx';
 
 const Overview = () => {
   return (
-    <div style={{"display":"flex", "flexDirection":"column", "border": "1px solid blue"}}>
-      <div style={{"display":"flex", "border": "1px solid yellow"}}>
-        <div style={{"border":"2px solid orange", "width":"65%"}}>
+    <div style={{"display":"flex", "flexDirection":"column", "border": "1px solid blue", "maxWidth":"1250px", "overflowX":"hidden"}}>
+      <div style={{"position":"relative", "border": "1px solid yellow"}}>
+        <div style={{"border":"2px solid orange", "width":"100%"}}>
           <Thumbnails />
         </div>
-        <div>
+        <div style={{"position":"absolute","right":"0","top":"0","border":"2px solid purple", "width": "35%"}}>
           <Rating />
           <StyleSelector />
           <AddCart />
