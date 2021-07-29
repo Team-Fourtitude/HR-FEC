@@ -38,7 +38,7 @@ const Thumbnails = () => {
             <>
             <div style={{"position":"relative"}}>
             <Image current={currentPic ? currentPic : {url: '#', name: 'alt-name'}} context={curStyle} index={{index, setIndex}} currentPicture={{currentPic, setCurrentPic}}/>
-              <div id="thumbnailScroll" style={{"width":"75px", "maxHeight": "475px","height":"70%", "overflowY":"auto", "overflowX":"hidden", "position":"absolute", "top":"10%", "left":"1%", "display":"block", "backgroundColor":"rgba(0, 0, 0, 0.5)", "padding":"1.5em 1em", "borderRadius":"10px"}}>
+              <div id="thumbnailScroll" style={{"width":"75px", "maxHeight": "475px","height":"70%", "overflowY":"auto", "overflowX":"hidden", "position":"absolute", "top":"10%", "left":"1%", "display":"block", "backgroundColor":"rgba(0, 0, 0, 0.5)", "padding":"1.5em 1em", "borderRadius":"10px", "zIndex":"1000"}}>
                 {curStyle.style ? curStyle.style.photos.map( (photo, index) => {
                   if (currentPic.name == index) {
                     return (
