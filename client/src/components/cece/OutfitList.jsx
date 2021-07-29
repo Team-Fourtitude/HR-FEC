@@ -3,6 +3,7 @@ import axios from 'axios';
 import ProductContext from '../context/ProductContext.jsx';
 import StylesContext from '../context/StylesContext.jsx';
 import OutFitCard from './OutFitCard.jsx';
+import { FaPlus } from 'react-icons/fa';
 
 
 const OutfitList = () => {
@@ -25,15 +26,17 @@ const [add, setAdd] = useState(false);
 
 
   return (
-
-    <div className="add-outfit-card-container">
-      <div className='add-card'>
-          <button className="add" onClick={handleClick}>+</button>
-          <div className="add-to-outfit">Add To Outfit</div>
+    <>
+      <h4 id="outfit-title">Your Outfit</h4>
+      <div className="add-outfit-card-container">
+        <div className='add-card' onClick={handleClick}>
+            {/* <button className="add" onClick={handleClick}>+</button> */}
+            <FaPlus id="add" />
+            <div className="add-to-outfit">Add To Outfit</div>
+        </div>
+          {add ? <OutFitCard product={product} style={card}/> : null}
       </div>
-        {add ? <OutFitCard product={product} style={card}/> : null}
-    </div>
-
+    </>
   );
 }
 

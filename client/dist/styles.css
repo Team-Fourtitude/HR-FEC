@@ -2,23 +2,25 @@
 
 
 
-.related {
-  height:1000px;
-}
-
-#close {
+h4 {
   position: relative;
-  top: 0;
-  right: 20px;
+  margin: 0;
+  left: 3%;
 }
 
+caption {
+  position: relative;
+  padding-bottom: 5%;
+  font-size: 30px;
+  font-weight: bold;
+}
 
 .tbl-container {
   background-color: rgba(255, 255, 255, 0.884);
-  /* position: fixed;
-  display: flex; */
-
+  position: relative;
   align-content: center;
+  width: 75%;
+  left: 10%;
   padding: 15px;
   border: 1px solid white;
   opacity: 5;
@@ -27,11 +29,21 @@
   overflow-y: scroll;
 }
 
+table {
+  position:static;
+  overflow-y: scroll;
+  max-width: 100%;
+}
+
+tbody {
+  font-size: small;
+}
 
 table, th, td {
   text-align: center;
   border: 1px solid black;
 }
+
 th, td {
   padding: 15px;
 }
@@ -54,62 +66,104 @@ th, td {
 .column {
   width: 275px;
   height: 400px;
-
-  background-color: aqua;
+  background-color: whitesmoke;
   text-align: justify;
   margin: 20px;
-  border: 2px solid black;
+  /* border: 2px solid lightgrey; */
   box-sizing: border-box;
 }
 
-#delete {
-  align-self: flex-end;
+p.info {
+  position: relative;
+  padding-left: 2%;
+  bottom: 6%;
 }
 
-#next, #prev {
-  position: absolute;
+span {
+  font-size: xx-small;
+}
+
+span.cat {
+  top: 0%;
+}
+
+.starRating {
+  position: relative;
+  padding-left: 2%;
+  bottom: 3%;
+}
+
+.next, .prev {
+  position: relative;
   top: 25%;
   padding: 10px;
   font-size: 16px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
 
 }
-
-#next:hover,
-#prev:hover {
-  background-color: grey;
+.next {
+  left: 85%;
 }
 
-#next:disabled,
-#prev:disabled {
-  background-color: grey;
-  color: darkgray;
-}
-
-#next {
-  right: 20px;
-}
-
-
-#prev {
+.prev {
   left: 20px;
 }
 
-#compare {
-  position: relative;
-  align-self:flex-end;
-  border: 1px solid black;
-  background-color: lightgrey;
+.prev:hover,
+.next:hover {
+  background-color: grey;
+}
 
+.next#disabled {
+  position:relative;
+  left: 85%;
+  top: 25%;
+  padding: 10px;
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  background-color: grey;
+  border-radius: 50%;
+  pointer-events:none;
+  /* color: darkgray; */
+}
+
+.prev#disabled {
+  position:relative;
+  top: 25%;
+  left: 20px;
+  padding: 10px;
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  background-color: grey;
+  border-radius: 50%;
+  pointer-events: none;
+  /* color: darkgray; */
+}
+
+.compare {
+  position: relative;
+  top: 2%;
+  left: 89%;
+  color: rgb(167, 167, 167);
+  /* border: 1px solid lightgrey; */
+  transition-duration: 0.2s;
+
+}
+
+.compare:hover {
+  color: goldenrod;
 }
 
 .square {
   position: relative;
+  top: 1%;
   width: 270px;
-  height: 300px;
+  height: 215px;
   overflow: hidden;
 }
 
@@ -122,9 +176,6 @@ th, td {
   left: 50%;
   transform: translate( -50%, -50%);
 }
-
-
-
 
 
 .add-outfit-card-container {
@@ -141,11 +192,11 @@ th, td {
 }
 
 .add-card {
-
-  width: 275px;
-  height: 400px;
-
-  background-color: aqua;
+  position: relative;
+  top: 10%;
+  width: 200px;
+  height: 200px;
+  background-color: whitesmoke;
   text-align: justify;
   margin: 20px;
   border: 2px solid black;
@@ -153,17 +204,33 @@ th, td {
 }
 
 
+#add {
+  position: relative;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  top: 30%;
+  left: 37%;
+}
+
+.add-to-outfit {
+  position: relative;
+  left: 19%;
+  top: 30%;
+}
+
 
 
 .outfit-card {
   width: 275px;
-  height: 400px;
-
-
+  height: 300px;
   text-align: justify;
   margin: 20px;
-  border: 2px solid black;
+  background-color: whitesmoke;
+  /* border: 2px solid black; */
   box-sizing: border-box;
+  overflow-y: scroll;
 }
 
 .outfit-img {
@@ -174,4 +241,21 @@ th, td {
   top: 50%;
   left: 50%;
   transform: translate( -50%, -50%);
+}
+
+p.outfit-info {
+  position: relative;
+  padding-left: 2%;
+  bottom: 12%;
+}
+
+#delete {
+  position: sticky;
+  left: 89%;
+  top: 3%;
+  color: darkgray;
+}
+
+#delete:hover {
+  color: black;
 }

@@ -9,8 +9,8 @@ import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
 const RelatedProductList = () => {
   const [ relatedProduct, setRelatedProduct ] = useContext(RelatedProductContext);
   const [ relatedStyles, setRelatedStyles ] = useContext(RelatedStylesContext);
-  const [ leftDisabled, setLeftDisabled] = useState(true);
-  const [ rightDisabled, setRightDisabled] = useState(false);
+  const [ left, setLeft] = useState('disabled');
+  const [ right, setRight] = useState('');
 
 
   const ref = useRef(null);
@@ -21,18 +21,27 @@ const RelatedProductList = () => {
     } else {
       ref.current.scrollLeft += 200;
     }
-    if (ref.current.scrollLeft) {
-      setLeftDisabled(prevState => !prevState);
+
+    if (ref.current.scrollLeft > ref.current.offsetWidth) {
+      setRight('disabled')
+    } else {
+      setRight('next');
     }
 
+    if (!ref.current.scrollLeft) {
+      setLeft('disabled')
+    } else {
+      setLeft('prev');
+    }
   }
 
 
   return (
     <>
 
-      {leftDisabled ? <FaAngleLeft id="prev" onClick={() => handleClick('left')} /> : <FaAngleLeft id="prev disabled" onClick={() => handleClick('left')}/>}
-      <FaAngleRight id="next" onClick={() => handleClick('right')} />
+      <FaAngleLeft className="prev" id={left} onClick={() => handleClick('left')} />
+      <FaAngleRight className="next" id={right} onClick={() => handleClick('right')} />
+      <h4 id="related-title">Related Products</h4>
       <div className="container" ref={ref} >
         {relatedStyles.related ? relatedStyles.related.map((item) => {
           return (
