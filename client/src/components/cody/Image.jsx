@@ -19,7 +19,7 @@ const Image = (props) => {
             "position": "relative",
             "justifyContent": "center",
             "width": "100%",
-            "maxHeight": "900px",
+            "maxHeight": "600px",
             "backgroundColor": "black",
             "overflow": "hidden",
             "cursor": zoom ? "url(\"https://i.imgur.com/spnFx5r.png\"), auto" : 'crosshair',
@@ -35,7 +35,7 @@ const Image = (props) => {
           }} >
             <img style={{
               "width": "100%",
-              "height": "400px",
+              "height": "600px",
               "objectFit": "contain",
               "backgroundColor": "grey",
               "transform": zoom ? "scale(2.5)" : "scale(1)",
@@ -124,12 +124,14 @@ const Image = (props) => {
         return (
           <div style={{
             "width": "65%",
-            "maxHeight": "900px",
+            "maxHeight": "600px",
             "cursor": "zoom-in",
             "position":"relative",
           }}>
             <img style={{
-              "width": "100%"
+              "width": "100%",
+              "height":"600px",
+              "objectFit":"cover",
             }} src={props.current.url} alt={props.current.name} onClick={ () => {
               if (size) {
                 setZoom(false);
