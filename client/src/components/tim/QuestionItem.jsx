@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 //import ReactDOM from 'react-dom';
 
 import Modal from './Modal.jsx';
 import AnswerItem from './AnswerItem.jsx';
-// import HelpfulFeedback from './HelpfulFeedback.jsx'
+import AddQuestion from './AddQuestion.jsx';
+import QuestionContext from './QuestionContext.jsx';
+import { useAnswersUpdate } from './AnswersContext.jsx';
+import { LoadMoreAnswersButton } from './StyleHelpers.jsx'
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
 
 
@@ -12,10 +15,17 @@ import { useQuestionsUpdate } from './QuestionsContext.jsx';
 const QuestionItem = (props) => {
   const [allAns, setAllAns] = useState([]);
   const [maxAnsCount, setMaxAnsCount] = useState(2);
+  const [hasHelped, setHasHelped] = useState(false);
   const [isBtnHidden, setBtnToHide] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
   const questionUpdaters = useQuestionsUpdate();
+  const answerUpdaters = useAnswersUpdate();
+  const currentQuestion = useContext(QuestionContext);
 
+  useEffect(() => {
+    answerUpdaters.sortAnswers();
+  }, [])
 
   const loadMoreAnswers = () => {
     const newMax = maxAnsCount + 2;
@@ -37,38 +47,47 @@ const QuestionItem = (props) => {
     return sortedAnswers;
   }
 
-  useEffect(() => {
-    setAllAns(sortAnswers());
-  }, [])
-
   return(<div className="question-item">
     <div className="question-title">
-      <h3>Q: {props.question.question_body}</h3>
+      <h3>Q: {currentQuestion.question_body}</h3>
       <div className="question-sub-text">
-        by {props.question.asker_name} | Helpful?  <u
-        onClick={() => {questionUpdaters.markQuestionHelpful(props.question.question_id)}}
-        style={{cursor: 'pointer'}}>
+        by {currentQuestion.asker_name} | Helpful?  <u
+        onClick={() => {
+          questionUpdaters.markQuestionHelpful(currentQuestion.question_id, hasHelped);
+          setHasHelped(true);
+        }}
+        style={{cursor: "pointer"}}>
            Yes</u>
-        <span> ({props.question.question_helpfulness}) | </span>
-        <u
-          style={{cursor: 'pointer'}}
-          onClick={() => {console.log(`Add attempt`)}}
+        <span> ({currentQuestion.question_helpfulness}) | </span>
+        <u className="add-answer-link"
+          style={{cursor: "pointer"}}
+          onClick={ () => setOpen(true) }
         >Add Answer</u>
       </div>
     </div>
     {' '}
     <div
-      className='answer-list'
+      className="answer-list"
       style={{margin: 10}}>
-      {allAns.slice(0, maxAnsCount).map((id) => <AnswerItem answer={props.question.answers[id]}
-      key={id} />)}
+        { allAns.slice(0, maxAnsCount).map((id) =>
+            <AnswerItem answer={currentQuestion.answers[id]}
+            key={id} />
+        )}
       {(!isBtnHidden && allAns.length > 2) &&
-      <button
-      className="LoadMoreAns"
-      onClick={() => loadMoreAnswers()}>
+      <LoadMoreAnswersButton
+        onClick={() => loadMoreAnswers()}
+        style={{"cursor": "pointer",
+        "fontWeight": "bold"}}>
         LOAD MORE ANSWERS
-      </button>}
+      </LoadMoreAnswersButton>}
     </div>
+    <div className="add-answer-modal">
+        <Modal
+          isOpen={ isOpen }
+          close={ () => setOpen(false) }>
+            <AddQuestion />
+        </Modal>
+      </div>
   </div>)
 }
 

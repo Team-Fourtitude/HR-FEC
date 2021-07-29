@@ -1,5 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
+
+import QuestionContext from './QuestionContext.jsx';
 /* eslint react/prop-types: 0 */
 
 const AnswersContext = createContext(null);
@@ -17,12 +19,15 @@ export const AnswersProvider = ({children}) => {
   const [answers, setAnswers] = useState([]);
   const [sortedAnswers, setSortedAnswers] = useState([]);
 
+  const currentQuestion = useContext(QuestionContext);
+  const currentQuestionId = currentQuestion.question_id;
+
   // API fetch current answers for question
-  const getAnswers = (qid) => {
-    console.log(`Current Question: ${qid}`);
-    axios.get(`/qa/questions/${qid}/answers`, {
+  const getAnswers = () => {
+    console.log(`Current Question Id: ${currentQuestionId}`);
+    axios.get(`/qa/questions/${currentQuestionId}/answers`, {
         params: {
-          id: qid,
+          question_id: currentQuestionId,
         },
       })
     .then(data => {
@@ -32,13 +37,36 @@ export const AnswersProvider = ({children}) => {
   }
 
   const sortAnswers = () => {
-    // Need to Update for
     const sortedByHelp = answers.sort((a, b) => {
       return [b].helpfulness - [a].helpfulness
     })
-    //console.log(`This is the sorted array ${sortedAnswers}`)
-    setSortedAnswers(sortedAnswers);
+    setSortedAnswers(sortedByHelp);
   }
+
+  const markAnswerHelpful = (answer_id, hasHelped) => {
+    // PUT upvoteed question
+    if (hasHelped) return;
+    axios.put(`/qa/answers/${answer_id}/helpful`)
+      .then(() => {
+        console.log(`Marked Answer Helpful: ${answer_id}`)
+        getAnswers()
+      })
+      .catch(error => console.log(error));
+  }
+
+  const reportAnswer = (answer_id) => {
+    // PUT reported question
+    axios.put(`/qa/answers/${answer_id}/report`)
+      .then(() => {
+        console.log(`Reported Answer: ${answer_id}`)
+        getAnswers()
+      })
+      .catch(error => console.log(error));
+  }
+
+  useEffect(() => {
+    getAnswers()
+  }, [currentQuestionId])
 
   return (
     <AnswersContext.Provider value={
@@ -46,6 +74,9 @@ export const AnswersProvider = ({children}) => {
       sortedAnswers}}>
         <AnswersUpdateContext.Provider value={{
           getAnswers,
+          sortAnswers,
+          reportAnswer,
+          markAnswerHelpful,
         }}>
           {children}
         </AnswersUpdateContext.Provider>

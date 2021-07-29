@@ -12,7 +12,10 @@ const QuestionSearch = () => {
   }
 
   return (
-    <div className='question-search'>
+    <div className="question-search" style={{
+      "gridColumn": "2",
+      "verticalAlign" : "center",
+    }}>
       <input type='text'
       className='question-search-input'
       value={query}

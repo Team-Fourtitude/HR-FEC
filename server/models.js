@@ -81,6 +81,14 @@ module.exports = {
     });
   },
 
+  getAnswers: (question_id) => {
+    return axios({
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/${questions}/answers`,
+      method: 'get',
+      headers: {Authorization: apiKey},
+    });
+  },
+
   putAnswerHelp: (answer_id) => {
     return axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/answers/${answer_id}/helpful`,

@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 import PictureGallery from './PictureGallery.jsx';
 import axios from 'axios';
 
-import { useQuestions } from './QuestionsContext.jsx';
+//import { useQuestions } from './QuestionsContext.jsx';
 /* eslint react/prop-types: 0 */
 
 const AnswerItem = (props) => {
-  const { questions } = useQuestions();
-  const [answer, setAnswer] = useState({});
+  // const { questions } = useQuestions();
+ //const [answer, setAnswer] = useState({});
+ const [isHelpful, setHelped] = useState(false);
 
-  useEffect(() => {
-    setAnswer(props.answer)
-  }, [])
+  // useEffect(() => {
+  //   console.log(`please`)
+  //   //setAnswer(props.answer)
+  // }, [])
 
   const convertDate = (date) => {
     const dateFormat = {
@@ -39,28 +41,31 @@ const AnswerItem = (props) => {
   }
 
   return (
-    <div className="AnswerItem">
-      <div className="AnsBody">
-        <strong>A:</strong> {props.answer.body}
+    <div className="answer-item">
+      <div className="answer-container">
+        <div className="answer-body">
+          <strong>A:</strong> {props.answer.body}
+        </div>
+        <div
+          className="answer-sub-text"
+          style={{margin: 10}}>
+          by {props.answer.answerer_name}, {convertDate(props.answer.date)} | <span>Helpful? </span>
+          <u
+            onClick={() => {markAnswerHelpful(props.answer.id)}}
+            style={{cursor: 'pointer'}}>
+            Yes
+          </u> {' '}
+          ({props.answer.helpfulness})
+          <span> | </span>
+          <u
+            style={{cursor: 'pointer'}}
+            onClick={() => {reportAnswer(props.answer.id)}}>
+            Report
+          </u>
+        </div>
+        <PictureGallery photos={props.answer.photos}/>
       </div>
-      <div
-        className="answer-sub-text"
-        style={{margin: 10}}>
-        by {props.answer.answerer_name}, {convertDate(props.answer.date)} | <span>Helpful? </span>
-        <u
-          onClick={() => {markAnswerHelpful(props.answer.id)}}
-          style={{cursor: 'pointer'}}>
-           Yes
-        </u> {' '}
-        ({props.answer.helpfulness})
-        <span> | </span>
-        <u
-          style={{cursor: 'pointer'}}
-          onClick={() => {reportAnswer(props.answer.id)}}>
-          Report
-        </u>
-      </div>
-      <PictureGallery photos={props.answer.photos}/>
+      <hr></hr>
     </div>
   )
 }

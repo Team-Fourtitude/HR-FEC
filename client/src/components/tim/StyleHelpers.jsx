@@ -58,3 +58,11 @@ export const InvisButton = styled.button`
   cursor:pointer;
   position:relative
 `;
+
+export const LoadMoreAnswersButton = styled.button`
+  background:transparent;
+  border:none;
+  outline:none;
+  position:relative;
+
+`;

@@ -145,3 +145,15 @@ th, td {
 .delete {
   align-self: flex-end;
 }
+
+.answer-container {
+  background-color: lightgrey;
+  border-radius: 20px;
+  padding: 15px;
+  transition: all .1s ease-in-out;
+}
+
+.answer-container:hover {
+  transform: scale(1.05);
+  background-color: rgb(198, 214, 219, 0.5);
+}
