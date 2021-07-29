@@ -47,12 +47,53 @@ module.exports = {
       params: {product_id},
     });
   },
-  getQuestions: (product_id = 25168, page = 1, count = 5) => {
+  getQuestions: ({product_id = 25168, page = 1, count = 5}) => {
     return axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions`,
       method: 'get',
       headers: {Authorization: apiKey},
       params: {product_id, page, count},
+    });
+  },
+
+  addQuestions: ({product_id, questionBody, email, name}) => {
+    return axios({
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions`,
+      method: 'post',
+      headers: {Authorization: apiKey},
+      params: {product_id, questionBody, email, name},
+    });
+  },
+
+  putQuestionHelp: (question_id) => {
+    return axios({
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/${question_id}/helpful`,
+      method: 'put',
+      headers: {Authorization: apiKey},
+    });
+  },
+
+  putQuestionReport: (question_id) => {
+    return axios({
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/${question_id}/report`,
+      method: 'put',
+      headers: {Authorization: apiKey},
+    });
+  },
+
+  putAnswerHelp: (answer_id) => {
+    return axios({
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/answers/${answer_id}/helpful`,
+      method: 'put',
+      headers: {Authorization: apiKey},
+    });
+  },
+
+  putAnswerReport: (answer_id) => {
+    return axios({
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/answers/${answer_id}/report`,
+      method: 'put',
+      headers: {Authorization: apiKey},
     });
   },
 }
