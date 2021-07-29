@@ -10,7 +10,7 @@ import OutfitList from './cece/OutfitList.jsx';
 
 
 // this file shows how to use context in your component
-import Test from './cody/Test.jsx';
+import Overview from './cody/Overview.jsx';
 
 const App = () => {
   const [product, setProduct] = useState({});
@@ -138,11 +138,11 @@ const App = () => {
         <RelatedStylesContext.Provider value={[relatedStyles, setRelatedStyles]}>
           <StylesContext.Provider value={{styles, setStyles}}>
             <StyleContext.Provider value={{style, setStyle}}>
-              <Test />
-              {/* {console.log(relatedStyles)} */}
-
-              <RelatedProductList />
-              <OutfitList />
+              <Overview />
+              <div className="related" style={{"position":"relative"}}>
+                <RelatedProductList />
+                <OutfitList />
+              </div>
             </StyleContext.Provider>
           </StylesContext.Provider>
         </RelatedStylesContext.Provider>

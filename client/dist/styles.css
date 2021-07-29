@@ -1,6 +1,5 @@
 
 
-
 .related-products {
   display: flex;
   flex-direction: column;
@@ -49,7 +48,7 @@ th, td {
   width: 75%;
   padding: 20px;
   position: absolute;
-  top: 300px;
+  /* top: 800px; */
   left: 10%;
   right:10%;
   overflow-x: scroll;
