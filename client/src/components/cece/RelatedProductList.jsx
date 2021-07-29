@@ -24,6 +24,8 @@ const RelatedProductList = () => {
 
   return (
     <>
+          <button id="prev" onClick={() => handleClick('left')}> {`<`} </button>
+          <button id="next" onClick={() => handleClick('right')}> {`>`} </button>
         <div className="container" ref={ref} >
           {relatedStyles.related ? relatedStyles.related.map((item) => {
             return (
@@ -34,12 +36,10 @@ const RelatedProductList = () => {
           })
           : null}
         </div>
-        <div>
-          <button id="prev" onClick={() => handleClick('left')}> {`<`} </button>
+        {/* <div>
         </div>
         <div>
-          <button id="next" onClick={() => handleClick('right')}> {`>`} </button>
-        </div>
+        </div> */}
     </>
   );
 }

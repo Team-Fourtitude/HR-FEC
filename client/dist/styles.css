@@ -1,15 +1,13 @@
 
 
-.related-products {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  /* justify-content: center; */
+
+
+.related {
+  height:1000px;
 }
 
-#close,
-#delete {
-  position: absolute;
+#close {
+  position: relative;
   top: 0;
   right: 20px;
 }
@@ -17,9 +15,9 @@
 
 .tbl-container {
   background-color: rgba(255, 255, 255, 0.884);
-  position: fixed;
-  display: flex;
-  /* justify-content: center; */
+  /* position: fixed;
+  display: flex; */
+
   align-content: center;
   padding: 15px;
   border: 1px solid white;
@@ -44,11 +42,9 @@ th, td {
 .container {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-evenly; */
   width: 75%;
   padding: 20px;
-  position: absolute;
-  /* top: 800px; */
+  position: relative;
   left: 10%;
   right:10%;
   overflow-x: scroll;
@@ -66,18 +62,20 @@ th, td {
   box-sizing: border-box;
 }
 
-#compare {
-  align-self: flex-start;
+#compare,
+#delete {
+  align-self: flex-end;
 }
 
 #next, #prev {
   position: absolute;
-  top: 525px;
+  top: 25%;
 }
 
 #next {
   right: 20px;
 }
+
 
 #prev {
   left: 20px;
@@ -89,6 +87,7 @@ th, td {
   height: 300px;
   overflow: hidden;
 }
+
 .relImg {
   position: absolute;
   max-width: 100%;
@@ -98,50 +97,69 @@ th, td {
   left: 50%;
   transform: translate( -50%, -50%);
 }
-/* .relImg {
-  width: auto;
-  height: 200px;
-} */
+
 
 
 
 
 .add-outfit-card-container {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  position: absolute;
-  top: 800px;
+  position: relative;
+  top: 5%;
   left: 10%;
   right: 10%;
+  overflow-x: scroll;
+  scroll-behavior: smooth; */
+  display: flex;
+  flex-direction: row;
+  width: 75%;
+  padding: 20px;
+  position: relative;
+  left: 10%;
+  right:10%;
   overflow-x: scroll;
   scroll-behavior: smooth;
 
 }
 
 .add-card {
+  /* width: 275px;
+  height: 400px;
+
+  border: 2px solid rgb(12, 12, 11); */
   width: 275px;
   height: 400px;
-  left: 10%;
-  border: 2px solid rgb(12, 12, 11);
+
+  background-color: aqua;
+  text-align: justify;
+  margin: 20px;
+  border: 2px solid black;
+  box-sizing: border-box;
 }
 
 
 
 
 .outfit-card {
-  float: left;
   width: 275px;
   height: 400px;
-  border: 2px solid rgb(10, 10, 10);
+
+  /* background-color: aqua; */
+  text-align: justify;
+  margin: 20px;
+  border: 2px solid black;
+  box-sizing: border-box;
 }
 
 .outfit-img {
-  width: 275px;
-}
-
-
-
-.delete {
-  align-self: flex-end;
+  /* width: 270px; */
+  position: absolute;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate( -50%, -50%);
 }
