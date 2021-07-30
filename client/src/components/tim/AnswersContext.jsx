@@ -15,9 +15,9 @@ export const useAnswersUpdate = () => {
   return useContext(AnswersUpdateContext);
 }
 
+
 export const AnswersProvider = ({children}) => {
   const [answers, setAnswers] = useState([]);
-  const [isLoaded, setLoaded] = useState(false);
 
   const currentQuestion = useContext(QuestionContext);
   const currentQuestionId = currentQuestion.question_id;
@@ -54,13 +54,12 @@ export const AnswersProvider = ({children}) => {
       console.log(`Added Answer from ${newAnswer.name}`)
     })
     .catch(error => console.log(error));
+    setAnswers(newAnswer)
   }
 
-  // /qa/questions/:question_id/answers
   return (
     <AnswersContext.Provider value={
       {answers,
-      isLoaded,
       }}>
         <AnswersUpdateContext.Provider value={{
           reportAnswer,
