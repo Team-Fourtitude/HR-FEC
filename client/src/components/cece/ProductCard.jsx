@@ -72,14 +72,14 @@ const ProductCard = ({item}) => {
             if (style[`default?`] && !style.sale_price) {
               return (
                 <>
-                  <span>{style.original_price}</span>
+                  <span className="price">{style.original_price}</span>
                 </>
               )
             } else if (style[`default?`] && style.sale_price) {
               return (
                 <>
-                  <span style={{'text-decoration': 'line-through', 'text-decoration-color': 'red'}}>{style.original_price}</span><br/>
-                  <span style={{'color': 'red'}}>SALE: $100</span>
+                  <span className="price" style={{'text-decoration': 'line-through', 'text-decoration-color': 'red'}}>{style.original_price}</span><br/>
+                  <span className="price" style={{'color': 'red'}}>SALE: $100</span>
                 </>
               )
             }

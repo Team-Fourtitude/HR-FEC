@@ -22,7 +22,7 @@ const RelatedProductList = () => {
       ref.current.scrollLeft += 200;
     }
 
-    if (ref.current.scrollLeft > ref.current.offsetWidth) {
+    if (ref.current.scrollLeft > ref.current.offsetWidth || ref.current.scrollLeft > 500) {
       setRight('disabled')
     } else {
       setRight('next');
