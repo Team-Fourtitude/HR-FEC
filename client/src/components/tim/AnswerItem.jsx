@@ -3,6 +3,7 @@ import PictureGallery from './PictureGallery.jsx';
 import { useAnswersUpdate } from './AnswersContext.jsx';
 import AnswerContext from './AnswerContext.jsx';
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
+import { ImArrowUp } from 'react-icons/im';
 
 //import { useQuestions } from './QuestionsContext.jsx';
 /* eslint react/prop-types: 0 */
@@ -30,20 +31,6 @@ const AnswerItem = () => {
     return `${newdate[1]} ${newdate[0]} ${newdate[2]}`;
   }
 
-  // const reportAnswer = (answer_id) => {
-  //   // PUT reported question
-  //   axios.put(`/qa/answers/${answer_id}/report`)
-  //     .then(() => console.log(`Reported Answer: ${answer_id}`))
-  //     .catch(error => console.log(error));
-  // }
-
-  // const markAnswerHelpful = (answer_id) => {
-  //   // PUT upvoted answer
-  //   axios.put(`/qa/answers/${answer_id}/helpful`)
-  //     .then(() => console.log(`Marked Answer Helpful: ${answer_id}`))
-  //     .catch(error => console.log(error));
-  // }
-
   return (
     <div className="answer-item">
       <div className={`answer-container${willReport && !isHelpful ? "-reportable" : "" || isHelpful ? "-helpful" : ""}`}>
@@ -53,7 +40,7 @@ const AnswerItem = () => {
         <div
           className="answer-sub-text"
           style={{margin: 10}}>
-          by {currentAnswer.answerer_name}, {convertDate(currentAnswer.date)} | Helpful? {' '}
+          by {currentAnswer.answerer_name}, {convertDate(currentAnswer.date)} | Helpful? {!isHelpful ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}
           <u
             onClick={() => {
               markAnswerHelpful(currentAnswer.id, isHelpful)

@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const models = require('./models.js');
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -132,6 +133,13 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
   .catch((e) => {
     console.log(e);
   })
+})
+
+app.post(`/qa/questions/:question_id/answers`, (req, res) => {
+  console.log(`posting answer from ${JSON.stringify(req.body.name)},
+  for question ${JSON.stringify(req.params.question_id)},
+  with this as the first photo ${JSON.stringify(req.body.photos)}`)
+  res.status(200).send();
 })
 
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {

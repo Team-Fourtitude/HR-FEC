@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 //import ReactDOM from 'react-dom';
 
 import Modal from './Modal.jsx';
+import { ImArrowUp } from 'react-icons/im';
 import AnswerItem from './AnswerItem.jsx';
 import AddAnswer from './AddAnswer.jsx';
 import AnswerContext from './AnswerContext.jsx';
@@ -53,7 +54,7 @@ const QuestionItem = (props) => {
       <div className="question-title">
         <h3>Q: {currentQuestion.question_body}</h3>
         <div className="question-sub-text">
-          by {currentQuestion.asker_name} | Helpful?  <u
+          by {currentQuestion.asker_name} | Helpful?  {!hasHelped ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}<u
           onClick={() => {
             questionUpdaters.markQuestionHelpful(currentQuestion.question_id, hasHelped);
             setHasHelped(true);

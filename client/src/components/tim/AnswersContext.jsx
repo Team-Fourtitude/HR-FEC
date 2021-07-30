@@ -41,10 +41,10 @@ export const AnswersProvider = ({children}) => {
       .catch(error => console.log(error));
   }
 
-  const submitAnswer = (qid, newAnswer) => {
-    axios.post(`/qa/questions/${qid}/answers`, {
+  const submitAnswer = (newAnswer) => {
+    axios.post(`/qa/questions/${currentQuestionId}/answers`, {
       body: {
-        answerBody: newAnswer.questionBody,
+        answerBody: newAnswer.answerBody,
         photos: newAnswer.photos,
         email: newAnswer.email,
         name: newAnswer.name,

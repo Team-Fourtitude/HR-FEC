@@ -34,7 +34,7 @@ export const ModalBackground = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  background-color: #fff;
+  background-color: rgb(228, 222, 222, 0.8);
   padding: 30px;
   border-radius: 30px;
   max-width: 90vw;
@@ -81,6 +81,24 @@ export const QuestionAnimationButton = styled.button`
     background-color: white;
     color: black;
     border: .1rem solid;
+  }
+`;
+
+export const UploadThumbnailImage = styled.image`
+  height: auto;
+  width: 100;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid gray;
+  padding: 5px;
+  opacity: .5;
+  &:hover {
+    width: 125%;
+    opacity: 1;
   }
 `;
 

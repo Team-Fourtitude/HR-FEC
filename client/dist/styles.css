@@ -266,6 +266,39 @@ span.cat {
   }
 }
 
+@keyframes greenpop {
+  from {
+    background-color: green;
+    transition: all .1s ease-in-out;
+  }
+
+  50% {
+    background-color: rgba(118, 202, 118, 0.836);
+  }
+
+  to {
+    background-color: lightgreen;
+    transition: all .1s ease-in-out;
+  }
+}
+
+@keyframes greenBreath {
+  from {
+    background-color: rgba(53, 141, 53, 0.815);
+    transition: all .1s ease-in-out;
+  }
+
+  50% {
+    background-color: lightgreen;
+    transition: all .1s ease-in-out;
+  }
+
+  to {
+    background-color: rgba(53, 141, 53, 0.815);
+    transition: all .1s ease-in-out;
+  }
+}
+
 .question-search {
   width: 100%;
   position: relative;
@@ -279,7 +312,6 @@ span.cat {
   height: auto;
   border-radius: 5px 5px 5px 5px;
   outline: none;
-  color: rgb(107, 211, 211);
 }
 
 .question-search-input:focus{
@@ -300,14 +332,8 @@ span.cat {
   background-color: lightgreen;
   border-radius: 20px;
   padding: 15px;
-  transition: all .1s ease-in-out;
-}
-
-.answer-container-helpful {
-  background-color: lightgreen;
-  border-radius: 20px;
-  padding: 15px;
-  transition: all .1s ease-in-out;
+  animation-name: greenpop;
+  animation-duration: 2s;
 }
 
 .answer-container {
@@ -318,7 +344,7 @@ span.cat {
 }
 
 .answer-container-helpful {
-  background-color: lightgreen;
+  background-color: rgba(53, 141, 53, 0.815);
   border-radius: 20px;
   padding: 15px;
   transition: all .1s ease-in-out;
@@ -328,7 +354,9 @@ span.cat {
   background-color: rgb(80, 177, 80);
   border-radius: 20px;
   padding: 15px;
-  transition: all .1s ease-in-out;
+  animation-name: greenBreath;
+  animation-duration: 2s;
+  animation-iteration-count:infinite;
 }
 
 .answer-container-reportable {
