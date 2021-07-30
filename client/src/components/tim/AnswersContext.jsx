@@ -1,5 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
+
+import QuestionContext from './QuestionContext.jsx';
 /* eslint react/prop-types: 0 */
 
 const AnswersContext = createContext(null);
@@ -13,39 +15,56 @@ export const useAnswersUpdate = () => {
   return useContext(AnswersUpdateContext);
 }
 
+
 export const AnswersProvider = ({children}) => {
   const [answers, setAnswers] = useState([]);
-  const [sortedAnswers, setSortedAnswers] = useState([]);
 
-  // API fetch current answers for question
-  const getAnswers = (qid) => {
-    console.log(`Current Question: ${qid}`);
-    axios.get(`/qa/questions/${qid}/answers`, {
-        params: {
-          id: qid,
-        },
+  const currentQuestion = useContext(QuestionContext);
+  const currentQuestionId = currentQuestion.question_id;
+
+  const markAnswerHelpful = (answer_id, hasHelped) => {
+    // PUT upvoteed question
+    if (hasHelped) return;
+    axios.put(`/qa/answers/${answer_id}/helpful`)
+      .then(() => {
+        console.log(`Marked Answer Helpful: ${answer_id}`)
       })
-    .then(data => {
-      setAnswers(data.data.results)
-    })
-    .catch(error => console.log(error));
+      .catch(error => console.log(error));
   }
 
-  const sortAnswers = () => {
-    // Need to Update for
-    const sortedByHelp = answers.sort((a, b) => {
-      return [b].helpfulness - [a].helpfulness
+  const reportAnswer = (answer_id) => {
+    // PUT reported question
+    axios.put(`/qa/answers/${answer_id}/report`)
+      .then(() => {
+        console.log(`Reported Answer: ${answer_id}`)
+      })
+      .catch(error => console.log(error));
+  }
+
+  const submitAnswer = (newAnswer) => {
+    axios.post(`/qa/questions/${currentQuestionId}/answers`, {
+      body: {
+        answerBody: newAnswer.answerBody,
+        photos: newAnswer.photos,
+        email: newAnswer.email,
+        name: newAnswer.name,
+      }
     })
-    //console.log(`This is the sorted array ${sortedAnswers}`)
-    setSortedAnswers(sortedAnswers);
+    .then(() => {
+      console.log(`Added Answer from ${newAnswer.name}`)
+    })
+    .catch(error => console.log(error));
+    setAnswers(newAnswer)
   }
 
   return (
     <AnswersContext.Provider value={
       {answers,
-      sortedAnswers}}>
+      }}>
         <AnswersUpdateContext.Provider value={{
-          getAnswers,
+          reportAnswer,
+          markAnswerHelpful,
+          submitAnswer,
         }}>
           {children}
         </AnswersUpdateContext.Provider>

@@ -40,14 +40,13 @@ const AddQuestion = () => {
 
   const isValidEmail = () => {
     console.log('Good email')
-    return (email.length <= 60 && email.includes('@'));
+    return (email.length <= 60 && email.includes('@') && email.includes('.'));
   }
 
   return (
     <div>
       <div className='add-question-header'>
         <h2>Add a Question</h2>
-        <h4>Mandatory Fields Are Indicated With A *</h4>
         {!canSubmit &&
         <p
         style={{color: 'red'}}>
@@ -55,7 +54,7 @@ const AddQuestion = () => {
         </p>}
       </div>
       <ModalForm onSubmit={e => handleSubmit(e)}>
-        <span>Your Question* :</span>
+        Your Question* :
           <ModalTextArea
             type='text'
             value={questionBody}
@@ -80,6 +79,9 @@ const AddQuestion = () => {
           onChange={e => setEmail(e.target.value)}
         />
       </label>
+      <h4>
+        Mandatory Fields Are Indicated With*
+      </h4>
       <span>
         For authentication reasons, you will not be emailed
       </span>

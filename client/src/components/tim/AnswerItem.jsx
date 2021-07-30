@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PictureGallery from './PictureGallery.jsx';
-import axios from 'axios';
+import { useAnswersUpdate } from './AnswersContext.jsx';
+import AnswerContext from './AnswerContext.jsx';
+import { useQuestionsUpdate } from './QuestionsContext.jsx';
+import { ImArrowUp } from 'react-icons/im';
 
-import { useQuestions } from './QuestionsContext.jsx';
+//import { useQuestions } from './QuestionsContext.jsx';
 /* eslint react/prop-types: 0 */
 
-const AnswerItem = (props) => {
-  const { questions } = useQuestions();
-  const [answer, setAnswer] = useState({});
+const AnswerItem = () => {
+  const [isHelpful, setHelped] = useState(false);
+  const [willReport, setWillReport] = useState(false);
+  const { reportAnswer, markAnswerHelpful } = useAnswersUpdate();
+
+  const currentAnswer = useContext(AnswerContext);
+  const getQuestions = useQuestionsUpdate().getQuestions;
 
   useEffect(() => {
-    setAnswer(props.answer)
-  }, [])
+    if (isHelpful) getQuestions();
+  }, [isHelpful])
 
   const convertDate = (date) => {
     const dateFormat = {
@@ -24,43 +31,37 @@ const AnswerItem = (props) => {
     return `${newdate[1]} ${newdate[0]} ${newdate[2]}`;
   }
 
-  const reportAnswer = (answer_id) => {
-    // PUT reported question
-    axios.put(`/qa/answers/${answer_id}/report`)
-      .then(() => console.log(`Reported Answer: ${answer_id}`))
-      .catch(error => console.log(error));
-  }
-
-  const markAnswerHelpful = (answer_id) => {
-    // PUT upvoted answer
-    axios.put(`/qa/answers/${answer_id}/helpful`)
-      .then(() => console.log(`Marked Answer Helpful: ${answer_id}`))
-      .catch(error => console.log(error));
-  }
-
   return (
-    <div className="AnswerItem">
-      <div className="AnsBody">
-        <strong>A:</strong> {props.answer.body}
+    <div className="answer-item">
+      <div className={`answer-container${willReport && !isHelpful ? "-reportable" : "" || isHelpful ? "-helpful" : ""}`}>
+        <div className="answer-body">
+          <strong>A:</strong> {currentAnswer.body}
+        </div>
+        <div
+          className="answer-sub-text"
+          style={{margin: 10}}>
+          by {currentAnswer.answerer_name}, {convertDate(currentAnswer.date)} | Helpful? {!isHelpful ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}
+          <u
+            onClick={() => {
+              markAnswerHelpful(currentAnswer.id, isHelpful)
+              setHelped(true);
+            }}
+            style={{cursor: !isHelpful && 'pointer'}}>
+            Yes
+          </u> {' '}
+          ({currentAnswer.helpfulness})
+          {' '} | {' '}
+          <u
+            style={{cursor: 'pointer'}}
+            onMouseEnter={() => {setWillReport(true)}}
+            onMouseLeave={() => {setWillReport(false)}}
+            onClick={() => {reportAnswer(currentAnswer.id)}}>
+            Report
+          </u>
+        </div>
+        <PictureGallery photos={currentAnswer.photos ? currentAnswer.photos : []}/>
       </div>
-      <div
-        className="answer-sub-text"
-        style={{margin: 10}}>
-        by {props.answer.answerer_name}, {convertDate(props.answer.date)} | <span>Helpful? </span>
-        <u
-          onClick={() => {markAnswerHelpful(props.answer.id)}}
-          style={{cursor: 'pointer'}}>
-           Yes
-        </u> {' '}
-        ({props.answer.helpfulness})
-        <span> | </span>
-        <u
-          style={{cursor: 'pointer'}}
-          onClick={() => {reportAnswer(props.answer.id)}}>
-          Report
-        </u>
-      </div>
-      <PictureGallery photos={props.answer.photos}/>
+      <hr className="answer-break"></hr>
     </div>
   )
 }

@@ -1,27 +1,20 @@
 import React from 'react';
-
-import QuestionSearch from './QuestionSearch.jsx'
 import QuestionsList from './QuestionsList.jsx';
 import { QuestionsProvider } from './QuestionsContext.jsx'
 
 // Main
 const QuestionsAnswers = () => {
-  const style = {
-    "display": "flex",
-    "margin": "auto",
-    "maxWidth": "1800px",
-    "width": "80%",
-    "padding": "20",
-  }
 
   return (
-    <div className="questions-answers-module" style={{style}}>
+    <div className="questions-answers-module" style={{
+      "display": "grid",
+      "gridTemplateColumns": "repeat (5, 1fr)",
+      "gridTemplateRows": "auto",
+      "width": "80%",
+      "margin": "50px",
+      }}>
         <QuestionsProvider>
-          <QuestionSearch />
-          <QuestionsList style={{
-            "position": "absolute",
-            "align": "center",
-          }}/>
+          <QuestionsList />
         </QuestionsProvider>
     </div>
   )

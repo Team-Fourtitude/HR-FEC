@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 //import ReactDOM from 'react-dom';
 
 import Modal from './Modal.jsx';
+import { ImArrowUp } from 'react-icons/im';
 import AnswerItem from './AnswerItem.jsx';
-// import HelpfulFeedback from './HelpfulFeedback.jsx'
+import AddAnswer from './AddAnswer.jsx';
+import AnswerContext from './AnswerContext.jsx';
+import QuestionContext from './QuestionContext.jsx';
+import { LoadMoreAnswersButton } from './StyleHelpers.jsx'
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
 
 
@@ -12,10 +16,18 @@ import { useQuestionsUpdate } from './QuestionsContext.jsx';
 const QuestionItem = (props) => {
   const [allAns, setAllAns] = useState([]);
   const [maxAnsCount, setMaxAnsCount] = useState(2);
+  const [hasHelped, setHasHelped] = useState(false);
   const [isBtnHidden, setBtnToHide] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
   const questionUpdaters = useQuestionsUpdate();
 
+  const currentQuestion = useContext(QuestionContext);
+
+  useEffect(() => {
+
+    setAllAns(sortAnswers());
+  }, [])
 
   const loadMoreAnswers = () => {
     const newMax = maxAnsCount + 2;
@@ -28,46 +40,60 @@ const QuestionItem = (props) => {
   }
 
   const sortAnswers = () => {
-    // Need to Update for
     let ansByKeys = Object.keys(props.question.answers);
     const sortedAnswers = ansByKeys.sort((a, b) => {
       return props.question.answers[b].helpfulness - props.question.answers[a].helpfulness
     })
-    //console.log(`This is the sorted array ${sortedAnswers}`)
     return sortedAnswers;
   }
 
-  useEffect(() => {
-    setAllAns(sortAnswers());
-  }, [])
 
-  return(<div className="question-item">
-    <div className="question-title">
-      <h3>Q: {props.question.question_body}</h3>
-      <div className="question-sub-text">
-        by {props.question.asker_name} | Helpful?  <u
-        onClick={() => {questionUpdaters.markQuestionHelpful(props.question.question_id)}}
-        style={{cursor: 'pointer'}}>
-           Yes</u>
-        <span> ({props.question.question_helpfulness}) | </span>
-        <u
-          style={{cursor: 'pointer'}}
-          onClick={() => {console.log(`Add attempt`)}}
-        >Add Answer</u>
+  return(
+  <div className="question-item">
+    <div className={`question-container${ hasHelped ? "-helpful" : ""}`}>
+      <div className="question-title">
+        <h3>Q: {currentQuestion.question_body}</h3>
+        <div className="question-sub-text">
+          by {currentQuestion.asker_name} | Helpful?  {!hasHelped ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}<u
+          onClick={() => {
+            questionUpdaters.markQuestionHelpful(currentQuestion.question_id, hasHelped);
+            setHasHelped(true);
+          }}
+          style={{cursor: "pointer"}}>
+            Yes</u>
+            {' '} ({currentQuestion.question_helpfulness}) | {' '}
+          <u className="add-answer-link"
+            style={{cursor: "pointer"}}
+            onClick={ () => setOpen(true) }
+          >Add Answer</u>
+        </div>
       </div>
-    </div>
     {' '}
+
     <div
-      className='answer-list'
+      className="answer-list"
       style={{margin: 10}}>
-      {allAns.slice(0, maxAnsCount).map((id) => <AnswerItem answer={props.question.answers[id]}
-      key={id} />)}
+        { allAns.slice(0, maxAnsCount).map((id) =>
+        <AnswerContext.Provider value={currentQuestion.answers[id]} key={id}>
+            <AnswerItem answer={currentQuestion.answers[id]}
+            key={id} />
+        </AnswerContext.Provider>
+        )}
       {(!isBtnHidden && allAns.length > 2) &&
-      <button
-      className="LoadMoreAns"
-      onClick={() => loadMoreAnswers()}>
+      <LoadMoreAnswersButton
+        onClick={() => loadMoreAnswers()}
+        style={{"cursor": "pointer",
+        "fontWeight": "bold"}}>
         LOAD MORE ANSWERS
-      </button>}
+      </LoadMoreAnswersButton>}
+    </div>
+    <div className="add-answer-modal">
+        <Modal
+          isOpen={ isOpen }
+          close={ () => setOpen(false) }>
+            <AddAnswer />
+        </Modal>
+      </div>
     </div>
   </div>)
 }

@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const models = require('./models.js');
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -89,11 +90,11 @@ app.post('/qa/questions/', (req, res) => {
     email: req.body.email,
     name: req.body.name,
   })
-  .then( () => {
+  .then(() => {
     res.status(201).send();
     console.log(`Succesful Question Posted!!!`)
   })
-  .catch( (e) => {
+  .catch((e) => {
     console.log(e);
   });
 });
@@ -101,7 +102,7 @@ app.post('/qa/questions/', (req, res) => {
 app.put('/qa/questions/:question_id/helpful', (req, res) => {
   console.log(`Put question as helpful: ${req.params.question_id}`)
   models.putQuestionHelp(req.params.question_id)
-  .then( () => {
+  .then(() => {
     res.status(204).send();
     console.log(`Succesful Marked Question Helpful!!! `)
   })
@@ -113,19 +114,38 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
 app.put('/qa/questions/:question_id/report', (req, res) => {
   console.log(`Put question as reported: ${req.params.question_id}`)
   models.putQuestionReport(req.params.question_id)
-  .then( () => {
+  .then(() => {
     res.status(204).send();
     console.log(`Succesful Marked Question as MEAN!!! `)
   })
-  .catch( (e) => {
+  .catch((e) => {
     console.log(e);
   });
 });
 
+app.get('/qa/questions/:question_id/answers', (req, res) => {
+  console.log(`Getting answers: ${req.params.question_id}`)
+  models.getAnswers(req.params.question_id)
+  .then((data) => {
+    res.status(200).send(data.data);
+    console.log(`Got Answers`);
+  })
+  .catch((e) => {
+    console.log(e);
+  })
+})
+
+app.post(`/qa/questions/:question_id/answers`, (req, res) => {
+  console.log(`posting answer from ${JSON.stringify(req.body.name)},
+  for question ${JSON.stringify(req.params.question_id)},
+  with this as the first photo ${JSON.stringify(req.body.photos)}`)
+  res.status(200).send();
+})
+
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {
   console.log(`Put Answer as helpful: ${req.params.answer_id}`)
   models.putAnswerHelp(req.params.answer_id)
-  .then( () => {
+  .then(() => {
     res.status(204).send();
     console.log(`Succesful Marked Answer Helpful!!! `)
   })
@@ -137,11 +157,11 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
 app.put('/qa/answers/:answer_id/report', (req, res) => {
   console.log(`Put Answer as reported: ${req.params.answer_id}`)
   models.putAnswerReport(req.params.answer_id)
-  .then( () => {
+  .then(() => {
     res.status(204).send();
     console.log(`Succesful Marked Answer as MEAN!!! `)
   })
-  .catch( (e) => {
+  .catch((e) => {
     console.log(e);
   });
 });

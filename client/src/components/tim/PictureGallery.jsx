@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from './Modal.jsx';
-//import styled from 'styled'
+import { Fade } from './StyleHelpers.jsx'
 
 
 const PictureGallery = (props) => {
@@ -8,9 +8,12 @@ const PictureGallery = (props) => {
   const [popSrc, setPopped] = useState('');
 
   const style = {
-    height: 'auto',
-    maxWidth: 100,
-    cursor: 'pointer'
+    height: "auto",
+    width: 100,
+    cursor: "pointer",
+    borderRadius: "5px",
+    border: "2px solid gray",
+    margin: "5px",
   }
 
   const popImage = (src) => {
@@ -36,21 +39,25 @@ const PictureGallery = (props) => {
     {props.photos.map((link, index) => {
       return (
         <img
-        className='AnsPhoto'
-        src={link}
-        key={index}
-        style={style}
-        onClick={() => {popImage(event.target.src)}}
+          className='AnsPhoto'
+          src={link}
+          key={index}
+          style={style}
+          onClick={() => {popImage(event.target.src)}}
         ></img>
       )}
     )}
-    <div style={{ transform: 'translateX(50px)' }}>
+    <div style={{ transform: "translateX(50px)" }}>
       <Modal isOpen={isOpen} close={() => {setOpen(false)}}>
         <img
-          className='AnsPhoto'
+          className="AnsPhoto"
           src={popSrc}
           onClick={() => {setOpen(false)}}
-          style={{cursor: 'pointer', height: 'auto', maxWidth: 400}}
+          style={{
+            cursor: "pointer",
+            maxHeight: "auto",
+            maxWidth: 400
+          }}
           ></img>
       </Modal>
     </div>
