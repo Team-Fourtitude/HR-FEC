@@ -1,27 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PictureGallery from './PictureGallery.jsx';
-import { useAnswers, useAnswersUpdate } from './AnswersContext.jsx';
-import axios from 'axios';
-import QuestionContext from './QuestionContext.jsx';
+import { useAnswersUpdate } from './AnswersContext.jsx';
+import AnswerContext from './AnswerContext.jsx';
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
 
 //import { useQuestions } from './QuestionsContext.jsx';
 /* eslint react/prop-types: 0 */
 
-const AnswerItem = (props) => {
-  const [answer, setAnswer] = useState({});
+const AnswerItem = () => {
   const [isHelpful, setHelped] = useState(false);
   const [willReport, setWillReport] = useState(false);
-  const { isLoaded, sortedAnswers } = useAnswers();
   const { reportAnswer, markAnswerHelpful } = useAnswersUpdate();
-  const currentQuestionId = useContext(QuestionContext).question_id;
-  const answersByQuestion = useQuestionsUpdate().getAnswersByQuestion;
 
+  const currentAnswer = useContext(AnswerContext);
+  const getQuestions = useQuestionsUpdate().getQuestions;
 
   useEffect(() => {
-    let answers = answersByQuestion(currentQuestionId);
-    setAnswer(answers[props.answer.id])
-  }, [isLoaded])
+    if (isHelpful) getQuestions();
+  }, [isHelpful])
 
   const convertDate = (date) => {
     const dateFormat = {
@@ -52,31 +48,31 @@ const AnswerItem = (props) => {
     <div className="answer-item">
       <div className={`answer-container${willReport && !isHelpful ? "-reportable" : "" || isHelpful ? "-helpful" : ""}`}>
         <div className="answer-body">
-          <strong>A:</strong> {answer.body}
+          <strong>A:</strong> {currentAnswer.body}
         </div>
         <div
           className="answer-sub-text"
           style={{margin: 10}}>
-          by {answer.answerer_name}, {convertDate(answer.date)} | <span>Helpful? </span>
+          by {currentAnswer.answerer_name}, {convertDate(currentAnswer.date)} | Helpful? {' '}
           <u
-            onClick={(e) => {
-              markAnswerHelpful(answer.id, isHelpful)
+            onClick={() => {
+              markAnswerHelpful(currentAnswer.id, isHelpful)
               setHelped(true);
             }}
             style={{cursor: !isHelpful && 'pointer'}}>
             Yes
           </u> {' '}
-          ({answer.helpfulness})
-          <span> | </span>
+          ({currentAnswer.helpfulness})
+          {' '} | {' '}
           <u
             style={{cursor: 'pointer'}}
             onMouseEnter={() => {setWillReport(true)}}
             onMouseLeave={() => {setWillReport(false)}}
-            onClick={() => {reportAnswer(answer.id)}}>
+            onClick={() => {reportAnswer(currentAnswer.id)}}>
             Report
           </u>
         </div>
-        <PictureGallery photos={answer.photos ? answer.photos : []}/>
+        <PictureGallery photos={currentAnswer.photos ? currentAnswer.photos : []}/>
       </div>
       <hr className="answer-break"></hr>
     </div>

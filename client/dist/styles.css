@@ -249,6 +249,23 @@ span.cat {
   align-self: flex-end;
 }
 
+@keyframes fadein {
+  from {
+    margin-left: 0px;
+    opacity: 0;
+  }
+
+  50% {
+    margin-left: 50px;
+    opacity: .7;
+  }
+
+  to {
+    margin-left: 100px;
+    opacity: 1;
+  }
+}
+
 .question-search {
   width: 100%;
   position: relative;
@@ -274,6 +291,8 @@ span.cat {
   background: rgba(228, 222, 222, 0.4);
   padding: 25px;
   border-radius: 20px;
+  min-height: 60vh;
+  min-width: 60vw;
   transition: all .1s ease-in-out;
 }
 

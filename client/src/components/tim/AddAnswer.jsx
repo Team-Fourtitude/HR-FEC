@@ -7,6 +7,8 @@ const AddAnswer = () => {
   const [answerBody, setAnswerBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [photos, setPhotos] = useState([]);
+  const [files, setFiles] = useState({});
   const [canSubmit, setCanSubmit] = useState(true);
 
   const answerUpdaters = useAnswersUpdate();
@@ -20,7 +22,7 @@ const AddAnswer = () => {
       validAnswer.answerBody = answerBody;
       validAnswer.name = nickname;
       validAnswer.email = email;
-      validAnswer.photos
+      validAnswer.photos = photos;
       answerUpdaters.addAnswer(validAnswer)
     } else {
       console.log(`Not Valid`)
@@ -56,7 +58,7 @@ const AddAnswer = () => {
         </p>}
       </div>
       <ModalForm onSubmit={e => handleSubmit(e)}>
-        <span>Your Answer* :</span>
+        <p>Your Answer* :</p>
           <ModalTextArea
             type='text'
             value={answerBody}

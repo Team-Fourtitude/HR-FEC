@@ -6,6 +6,8 @@ import Modal from './Modal.jsx';
 import QuestionSearch from './QuestionSearch.jsx'
 import AddQuestion from './AddQuestion.jsx';
 import { useQuestions } from './QuestionsContext.jsx';
+import { QuestionAnimationButton } from './StyleHelpers.jsx';
+import { FaPlus } from 'react-icons/fa';
 
 const QuestionsList = () => {
   const [maxQuestionsCount, setMaxQuestionsCount] = useState(4);
@@ -33,16 +35,23 @@ const QuestionsList = () => {
             </AnswersProvider>
           </QuestionContext.Provider>
       )}
-      <button
-        className="more-question-btn"
-        onClick={ () => loadMoreQuestions() }>
-          MORE ANSWERED QUESTIONS
-      </button>
-      <button
+      <QuestionAnimationButton
+          className="more-question-btn"
+          onClick={ () => loadMoreQuestions() }><FaPlus style={{
+            "position": "relative",
+             "marginRight" : "7px",
+            }}/>
+            MORE ANSWERED QUESTIONS
+      </QuestionAnimationButton>
+      <QuestionAnimationButton
         className="add-question-btn"
-        onClick={ () => setOpen(true) }>
+        onClick={ () => setOpen(true) }
+        ><FaPlus style={{
+          "position": "relative",
+           "marginRight" : "7px",
+          }}/>
           ADD A QUESTION
-      </button>
+      </QuestionAnimationButton>
       <div className="add-question-modal">
         <Modal
           isOpen={ isOpen }

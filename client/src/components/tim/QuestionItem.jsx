@@ -3,9 +3,9 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import Modal from './Modal.jsx';
 import AnswerItem from './AnswerItem.jsx';
-import AddQuestion from './AddQuestion.jsx';
+import AddAnswer from './AddAnswer.jsx';
+import AnswerContext from './AnswerContext.jsx';
 import QuestionContext from './QuestionContext.jsx';
-import { useAnswers, useAnswersUpdate } from './AnswersContext.jsx';
 import { LoadMoreAnswersButton } from './StyleHelpers.jsx'
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
 
@@ -22,11 +22,9 @@ const QuestionItem = (props) => {
   const questionUpdaters = useQuestionsUpdate();
 
   const currentQuestion = useContext(QuestionContext);
-  const { answers } = useAnswers();
-  const currentQuestionId = currentQuestion.question_id;
 
   useEffect(() => {
-    console.log(`Ans: ${answers}`)
+
     setAllAns(sortAnswers());
   }, [])
 
@@ -62,7 +60,7 @@ const QuestionItem = (props) => {
           }}
           style={{cursor: "pointer"}}>
             Yes</u>
-          <span> ({currentQuestion.question_helpfulness}) | </span>
+            {' '} ({currentQuestion.question_helpfulness}) | {' '}
           <u className="add-answer-link"
             style={{cursor: "pointer"}}
             onClick={ () => setOpen(true) }
@@ -75,8 +73,10 @@ const QuestionItem = (props) => {
       className="answer-list"
       style={{margin: 10}}>
         { allAns.slice(0, maxAnsCount).map((id) =>
+        <AnswerContext.Provider value={currentQuestion.answers[id]} key={id}>
             <AnswerItem answer={currentQuestion.answers[id]}
             key={id} />
+        </AnswerContext.Provider>
         )}
       {(!isBtnHidden && allAns.length > 2) &&
       <LoadMoreAnswersButton
@@ -90,7 +90,7 @@ const QuestionItem = (props) => {
         <Modal
           isOpen={ isOpen }
           close={ () => setOpen(false) }>
-            <AddQuestion />
+            <AddAnswer />
         </Modal>
       </div>
     </div>

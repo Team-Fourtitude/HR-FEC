@@ -17,37 +17,10 @@ export const useAnswersUpdate = () => {
 
 export const AnswersProvider = ({children}) => {
   const [answers, setAnswers] = useState([]);
-  const [sortedAnswers, setSortedAnswers] = useState([]);
   const [isLoaded, setLoaded] = useState(false);
 
   const currentQuestion = useContext(QuestionContext);
   const currentQuestionId = currentQuestion.question_id;
-
-  // API fetch current answers for question
-  const getAnswers = (qid) => {
-    axios.get(`/qa/questions/${qid}/answers`, {
-        params: {
-          question_id: qid,
-        },
-      })
-    .then(data => {
-    setAnswers(data.data.results)
-    })
-    .then(() => {
-      sortAnswers()
-    })
-    .then(() => {
-      setLoaded(true);
-    })
-    .catch(error => console.log(error));
-  }
-
-  const sortAnswers = () => {
-    const sortedByHelp = answers.sort((a, b) => {
-      return [b].helpfulness - [a].helpfulness
-    })
-    setSortedAnswers(sortedByHelp);
-  }
 
   const markAnswerHelpful = (answer_id, hasHelped) => {
     // PUT upvoteed question
@@ -72,8 +45,8 @@ export const AnswersProvider = ({children}) => {
     axios.post(`/qa/questions/${qid}/answers`, {
       body: {
         answerBody: newAnswer.questionBody,
-        email: newAnswer.email,
         photos: newAnswer.photos,
+        email: newAnswer.email,
         name: newAnswer.name,
       }
     })
@@ -84,21 +57,12 @@ export const AnswersProvider = ({children}) => {
   }
 
   // /qa/questions/:question_id/answers
-
-  useEffect(() => {
-    setLoaded(false);
-    getAnswers(currentQuestionId);
-  }, [currentQuestion])
-
   return (
     <AnswersContext.Provider value={
       {answers,
-      sortedAnswers,
       isLoaded,
       }}>
         <AnswersUpdateContext.Provider value={{
-          getAnswers,
-          sortAnswers,
           reportAnswer,
           markAnswerHelpful,
           submitAnswer,
