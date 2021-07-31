@@ -20,11 +20,13 @@ const Modal = ({isOpen, close, children}) => {
       close();
     }
 
-    appStyle.filter = 'blur(5px)'
+    appStyle.filter = 'blur(5px)';
+    appStyle.overflow = 'hidden';
     window.addEventListener("click", listener);
 
     return () => {
-      appStyle.filter = 'blur(0px)'
+      appStyle.filter = 'blur(0px)';
+      appStyle.overflow = 'scroll';
       window.removeEventListener("click", listener);
     };
   }, [isOpen]);
