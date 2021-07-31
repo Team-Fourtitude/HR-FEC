@@ -47,7 +47,7 @@ module.exports = {
       params: {product_id},
     });
   },
-  getQuestions: ({product_id = 25168, page = 1, count = 5}) => {
+  getQuestions: ({product_id = 25168, page = 1, count = 100}) => {
     return axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions`,
       method: 'get',
@@ -56,12 +56,12 @@ module.exports = {
     });
   },
 
-  addQuestions: ({product_id, questionBody, email, name}) => {
+  addQuestion: (info) => {
     return axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions`,
       method: 'post',
       headers: {Authorization: apiKey},
-      params: {product_id, questionBody, email, name},
+      data: info,
     });
   },
 
@@ -87,6 +87,15 @@ module.exports = {
       method: 'get',
       headers: {Authorization: apiKey},
     });
+  },
+
+  addAnswer: (question_id, info) => {
+    return axios({
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/${question_id}/answers`,
+      method: 'post',
+      headers: {Authorization: apiKey},
+      data: info,
+    })
   },
 
   putAnswerHelp: (answer_id) => {

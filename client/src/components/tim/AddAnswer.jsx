@@ -4,7 +4,7 @@ import PictureGallery from './PictureGallery.jsx';
 import { useAnswersUpdate } from './AnswersContext.jsx'
 
 const AddAnswer = () => {
-  const [answerBody, setAnswerBody] = useState('');
+  const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
@@ -26,7 +26,7 @@ const AddAnswer = () => {
     e.preventDefault();
 
     if (isValidBody() && isValidName() && isValidEmail()) {
-      validAnswer.answerBody = answerBody;
+      validAnswer.body = body;
       validAnswer.name = nickname;
       validAnswer.email = email;
       validAnswer.photos = photos;
@@ -92,7 +92,7 @@ const AddAnswer = () => {
 
   const isValidBody = () => {
     console.log('Good body')
-    return (answerBody.length <= 1000);
+    return (body.length <= 1000);
   }
 
   const isValidName = () => {
@@ -120,9 +120,9 @@ const AddAnswer = () => {
         <p>Your Answer* :</p>
           <ModalTextArea
             type='text'
-            value={answerBody}
+            value={body}
             rows='10'
-            onChange={e => setAnswerBody(e.target.value)}
+            onChange={e => setBody(e.target.value)}
           />
       <label>Your Nickname* :
         <ModalInput

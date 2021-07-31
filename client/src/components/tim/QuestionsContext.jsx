@@ -40,7 +40,7 @@ export const QuestionsProvider = ({children}) => {
     axios.post(`/qa/questions/`, {
       body: {
         product_id: product.id,
-        questionBody: newQuestion.questionBody,
+        body: newQuestion.questionBody,
         email: newQuestion.email,
         name: newQuestion.name,
       }

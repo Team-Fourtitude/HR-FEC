@@ -2,6 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
 import QuestionContext from './QuestionContext.jsx';
+import { useQuestionsUpdate } from './QuestionsContext.jsx'
 /* eslint react/prop-types: 0 */
 
 const AnswersContext = createContext(null);
@@ -21,6 +22,7 @@ export const AnswersProvider = ({children}) => {
 
   const currentQuestion = useContext(QuestionContext);
   const currentQuestionId = currentQuestion.question_id;
+  const getQuestions = useQuestionsUpdate().getQuestions;
 
   const markAnswerHelpful = (answer_id, hasHelped) => {
     // PUT upvoteed question
@@ -38,23 +40,20 @@ export const AnswersProvider = ({children}) => {
       .then(() => {
         console.log(`Reported Answer: ${answer_id}`)
       })
+      .then(getQuestions())
       .catch(error => console.log(error));
   }
 
   const submitAnswer = (newAnswer) => {
     axios.post(`/qa/questions/${currentQuestionId}/answers`, {
-      body: {
-        answerBody: newAnswer.answerBody,
-        photos: newAnswer.photos,
-        email: newAnswer.email,
-        name: newAnswer.name,
-      }
+      body: newAnswer,
     })
     .then(() => {
       console.log(`Added Answer from ${newAnswer.name}`)
     })
     .catch(error => console.log(error));
-    setAnswers(newAnswer)
+
+    //setAnswers(newAnswer)
   }
 
   return (

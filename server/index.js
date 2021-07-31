@@ -84,12 +84,7 @@ app.get('/qa/questions/:id', (req, res) => {
 
 app.post('/qa/questions/', (req, res) => {
   console.log(`Posting question for product: ${JSON.stringify(req.body)}`)
-  models.getQuestions({
-    product_id: req.body.product_id,
-    questionBody: req.body.questionBody,
-    email: req.body.email,
-    name: req.body.name,
-  })
+  models.addQuestion(req.body.body)
   .then(() => {
     res.status(201).send();
     console.log(`Succesful Question Posted!!!`)
@@ -98,6 +93,7 @@ app.post('/qa/questions/', (req, res) => {
     console.log(e);
   });
 });
+
 
 app.put('/qa/questions/:question_id/helpful', (req, res) => {
   console.log(`Put question as helpful: ${req.params.question_id}`)
@@ -136,11 +132,25 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
 })
 
 app.post(`/qa/questions/:question_id/answers`, (req, res) => {
-  console.log(`posting answer from ${JSON.stringify(req.body.name)},
+  console.log(`Posting answer from ${JSON.stringify(req.body.body.name)},
   for question ${JSON.stringify(req.params.question_id)},
-  with this as the first photo ${JSON.stringify(req.body.photos)}`)
-  res.status(200).send();
+  with this as the first photo ${JSON.stringify(req.body.body.photos)}`)
+  models.addAnswer(req.params.question_id, req.body.body)
+    .then(() => {
+      res.status(200).send();
+    })
+    .catch(console.log);
 })
+
+// console.log(`Posting question for product: ${JSON.stringify(req.body)}`)
+// models.addQuestion(req.body.body)
+// .then(() => {
+//   res.status(201).send();
+//   console.log(`Succesful Question Posted!!!`)
+// })
+// .catch((e) => {
+//   console.log(e);
+// });
 
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {
   console.log(`Put Answer as helpful: ${req.params.answer_id}`)

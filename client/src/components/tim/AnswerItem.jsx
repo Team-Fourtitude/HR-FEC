@@ -9,6 +9,7 @@ import { ImArrowUp } from 'react-icons/im';
 /* eslint react/prop-types: 0 */
 
 const AnswerItem = () => {
+  const [answer, setAnswer] = useState({});
   const [isHelpful, setHelped] = useState(false);
   const [willReport, setWillReport] = useState(false);
   const { reportAnswer, markAnswerHelpful } = useAnswersUpdate();
@@ -17,8 +18,22 @@ const AnswerItem = () => {
   const getQuestions = useQuestionsUpdate().getQuestions;
 
   useEffect(() => {
-    if (isHelpful) getQuestions();
+    setAnswer(currentAnswer);
+  }, [currentAnswer])
+
+  useEffect(() => {
+    if (isHelpful) {
+      setTimeout(() => {
+        getQuestions();
+        setAnswer(currentAnswer);
+      }, 10)
+    }
   }, [isHelpful])
+
+  // setTimeout to update questions
+  const reportCurrAns = () => {
+    reportAnswer(answer.id)
+  }
 
   const convertDate = (date) => {
     const dateFormat = {
@@ -49,7 +64,7 @@ const AnswerItem = () => {
             style={{cursor: !isHelpful && 'pointer'}}>
             Yes
           </u> {' '}
-          ({currentAnswer.helpfulness})
+          ({answer.helpfulness})
           {' '} | {' '}
           <u
             style={{cursor: 'pointer'}}
