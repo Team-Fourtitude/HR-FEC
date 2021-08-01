@@ -144,9 +144,7 @@ const App = () => {
                 <RelatedProductList />
                 <OutfitList />
               </div>
-              <div>
-                <QuestionsAnswers />
-              </div>
+              <QuestionsAnswers />
             </StyleContext.Provider>
           </StylesContext.Provider>
         </RelatedStylesContext.Provider>
