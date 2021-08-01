@@ -3,7 +3,7 @@ import { ModalInput, ModalForm, ModalTextArea ,ModalErrorText } from './StyleHel
 import PictureGallery from './PictureGallery.jsx';
 import { useAnswersUpdate } from './AnswersContext.jsx'
 
-const AddAnswer = () => {
+const AddAnswer = ({ close }) => {
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
@@ -32,6 +32,7 @@ const AddAnswer = () => {
       validAnswer.email = email;
       validAnswer.photos = photos;
       answerUpdaters.submitAnswer(validAnswer)
+      close();
     } else {
       console.log(`Not Valid`)
       setCanSubmit(false);
@@ -53,7 +54,7 @@ const AddAnswer = () => {
     const ampIndex = email.indexOf('@');
     const dotIndex = email.indexOf('.');
     const currentResponse = badInputResponse;
-    // Formatting to best reflect server
+    // Email formatting
     if (!email.length) {
       currentResponse.email = `Email is a mandatory field`;
       setBadInputResponse(currentResponse)
@@ -71,7 +72,7 @@ const AddAnswer = () => {
       setBadInputResponse(currentResponse)
       valid = false;
     }
-
+    // Name formating
     if (nickname.length > 60) {
       currentResponse.nickname = `Bad Nickname: Must be under 60 characters`;
       setBadInputResponse(currentResponse)
@@ -81,7 +82,7 @@ const AddAnswer = () => {
       setBadInputResponse(currentResponse)
       valid = false;
     }
-
+    // Body formatting
     if (body.length > 1000 && body.length ) {
       currentResponse.body = `Bad Body Length: Must be under 1000 characters`;
       setBadInputResponse(currentResponse)

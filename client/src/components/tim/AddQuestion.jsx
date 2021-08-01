@@ -3,7 +3,7 @@ import { ModalInput, ModalForm, ModalTextArea, ModalErrorText } from './StyleHel
 
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
 
-const AddQuestion = () => {
+const AddQuestion = ({ close }) => {
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
@@ -21,7 +21,8 @@ const AddQuestion = () => {
       validQuestion.body = body;
       validQuestion.name = nickname;
       validQuestion.email = email;
-      questionUpdaters.addQuestion(validQuestion)
+      questionUpdaters.addQuestion(validQuestion);
+      close();
     } else {
       console.log(`Not Valid`)
       setCanSubmit(false);
