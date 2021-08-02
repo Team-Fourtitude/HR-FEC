@@ -32,7 +32,7 @@ const AnswerItem = () => {
 
   useEffect(() => {
     if (isHelpful) {
-      getQuestions();
+      //getQuestions();
     }
   }, [isHelpful])
 
@@ -42,9 +42,19 @@ const AnswerItem = () => {
       month: 'long',
       day: '2-digit',
      }
-
     let newdate = new Date(date).toLocaleDateString('en-gb', dateFormat).split(' ')
     return `${newdate[1]} ${newdate[0]} ${newdate[2]}`;
+  }
+
+  const markHelpful = () => {
+    setAnswer({...answer, helpfulness: answer.helpfulness++})
+    markAnswerHelpful(currentAnswer.id, isHelpful)
+    setHelped(true);
+  }
+
+  const markReported = () => {
+    reportCurrentAnswer(currentAnswer.id, currentQuestion.id)
+    setReported(true);
   }
 
   return (
@@ -58,23 +68,17 @@ const AnswerItem = () => {
           style={{margin: 10}}>
           by {currentAnswer.answerer_name}, {convertDate(currentAnswer.date)} | Helpful? {!isHelpful ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}
           <u
-            onClick={() => {
-              markAnswerHelpful(currentAnswer.id, isHelpful)
-              setHelped(true);
-            }}
+            onClick={() => { markHelpful() }}
             style={{cursor: !isHelpful && 'pointer'}}>
             Yes
           </u> {' '}
-          ({answer.helpfulness})
+          ({currentAnswer.helpfulness})
           {' '} | {' '}
           <u
             style={{cursor: 'pointer'}}
             onMouseEnter={() => {setWillReport(true)}}
             onMouseLeave={() => {setWillReport(false)}}
-            onClick={() => {
-              reportCurrentAnswer(currentAnswer.id, currentQuestion.id)
-              setReported(true);
-              }}>
+            onClick={() => { markReported() }}>
             Report
           </u>
         </div>

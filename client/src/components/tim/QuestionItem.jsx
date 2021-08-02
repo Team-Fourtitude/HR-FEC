@@ -40,7 +40,7 @@ const QuestionItem = () => {
   }, [question])
 
   useEffect(() => {
-    if (isBtnHidden) setBtnToHide(false);
+    if (isBtnHidden && allAns.length !== question.answers.length) setBtnToHide(false);
   }, [allAns.length])
 
   const loadMoreAnswers = () => {
@@ -78,6 +78,12 @@ const QuestionItem = () => {
     })
   }
 
+  const markHelpful = () => {
+    setQuestion({...question, helpfulness: question.question_helpfulness++})
+    questionUpdaters.markQuestionHelpful(currentQuestion.question_id, hasHelped);
+    setHasHelped(true);
+  }
+
   return(
   <div className="question-item">
     <div className={`question-container${ hasHelped ? "-helpful" : ""}`}>
@@ -85,13 +91,10 @@ const QuestionItem = () => {
         <h3>Q: {question.question_body}</h3>
         <div className="question-sub-text">
           by {question.asker_name} | Helpful?  {!hasHelped ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}<u
-          onClick={() => {
-            questionUpdaters.markQuestionHelpful(question.question_id, hasHelped);
-            setHasHelped(true);
-          }}
+          onClick={() => { markHelpful() }}
           style={{cursor: "pointer"}}>
             Yes</u>
-            {' '} ({question.question_helpfulness}) | {' '}
+            {' '} ({currentQuestion.question_helpfulness}) | {' '}
           <u className="add-answer-link"
             style={{cursor: "pointer"}}
             onClick={ () => setOpen(true) }
