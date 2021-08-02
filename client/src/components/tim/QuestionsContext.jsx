@@ -16,7 +16,6 @@ export const useQuestionsUpdate = () => {
 }
 
 export const QuestionsProvider = ({children}) => {
-  const [hasProductLoaded, setProductLoaded] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [fetching, setFetched] = useState(false);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
@@ -27,16 +26,14 @@ export const QuestionsProvider = ({children}) => {
   const product = currentProduct.product;
 
   useEffect(() => {
-    if (product.id) {
-      setProductLoaded(true);
-    }
+    if (product.id) getQuestions(product.id)
   }, [product])
 
   // get new set of questions
   // filter results if local state query is met
   useEffect(() => {
     getQuestions(product.id)
-  }, [hasProductLoaded, fetching])
+  }, [fetching])
 
   useEffect(() => {
     queryQuestions(query)
@@ -52,7 +49,7 @@ export const QuestionsProvider = ({children}) => {
 
   const getQuestions = (product_id = product.id) => {
     console.log(`This is the current pid: ${product_id}`)
-    if (hasProductLoaded) {
+    if (product_id) {
       axios.get(`/qa/questions/${product_id}`, {
         params: {
           id: product_id,
@@ -106,12 +103,6 @@ export const QuestionsProvider = ({children}) => {
     // Check the length of the passed target or the current local query
 
     // Are target conditions correct? ie filter for input > 3
-    // make a copy of immutable current questions
-    // flatten target to lowcase and set current target to local query state
-    // set a soln array to results of filtering current Questions on
-    // each items lower cased body including the target
-    // SHOULD BE setfiltered question to soln
-    // therefore filteredQuestions should be ssoT ie only one passed to context provider
 
     if (target.length > 2) {
       target = target.toLowerCase();
