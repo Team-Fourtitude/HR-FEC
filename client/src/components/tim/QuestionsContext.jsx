@@ -16,38 +16,67 @@ export const useQuestionsUpdate = () => {
 }
 
 export const QuestionsProvider = ({children}) => {
+  const [hasProductLoaded, setProductLoaded] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const [fetching, setFetched] = useState(false);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [query, setQuery] = useState('');
+  const [reported, setReported] = useState(false);
 
   const currentProduct = useContext(ProductContext);
   const product = currentProduct.product;
 
-  const getQuestions = (product_id = 25171) => {
-    axios.get(`/qa/questions/${product_id}`, {
+  useEffect(() => {
+    if (product.id) {
+      setProductLoaded(true);
+    }
+  }, [product])
+
+  // get new set of questions
+  // filter results if local state query is met
+  useEffect(() => {
+    getQuestions(product.id)
+  }, [hasProductLoaded, fetching])
+
+  useEffect(() => {
+    queryQuestions(query)
+  }, [questions])
+
+  useEffect(() => {
+    if(reported) {
+      console.log('Bad to the Bone!')
+      getQuestions();
+      setReported(false);
+    }
+  }, [reported])
+
+  const getQuestions = (product_id = product.id) => {
+    console.log(`This is the current pid: ${product_id}`)
+    if (hasProductLoaded) {
+      axios.get(`/qa/questions/${product_id}`, {
         params: {
           id: product_id,
         },
       })
-    .then(data => {
-      setQuestions(data.data.results)
-      setFilteredQuestions([])
-    })
-    .catch(error => console.log(error));
+      .then(data => {
+        setQuestions(data.data.results)
+      })
+      .catch(error => console.log(error));
+    }
   }
 
   const addQuestion = (newQuestion) => {
     axios.post(`/qa/questions/`, {
       body: {
         product_id: product.id,
-        body: newQuestion.questionBody,
+        body: newQuestion.body,
         email: newQuestion.email,
         name: newQuestion.name,
       }
     })
     .then(() => {
       console.log(`Added Question from ${newQuestion.name}`)
-      getQuestions(product.id)
+      setFetched(true);
     })
     .catch(error => console.log(error));
   }
@@ -74,32 +103,30 @@ export const QuestionsProvider = ({children}) => {
   }
 
   const queryQuestions = (target) => {
-    // Needs Reworking for product change
-    if (target.length > 2 || query.length > 2) {
+    // Check the length of the passed target or the current local query
 
-      let currentQuestions = [];
+    // Are target conditions correct? ie filter for input > 3
+    // make a copy of immutable current questions
+    // flatten target to lowcase and set current target to local query state
+    // set a soln array to results of filtering current Questions on
+    // each items lower cased body including the target
+    // SHOULD BE setfiltered question to soln
+    // therefore filteredQuestions should be ssoT ie only one passed to context provider
 
-      if (filteredQuestions.length === 0) {
-        currentQuestions = questions;
-        setFilteredQuestions(questions)
-      } else {
-        currentQuestions = filteredQuestions;
-      }
-
-      // console.log(`These are the filtered questions ${filteredQuestions}`)
-      // console.log(`These are the reg questions ${questions}`)
-
-      const searchTerm = target.toLowerCase();
-      setQuery(searchTerm)
-
-      const results = currentQuestions.filter(question => {
-        return question.question_body.toLowerCase().includes(searchTerm)
+    if (target.length > 2) {
+      target = target.toLowerCase();
+      setQuery(target);
+      const results = questions.filter(questionItem => {
+        return questionItem.question_body.toLowerCase().includes(target);
       })
-      setQuestions(results)
-      console.log(results)
+      console.log(`\n These are the reg questions:\n${JSON.stringify(questions)}\n`)
+      console.log(`These are the filtered questions:\n${JSON.stringify(filteredQuestions)}\n`)
+
+      setFilteredQuestions(results);
     } else {
-      if (filteredQuestions.length > 0) setQuestions(filteredQuestions)
+      setFilteredQuestions(questions);
     }
+
   }
 
   const getAnswersByQuestion = (qid) => {
@@ -108,12 +135,14 @@ export const QuestionsProvider = ({children}) => {
     }
   }
 
-  useEffect(() => {
-    getQuestions(product.id)
-    if (query.length > 2) {
-      queryQuestions(query)
-    }
-  }, [product])
+  const reportAnswer = (answer_id) => {
+    axios.put(`/qa/answers/${answer_id}/report`)
+      .then(() => {
+        setReported(true);
+        console.log(`Reported Answer in Qcontext: ${answer_id}`)
+      })
+      .catch(error => console.log(error));
+  }
 
   return (
     <QuestionsContext.Provider value={{questions, filteredQuestions}}>
@@ -123,7 +152,8 @@ export const QuestionsProvider = ({children}) => {
         reportQuestion,
         queryQuestions,
         markQuestionHelpful,
-        getAnswersByQuestion
+        getAnswersByQuestion,
+        reportAnswer,
         }}>
       {children}
       </QuestionsUpdateContext.Provider>

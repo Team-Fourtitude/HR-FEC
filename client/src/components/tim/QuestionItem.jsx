@@ -35,18 +35,16 @@ const QuestionItem = () => {
 
   useEffect(() => {
     if (isLoaded) {
-      setAllAns(sortAnswers());
+      sortAnswers();
     }
   }, [question])
 
-  // useEffect(() => {
-  //   if (isLoaded) {
-  //     setAllAns(sortAnswers());
-  //   }
-  // }, [isLoaded])
+  useEffect(() => {
+    if (isBtnHidden) setBtnToHide(false);
+  }, [allAns.length])
 
   const loadMoreAnswers = () => {
-     console.log(`This is the current question: ${JSON.stringify(question)}`)
+     //console.log(`This is the current question: ${JSON.stringify(question)}`)
     const newMax = maxAnsCount + 2;
     if (newMax < allAns.length) {
       setMaxAnsCount(newMax)
@@ -56,25 +54,29 @@ const QuestionItem = () => {
     }
   }
 
+  //Split answerers by seller status, then sort seprately, then concat buyers onto sellers
   const sortAnswers = () => {
-    let ansByKeys = Object.keys(question.answers);
-    const sortedAnswers = ansByKeys.sort((a, b) => {
-      return question.answers[b].helpfulness - question.answers[a].helpfulness
+    let buyers = [];
+    let sellers = [];
+    const target = 'seller';
+    const answers = question.answers;
+    let ansByKeys = Object.keys(answers);
+
+    ansByKeys.forEach((id) => {
+      (answers[id].answerer_name.toLowerCase() === target) ? sellers.push(id) : buyers.push(id);
     })
-    return sortedAnswers;
+
+    sellers = sortByHelpful(sellers, answers);
+    buyers = sortByHelpful(buyers, answers);
+
+    setAllAns(sellers.concat(buyers));
   }
 
-  // const reportAnswerById = (answer_id) => {
-  //   const currentAns = allAns;
-  //   const newAns = currentAns.filter((id) => {
-  //     return id !== answer_id;
-  //   })
-  //   setAllAns(newAns);
-  //   setTimeout(() => {
-  //     questionUpdaters.reportAnswer(answer_id, currentQuestion.question_id, 10)
-  //   })
-  // }
-
+  const sortByHelpful = (idArr, answers) => {
+    return idArr.sort((a, b) => {
+      return answers[b].helpfulness - answers[a].helpfulness;
+    })
+  }
 
   return(
   <div className="question-item">
