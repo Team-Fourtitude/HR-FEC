@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { ModalInput, ModalForm, ModalTextArea } from './StyleHelpers.jsx';
+import { ModalInput, ModalForm, ModalTextArea ,ModalErrorText } from './StyleHelpers.jsx';
 import PictureGallery from './PictureGallery.jsx';
 import { useAnswersUpdate } from './AnswersContext.jsx'
 
-const AddAnswer = () => {
+const AddAnswer = ({ close }) => {
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
   const [previews, setPreviews] = useState([]);
   const [canSubmit, setCanSubmit] = useState(true);
+  const [badInputResponse, setBadInputResponse] = useState({});
   const [badUploadTypes, setBadUploadTypes] = useState({
     size: true,
     type: true,
     amount: true,
   });
 
-  const MAX_UPLOAD_SIZE = 1000000;
+  const MAX_UPLOAD_SIZE = 2000000;
 
   const answerUpdaters = useAnswersUpdate();
 
@@ -25,12 +26,13 @@ const AddAnswer = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isValidBody() && isValidName() && isValidEmail()) {
+    if (isValid()) {
       validAnswer.body = body;
       validAnswer.name = nickname;
       validAnswer.email = email;
       validAnswer.photos = photos;
       answerUpdaters.submitAnswer(validAnswer)
+      close();
     } else {
       console.log(`Not Valid`)
       setCanSubmit(false);
@@ -39,13 +41,63 @@ const AddAnswer = () => {
   }
 
   useEffect(() => {
+    setCanSubmit(true);
+    setBadInputResponse({});
+  }, [body, nickname, email])
+
+  useEffect(() => {
     setPhotos(previews);
   }, [previews])
 
-  // I: file
-  // O: Thumbnail
-  // C: Up to Five valid files, save src to pass along to serv
-  // E: Validation: aka bad filename, too large
+  const isValid = () => {
+    let valid = true;
+    const ampIndex = email.indexOf('@');
+    const dotIndex = email.indexOf('.');
+    const currentResponse = badInputResponse;
+    // Email formatting
+    if (!email.length) {
+      currentResponse.email = `Email is a mandatory field`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    } else if (ampIndex < 0 || dotIndex < 0 || ampIndex > dotIndex) {
+      currentResponse.email = `Bad email: Need special characters in correct placement`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    } else if (email.substring(0, dotIndex).length < 1 || email.substring(dotIndex).length < 2 || email.substring(ampIndex, dotIndex).length < 2) {
+      currentResponse.email = `Bad email: Format should be aaa@bbb.ccc`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    } else if (email.length > 60) {
+      currentResponse.email = `Bad email: Must be under 60 characters`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    }
+    // Name formating
+    if (nickname.length > 60) {
+      currentResponse.nickname = `Bad Nickname: Must be under 60 characters`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    } else if (!nickname.length) {
+      currentResponse.nickname = `Nickname is a mandatory field`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    }
+    // Body formatting
+    if (body.length > 1000 && body.length ) {
+      currentResponse.body = `Bad Body Length: Must be under 1000 characters`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    } else if (!body.length) {
+      currentResponse.body = `Body is a mandatory field`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    }
+
+    if (valid) {
+      setBadInputResponse({});
+    }
+    return valid;
+  }
 
   const handleUpload = (event) => {
     Object.keys(badUploadTypes).map(cond => badUploadTypes[cond] = true)
@@ -90,21 +142,6 @@ const AddAnswer = () => {
     return result;
   }
 
-  const isValidBody = () => {
-    console.log('Good body')
-    return (body.length <= 1000);
-  }
-
-  const isValidName = () => {
-    console.log('Good name')
-    return (nickname.length <= 60);
-  }
-
-  const isValidEmail = () => {
-    console.log('Good email')
-    return (email.length <= 60 && email.includes('@'));
-  }
-
   return (
     <div>
       <div className='add-answer-header' >
@@ -124,6 +161,9 @@ const AddAnswer = () => {
             rows='10'
             onChange={e => setBody(e.target.value)}
           />
+          {badInputResponse.body &&
+        <ModalErrorText>{badInputResponse.body}</ModalErrorText>
+        }
       <label>Your Nickname* :
         <ModalInput
           type='text'
@@ -132,6 +172,9 @@ const AddAnswer = () => {
           placeholder='jack543!'
           onChange={e => setNickname(e.target.value)}
         />
+        {badInputResponse.nickname &&
+        <ModalErrorText>{badInputResponse.nickname}</ModalErrorText>
+        }
       </label>
       <label>Your Email* :
         <ModalInput
@@ -141,6 +184,9 @@ const AddAnswer = () => {
           placeholder='Example: jack@email.com'
           onChange={e => setEmail(e.target.value)}
         />
+        {badInputResponse.email &&
+        <ModalErrorText>{badInputResponse.email}</ModalErrorText>
+        }
       </label>
       <span>
         For authentication reasons, you will not be emailed

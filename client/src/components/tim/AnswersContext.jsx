@@ -16,13 +16,55 @@ export const useAnswersUpdate = () => {
   return useContext(AnswersUpdateContext);
 }
 
-
 export const AnswersProvider = ({children}) => {
   const [answers, setAnswers] = useState([]);
+  const [questionLoad, setQuestionLoaded] = useState(false);
 
-  const currentQuestion = useContext(QuestionContext);
-  const currentQuestionId = currentQuestion.question_id;
-  const getQuestions = useQuestionsUpdate().getQuestions;
+  const question = useContext(QuestionContext);
+  const question_id = question.question_id;
+  const updateQuestions = useQuestionsUpdate();
+
+  // Verify current Question context
+  useEffect(() => {
+    question_id ? setQuestionLoaded(true) : setQuestionLoaded(false);
+  }, [question_id])
+
+  // On question load should should sort and fetch answers
+  // useEffect(() => {
+  //   if (questionLoad) getAnswers();
+  //   //console.log(`Current answers are: ${JSON.stringify(answers)}`)
+  // }, [questionLoad, question])
+
+
+  // const sortAnswers = (newAnswers) => {
+  //   const target = 'seller';
+  //   let sellers = [];
+  //   let buyers = [];
+
+  //   const sortByHelpful = (unsortedAns) => {
+  //     const result = unsortedAns.sort((a, b) => {
+  //       return b.helpfulness - a.helpfulness;
+  //     })
+  //     return result;
+  //   }
+
+  //   newAnswers.forEach((answer) => {
+  //     (answer.answerer_name.toLowerCase().includes(target)) ? sellers.push(answer) : buyers.push(answer);
+  //   })
+
+  //   sellers = sortByHelpful(sellers);
+  //   buyers = sortByHelpful(buyers);
+  //   console.log(JSON.stringify(sellers))
+  //   setAnswers(sellers.concat(buyers));
+  // }
+
+  // const getAnswers = () => {
+  //   axios.get(`/qa/questions/${question_id}/answers`)
+  //     .then(data => {
+  //       sortAnswers(data.data.results)
+  //     })
+  //     .catch(error => console.log(error))
+  // }
 
   const markAnswerHelpful = (answer_id, hasHelped) => {
     // PUT upvoteed question
@@ -34,25 +76,16 @@ export const AnswersProvider = ({children}) => {
       .catch(error => console.log(error));
   }
 
-  const reportAnswer = (answer_id) => {
-    // PUT reported question
-    axios.put(`/qa/answers/${answer_id}/report`)
-      .then(() => {
-        console.log(`Reported Answer: ${answer_id}`)
-      })
-      .then(getQuestions())
-      .catch(error => console.log(error));
-  }
-
   const submitAnswer = (newAnswer) => {
-    axios.post(`/qa/questions/${currentQuestionId}/answers`, {
+    axios.post(`/qa/questions/${question_id}/answers`, {
       body: newAnswer,
     })
     .then(() => {
+      updateQuestions.getQuestions();
+      getAnswers();
       console.log(`Added Answer from ${newAnswer.name}`)
     })
     .catch(error => console.log(error));
-
     //setAnswers(newAnswer)
   }
 
@@ -61,7 +94,6 @@ export const AnswersProvider = ({children}) => {
       {answers,
       }}>
         <AnswersUpdateContext.Provider value={{
-          reportAnswer,
           markAnswerHelpful,
           submitAnswer,
         }}>

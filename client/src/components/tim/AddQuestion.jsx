@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { ModalInput, ModalForm, ModalTextArea } from './StyleHelpers.jsx';
+import React, { useState, useEffect } from 'react';
+import { ModalInput, ModalForm, ModalTextArea, ModalErrorText } from './StyleHelpers.jsx';
 
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
 
-const AddQuestion = () => {
-  const [questionBody, setQuestionBody] = useState('');
+const AddQuestion = ({ close }) => {
+  const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [badInputResponse, setBadInputResponse] = useState({});
   const [canSubmit, setCanSubmit] = useState(true);
 
   const questionUpdaters = useQuestionsUpdate();
@@ -16,11 +17,12 @@ const AddQuestion = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isValidBody() && isValidName() && isValidEmail()) {
-      validQuestion.questionBody = questionBody;
+    if (isValid()) {
+      validQuestion.body = body;
       validQuestion.name = nickname;
       validQuestion.email = email;
-      questionUpdaters.addQuestion(validQuestion)
+      questionUpdaters.addQuestion(validQuestion);
+      close();
     } else {
       console.log(`Not Valid`)
       setCanSubmit(false);
@@ -28,19 +30,59 @@ const AddQuestion = () => {
     console.log(validQuestion)
   }
 
-  const isValidBody = () => {
-    console.log('Good body')
-    return (questionBody.length <= 1000);
-  }
+  useEffect(() => {
+    setCanSubmit(true);
+    setBadInputResponse({});
+  }, [body, nickname, email])
 
-  const isValidName = () => {
-    console.log('Good name')
-    return (nickname.length <= 60);
-  }
+  const isValid = () => {
+    let valid = true;
+    const ampIndex = email.indexOf('@');
+    const dotIndex = email.indexOf('.');
+    const currentResponse = badInputResponse;
+    // Formatting to best reflect server
+    if (!email.length) {
+      currentResponse.email = `Email is a mandatory field`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    } else if (ampIndex < 0 || dotIndex < 0 || ampIndex > dotIndex) {
+      currentResponse.email = `Bad email: Need special characters in correct placement`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    } else if (email.substring(0, dotIndex).length < 1 || email.substring(dotIndex).length < 2 || email.substring(ampIndex, dotIndex).length < 2) {
+      currentResponse.email = `Bad email: Format should be aaa@bbb.ccc`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    } else if (email.length > 60) {
+      currentResponse.email = `Bad email: Must be under 60 characters`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    }
 
-  const isValidEmail = () => {
-    console.log('Good email')
-    return (email.length <= 60 && email.includes('@') && email.includes('.'));
+    if (nickname.length > 60) {
+      currentResponse.nickname = `Bad Nickname: Must be under 60 characters`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    } else if (!nickname.length) {
+      currentResponse.nickname = `Nickname is a mandatory field`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    }
+
+    if (body.length > 1000 && body.length ) {
+      currentResponse.body = `Bad Body Length: Must be under 1000 characters`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    } else if (!body.length) {
+      currentResponse.body = `Body is a mandatory field`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    }
+
+    if (valid) {
+      setBadInputResponse({});
+    }
+    return valid;
   }
 
   return (
@@ -57,10 +99,13 @@ const AddQuestion = () => {
         Your Question* :
           <ModalTextArea
             type='text'
-            value={questionBody}
+            value={body}
             rows='10'
-            onChange={e => setQuestionBody(e.target.value)}
+            onChange={e => setBody(e.target.value)}
           />
+        {badInputResponse.body &&
+        <ModalErrorText>{badInputResponse.body}</ModalErrorText>
+        }
       <label>Your Nickname* :
         <ModalInput
           type='text'
@@ -69,6 +114,9 @@ const AddQuestion = () => {
           placeholder='jack543!'
           onChange={e => setNickname(e.target.value)}
         />
+        {badInputResponse.nickname &&
+        <ModalErrorText>{badInputResponse.nickname}</ModalErrorText>
+        }
       </label>
       <label>Your Email* :
         <ModalInput
@@ -78,6 +126,9 @@ const AddQuestion = () => {
           placeholder='Example: jack@email.com'
           onChange={e => setEmail(e.target.value)}
         />
+        {badInputResponse.email &&
+        <ModalErrorText>{badInputResponse.email}</ModalErrorText>
+        }
       </label>
       <h4>
         Mandatory Fields Are Indicated With*
