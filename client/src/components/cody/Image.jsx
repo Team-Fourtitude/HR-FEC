@@ -24,32 +24,41 @@ const Image = (props) => {
             "overflow": "hidden",
             "cursor": zoom ? "url(\"https://i.imgur.com/spnFx5r.png\"), auto" : 'crosshair',
             "zIndex": "100",
-          }}
-          onMouseMove={ (e) => {
-            if (zoom) {
-              console.log('x', e.nativeEvent.offsetX * 2.5);
-              console.log('y', e.nativeEvent.offsetY * 2.5);
-              setX(e.nativeEvent.offsetX * 2.5);
-              setY(e.nativeEvent.offsetY * 2.5);
-            }
-          }} >
-            <img style={{
+          }}>
+            <div style={{
               "width": "100%",
               "height": "600px",
               "objectFit": "contain",
               "backgroundColor": "grey",
-              "transform": zoom ? "scale(2.5)" : "scale(1)",
+              "backgroundImage": `url(${props.current.url})`,
+              "backgroundRepeat":"no-repeat",
+              "backgroundSize": zoom ? "250%" : "100%",
+              "backgroundPosition":"center",
             }}
             onClick={ (e) => {
               if (zoom) {
+                e.target.style.backgroundPosition = "center";
                 setZoom(false);
               } else {
-                setX(e.nativeEvent.offsetX);
-                setY(e.nativeEvent.offsetY);
+                console.log('there');
+                // var img = new Image();
+                console.log('here');
+                // test.src = e.target.css(props.current.url).replace(/url\(|\)$/ig, '');
+                // console.log(test.width, test.height, '@@@@@@@@@@@@@@@@@@@@@@@@');
+                e.target.style.backgroundPositionX = (-e.nativeEvent.offsetX * 1.5) + "px";
+                e.target.style.backgroundPositionY = (-e.nativeEvent.offsetY * 2.47222) + "px";
+                console.log(props.current.url);
                 setZoom(true);
               }
             }}
-            src={props.current.url} alt={props.current.name}/>
+            onMouseMove={ (e) => {
+              if (zoom) {
+                e.target.style.backgroundPositionX = (-e.nativeEvent.offsetX * 1.5) + "px";
+                e.target.style.backgroundPositionY = (-e.nativeEvent.offsetY * 2.47222) + "px";
+              }
+            }}
+            // src={props.current.url} alt={props.current.name}
+            />
             <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "top":"0", "right":"0"}}
             onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
             onClick={ () => {

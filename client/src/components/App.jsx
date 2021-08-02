@@ -18,7 +18,7 @@ const App = () => {
   const [styles, setStyles] = useState({});
   const [style, setStyle] = useState({});
   const [relatedIds, setRelatedIds] = useState([]);
-  const [relatedProduct, setRelatedProduct] = useState([])
+  const [relatedProduct, setRelatedProduct] = useState([]);
   const [relatedStyles, setRelatedStyles] = useState([]);
 
   //initial Data

@@ -390,3 +390,7 @@ p.outfit-info {
 #delete:hover {
   color: black;
 }
+
+#thumbnailScroll::-webkit-scrollbar {
+  display:none;
+}

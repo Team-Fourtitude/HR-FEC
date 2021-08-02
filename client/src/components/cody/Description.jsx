@@ -15,16 +15,22 @@ const Description = () => {
         {currentProduct.product.features ? currentProduct.product.features.map( (feature, index) => <li style={{"marginBottom":"0.5em"}} key={index}>{feature.value ? feature.value : null} {feature.feature}</li>) : null}
       </ul>
     </div>
-    <div style={{"display":"flex"}}>
-      <button type="button" onClick={() => {
-        console.log('Share to facebook button activated');
-      }}>Facebook</button>
-      <button type="button" onClick={() => {
-        console.log('Share to twitter button activated');
-      }}>Twitter</button>
-      <button type="button" onClick={() => {
-        console.log('Share to pinterest button activated');
-      }}>Pinterest</button>
+    <div style={{"display":"flex", "justifyContent":"space-between", "width":"30%"}}>
+      <div style={{"width":"50px"}} onClick={ () => {
+        console.log('');
+      }}>
+        <img style={{"width":"100%"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Twitter3_colored_svg-512.png' alt='twitter icon' />
+      </div>
+      <div style={{"width":"50px"}} onClick={ () => {
+        console.log('');
+      }}>
+        <img style={{"width":"100%"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Facebook_colored_svg_copy-512.png' alt='facebook icon' />
+      </div>
+      <div style={{"width":"50px"}} onClick={ () => {
+        console.log('');
+      }}>
+        <img style={{"width":"100%"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Pinterest_colored_svg-512.png' alt='pinterest icon' />
+      </div>
     </div>
   </div>
   );
