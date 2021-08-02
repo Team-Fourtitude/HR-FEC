@@ -119,6 +119,7 @@ export const QuestionsProvider = ({children}) => {
       const results = questions.filter(questionItem => {
         return questionItem.question_body.toLowerCase().includes(target);
       })
+
       console.log(`\n These are the reg questions:\n${JSON.stringify(questions)}\n`)
       console.log(`These are the filtered questions:\n${JSON.stringify(filteredQuestions)}\n`)
 
