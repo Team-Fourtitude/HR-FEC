@@ -6,12 +6,11 @@ import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
 
 
 
-const RelatedProductList = () => {
+const RelatedProductList = ({ initData }) => {
   const [ relatedProduct, setRelatedProduct ] = useContext(RelatedProductContext);
   const [ relatedStyles, setRelatedStyles ] = useContext(RelatedStylesContext);
   const [ left, setLeft] = useState('disabled');
   const [ right, setRight] = useState('');
-
 
   const ref = useRef(null);
 
@@ -46,7 +45,7 @@ const RelatedProductList = () => {
         {relatedStyles.related ? relatedStyles.related.map((item) => {
           return (
             <>
-              <ProductCard item={item} key={item.product_id} />
+              <ProductCard  initData={initData} item={item} key={item.product_id} />
             </>
           )
         })

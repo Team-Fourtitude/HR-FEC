@@ -9,12 +9,12 @@ import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
 import Modal from '../Tim/Modal.jsx';
 
 
-const ProductCard = ({item}) => {
+const ProductCard = ({ item, initData }) => {
 
   const { style, setStyle } = useContext(StyleContext);
   const [ relatedStyles, setRelatedStyles ] = useContext(RelatedStylesContext);
   const [ relatedProduct, setRelatedProduct] = useContext(RelatedProductContext);
-  const product = useContext(ProductContext);
+  const { product, setProduct } = useContext(ProductContext);
   const [ viewModal, setViewModal ] = useState(false);
   const [isOpen, setOpen] = useState(false);
 
@@ -26,30 +26,21 @@ const ProductCard = ({item}) => {
   }
 
 
-  const navToProduct = (id) => {
-    console.log(id);
-
+  const navToProduct = (clickedId) => {
+    let result = relatedProduct.find( ({ id }) => id === Number(clickedId));
+    setProduct(result);
   }
-
-  // console.log('item', item)
-  // console.log('related', relatedProduct)
-
-
 
 
   return (
     <>
-
       <div className="column" onClick={() => navToProduct(item.product_id)}>
          <FaStar className="compare" onClick={modalInfoClick}/>
          <Modal isOpen={isOpen} close={() => {setOpen(false)}}>
            <ComparisonModal id={item.product_id} current={product.product} related={relatedProduct}/>
          </Modal>
-        {/* {viewModal ? <ComparisonModal id={item.product_id} current={product.product} related={relatedProduct}/> : null} */}
         {item && item.results ? item.results.map((style) => {
-
           if (style[`default?`]) {
-            // console.log(style)
             return (
               <div className="square">
                 <img className="relImg" src={style.photos[0].thumbnail_url} />
@@ -93,14 +84,8 @@ const ProductCard = ({item}) => {
           <FaRegStar />
         </div>
       </div>
-
     </>
   );
-
-
-
-
-
 }
 
 export default ProductCard;
