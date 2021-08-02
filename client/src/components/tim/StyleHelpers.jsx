@@ -3,7 +3,6 @@ import styled, { keyframes } from 'styled-components';
 
 // Modal Screen
 export const ModalInput = styled.input`
-  resize: vertical;
   position: relative;
   width: 100%;
 `;
@@ -18,6 +17,12 @@ export const ModalForm = styled.form`
   display: grid;
   grid-template-rows: 1fr;
   grid-gap: 20px;
+`;
+
+export const ModalErrorText = styled.div`
+  color: red;
+  position: relative;
+  max-width: 100%;
 `;
 
 // Modal Helpers
@@ -61,6 +66,7 @@ export const InvisButton = styled.button`
   position:relative
 `;
 
+// Buttons
 export const LoadMoreAnswersButton = styled.button`
   background:transparent;
   border: none;

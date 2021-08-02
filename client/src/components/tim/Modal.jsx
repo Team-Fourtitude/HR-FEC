@@ -21,12 +21,10 @@ const Modal = ({isOpen, close, children}) => {
     }
 
     appStyle.filter = 'blur(5px)';
-    appStyle.overflow = 'hidden';
     window.addEventListener("click", listener);
 
     return () => {
       appStyle.filter = 'blur(0px)';
-      appStyle.overflow = 'scroll';
       window.removeEventListener("click", listener);
     };
   }, [isOpen]);
@@ -43,7 +41,7 @@ const Modal = ({isOpen, close, children}) => {
               <InvisButton onClick={close}/>
             </div>
           </ModalHeaderRow>
-          {children}
+          {children }
         </ModalContent>
       </ModalBackground>
     </>,

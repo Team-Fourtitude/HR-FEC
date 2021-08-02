@@ -322,7 +322,6 @@ span.cat {
   background-color: rgb(228, 222, 222);
   background: rgba(228, 222, 222, 0.4);
   padding: 25px;
-  border-radius: 20px;
   min-height: 60vh;
   min-width: 60vw;
   transition: all .1s ease-in-out;
@@ -330,7 +329,6 @@ span.cat {
 
 .question-container-helpful {
   background-color: lightgreen;
-  border-radius: 20px;
   padding: 15px;
   animation-name: greenpop;
   animation-duration: 2s;
@@ -338,21 +336,18 @@ span.cat {
 
 .answer-container {
   background-color: lightgrey;
-  border-radius: 20px;
   padding: 15px;
   transition: all .1s ease-in-out;
 }
 
 .answer-container-helpful {
   background-color: rgba(53, 141, 53, 0.815);
-  border-radius: 20px;
   padding: 15px;
   transition: all .1s ease-in-out;
 }
 
 .answer-container-helpful:hover {
   background-color: rgb(80, 177, 80);
-  border-radius: 20px;
   padding: 15px;
   animation-name: greenBreath;
   animation-duration: 2s;
@@ -361,7 +356,6 @@ span.cat {
 
 .answer-container-reportable {
   background-color: lightgrey;
-  border-radius: 20px;
   padding: 15px;
   transition: all .1s ease-in-out;
 }
