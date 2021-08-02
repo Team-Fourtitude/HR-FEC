@@ -46,6 +46,8 @@ node_modules
 .flooignore
 
 ## API keys
+client/env/config.js
+secret.js
 
 ##bundled files
 client/dist/bundle.js
