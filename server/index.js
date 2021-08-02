@@ -1,4 +1,5 @@
 const express = require('express');
+
 const app = express();
 const port = 3000;
 const models = require('./models.js');
@@ -165,6 +166,18 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
     console.log(e);
   });
 });
+
+app.post('/upload', (req, res) => {
+  //req.body.body.src
+  models.postUpload()
+    .then((image) => {
+
+      res.status(201).send(`Success! Here is the image: ${image.url}`);
+    })
+    .catch((e) => {
+      console.log(e);
+    })
+})
 
 app.listen(port, () => {
   console.log(`App listening at post:${port}`);
