@@ -40,7 +40,8 @@ const QuestionsList = () => {
         "gridColumn": "2",
         "verticalAlign" : "center",
         "width": "100%",
-        "height": "90vh"
+        "height": "90vh",
+        "display": "grid",
     }}>
       <h3>QUESTIONS & ANSWERS</h3>
       <QuestionSearch style={{
@@ -50,6 +51,7 @@ const QuestionsList = () => {
       "overflowY": "auto",
       "height": "100%",
       "display": "grid",
+      "overflowX": "hidden",
   }}>
       { questionsList &&
          questionsList.slice(0, maxListCount).map((item) =>
@@ -59,6 +61,7 @@ const QuestionsList = () => {
             </AnswersProvider>
           </QuestionContext.Provider>
       )}</div>
+      <div>
       <QuestionAnimationButton
           className="more-question-btn"
           onClick={ () => loadMoreQuestions() }>
@@ -83,6 +86,7 @@ const QuestionsList = () => {
           close={ () => setOpen(false) }>
             <AddQuestion close={ () => setOpen(false) }/>
         </Modal>
+      </div>
       </div>
     </div>
   );
