@@ -108,6 +108,18 @@ export const UploadThumbnailImage = styled.image`
   }
 `;
 
+// Divs and Wrappers
+
+export const QuestionsList = styled.div`
+  grid-column: 2;
+  vertical-align: center;
+  width: 100%;
+  overflow: auto;
+  height: 90vh
+`;
+
+//export const
+
 //keyframes fade animations
 // const fadeIn = styled.keyframes`
   // from {
