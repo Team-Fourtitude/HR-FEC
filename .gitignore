@@ -47,7 +47,7 @@ node_modules
 
 ## API keys
 client/env/config.js
-secret.js
+secret.env
 
 ##bundled files
 client/dist/bundle.js
