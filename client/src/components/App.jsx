@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductContext from './context/ProductContext.jsx';
-import RelatedProductContext from './context/RelatedProductContext.jsx';
-import RelatedStylesContext from './context/RelatedStylesContext.jsx';
 import StylesContext from './context/StylesContext.jsx';
 import StyleContext from './context/StyleContext.jsx';
 import QuestionsAnswers from './tim/QuestionsAnswers.jsx'
-import RelatedProductList from './cece/RelatedProductList.jsx';
-import OutfitList from './cece/OutfitList.jsx';
+import RelatedProducts from './cece/RelatedProducts.jsx';
+
 
 
 // this file shows how to use context in your component
@@ -17,6 +15,7 @@ const App = () => {
   const [product, setProduct] = useState({});
   const [styles, setStyles] = useState({});
   const [style, setStyle] = useState({});
+<<<<<<< HEAD
   const [relatedIds, setRelatedIds] = useState([]);
   const [relatedProduct, setRelatedProduct] = useState([]);
   const [relatedStyles, setRelatedStyles] = useState([]);
@@ -59,51 +58,11 @@ const App = () => {
         let productInfo = axios.get(url);
         return productInfo;
       })
+=======
+>>>>>>> 221d064ae20e369ab51bf31bbf91da1007a5d773
 
-      const relatedStyles = relUrl.map((url) => {
-        let productStyles = axios.get(`${url}/styles`)
-        return productStyles;
-      })
-
-
-      axios.all(relatedData).then(axios.spread((...res) => {
-        console.log(res)
-        let relatedDataMap = res.map((data) => {
-          return data.data;
-        })
-        setRelatedProduct(relatedDataMap)
-      }))
-      .catch(err => console.log(err))
-
-
-      axios.all(relatedStyles).then(axios.spread((...res) => {
-        let relatedStylesMap = res.map((data) => {
-          return data.data;
-        })
-
-
-        let defaultStyleMap = res.flatMap((data) => {
-          let defaultStyle = data.data.results.filter((style) => {
-            return style[`default?`];
-            })
-          return defaultStyle;
-        })
-        return setRelatedStyles({related: relatedStylesMap, defaults: defaultStyleMap})
-      }))
-      .catch(err => console.log(err))
-    }
-  }
 
   useEffect( () => {
-    getRelatedData();
-  }, [relatedIds])
-
-  useEffect( () => {
-    getInitialData();
-  }, [])
-
-  useEffect( () => {
-    getInitialData();
     axios.get('http://localhost:3000/products/25171')
     .then( (data) => {
       if (product.id !== data.data.id) {
@@ -118,7 +77,7 @@ const App = () => {
       axios.get(`http://localhost:3000/products/${id}/styles`)
       .then( (data) => {
         if (styles.product_id !== data.data.product_id) {
-          // console.log(data.data);
+          console.log(data.data);
           setStyles(data.data);
           return data.data.results[0];
         } else {
@@ -131,26 +90,23 @@ const App = () => {
     .catch( (e) => console.error(e) );
   }, []); // An empty array as the second argument of useEffect makes this function run only once on startup, feel free to edit this for your purposes
 
+
+
   return (
     // Our context.Providers 'values' are linked to an object that contains our state hooks.
     // Thus when the state changes, all children using that context value will rerender with the newly set state value.
     <ProductContext.Provider value={{product, setProduct}}>
-      <RelatedProductContext.Provider value={[relatedProduct, setRelatedProduct]}>
-        <RelatedStylesContext.Provider value={[relatedStyles, setRelatedStyles]}>
-          <StylesContext.Provider value={{styles, setStyles}}>
-            <StyleContext.Provider value={{style, setStyle}}>
-              <Overview />
-              <div className="related" style={{"position":"relative", "height": "1000px"}}>
-                <RelatedProductList />
-                <OutfitList />
-              </div>
-              <div>
-                <QuestionsAnswers />
-              </div>
-            </StyleContext.Provider>
-          </StylesContext.Provider>
-        </RelatedStylesContext.Provider>
-      </RelatedProductContext.Provider>
+      <StylesContext.Provider value={{styles, setStyles}}>
+        <StyleContext.Provider value={{style, setStyle}}>
+          <Overview />
+          <div className="related" style={{"position":"relative", "height": "1000px"}}>
+            <RelatedProducts />
+          </div>
+          <div>
+            <QuestionsAnswers />
+          </div>
+        </StyleContext.Provider>
+      </StylesContext.Provider>
     </ProductContext.Provider>
   );
 }
