@@ -87,12 +87,15 @@ const RelatedProducts = () => {
 
 
   return(
-    <RelatedProductContext.Provider value={[relatedProduct, setRelatedProduct]}>
-      <RelatedStylesContext.Provider value={[relatedStyles, setRelatedStyles]}>
-        <RelatedProductList initData={getInitialData}/>
-        <OutfitList />
-      </RelatedStylesContext.Provider>
-    </RelatedProductContext.Provider>
+    <div className="related" style={{"position":"relative", "height": "1000px"}}>
+      <RelatedProductContext.Provider value={[relatedProduct, setRelatedProduct]}>
+        <RelatedStylesContext.Provider value={[relatedStyles, setRelatedStyles]}>
+          <RelatedProductList initData={getInitialData}/>
+          <OutfitList />
+        </RelatedStylesContext.Provider>
+      </RelatedProductContext.Provider>
+
+    </div>
   )
 }
 

@@ -54,9 +54,9 @@ const App = () => {
       <StylesContext.Provider value={{styles, setStyles}}>
         <StyleContext.Provider value={{style, setStyle}}>
           <Overview />
-          <div className="related" style={{"position":"relative", "height": "1000px"}}>
-            <RelatedProducts />
-          </div>
+
+          <RelatedProducts />
+
           <div>
             <QuestionsAnswers />
           </div>
