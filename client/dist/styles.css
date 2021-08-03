@@ -164,7 +164,7 @@ span.cat {
   position: relative;
   top: 1%;
   width: 270px;
-  height: 215px;
+  height: 183px;
   overflow: hidden;
 }
 
@@ -195,7 +195,7 @@ span.cat {
 .add-card {
   position: relative;
   top: 10%;
-  width: 200px;
+  min-width: 200px;
   height: 200px;
   background-color: whitesmoke;
   text-align: justify;
@@ -224,7 +224,7 @@ span.cat {
 
 
 .outfit-card {
-  width: 275px;
+  min-width: 275px;
   height: 300px;
   text-align: justify;
   margin: 20px;
@@ -378,7 +378,7 @@ span.cat {
 p.outfit-info {
   position: relative;
   padding-left: 2%;
-  bottom: 12%;
+  bottom: 5%;
 }
 
 #delete {
