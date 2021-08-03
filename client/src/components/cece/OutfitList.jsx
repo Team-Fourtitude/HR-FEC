@@ -26,7 +26,7 @@ const [add, setAdd] = useState(false);
   const handleClick = () => {
     if (!localStorage.getItem(product.id)) {
       let defaultStyle = styles.results.filter(item => item[`default?`]);
-      if (defaultStyle) {
+      if (defaultStyle.length) {
         let combined = Object.assign(defaultStyle[0], product);
         localStorage.setItem(product.id, JSON.stringify(combined));
         console.log('added default to storage: ', product.id)
@@ -40,6 +40,7 @@ const [add, setAdd] = useState(false);
       setAdd(true);
     }
   }
+
 
   const renderOutfit = (outfitCard) => {
       return <OutFitCard key={product.id} product={outfitCard} style={outfitCard}/>
