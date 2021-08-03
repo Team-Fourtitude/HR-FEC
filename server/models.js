@@ -1,5 +1,14 @@
 const axios = require('axios');
 const apiKey = require('../client/env/config.js');
+const cloudinary = require("cloudinary").v2;
+require('dotenv').config()
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+  secure: true,
+});
 
 module.exports = {
   getProducts: (page = 1, count = 5) => {
@@ -113,4 +122,8 @@ module.exports = {
       headers: {Authorization: apiKey},
     });
   },
+
+  postUpload: (src) => {
+    return cloudinary.uploader.upload(src, { tags: 'basic_test' })
+  }
 }

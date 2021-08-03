@@ -103,6 +103,7 @@ const AddAnswer = ({ close }) => {
     Object.keys(badUploadTypes).map(cond => badUploadTypes[cond] = true)
     const files = event.target.files
     const uploads = []
+    // URL.revokeObjectURL() On succesfull upload
 
     const readImage = (file) => {
       //const reader = new FileReader();
@@ -119,6 +120,7 @@ const AddAnswer = ({ close }) => {
         uploads.push(URL.createObjectURL(file))
       }
     }
+
     if (files.length + previews.length < 6) {
       [].forEach.call(files, readImage);
     } else {
@@ -126,9 +128,9 @@ const AddAnswer = ({ close }) => {
       setBadUploadTypes({...badUploadTypes, amount})
       console.log(`Too many files attempted ${files.length + previews.length}`)
     }
+
     console.log(uploads);
     setPreviews(previews.concat(uploads));
-
     return badUploadTypes.amount;
   }
 

@@ -118,6 +118,18 @@ export const QuestionsList = styled.div`
   height: 90vh
 `;
 
+export const QuestionsListHeader = styled.div`
+  margin: 1%;
+  margin-top: none;
+`;
+
+export const QuestionList = styled.div`
+  background: rgba(167, 167, 167, 0.4);
+  padding: 2.5%;
+  min-height: 60vh;
+  min-width: 60vw;
+`;
+
 //export const
 
 //keyframes fade animations

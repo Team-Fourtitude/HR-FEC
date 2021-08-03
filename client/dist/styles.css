@@ -322,7 +322,7 @@ span.cat {
 .questions-list {
   background-color: rgb(228, 222, 222);
   background: rgba(228, 222, 222, 0.4);
-  padding: 25px;
+  padding: 2.5%;
   min-height: 60vh;
   min-width: 60vw;
   transition: all .1s ease-in-out;
