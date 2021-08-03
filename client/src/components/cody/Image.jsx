@@ -65,7 +65,7 @@ const Image = (props) => {
             }}
             // src={props.current.url} alt={props.current.name}
             />
-            <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "top":"0", "right":"0"}}
+            <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "top":"0", "right":"0"}}
             onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
             onClick={ () => {
               if (size) {
@@ -81,15 +81,15 @@ const Image = (props) => {
                   if (curStyle.style.photos.length === 1) {
                     return (
                       <>
-                <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}} disabled>🞀</button>
-                <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}} disabled>🞂</button>
+                <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}} disabled>🞀</button>
+                <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}} disabled>🞂</button>
               </>
             );
           } else {
             return (
               <>
-                <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}} disabled>🞀</button>
-                <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}}
+                <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}} disabled>🞀</button>
+                <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}}
                 onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
                 onClick={() => {
                   setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
@@ -104,19 +104,19 @@ const Image = (props) => {
         if (index === photoMax) {
           return (
             <>
-              <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}}
+              <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}}
               onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
               }}>🞀</button>
-              <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}} disabled>🞂</button>
+              <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}} disabled>🞂</button>
             </>
           );
         } else {
           return (
             <>
-              <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}}
+              <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}}
               onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
@@ -127,7 +127,7 @@ const Image = (props) => {
                 console.log(scrollbar.scrollTop, 'top scroll');
                 scrollbar.scrollTop -= 100;
               }}>🞀</button>
-              <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}}
+              <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}}
               onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
@@ -165,7 +165,7 @@ const Image = (props) => {
                 setSize(true);
               }
             }}/>
-            <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "top":"0", "right":"0"}}
+            <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "top":"0", "right":"0"}}
             onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
             onClick={ () => {
               if (size) {
@@ -181,15 +181,15 @@ const Image = (props) => {
           if (curStyle.style.photos.length === 1) {
             return (
               <>
-                <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}} disabled>🞀</button>
-                <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}} disabled>🞂</button>
+                <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}} disabled>🞀</button>
+                <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}} disabled>🞂</button>
               </>
             );
           } else {
             return (
               <>
-                <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}} disabled>🞀</button>
-                <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}}
+                <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}} disabled>🞀</button>
+                <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}}
                 onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
                 onClick={() => {
                   setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
@@ -204,19 +204,19 @@ const Image = (props) => {
         if (index === photoMax) {
           return (
             <>
-              <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}}
+              <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}}
               onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
               }}>🞀</button>
-              <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}} disabled>🞂</button>
+              <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}} disabled>🞂</button>
             </>
           );
         } else {
           return (
             <>
-              <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}}
+              <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "left":"17%", "top": "50%"}}
               onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
@@ -227,7 +227,7 @@ const Image = (props) => {
                 console.log(scrollbar.scrollTop, 'top scroll');
                 scrollbar.scrollTop -= 100;
               }}>🞀</button>
-              <button type='button' style={{"color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}}
+              <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}}
               onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});

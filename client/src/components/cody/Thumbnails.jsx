@@ -47,7 +47,7 @@ const Thumbnails = () => {
                         setCurrentPic({url:photo.thumbnail_url, name:`${index}`, style:curStyle.style.style_id});
                         setIndex(index);
                       }}>
-                        <img style={{"width":"100%", "height":"100%", "objectFit":"cover", "opacity":"0.5"}} src={photo.thumbnail_url} alt={`${index}`} />
+                        <img style={{"width":"100%", "height":"100%", "objectFit":"cover", "objectPosition":"center", "opacity":"0.5"}} src={photo.thumbnail_url} alt={`${index}`} />
                       </div>
                     );
                   } else {
@@ -56,7 +56,7 @@ const Thumbnails = () => {
                         setCurrentPic({url:photo.thumbnail_url, name:`${index}`, style:curStyle.style.style_id});
                         setIndex(index);
                       }}>
-                        <img style={{"width":"100%", "height":"100%", "objectFit":"cover"}} src={photo.thumbnail_url} alt={`${index}`} />
+                        <img style={{"width":"100%", "height":"100%", "objectFit":"cover", "objectPosition":"center"}} src={photo.thumbnail_url} alt={`${index}`} />
                       </div>
                     );
                   }
