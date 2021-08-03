@@ -13,6 +13,7 @@ const AddAnswer = ({ close }) => {
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
   const [previews, setPreviews] = useState([]);
+  const [hasMaxUploads, setHasMaxUploads] = useState(false);
   const [canSubmit, setCanSubmit] = useState(true);
   const [badInputResponse, setBadInputResponse] = useState({});
   const [badUploadTypes, setBadUploadTypes] = useState({
@@ -54,6 +55,7 @@ const AddAnswer = ({ close }) => {
 
   useEffect(() => {
     setPhotos(previews);
+    if (previews.length >= 5) setHasMaxUploads(true);
   }, [previews])
 
   const isValid = () => {
@@ -219,10 +221,10 @@ const AddAnswer = ({ close }) => {
       <div className="uploaded-gallery">
           <PictureGallery photos={previews}/>
       </div>
-      <button
+      { hasMaxUploads && <button
       onClick={e => handleSubmit(e)}>
         Submit
-      </button>
+      </button> }
     </ModalForm>
   </div>
   )

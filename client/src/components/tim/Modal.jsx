@@ -16,7 +16,7 @@ const Modal = ({isOpen, close, children, title}) => {
     if (!isOpen) return;
 
     let listener = (evt) => {
-      if (contentRef.current?.contains(evt.target)) return;s
+      if (contentRef.current?.contains(evt.target)) return;
       close();
     }
 

@@ -17,6 +17,7 @@ const QuestionSearch = () => {
           "display": "flex",
           "width": "100%",
           "justifyContent": "center",
+          "height": "10%",
       }}>
         <input
           type='text'

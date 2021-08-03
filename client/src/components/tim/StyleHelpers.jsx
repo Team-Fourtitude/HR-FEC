@@ -64,7 +64,7 @@ export const ModalChildContainer = styled.div`
   padding: 15px;
   max-height: 80vh;
   display: flex;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 /////////////////////////////////////////////////////
 // Modal Close Button
