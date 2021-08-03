@@ -107,7 +107,7 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
     console.log(e);
   });
 });
-
+//
 app.put('/qa/questions/:question_id/report', (req, res) => {
   //console.log(`Put question as reported: ${req.params.question_id}`)
   models.putQuestionReport(req.params.question_id)

@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { ModalInput, ModalForm, ModalTextArea ,ModalErrorText } from './StyleHelpers.jsx';
+import React, { useState, useEffect, useContext } from 'react';
+import { ModalInput, ModalForm, ModalTextArea ,ModalErrorText, SecurityAdvisory } from './StyleHelpers.jsx';
+import QuestionContext from './QuestionContext.jsx';
+import ProductContext from '../context/ProductContext.jsx';
 import PictureGallery from './PictureGallery.jsx';
 import { useAnswersUpdate } from './AnswersContext.jsx'
 
@@ -18,6 +20,9 @@ const AddAnswer = ({ close }) => {
     type: true,
     amount: true,
   });
+
+  const product = useContext(ProductContext).product;
+  const question = useContext(QuestionContext);
 
   const MAX_UPLOAD_SIZE = 2000000;
 
@@ -147,28 +152,31 @@ const AddAnswer = ({ close }) => {
   }
 
   return (
-    <div>
+    <div style={{height: "100%", width:"100%", display: "grid"}}>
       <div className='add-answer-header' >
-        <h2>Add a Answer</h2>
-        <h4>Mandatory Fields Are Indicated With A *</h4>
+        <h2>Submit Your Answer</h2>
+        <h3>{`${product.name}: ${question.question_body}`}</h3>
         {!canSubmit &&
         <p
         style={{color: 'red'}}>
           Current Submission Is Not Valid...
         </p>}
       </div>
+      <p>Mandatory Fields Are Indicated With A (*)</p>
       <ModalForm onSubmit={e => handleSubmit(e)}>
-        <p>Your Answer* :</p>
+        <span>Your Answer* :</span>
+        <div style={{height: "auto", width:"100%", display: "flex"}}>
           <ModalTextArea
             type='text'
             value={body}
             rows='10'
             onChange={e => setBody(e.target.value)}
           />
+        </div>
           {badInputResponse.body &&
         <ModalErrorText>{badInputResponse.body}</ModalErrorText>
         }
-      <label>Your Nickname* :
+        <label>Your Nickname* :
         <ModalInput
           type='text'
           maxlength='60'
@@ -180,6 +188,9 @@ const AddAnswer = ({ close }) => {
         <ModalErrorText>{badInputResponse.nickname}</ModalErrorText>
         }
       </label>
+      <SecurityAdvisory>
+        For privacy reasons, do not use your full name or email address
+      </SecurityAdvisory>
       <label>Your Email* :
         <ModalInput
           type='text'
@@ -192,9 +203,9 @@ const AddAnswer = ({ close }) => {
         <ModalErrorText>{badInputResponse.email}</ModalErrorText>
         }
       </label>
-      <span>
+      <SecurityAdvisory>
         For authentication reasons, you will not be emailed
-      </span>
+      </SecurityAdvisory>
       <label> Images (Max: 2MB) {' '}
         <input
           type="file"

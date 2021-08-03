@@ -1,4 +1,6 @@
+
 import styled from 'styled-components';
+import { RiCloseFill } from 'react-icons/ri';
 
 
 // Modal Screen
@@ -44,15 +46,40 @@ export const ModalContent = styled.div`
   border-radius: 30px;
   max-width: 90vw;
   max-height: 90vw;
-  margin: auto;
   box-shadow: 0 3px 15px -3px rgba(0, 0, 0, 0.2);
   position: relative;
+  display: grid;
+  grid-template-rows: repeat(2, 5%);
 `;
 
 export const ModalHeaderRow = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 15px;
+  grid-row-start: 1;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+`;
+
+export const ModalChildContainer = styled.div`
+  grid-row-start: 2;
+  padding: 15px;
+  max-height: 80vh;
+  display: flex;
+  overflow-y: scroll;
+`;
+/////////////////////////////////////////////////////
+// Modal Close Button
+/////////////////////////////////////////////////////
+
+export const CloseWrapper = styled.div`
+  grid-column: 11;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1%;
+  &:hover {
+    color: red;
+  }
 `;
 
 export const InvisButton = styled.button`
@@ -60,10 +87,17 @@ export const InvisButton = styled.button`
   border:none;
   outline:none;
   display:block;
-  height:16px;
-  width:16px;
+  width:30px;
+  height:30px;
   cursor:pointer;
-  position:relative
+  position:absolute;
+`;
+
+export const CloseIcon = styled(RiCloseFill)`
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  cursor:pointer;
 `;
 
 // Buttons
@@ -128,4 +162,8 @@ export const QuestionList = styled.div`
   padding: 2.5%;
   min-height: 60vh;
   min-width: 60vw;
+`;
+
+export const SecurityAdvisory = styled.span`
+  font-size: smaller;
 `;
