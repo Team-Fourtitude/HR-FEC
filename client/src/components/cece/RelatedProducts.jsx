@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ProductContext from '../context/ProductContext.jsx';
+import StylesContext from '../context/StylesContext.jsx';
+import StyleContext from '../context/StyleContext.jsx';
 import RelatedProductContext from '../context/RelatedProductContext.jsx';
 import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
 import RelatedProductList from './RelatedProductList.jsx';
@@ -10,17 +12,34 @@ import OutfitList from './OutfitList.jsx';
 const RelatedProducts = () => {
   const { product, setProduct } = useContext(ProductContext);
   const [relatedIds, setRelatedIds] = useState([]);
-  const [relatedProduct, setRelatedProduct] = useState([])
+  const [relatedProduct, setRelatedProduct] = useState([]);
   const [relatedStyles, setRelatedStyles] = useState([]);
+  const { styles, setStyles } = useContext(StylesContext);
+  const { style, setStyle } = useContext(StyleContext);
 
 
   //initial Data
   const getInitialData = () => {
     if (product.id) {
       let id = product.id;
+
+      //re-renders styles
+      axios.get(`http://localhost:3000/products/${id}/styles`)
+      .then( (data) => {
+        if (styles.product_id !== data.data.product_id) {
+          console.log(data.data);
+          setStyles(data.data);
+          return data.data.results[0];
+        } else {
+          console.log('same product/styles');
+        }
+      })
+      .then( (firstStyle) => setStyle(firstStyle) )
+      .catch( (e) => console.error(e) );
+
+
       let relatedUrl = `http://localhost:3000/products/${id}/related`;
       const relatedInfo = axios.get(relatedUrl)
-
       axios.all([relatedInfo]).then(axios.spread((responses) => {
         // console.log('IDS', responses);
         const relatedSet = [...new Set(responses.data)]
