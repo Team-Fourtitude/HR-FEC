@@ -9,7 +9,7 @@ import QuestionContext from './QuestionContext.jsx';
 
 import { useQuestions } from './QuestionsContext.jsx';
 import { AnswersProvider } from './AnswersContext.jsx';
-import { QuestionAnimationButton } from './StyleHelpers.jsx';
+import { QuestionAnimationButton, QuestionsListHeader } from './StyleHelpers.jsx';
 
 
 const QuestionsList = () => {
@@ -43,11 +43,14 @@ const QuestionsList = () => {
         "height": "90vh",
         "display": "grid",
     }}>
-      <h3>QUESTIONS & ANSWERS</h3>
-      <QuestionSearch style={{
-        "display": "flex",
-        "alignItems": "center",
-    }}/><div style={{
+      <QuestionsListHeader>
+        <h3>QUESTIONS & ANSWERS</h3>
+        <QuestionSearch style={{
+          "display": "flex",
+          "alignItems": "center",
+        }}/>
+      </QuestionsListHeader>
+    <div style={{
       "overflowY": "auto",
       "height": "100%",
       "display": "grid",
