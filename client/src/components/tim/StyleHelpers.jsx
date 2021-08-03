@@ -3,7 +3,6 @@ import styled, { keyframes } from 'styled-components';
 
 // Modal Screen
 export const ModalInput = styled.input`
-  resize: vertical;
   position: relative;
   width: 100%;
 `;
@@ -18,6 +17,12 @@ export const ModalForm = styled.form`
   display: grid;
   grid-template-rows: 1fr;
   grid-gap: 20px;
+`;
+
+export const ModalErrorText = styled.div`
+  color: red;
+  position: relative;
+  max-width: 100%;
 `;
 
 // Modal Helpers
@@ -61,6 +66,7 @@ export const InvisButton = styled.button`
   position:relative
 `;
 
+// Buttons
 export const LoadMoreAnswersButton = styled.button`
   background:transparent;
   border: none;
@@ -101,6 +107,30 @@ export const UploadThumbnailImage = styled.image`
     opacity: 1;
   }
 `;
+
+// Divs and Wrappers
+
+export const QuestionsList = styled.div`
+  grid-column: 2;
+  vertical-align: center;
+  width: 100%;
+  overflow: auto;
+  height: 90vh
+`;
+
+export const QuestionsListHeader = styled.div`
+  margin: 1%;
+  margin-top: none;
+`;
+
+export const QuestionList = styled.div`
+  background: rgba(167, 167, 167, 0.4);
+  padding: 2.5%;
+  min-height: 60vh;
+  min-width: 60vw;
+`;
+
+//export const
 
 //keyframes fade animations
 // const fadeIn = styled.keyframes`

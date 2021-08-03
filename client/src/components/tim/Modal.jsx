@@ -20,11 +20,11 @@ const Modal = ({isOpen, close, children}) => {
       close();
     }
 
-    appStyle.filter = 'blur(5px)'
+    appStyle.filter = 'blur(5px)';
     window.addEventListener("click", listener);
 
     return () => {
-      appStyle.filter = 'blur(0px)'
+      appStyle.filter = 'blur(0px)';
       window.removeEventListener("click", listener);
     };
   }, [isOpen]);
@@ -41,7 +41,7 @@ const Modal = ({isOpen, close, children}) => {
               <InvisButton onClick={close}/>
             </div>
           </ModalHeaderRow>
-          {children}
+          {children }
         </ModalContent>
       </ModalBackground>
     </>,

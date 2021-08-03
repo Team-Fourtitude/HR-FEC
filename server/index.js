@@ -1,4 +1,5 @@
 const express = require('express');
+
 const app = express();
 const port = 3000;
 const models = require('./models.js');
@@ -83,13 +84,8 @@ app.get('/qa/questions/:id', (req, res) => {
 });
 
 app.post('/qa/questions/', (req, res) => {
-  console.log(`Posting question for product: ${JSON.stringify(req.body)}`)
-  models.getQuestions({
-    product_id: req.body.product_id,
-    questionBody: req.body.questionBody,
-    email: req.body.email,
-    name: req.body.name,
-  })
+  //console.log(`Posting question for product: ${JSON.stringify(req.body)}`)
+  models.addQuestion(req.body.body)
   .then(() => {
     res.status(201).send();
     console.log(`Succesful Question Posted!!!`)
@@ -99,8 +95,9 @@ app.post('/qa/questions/', (req, res) => {
   });
 });
 
+
 app.put('/qa/questions/:question_id/helpful', (req, res) => {
-  console.log(`Put question as helpful: ${req.params.question_id}`)
+  //console.log(`Put question as helpful: ${req.params.question_id}`)
   models.putQuestionHelp(req.params.question_id)
   .then(() => {
     res.status(204).send();
@@ -112,7 +109,7 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
 });
 
 app.put('/qa/questions/:question_id/report', (req, res) => {
-  console.log(`Put question as reported: ${req.params.question_id}`)
+  //console.log(`Put question as reported: ${req.params.question_id}`)
   models.putQuestionReport(req.params.question_id)
   .then(() => {
     res.status(204).send();
@@ -124,7 +121,7 @@ app.put('/qa/questions/:question_id/report', (req, res) => {
 });
 
 app.get('/qa/questions/:question_id/answers', (req, res) => {
-  console.log(`Getting answers: ${req.params.question_id}`)
+  //console.log(`Getting answers: ${req.params.question_id}`)
   models.getAnswers(req.params.question_id)
   .then((data) => {
     res.status(200).send(data.data);
@@ -133,17 +130,21 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
   .catch((e) => {
     console.log(e);
   })
-})
+});
 
 app.post(`/qa/questions/:question_id/answers`, (req, res) => {
-  console.log(`posting answer from ${JSON.stringify(req.body.name)},
-  for question ${JSON.stringify(req.params.question_id)},
-  with this as the first photo ${JSON.stringify(req.body.photos)}`)
-  res.status(200).send();
-})
+  // console.log(`Posting answer from ${JSON.stringify(req.body.body.name)},
+  // for question ${JSON.stringify(req.params.question_id)},
+  // with this as the first photo ${JSON.stringify(req.body.body.photos)}`)
+  models.addAnswer(req.params.question_id, req.body.body)
+    .then(() => {
+      res.status(200).send();
+    })
+    .catch(console.log);
+});
 
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {
-  console.log(`Put Answer as helpful: ${req.params.answer_id}`)
+  //console.log(`Put Answer as helpful: ${req.params.answer_id}`)
   models.putAnswerHelp(req.params.answer_id)
   .then(() => {
     res.status(204).send();
@@ -155,7 +156,7 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
 });
 
 app.put('/qa/answers/:answer_id/report', (req, res) => {
-  console.log(`Put Answer as reported: ${req.params.answer_id}`)
+  //console.log(`Put Answer as reported: ${req.params.answer_id}`)
   models.putAnswerReport(req.params.answer_id)
   .then(() => {
     res.status(204).send();
@@ -165,6 +166,18 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
     console.log(e);
   });
 });
+
+app.post('/upload', (req, res) => {
+  //req.body.body.src
+  models.postUpload()
+    .then((image) => {
+
+      res.status(201).send(`Success! Here is the image: ${image.url}`);
+    })
+    .catch((e) => {
+      console.log(e);
+    })
+})
 
 app.listen(port, () => {
   console.log(`App listening at post:${port}`);

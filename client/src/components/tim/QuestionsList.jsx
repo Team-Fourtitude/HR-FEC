@@ -1,43 +1,74 @@
-import React, { useState } from 'react';
-import QuestionContext from './QuestionContext.jsx';
-import { AnswersProvider } from './AnswersContext.jsx';
-import QuestionItem from './QuestionItem.jsx';
-import Modal from './Modal.jsx';
-import QuestionSearch from './QuestionSearch.jsx'
-import AddQuestion from './AddQuestion.jsx';
-import { useQuestions } from './QuestionsContext.jsx';
-import { QuestionAnimationButton } from './StyleHelpers.jsx';
+import React, { useState, useEffect } from 'react';
 import { FaPlus } from 'react-icons/fa';
 
+import Modal from './Modal.jsx';
+import AddQuestion from './AddQuestion.jsx';
+import QuestionItem from './QuestionItem.jsx';
+import QuestionSearch from './QuestionSearch.jsx'
+import QuestionContext from './QuestionContext.jsx';
+
+import { useQuestions } from './QuestionsContext.jsx';
+import { AnswersProvider } from './AnswersContext.jsx';
+import { QuestionAnimationButton, QuestionsListHeader } from './StyleHelpers.jsx';
+
+
 const QuestionsList = () => {
-  const [maxQuestionsCount, setMaxQuestionsCount] = useState(4);
+  const [questionsList, setQuestionsList] = useState([]);
+  const [maxListCount, setMaxListCount] = useState(4);
   const [isOpen, setOpen] = useState(false);
 
-  const { questions } = useQuestions();
+  const { filteredQuestions } = useQuestions();
 
+  useEffect(() => {
+    setQuestionsList(filteredQuestions);
+    setMaxListCount(4);
+  }, [filteredQuestions])
+
+
+  // Loads two additional questions at a time up to
   const loadMoreQuestions = () => {
-    const newMax = maxQuestionsCount + 2;
-    newMax < questions.length ? setMaxQuestionsCount(newMax) : setMaxQuestionsCount(questions.length);
+    const newMax = maxListCount + 2;
+    newMax < questionsList.length ? setMaxListCount(newMax) : setMaxListCount(questionsList.length);
   }
+  //Needs Stylizing
+// questions-list
+// need a wrapper around items
 
   return (
-    <div className="questions-list" style={{
-      "gridColumn": "2",
-      "verticalAlign" : "center",
+    <div className="questions-list"
+      style={{
+        "gridColumn": "2",
+        "verticalAlign" : "center",
+        "width": "100%",
+        "height": "90vh",
+        "display": "grid",
     }}>
-      <h3>QUESTIONS & ANSWERS</h3>
-      <QuestionSearch />
-      { questions &&
-         questions.slice(0, maxQuestionsCount).map((item) =>
+      <QuestionsListHeader>
+        <h3>QUESTIONS & ANSWERS</h3>
+        <QuestionSearch style={{
+          "display": "flex",
+          "alignItems": "center",
+        }}/>
+      </QuestionsListHeader>
+    <div style={{
+      "overflowY": "auto",
+      "height": "100%",
+      "display": "grid",
+      "overflowX": "hidden",
+  }}>
+      { questionsList &&
+         questionsList.slice(0, maxListCount).map((item) =>
           <QuestionContext.Provider value={item} key={item.question_id}>
             <AnswersProvider value={item} key={item.question_id}>
               <QuestionItem question={item} key={item.question_id}/>
             </AnswersProvider>
           </QuestionContext.Provider>
-      )}
+      )}</div>
+      <div>
       <QuestionAnimationButton
           className="more-question-btn"
-          onClick={ () => loadMoreQuestions() }><FaPlus style={{
+          onClick={ () => loadMoreQuestions() }>
+          <FaPlus style={{
             "position": "relative",
              "marginRight" : "7px",
             }}/>
@@ -45,8 +76,8 @@ const QuestionsList = () => {
       </QuestionAnimationButton>
       <QuestionAnimationButton
         className="add-question-btn"
-        onClick={ () => setOpen(true) }
-        ><FaPlus style={{
+        onClick={ () => setOpen(true) }>
+          <FaPlus style={{
           "position": "relative",
            "marginRight" : "7px",
           }}/>
@@ -56,8 +87,9 @@ const QuestionsList = () => {
         <Modal
           isOpen={ isOpen }
           close={ () => setOpen(false) }>
-            <AddQuestion />
+            <AddQuestion close={ () => setOpen(false) }/>
         </Modal>
+      </div>
       </div>
     </div>
   );

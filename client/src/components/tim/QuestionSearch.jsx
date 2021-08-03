@@ -1,28 +1,31 @@
-import React, {useState} from 'react';
-import { BiSearchAlt } from 'react-icons/bi';
+import React, { useState, useEffect } from 'react';
 import { useQuestionsUpdate } from './QuestionsContext.jsx'
 
 const QuestionSearch = () => {
   const [query, setQuery] = useState('');
   const questionUpdaters = useQuestionsUpdate();
 
-  const filterQuestions = (q) => {
-    // dynamic filter questions after 3rd char
-    setQuery(q);
-    questionUpdaters.queryQuestions(q)
-  }
+  // on query of 2 char, filtered questions reset
+  useEffect(() => {
+    if (query.length > 1) questionUpdaters.queryQuestions(query)
+  }, [query])
 
   return (
-    <div className="question-search" style={{
-      "gridColumn": "2",
-      "verticalAlign" : "center",
-    }}>
-      <div className="question-search-bar">
+    <div className="question-search">
+      <div className="question-search-bar"
+        style={{
+          "display": "flex",
+          "width": "100%",
+          "justifyContent": "center",
+      }}>
         <input
           type='text'
           className='question-search-input'
           value={query}
-          onChange={e => {filterQuestions(e.target.value)}}
+          style={{
+            "width": "80%",
+          }}
+          onChange={e => {setQuery(e.target.value)}}
           placeholder='Have a question? Search for answers…'/>
       </div>
     </div>
