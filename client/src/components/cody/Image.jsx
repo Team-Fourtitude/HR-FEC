@@ -25,6 +25,10 @@ const Image = (props) => {
             "cursor": zoom ? "url(\"https://i.imgur.com/spnFx5r.png\"), auto" : 'crosshair',
             "zIndex": "100",
           }}>
+            <img id="imgRatio" src={props.current.url} style={{
+              "position": "absolute",
+              "visibility": "hidden",
+            }} />
             <div style={{
               "width": "100%",
               "height": "600px",
@@ -40,21 +44,23 @@ const Image = (props) => {
                 e.target.style.backgroundPosition = "center";
                 setZoom(false);
               } else {
-                console.log('there');
-                // var img = new Image();
-                console.log('here');
-                // test.src = e.target.css(props.current.url).replace(/url\(|\)$/ig, '');
-                // console.log(test.width, test.height, '@@@@@@@@@@@@@@@@@@@@@@@@');
+                let img = document.getElementById("imgRatio");
+                let imgRatio = img.clientHeight/img.clientWidth;
+                console.log('img ratio', imgRatio);
+                let scaleY = 3125 / 600 * imgRatio - 1;
+                console.log('scale Y: ', scaleY);
                 e.target.style.backgroundPositionX = (-e.nativeEvent.offsetX * 1.5) + "px";
-                e.target.style.backgroundPositionY = (-e.nativeEvent.offsetY * 2.47222) + "px";
-                console.log(props.current.url);
+                e.target.style.backgroundPositionY = (-e.nativeEvent.offsetY * scaleY) + "px";
                 setZoom(true);
               }
             }}
             onMouseMove={ (e) => {
               if (zoom) {
+                let img = document.getElementById("imgRatio");
+                let imgRatio = img.clientHeight/img.clientWidth;
+                let scaleY = 3125 / 600 * imgRatio - 1;
                 e.target.style.backgroundPositionX = (-e.nativeEvent.offsetX * 1.5) + "px";
-                e.target.style.backgroundPositionY = (-e.nativeEvent.offsetY * 2.47222) + "px";
+                e.target.style.backgroundPositionY = (-e.nativeEvent.offsetY * scaleY) + "px";
               }
             }}
             // src={props.current.url} alt={props.current.name}
