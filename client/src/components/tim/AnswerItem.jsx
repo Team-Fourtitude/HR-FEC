@@ -20,7 +20,6 @@ const AnswerItem = () => {
   const currentAnswer = useContext(AnswerContext);
   const { markAnswerHelpful } = useAnswersUpdate();
   const currentQuestion = useContext(QuestionContext);
-  const getQuestions = useQuestionsUpdate().getQuestions;
   const reportCurrentAnswer = useQuestionsUpdate().reportAnswer;
 
 
@@ -29,12 +28,6 @@ const AnswerItem = () => {
       setAnswer(currentAnswer);
     }
   }, [currentAnswer])
-
-  useEffect(() => {
-    if (isHelpful) {
-      //getQuestions();
-    }
-  }, [isHelpful])
 
   const convertDate = (date) => {
     const dateFormat = {
@@ -73,7 +66,7 @@ const AnswerItem = () => {
             Yes
           </u> {' '}
           ({currentAnswer.helpfulness})
-          {' '} | {' '}
+          {' | '}
           <u
             style={{cursor: 'pointer'}}
             onMouseEnter={() => {setWillReport(true)}}

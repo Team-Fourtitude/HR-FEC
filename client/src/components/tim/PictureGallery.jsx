@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from './Modal.jsx';
-import { Fade } from './StyleHelpers.jsx'
+
+/* eslint react/prop-types: 0 */
 
 
 const PictureGallery = (props) => {

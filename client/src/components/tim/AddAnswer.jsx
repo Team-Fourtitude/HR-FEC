@@ -3,6 +3,8 @@ import { ModalInput, ModalForm, ModalTextArea ,ModalErrorText } from './StyleHel
 import PictureGallery from './PictureGallery.jsx';
 import { useAnswersUpdate } from './AnswersContext.jsx'
 
+/* eslint react/prop-types: 0 */
+
 const AddAnswer = ({ close }) => {
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');

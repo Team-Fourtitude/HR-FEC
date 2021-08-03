@@ -3,6 +3,8 @@ import { ModalInput, ModalForm, ModalTextArea, ModalErrorText } from './StyleHel
 
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
 
+/* eslint react/prop-types: 0 */
+
 const AddQuestion = ({ close }) => {
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');

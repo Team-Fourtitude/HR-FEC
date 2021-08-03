@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 
 // Modal Screen
@@ -129,36 +129,3 @@ export const QuestionList = styled.div`
   min-height: 60vh;
   min-width: 60vw;
 `;
-
-//export const
-
-//keyframes fade animations
-// const fadeIn = styled.keyframes`
-  // from {
-  //   transform: scale(.25);
-  //   opacity: 0;
-  // }
-
-  // to {
-  //   transform: scale(1);
-  //   opacity: 1;
-  // }
-// `;
-// const fadeOut = styled.keyframes`
-//   from {
-//     transform: scale(1);
-//     opacity: 1;
-//   }
-
-//   to {
-//     transform: scale(.25);
-//     opacity: 0;
-//   }
-// `;
-// // Fade In
-// export const Fade = styled.defualt.div`
-//   display: inline-block;
-//   visibility: ${props => props.item ? 'hidden' : 'visible'};
-//   animation: ${props => props.item ? fadeOut : fadeIn} 1s linear;
-//   transition: visibility 1s linear;
-// `;
