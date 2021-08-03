@@ -104,7 +104,6 @@ const RelatedProducts = () => {
       getInitialData();
     }, [product])
 
-
   return(
     <div className="related" style={{"position":"relative", "height": "1000px"}}>
       <RelatedProductContext.Provider value={[relatedProduct, setRelatedProduct]}>
