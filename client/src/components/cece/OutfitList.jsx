@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import ProductContext from '../context/ProductContext.jsx';
 import StylesContext from '../context/StylesContext.jsx';
@@ -13,28 +13,41 @@ const { styles, setStyles } = useContext(StylesContext);
 const [card, setCard] = useState([]);
 const [add, setAdd] = useState(false);
 
-  // const handleClick = () => {
-  //   axios.get(`http://localhost:3000/products/${product.id}/styles`)
-  //   .then( (styles) => {
-  //     let defaultStyle = styles.data.results.filter(item => item[`default?`])
-  //     setCard(defaultStyle[0]);
-  //   })
-  //   .then( () => setAdd(true))
-  //   .catch( (err) => console.log(err))
-  //   //need to refactor this, add local storage
-  //   setAdd(false);
-  // }
+  //sets state if localStorage has properties
+  useEffect( () => {
+    if (localStorage.length) {
+      let items = Object.keys(localStorage).map((id) => JSON.parse(localStorage.getItem(id)));
+      console.log('first render', items)
+      setCard(card.concat(items));
+    }
+  }, [])
+
+
   const handleClick = () => {
     if (!localStorage.getItem(product.id)) {
-      localStorage.setItem(product.id, product);
-
-      console.log('added to storage: ', product.id)
-      //style is not updating
       let defaultStyle = styles.results.filter(item => item[`default?`]);
-      setCard([...card, defaultStyle[0]]);
+      if (defaultStyle) {
+        let combined = Object.assign(defaultStyle[0], product);
+        localStorage.setItem(product.id, JSON.stringify(combined));
+        console.log('added default to storage: ', product.id)
+        setCard([...card, combined]);
+      } else {
+        let combined = Object.assign(styles.results[0], product);
+        localStorage.setItem(product.id, JSON.stringify(combined));
+        console.log('added to storage: ', product.id)
+        setCard([...card, combined]);
+      }
       setAdd(true);
     }
   }
+
+  const renderOutfit = (outfitCard) => {
+      return <OutFitCard key={product.id} product={outfitCard} style={outfitCard}/>
+  }
+
+  useEffect( () => {
+    renderOutfit();
+  }, [card])
 
 
   return (
@@ -46,8 +59,7 @@ const [add, setAdd] = useState(false);
             <FaPlus id="add" />
             <div className="add-to-outfit">Add To Outfit</div>
         </div>
-          {localStorage.length ? card.map((outfitItem) =>
-            <OutFitCard key={outfitItem.style_id} product={product} style={outfitItem}/>) : null}
+          {card.map(renderOutfit)}
       </div>
     </>
   );

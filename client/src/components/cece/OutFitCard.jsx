@@ -20,9 +20,9 @@ const OutFitCard = ({product, style}) => {
 
   return(
     <>
-  {console.log('help', localStorage.getItem(25171))}
-    {console.log('longone', outfit.product.id)}
-    {canSee ?
+  {/* {console.log('help', localStorage.getItem(25171))} */}
+    {/* {console.log('longone', outfit.product.id)} */}
+    {/* {canSee ? */}
     <div className="outfit-card">
       <FaRegWindowClose id="delete" value={outfit.product.id} onClick={handleDelete}/>
       {outfit && outfit.style.photos ?
@@ -44,7 +44,7 @@ const OutFitCard = ({product, style}) => {
         <FaRegStar />
       </div>
     </div>
-    : null}
+    {/* : null} */}
     </>
   );
 }
