@@ -135,6 +135,7 @@ const App = () => {
     // Our context.Providers 'values' are linked to an object that contains our state hooks.
     // Thus when the state changes, all children using that context value will rerender with the newly set state value.
     <ProductContext.Provider value={{product, setProduct}}>
+<<<<<<< HEAD
       <RelatedProductContext.Provider value={[relatedProduct, setRelatedProduct]}>
         <RelatedStylesContext.Provider value={[relatedStyles, setRelatedStyles]}>
           <StylesContext.Provider value={{styles, setStyles}}>
@@ -151,6 +152,17 @@ const App = () => {
           </StylesContext.Provider>
         </RelatedStylesContext.Provider>
       </RelatedProductContext.Provider>
+=======
+      <StylesContext.Provider value={{styles, setStyles}}>
+        <StyleContext.Provider value={{style, setStyle}}>
+          <Overview />
+          <RelatedProducts />
+          <div>
+            <QuestionsAnswers />
+          </div>
+        </StyleContext.Provider>
+      </StylesContext.Provider>
+>>>>>>> 1f5df1f20ea38a3c61567d1b620220f52b29dd96
     </ProductContext.Provider>
   );
 }

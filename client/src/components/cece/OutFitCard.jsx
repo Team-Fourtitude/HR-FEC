@@ -7,25 +7,34 @@ const OutFitCard = ({product, style}) => {
   const [canSee, setToggle] = useState(true);
   console.log(outfit)
 
+  // const handleDelete = () => {
+  //   setToggle(false);
+  //   setOutfit({});
+  // }
+
   const handleDelete = () => {
+    localStorage.removeItem(Number(outfit.product.id));
+    console.log('removed: ', Number(outfit.product.id))
     setToggle(false);
-    setOutfit({});
   }
 
   return(
     <>
+  {console.log('help', localStorage.getItem(25171))}
+    {console.log('longone', outfit.product.id)}
     {canSee ?
     <div className="outfit-card">
-      <FaRegWindowClose id="delete" value={outfit.product.product_id} onClick={handleDelete}/>
+      <FaRegWindowClose id="delete" value={outfit.product.id} onClick={handleDelete}/>
       {outfit && outfit.style.photos ?
       <div className="square">
         <img className="outfit-img" src={outfit.style.photos[0].thumbnail_url} />
       </div>
       : null}
       <p className="outfit-info">
-        <span>[ {outfit ? outfit.product.category : null} ]</span><br />
+        <span className="cat">[ {outfit ? outfit.product.category : null} ]</span><br />
+
         {outfit ? outfit.product.name : null}<br />
-        <span>{outfit ? outfit.style.original_price : null}</span>
+        <span className="price">{outfit ? outfit.style.original_price : null}</span>
       </p>
       <div className="starRating">
         <FaStar />

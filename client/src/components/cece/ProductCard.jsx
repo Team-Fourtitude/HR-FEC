@@ -34,36 +34,36 @@ const ProductCard = ({ item, initData }) => {
 
   return (
     <>
-      <div className="column" onClick={() => navToProduct(item.product_id)}>
+      <div className="column">
          <FaStar className="compare" onClick={modalInfoClick}/>
          <Modal isOpen={isOpen} close={() => {setOpen(false)}}>
-           <ComparisonModal id={item.product_id} current={product.product} related={relatedProduct}/>
+           <ComparisonModal id={item.product_id} current={product} related={relatedProduct}/>
          </Modal>
-        {item && item.results ? item.results.map((style) => {
+        {item && item.results ? item.results.map((style, index) => {
           if (style[`default?`]) {
             return (
-              <div className="square">
-                <img className="relImg" src={style.photos[0].thumbnail_url} />
+              <div className="square" onClick={() => navToProduct(item.product_id)}>
+                <img className="relImg" key={index} src={style.photos[0].thumbnail_url} />
               </div>
             )
           }
         }) : null}
-        <p className="info">
-          {relatedProduct&& relatedProduct[0] ? relatedProduct.map((data) => {
+        <p className="info" onClick={() => navToProduct(item.product_id)}>
+          {relatedProduct&& relatedProduct[0] ? relatedProduct.map((data, index) => {
             if (Number(item.product_id) === data.id) {
               return (
                 <>
-                  <span className="cat">[ {data.category} ]</span><br /><br />
+                  <span className="cat" key={index}>[ {data.category} ]</span><br /><br />
                   {data.name}<br />
                 </>
               )
             }
           }) : null}
-          {item && item.results ? item.results.map((style) => {
+          {item && item.results ? item.results.map((style, index) => {
             if (style[`default?`] && !style.sale_price) {
               return (
                 <>
-                  <span className="price">{style.original_price}</span>
+                  <span className="price" key={index}>{style.original_price}</span>
                 </>
               )
             } else if (style[`default?`] && style.sale_price) {

@@ -3,6 +3,7 @@ import ProductCard from './ProductCard.jsx';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import RelatedProductContext from '../context/RelatedProductContext.jsx';
 import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
+import { v1 as uuidv1 } from 'uuid';
 
 
 
@@ -42,10 +43,10 @@ const RelatedProductList = ({ initData }) => {
       <FaAngleRight className="next" id={right} onClick={() => handleClick('right')} />
       <h4 id="related-title">Related Products</h4>
       <div className="container" ref={ref} >
-        {relatedStyles.related ? relatedStyles.related.map((item) => {
+        {relatedStyles.related ? relatedStyles.related.map((item, index) => {
           return (
             <>
-              <ProductCard  initData={initData} item={item} key={item.product_id} />
+              <ProductCard  initData={initData} item={item} key={index} />
             </>
           )
         })
