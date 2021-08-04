@@ -1,12 +1,15 @@
 const express = require('express');
+const formidableMiddleware = require('express-formidable');
 
 const app = express();
 const port = 3000;
 const models = require('./models.js');
 
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(formidableMiddleware({ multiples: true }))
 
 app.use('/', express.static('./client/dist'));
 
@@ -167,15 +170,27 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
   });
 });
 
-app.post('/upload', (req, res) => {
-  //req.body.body.src
-  models.postUpload()
-    .then((image) => {
 
-      res.status(201).send(`Success! Here is the image: ${image.url}`);
+// Takes a post request of images, uploads images to cloudinary API, once all uploads complete, returns the resultant URLs
+app.post('/upload', (req, res) => {
+//    console.log(JSON.stringify(req.files));
+  const reqData = req.files.validPics;
+  const upload = {};
+
+  if (Array.isArray(reqData)) {
+    upload.result = reqData.map(image => models.postUpload(image.path));
+  } else {
+    upload.result = [models.postUpload(reqData.path)];
+  }
+
+  Promise.all(upload.result)
+    .then(images => {
+      const urls = images.map(({ url }) => url);
+        return res.status(200).send(urls);
     })
-    .catch((e) => {
-      console.log(e);
+    .catch(error => {
+      console.log(`Failed at router with: \n ${error}`);
+      return res.status(500).send();
     })
 })
 
