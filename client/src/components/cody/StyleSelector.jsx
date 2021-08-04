@@ -3,6 +3,8 @@ import Styles from './Styles.jsx';
 import ProductContext from '../context/ProductContext.jsx';
 import StyleContext from '../context/StyleContext.jsx';
 
+const styler = {padding:"0", margin:"1em 0"};
+
 const StyleSelector = () => {
   const currentProduct = useContext(ProductContext);
   const curStyle = useContext(StyleContext);
@@ -10,12 +12,12 @@ const StyleSelector = () => {
   if (curStyle.style) {
     const current = curStyle.style;
     if (current.sale_price) {
-      price = <p style={{"padding":"0","margin":"1em 0"}}><s style={{"color": "red"}}>{'$' + curStyle.style.original_price}</s><span>{'$' + curStyle.style.sale_price}</span></p>
+      price = <p style={styler}><s style={{"color": "red"}}>{'$' + curStyle.style.original_price}</s><span>{'$' + curStyle.style.sale_price}</span></p>
     } else {
-      price = <p style={{"padding":"0","margin":"1em 0"}}><span>{'$' + curStyle.style.original_price}</span></p>
+      price = <p style={styler}><span>{'$' + curStyle.style.original_price}</span></p>
     }
   } else {
-    price = <p style={{"padding":"0","margin":"1em 0"}}>null price</p>
+    price = <p style={styler}>null price</p>
   }
   return (
   <div style={{"width":"100%", "marginBottom":"1.5em"}} onClick={ () => {console.log(currentProduct.product)}}>
