@@ -6,6 +6,8 @@ import ProductContext from '../context/ProductContext.jsx';
 import RelatedProductContext from '../context/RelatedProductContext.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import Modal from '../Tim/Modal.jsx';
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 const ProductCard = ({ item }) => {
@@ -54,7 +56,7 @@ const ProductCard = ({ item }) => {
             if (Number(item.product_id) === data.id) {
               return (
                 <>
-                <CatAndPrice key={index}>
+                <CatAndPrice key={uuidv4()}>
                   [ {data.category} ]
                 </CatAndPrice><br /><br />
                 {data.name}<br />

@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { RelatedContainer } from './Styled/Related.jsx';
 import { OutFitTitle } from './Styled/Outfit.jsx';
-import { v1 as uuidv1 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
 import ProductCard from './ProductCard.jsx';
 import { Next } from './Styled/Icons.jsx';
@@ -46,7 +46,7 @@ const RelatedProductList = () => {
         {relatedStyles.related ? relatedStyles.related.map((item, index) => {
           return (
             <>
-              <ProductCard item={item} key={index} />
+              <ProductCard item={item} key={uuidv4()} />
             </>
           )
         })
