@@ -24,6 +24,7 @@ const [card, setCard] = useState([]);
   const handleClick = () => {
     if (!localStorage.getItem(product.id)) {
       let defaultStyle = styles.results.filter(item => item[`default?`]);
+
       if (defaultStyle.length) {
         let combined = Object.assign(defaultStyle[0], product);
         localStorage.setItem(product.id, JSON.stringify(combined));

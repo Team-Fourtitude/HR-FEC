@@ -1,14 +1,14 @@
 import React, { useState, useRef, useContext } from 'react';
-import ProductCard from './ProductCard.jsx';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-import RelatedProductContext from '../context/RelatedProductContext.jsx';
-import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
+import { RelatedContainer } from './Styled/Related.jsx';
+import { OutFitTitle } from './Styled/Outfit.jsx';
 import { v1 as uuidv1 } from 'uuid';
+import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
+import ProductCard from './ProductCard.jsx';
 
 
 
 const RelatedProductList = ({ initData }) => {
-  const [ relatedProduct, setRelatedProduct ] = useContext(RelatedProductContext);
   const [ relatedStyles, setRelatedStyles ] = useContext(RelatedStylesContext);
   const [ left, setLeft] = useState('disabled');
   const [ right, setRight] = useState('');
@@ -41,8 +41,8 @@ const RelatedProductList = ({ initData }) => {
 
       <FaAngleLeft className="prev" id={left} onClick={() => handleClick('left')} />
       <FaAngleRight className="next" id={right} onClick={() => handleClick('right')} />
-      <h4 id="related-title">Related Products</h4>
-      <div className="container" ref={ref} >
+      <OutFitTitle>Related Products</OutFitTitle>
+      <RelatedContainer ref={ref} >
         {relatedStyles.related ? relatedStyles.related.map((item, index) => {
           return (
             <>
@@ -51,7 +51,7 @@ const RelatedProductList = ({ initData }) => {
           )
         })
         : null}
-      </div>
+      </RelatedContainer>
     </>
   );
 }

@@ -1,15 +1,15 @@
 
 
-
+/*
 
 h4 {
   position: relative;
   margin: 0;
   left: 3%;
-}
+} */
 
 
-
+/*
 .container {
   display: flex;
   flex-direction: row;
@@ -20,8 +20,8 @@ h4 {
   right:10%;
   overflow-x: scroll;
   scroll-behavior: smooth;
-}
-
+} */
+/*
 .column {
   width: 275px;
   height: 400px;
@@ -30,13 +30,13 @@ h4 {
   margin: 20px;
   /* border: 2px solid lightgrey; */
   box-sizing: border-box;
-}
+} */
 
-p.info {
+/* p.info {
   position: relative;
   padding-left: 2%;
   bottom: 6%;
-}
+} */
 
 span.cat,
 span.price {
@@ -112,15 +112,15 @@ span.price {
   color: goldenrod;
 }
 
-.square {
+/* .square {
   position: relative;
   top: 1%;
   width: 270px;
   height: 183px;
   overflow: hidden;
-}
+} */
 
-.relImg {
+/* .relImg {
   position: absolute;
   max-width: 100%;
   width: auto;
@@ -128,7 +128,7 @@ span.price {
   top: 50%;
   left: 50%;
   transform: translate( -50%, -50%);
-}
+} */
 
 
 /* .add-outfit-card-container {
