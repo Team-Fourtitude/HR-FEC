@@ -65,12 +65,11 @@ export const OutFitContainer = styled.div`
 
 export const AddCard = styled.div`
   position: relative;
-  top: 10%;
   min-width: 200px;
   height: 200px;
   background-color: whitesmoke;
   text-align: justify;
-  margin: 20px;
+  margin: 11% 20px 20px 20px;
   border: 2px solid black;
   box-sizing: border-box;
 `;

@@ -1,51 +1,5 @@
 
 
-/*
-
-h4 {
-  position: relative;
-  margin: 0;
-  left: 3%;
-} */
-
-
-/*
-.container {
-  display: flex;
-  flex-direction: row;
-  width: 75%;
-  padding: 20px;
-  position: relative;
-  left: 10%;
-  right:10%;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-} */
-/*
-.column {
-  width: 275px;
-  height: 400px;
-  background-color: whitesmoke;
-  text-align: justify;
-  margin: 20px;
-  /* border: 2px solid lightgrey; */
-  box-sizing: border-box;
-} */
-
-/* p.info {
-  position: relative;
-  padding-left: 2%;
-  bottom: 6%;
-} */
-
-span.cat,
-span.price {
-  font-size: xx-small;
-}
-
-
-
-
 .next, .prev {
   position: relative;
   top: 25%;
@@ -57,6 +11,7 @@ span.price {
   transition-duration: 0.2s;
 
 }
+
 .next {
   left: 85%;
 }
@@ -112,49 +67,7 @@ span.price {
   color: goldenrod;
 }
 
-/* .square {
-  position: relative;
-  top: 1%;
-  width: 270px;
-  height: 183px;
-  overflow: hidden;
-} */
 
-/* .relImg {
-  position: absolute;
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate( -50%, -50%);
-} */
-
-
-/* .add-outfit-card-container {
-  display: flex;
-  flex-direction: row;
-  width: 75%;
-  padding: 20px;
-  position: relative;
-  left: 10%;
-  right:10%;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-
-} */
-/*
-.add-card {
-  position: relative;
-  top: 10%;
-  min-width: 200px;
-  height: 200px;
-  background-color: whitesmoke;
-  text-align: justify;
-  margin: 20px;
-  border: 2px solid black;
-  box-sizing: border-box;
-} */
 
 
 #add {
@@ -167,41 +80,17 @@ span.price {
   left: 37%;
 }
 
-/* .add-to-outfit {
-  position: relative;
-  left: 19%;
-  top: 30%;
-} */
-
-
-
-/* .outfit-card {
-  min-width: 275px;
-  height: 300px;
-  text-align: justify;
-  margin: 20px;
-  background-color: whitesmoke;
-  /* border: 2px solid black; */
-  /* box-sizing: border-box;
-  overflow-y: scroll;
-} */
-
-/*
-.outfit-img {
-  position: absolute;
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate( -50%, -50%);
+#delete {
+  position: sticky;
+  left: 89%;
+  top: 3%;
+  color: darkgray;
 }
- */
 
-
-.delete {
-  align-self: flex-end;
+#delete:hover {
+  color: black;
 }
+
 
 @keyframes fadein {
   from {
@@ -322,19 +211,5 @@ span.price {
   transform: scale(1.05);
   background-color: rgb(198, 214, 219, 0.5);
 }
-/* p.outfit-info {
-  position: relative;
-  padding-left: 2%;
-  bottom: 5%;
-} */
 
-#delete {
-  position: sticky;
-  left: 89%;
-  top: 3%;
-  color: darkgray;
-}
 
-#delete:hover {
-  color: black;
-}

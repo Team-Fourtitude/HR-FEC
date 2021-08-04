@@ -1,15 +1,18 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import ProductContext from '../context/ProductContext.jsx';
 import StylesContext from '../context/StylesContext.jsx';
 import OutFitCard from './OutFitCard.jsx';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { OutFitTitle, OutFitContainer, AddCard, AddText } from './Styled/Outfit.jsx';
 
 
 const OutfitList = () => {
 const { product } = useContext(ProductContext);
 const { styles } = useContext(StylesContext);
+const [ left, setLeft] = useState('disabled');
+const [ right, setRight] = useState('');
 const [card, setCard] = useState([]);
+const ref = useRef(null);
 
 
   //sets state if localStorage has properties
@@ -39,6 +42,26 @@ const [card, setCard] = useState([]);
     }
   }
 
+  const handleArrowClick = (direction) => {
+    if (direction === 'left') {
+      ref.current.scrollLeft -= 200;
+    } else {
+      ref.current.scrollLeft += 200;
+    }
+
+    if (ref.current.scrollLeft > ref.current.offsetWidth || ref.current.scrollLeft > 500) {
+      setRight('disabled')
+    } else {
+      setRight('next');
+    }
+
+    if (!ref.current.scrollLeft) {
+      setLeft('disabled')
+    } else {
+      setLeft('prev');
+    }
+  }
+
 
   const renderOutfit = (outfitCard) => {
       return <OutFitCard key={product.id} product={outfitCard} style={outfitCard} card={card} setCard={setCard}/>
@@ -51,8 +74,10 @@ const [card, setCard] = useState([]);
 
   return (
     <>
+      <FaAngleLeft className="prev" id={left} onClick={() => handleArrowClick('left')} />
+      <FaAngleRight className="next" id={right} onClick={() => handleArrowClick('right')} />
       <OutFitTitle>Your Outfit</OutFitTitle>
-      <OutFitContainer>
+      <OutFitContainer ref={ref}>
         <AddCard onClick={handleClick}>
           <FaPlus id="add" />
           <AddText>Add To Outfit</AddText>

@@ -5,10 +5,11 @@ import { OutFitTitle } from './Styled/Outfit.jsx';
 import { v1 as uuidv1 } from 'uuid';
 import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
 import ProductCard from './ProductCard.jsx';
+import { Next } from './Styled/Icons.jsx';
 
 
 
-const RelatedProductList = ({ initData }) => {
+const RelatedProductList = () => {
   const [ relatedStyles, setRelatedStyles ] = useContext(RelatedStylesContext);
   const [ left, setLeft] = useState('disabled');
   const [ right, setRight] = useState('');
@@ -38,7 +39,6 @@ const RelatedProductList = ({ initData }) => {
 
   return (
     <>
-
       <FaAngleLeft className="prev" id={left} onClick={() => handleClick('left')} />
       <FaAngleRight className="next" id={right} onClick={() => handleClick('right')} />
       <OutFitTitle>Related Products</OutFitTitle>
@@ -46,7 +46,7 @@ const RelatedProductList = ({ initData }) => {
         {relatedStyles.related ? relatedStyles.related.map((item, index) => {
           return (
             <>
-              <ProductCard  initData={initData} item={item} key={index} />
+              <ProductCard item={item} key={index} />
             </>
           )
         })
