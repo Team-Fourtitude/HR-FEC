@@ -18,7 +18,7 @@ const App = () => {
 
 
   useEffect( () => {
-    axios.get('http://localhost:3000/products/25171')
+    axios.get('http://localhost:3000/products/25176')
     .then( (data) => {
       if (product.id !== data.data.id) {
         console.log(data.data);
