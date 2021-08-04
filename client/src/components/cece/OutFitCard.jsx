@@ -1,50 +1,47 @@
 import React, { useState } from 'react';
 import { FaStar, FaStarHalfAlt, FaRegStar, FaRegWindowClose } from 'react-icons/fa';
+import { OFCard, ImageView, OutFitImg, OutFitInfo, CatAndPrice, StarRating } from './Styled/Outfit.jsx';
 
 
-const OutFitCard = ({product, style}) => {
-  const [outfit, setOutfit] = useState({product, style})
-  const [canSee, setToggle] = useState(true);
-  console.log(outfit)
+const OutFitCard = ({ style }) => {
+  const [ outfit, setOutfit ] = useState({ style })
+  const [ toggle, setToggle ] = useState(true);
 
-  // const handleDelete = () => {
-  //   setToggle(false);
-  //   setOutfit({});
-  // }
 
   const handleDelete = () => {
-    localStorage.removeItem(Number(outfit.product.id));
-    console.log('removed: ', Number(outfit.product.id))
+    localStorage.removeItem(Number(outfit.style.id));
+    console.log('removed: ', Number(outfit.style.id))
     setToggle(false);
   }
 
   return(
     <>
-  {/* {console.log('help', localStorage.getItem(25171))} */}
-    {/* {console.log('longone', outfit.product.id)} */}
-    {/* {canSee ? */}
-    <div className="outfit-card">
-      <FaRegWindowClose id="delete" value={outfit.product.id} onClick={handleDelete}/>
+    {toggle ?
+    <OFCard>
+      <FaRegWindowClose id="delete" onClick={handleDelete}/>
       {outfit && outfit.style.photos ?
-      <div className="square">
-        <img className="outfit-img" src={outfit.style.photos[0].thumbnail_url} />
-      </div>
+      <ImageView>
+        <OutFitImg src={outfit.style.photos[0].thumbnail_url} />
+      </ImageView>
       : null}
-      <p className="outfit-info">
-        <span className="cat">[ {outfit ? outfit.product.category : null} ]</span><br />
-
-        {outfit ? outfit.product.name : null}<br />
-        <span className="price">{outfit ? outfit.style.original_price : null}</span>
-      </p>
-      <div className="starRating">
+      <OutFitInfo>
+        <CatAndPrice>
+          [ {outfit ? outfit.style.category : null} ]
+        </CatAndPrice><br />
+        {outfit ? outfit.style.name : null}<br />
+        <CatAndPrice>
+          {outfit ? outfit.style.original_price : null}
+        </CatAndPrice>
+      </OutFitInfo>
+      <StarRating>
         <FaStar />
         <FaStar />
         <FaStar />
         <FaStarHalfAlt />
         <FaRegStar />
-      </div>
-    </div>
-    {/* : null} */}
+      </StarRating>
+    </OFCard>
+    : null}
     </>
   );
 }
