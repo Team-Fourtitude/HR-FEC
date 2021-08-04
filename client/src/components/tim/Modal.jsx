@@ -2,7 +2,7 @@ import React, { useEffect, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { RiCloseCircleFill } from 'react-icons/ri';
-import { ModalChildContainer, ModalBackground, ModalContent, ModalHeaderRow, CloseIcon, CloseWrapper } from './StyleHelpers.jsx';
+import { ModalChildWrapper, ModalBackground, ModalContent, ModalHeaderRow, CloseIcon, CloseWrapper } from './StyleHelpers.jsx';
 /* eslint react/prop-types: 0 */
 
 const portal = document.getElementById('portal');
@@ -40,9 +40,9 @@ const Modal = ({isOpen, close, children, title}) => {
               <CloseIcon onClick={close}/>
             </CloseWrapper>
           </ModalHeaderRow>
-          <ModalChildContainer>
+          <ModalChildWrapper>
             {children}
-          </ModalChildContainer>
+          </ModalChildWrapper>
         </ModalContent>
       </ModalBackground>
     </>,

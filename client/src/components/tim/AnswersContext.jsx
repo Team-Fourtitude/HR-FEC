@@ -18,16 +18,16 @@ export const useAnswersUpdate = () => {
 
 export const AnswersProvider = ({children}) => {
   const [answers, setAnswers] = useState([]);
-  const [questionLoad, setQuestionLoaded] = useState(false);
+  // const [questionLoad, setQuestionLoaded] = useState(false);
 
   const question = useContext(QuestionContext);
   const question_id = question.question_id;
   const updateQuestions = useQuestionsUpdate();
 
   // Verify current Question context
-  useEffect(() => {
-    question_id ? setQuestionLoaded(true) : setQuestionLoaded(false);
-  }, [question_id])
+  // useEffect(() => {
+  //   question_id ? setQuestionLoaded(true) : setQuestionLoaded(false);
+  // }, [question_id])
 
   const markAnswerHelpful = (answer_id, hasHelped) => {
     // PUT upvoteed question

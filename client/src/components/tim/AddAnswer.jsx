@@ -1,21 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ModalInput, ModalForm, ModalTextArea ,ModalErrorText, SecurityAdvisory } from './StyleHelpers.jsx';
+import { ModalInput, ModalForm, ModalTextArea ,ModalErrorText, SecurityAdvisory, ModalFormWrapper, ModalFormSubmit } from './StyleHelpers.jsx';
 import QuestionContext from './QuestionContext.jsx';
 import ProductContext from '../context/ProductContext.jsx';
 import PictureGallery from './PictureGallery.jsx';
 import { useAnswersUpdate } from './AnswersContext.jsx'
+import axios from 'axios';
 
 /* eslint react/prop-types: 0 */
 
 const AddAnswer = ({ close }) => {
   const [body, setBody] = useState('');
-  const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
+  const [nickname, setNickname] = useState('');
   const [previews, setPreviews] = useState([]);
-  const [hasMaxUploads, setHasMaxUploads] = useState(false);
+  const [filesData, setFilesData] = useState(null);
   const [canSubmit, setCanSubmit] = useState(true);
+  const [hasMaxUploads, setHasMaxUploads] = useState(false);
   const [badInputResponse, setBadInputResponse] = useState({});
+
   const [badUploadTypes, setBadUploadTypes] = useState({
     size: true,
     type: true,
@@ -29,40 +32,57 @@ const AddAnswer = ({ close }) => {
 
   const answerUpdaters = useAnswersUpdate();
 
-  const validAnswer = {};
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (isValid()) {
-      validAnswer.body = body;
-      validAnswer.name = nickname;
-      validAnswer.email = email;
-      validAnswer.photos = photos;
-      answerUpdaters.submitAnswer(validAnswer)
-      close();
-    } else {
-      console.log(`Not Valid`)
-      setCanSubmit(false);
-    }
-    console.log(validAnswer)
-  }
-
   useEffect(() => {
     setCanSubmit(true);
     setBadInputResponse({});
   }, [body, nickname, email])
 
+  // on state change of previews,
+  // check to make sure that the number of uploaded items does not exceed 5
   useEffect(() => {
     setPhotos(previews);
     if (previews.length >= 5) setHasMaxUploads(true);
   }, [previews])
+
+  // User uploads images
+  // uploads are validated
+  // blobs are created for thumbnails
+  // When user submits, the previews should be sent to cloud
+  // urls are then recieved and should be sent with submit ansewr
+  // Dont need photos state
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validAnswer = {};
+
+    if (isValid()) {
+      getCloudinaryUrl(filesData)
+        .then(data => {
+          console.log(`Success, got cloudy with a chance of urls: ${JSON.stringify(data.data)}`)
+          validAnswer.body = body;
+          validAnswer.name = nickname;
+          validAnswer.email = email;
+          validAnswer.photos = data.data;
+          answerUpdaters.submitAnswer(validAnswer)
+        })
+        .then(() => {
+          terminate();
+        })
+        .catch(e => console.log(e));
+
+
+    } else {
+      console.log(`Not Valid`)
+      setCanSubmit(false);
+    }
+  }
 
   const isValid = () => {
     let valid = true;
     const ampIndex = email.indexOf('@');
     const dotIndex = email.indexOf('.');
     const currentResponse = badInputResponse;
+
     // Email formatting
     if (!email.length) {
       currentResponse.email = `Email is a mandatory field`;
@@ -108,30 +128,32 @@ const AddAnswer = ({ close }) => {
     return valid;
   }
 
+  // image form handler event
   const handleUpload = (event) => {
     Object.keys(badUploadTypes).map(cond => badUploadTypes[cond] = true)
     const files = event.target.files
     const uploads = []
-    // URL.revokeObjectURL() On succesfull upload
+    const formData = new FormData();
+    // URL.revokeObjectURL() On succesful upload
 
     const readImage = (file) => {
       //const reader = new FileReader();
-      if (!fileValidation(file.name) ) {
-        let type = false;
-        setBadUploadTypes({...badUploadTypes, type})
-        console.log(`bad file type at: ${file.name}`)
-      } else if (file.size > MAX_UPLOAD_SIZE) {
+      if (file.size > MAX_UPLOAD_SIZE) {
         let size = false;
         setBadUploadTypes({...badUploadTypes, size})
         console.log(`bad file size at :${file.size}`)
       } else {
-        console.log(`Good file`)
         uploads.push(URL.createObjectURL(file))
+        console.log(`Good file ${file}`)
+        formData.append('validPics', file, `preview_${uploads.length}_${file.name}`)
+        //console.log(`This is the form data: ${JSON.stringify(formData)}`)
       }
     }
-
+    // available images
     if (files.length + previews.length < 6) {
       [].forEach.call(files, readImage);
+      // setfiledata here, then use a hook on completeion to submit final
+      setFilesData(formData)
     } else {
       let amount = false;
       setBadUploadTypes({...badUploadTypes, amount})
@@ -143,41 +165,48 @@ const AddAnswer = ({ close }) => {
     return badUploadTypes.amount;
   }
 
-  const fileValidation = (name) => {
-    // reject any invalid names ie cat.png.gif
-    const validExt = ['.jpg', '.png', 'gif', '.jpeg'];
-    let result = true;
-    validExt.forEach(ext => {
-      if (!name.indexOf(ext)) result = false;
+  const getCloudinaryUrl = (imageData) => {
+    return axios.post(`/upload`, imageData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
-    return result;
   }
 
+  // function passed down to release blob
+  const removeThumbnail = (src) => {
+    //previews.filter(src => src !== e.src)
+    const toRemoveIndex = previews.indexOf(src);
+    setPreviews([...previews.slice(0, toRemoveIndex), ...previews.slice(toRemoveIndex + 1, previews.length)]);
+    URL.revokeObjectURL(src);
+    console.log(`Removed At ${toRemoveIndex}: ${src}`);
+  }
+
+  const terminate = () => {
+    previews.map(src => URL.revokeObjectURL(src));
+    close();
+  }
+
+
   return (
-    <div style={{height: "100%", width:"100%", display: "grid"}}>
+    <ModalFormWrapper >
       <div className='add-answer-header' >
         <h2>Submit Your Answer</h2>
         <h3>{`${product.name}: ${question.question_body}`}</h3>
-        {!canSubmit &&
-        <p
-        style={{color: 'red'}}>
-          Current Submission Is Not Valid...
-        </p>}
       </div>
-      <p>Mandatory Fields Are Indicated With A (*)</p>
+      { !canSubmit && <ModalErrorText>Current Submission Is Not Valid...</ModalErrorText> }
+      <span>Mandatory Fields Are Indicated With A (*)</span>
       <ModalForm onSubmit={e => handleSubmit(e)}>
         <span>Your Answer* :</span>
-        <div style={{height: "auto", width:"100%", display: "flex"}}>
-          <ModalTextArea
+        <ModalTextArea
             type='text'
             value={body}
             rows='10'
             onChange={e => setBody(e.target.value)}
           />
-        </div>
           {badInputResponse.body &&
-        <ModalErrorText>{badInputResponse.body}</ModalErrorText>
-        }
+          <ModalErrorText>{badInputResponse.body}</ModalErrorText>
+          }
         <label>Your Nickname* :
         <ModalInput
           type='text'
@@ -208,25 +237,25 @@ const AddAnswer = ({ close }) => {
       <SecurityAdvisory>
         For authentication reasons, you will not be emailed
       </SecurityAdvisory>
-      <label> Images (Max: 2MB) {' '}
+      { !hasMaxUploads ? <label> Images (Max: 2MB) {' '}
         <input
           type="file"
           accept="image/png, image/jpeg, image/gif"
           onChange={(event) => {handleUpload(event)}}
           multiple/>
-        </label>
+        </label> : <p style={{ color: 'red' }}>Max Images Uploaded</p>}
+
         {!badUploadTypes.size && <p style={{ color: 'red' }}>An Item was too large</p>}
         {!badUploadTypes.type && <p style={{ color: 'red' }}>An item not an accepted image type</p>}
         {!badUploadTypes.amount && <p style={{ color: 'red' }}>Too many pictures for this submission</p>}
-      <div className="uploaded-gallery">
-          <PictureGallery photos={previews}/>
-      </div>
-      { hasMaxUploads && <button
+
+      <PictureGallery photos={previews} remove={removeThumbnail} />
+      <ModalFormSubmit
       onClick={e => handleSubmit(e)}>
-        Submit
-      </button> }
+        SUBMIT
+      </ModalFormSubmit>
     </ModalForm>
-  </div>
+  </ModalFormWrapper>
   )
 }
 

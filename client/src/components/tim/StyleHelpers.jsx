@@ -3,16 +3,23 @@ import styled from 'styled-components';
 import { RiCloseFill } from 'react-icons/ri';
 
 
-// Modal Screen
+
+/////////////////////////////////////////////////////
+// Modal Form
+/////////////////////////////////////////////////////
 export const ModalInput = styled.input`
   position: relative;
+  max-width: 95%;
+  border: .15rem solid;
   width: 100%;
 `;
 
 export const ModalTextArea = styled.textarea`
+  grid: 2 / 3;
   resize: vertical;
   position: relative;
-  width: 100%;
+  max-width: 95%;
+  border: .15rem solid;
 `;
 
 export const ModalForm = styled.form`
@@ -20,6 +27,7 @@ export const ModalForm = styled.form`
   grid-template-rows: 1fr;
   grid-gap: 20px;
 `;
+//  grid-template-columns: 3fr;
 
 export const ModalErrorText = styled.div`
   color: red;
@@ -27,7 +35,34 @@ export const ModalErrorText = styled.div`
   max-width: 100%;
 `;
 
-// Modal Helpers
+export const ModalFormWrapper = styled.div`
+  display: grid;
+  overflow-y: scroll;
+  max-hieght: 100%;
+  &::-webkit-scrollbar {
+    background-color: transparent;
+  }
+`;
+
+export const ModalFormSubmit = styled.button`
+background-color: black;
+color: white;
+padding: 10px;
+max-width: 95%;
+border: .1rem solid;
+display: inline-block;
+margin: 5px;
+cursor: pointer;
+&:hover {
+  background-color: white;
+  color: black;
+  border: .1rem solid;
+}
+`;
+
+/////////////////////////////////////////////////////
+// Modal Screen
+/////////////////////////////////////////////////////
 export const ModalBackground = styled.div`
   width: 100vw;
   height: 100vh;
@@ -45,26 +80,23 @@ export const ModalContent = styled.div`
   padding: 30px;
   border-radius: 30px;
   max-width: 90vw;
-  max-height: 90vw;
+  max-height: 90vh;
   box-shadow: 0 3px 15px -3px rgba(0, 0, 0, 0.2);
   position: relative;
   display: grid;
-  grid-template-rows: repeat(2, 5%);
-`;
 
+`;
+//grid-template-rows: repeat(2, minmax(0,5%));
 export const ModalHeaderRow = styled.div`
-  grid-row-start: 1;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
 `;
 
-export const ModalChildContainer = styled.div`
-  grid-row-start: 2;
+export const ModalChildWrapper = styled.div`
   padding: 15px;
-  max-height: 80vh;
+  max-height: 50vh;
   display: flex;
-  overflow-y: auto;
 `;
 /////////////////////////////////////////////////////
 // Modal Close Button
