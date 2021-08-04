@@ -67,12 +67,20 @@ export const ImageButton = styled(ThumbnailsButton)`
   border-radius: 5px;
 `;
 
-export const ImageButtonRight = styled(ImageButton)`
+export const ImageButtonLeft = styled(ThumbnailsButton)`
+  top: 50%;
   left: 17%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.2em;
+  border-radius: 5px;
 `;
 
-export const ImageButtonLeft = styled(ImageButton)`
+export const ImageButtonRight = styled(ThumbnailsButton)`
+  top: 50%;
   right: 0;
+  background-color: red;
+  padding: 0.2em;
+  border-radius: 5px;
 `;
 
 
