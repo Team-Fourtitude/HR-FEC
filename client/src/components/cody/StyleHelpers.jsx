@@ -35,7 +35,6 @@ export const ThumbnailImage = styled.img`
 export const ThumbnailsButton = styled.button`
   visibility: ${props => props.disabled ? 'hidden' : 'visible'};
   position: absolute;
-  left: 30%;
   padding: 0;
   border: 1px solid transparent;
   background-color: transparent;
@@ -52,17 +51,30 @@ export const ThumbnailsButton = styled.button`
 
 export const ThumbnailsButtonUp = styled(ThumbnailsButton)`
   top: 1%;
+  left: 30%;
 `;
 
 export const ThumbnailsButtonDown = styled(ThumbnailsButton)`
   bottom: 1%;
+  left: 30%;
 `;
 
 export const ImageButton = styled(ThumbnailsButton)`
+  top: 0;
+  right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0.2em;
   border-radius: 5px;
 `;
+
+export const ImageButtonRight = styled(ImageButton)`
+  left: 17%;
+`;
+
+export const ImageButtonLeft = styled(ImageButton)`
+  right: 0;
+`;
+
 
 export const CartButtonWrapper = styled.div`
   height: 50px;

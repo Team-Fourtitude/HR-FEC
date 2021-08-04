@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ImageButton, ImageButtonLeft, ImageButtonRight} from './StyleHelpers.jsx';
 
 const Image = (props) => {
   const [size, setSize] = useState(false);
@@ -65,8 +66,7 @@ const Image = (props) => {
             }}
             // src={props.current.url} alt={props.current.name}
             />
-            <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "top":"0", "right":"0"}}
-            onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
+            <ImageButton type='button'
             onClick={ () => {
               if (size) {
                 setZoom(false);
@@ -74,7 +74,7 @@ const Image = (props) => {
               } else {
                 setSize(true);
               }
-            }}>{size ? '⛶' : '⛶'}</button>
+            }}>{size ? '⛶' : '⛶'}</ImageButton>
             {(() => {
               if (index === 0) {
                 if (curStyle.style) {
@@ -165,8 +165,7 @@ const Image = (props) => {
                 setSize(true);
               }
             }}/>
-            <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "top":"0", "right":"0"}}
-            onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
+            <ImageButton type='button'
             onClick={ () => {
               if (size) {
                 setZoom(false);
@@ -174,7 +173,7 @@ const Image = (props) => {
               } else {
                 setSize(true);
               }
-            }}>{size ? '⛶' : '⛶'}</button>
+            }}>{size ? '⛶' : '⛶'}</ImageButton>
             {(() => {
       if (index === 0) {
         if (curStyle.style) {
