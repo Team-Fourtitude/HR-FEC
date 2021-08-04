@@ -5,7 +5,7 @@ export const StyleSelectorTextWrapper = styled.p`
   padding: 0;
 `;
 
-export const StylesImageWrapper = styled.div.attr((props) => ({
+export const StylesImageWrapper = styled.div.attrs((props) => ({
     key: props.key,
 }))`
   width: 75px;
@@ -14,8 +14,8 @@ export const StylesImageWrapper = styled.div.attr((props) => ({
   overflow: hidden;
 `;
 
-export const ThumbnailsImageWrapper = styled.div.attr((props) => ({
-    key: props.key,
+export const ThumbnailsImageWrapper = styled.div.attrs((props) => ({
+    'key': props.key,
 }))`
   width: 100%;
   height: 55px;
@@ -56,11 +56,10 @@ export const ImageButton = styled(ThumbnailsButton)`
 `;
 
 export const CartButtonWrapper = styled.div`
-  visibility: ${props => props.disabled ? 'hidden' : 'visible'};
   height: 50px;
   width: 15%;
   margin-bottom: 1.5rem;
-  padding: 0.5em;
+  padding: 0.5em
 
   color: #333;
   font-size: 1em;

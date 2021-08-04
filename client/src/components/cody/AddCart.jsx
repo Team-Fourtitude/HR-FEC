@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
+import { CartButtonWrapper, CartButtonWrapper30, CartButtonWrapper60, CartButtonWrapper75 } from './StyleHelpers.jsx';
 
 const AddCart = () => {
   const curStyle = useContext(StyleContext);
@@ -19,22 +20,22 @@ const AddCart = () => {
       for (let i = 1; i < 16; i++) {
         options.push(<option value={i} key={i}>{i}</option>);
       }
-      quantity = <select className='quantity' style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"30%"}}>{options}</select>;
+      quantity = <CartButtonWrapper30 as='select' className='quantity'>{options}</CartButtonWrapper30>;
     } else if (max > 0) {
       let options = [];
       for (let i = 1; i < max + 1; i++) {
         options.push(<option value={i} key={i}>{i}</option>);
       }
-      quantity = <select className='quantity' style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"30%"}}>{options}</select>;
+      quantity = <CartButtonWrapper30 as='select' className='quantity'>{options}</CartButtonWrapper30>;
     } else {
       let options = [<option key='0' value='0'>-</option>];
-      quantity = <select className='quantity' style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"30%"}} disabled>{options}</select>;
+      quantity = <CartButtonWrapper30 as='select' className='quantity' disabled>{options}</CartButtonWrapper30>;
     }
   } else {
     quantity = (
-      <select className='quantity' value='null' style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"30%"}} disabled>
+      <CartButtonWrapper30 as='select' className='quantity' value='null' disabled>
       <option value='null'>-</option>
-    </select>
+    </CartButtonWrapper30>
     );
     if (currentSize) {
       setCurrentSize(null);
@@ -48,7 +49,7 @@ const AddCart = () => {
             if (styleSizes) {
               if (styleSizes[0] !== 'null') {
                 return (
-                  <select style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"60%"}} className='size' value={currentSize ? currentSize : 'null'} onChange={(ev) => {
+                  <CartButtonWrapper60 as='select' className='size' value={currentSize ? currentSize : 'null'} onChange={(ev) => {
                     setCurrentSize(ev.target.value);
                     ev.target.parentElement.children[1].value = 1;
                   }}>
@@ -58,10 +59,10 @@ const AddCart = () => {
                         <option key={sizeID} value={sizeID}>{curStyle.style.skus[sizeID].size}</option>
                         );
                       }) : null}
-                  </select>
+                  </CartButtonWrapper60>
                 );
               } else {
-                return <select style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"60%"}} className='size' value='null' disabled><option value='null'>OUT OF STOCK</option></select>;
+                return <CartButtonWrapper60 as='select' className='size' value='null' disabled><option value='null'>OUT OF STOCK</option></CartButtonWrapper60>;
               }
             }
           })()}
@@ -72,7 +73,7 @@ const AddCart = () => {
             if (styleSizes[0] !== 'null') {
               return (
                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
-                <button type='submit' style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"75%", "backgroundColor":"transparent"}} onClick={ (ev) => {
+                <CartButtonWrapper75 as='button' type='submit' onClick={ (ev) => {
                   ev.preventDefault();
                   let size = ev.target.parentElement.parentElement.children[0].children[0].value;
                   if (size !== 'null') {
@@ -81,8 +82,8 @@ const AddCart = () => {
                   } else {
                     console.log('please select a size');
                   }
-                }}>ADD TO BAG</button>
-                <button type='submit'style={{"fontSize": "2em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0em", "width":"15%", "backgroundColor":"transparent"}}  onClick={ (ev) => {
+                }}>ADD TO BAG</CartButtonWrapper75>
+                <CartButtonWrapper as='button' type='submit' onClick={ (ev) => {
                   ev.preventDefault();
                   if (fav) {
                     setFav(false);
@@ -90,14 +91,14 @@ const AddCart = () => {
                     setFav(true);
                   }
                   console.log(curStyle.style.name);
-                }}>{ fav ? '★' : '☆'}</button>
+                }}>{ fav ? '★' : '☆'}</CartButtonWrapper>
                 </div>
               );
             } else {
               return (
                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
-                <button type='submit' style={{"fontSize": "1em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0.5em", "width":"75%", "backgroundColor":"transparent"}} disabled>ADD TO BAG</button>
-                <button type='submit' style={{"fontSize": "2em", "height":"50px", "color":"#333", "marginBottom":"1.5rem", "fontWeight":"bold", "padding":"0em", "width":"15%", "backgroundColor":"transparent"}}disabled>☆</button>
+                <CartButtonWrapper75 as='button' type='submit' disabled>ADD TO BAG</CartButtonWrapper75>
+                <CartButtonWrapper as='button' type='submit' disabled>☆</CartButtonWrapper>
                 </div>
               );
               }
