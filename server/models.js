@@ -56,7 +56,7 @@ module.exports = {
       params: {product_id},
     });
   },
-  getQuestions: ({product_id = 25168, page = 1, count = 5}) => {
+  getQuestions: ({product_id = 25168, page = 1, count = 20}) => {
     return axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions`,
       method: 'get',

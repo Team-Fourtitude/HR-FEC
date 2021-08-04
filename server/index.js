@@ -9,7 +9,6 @@ const models = require('./models.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(formidableMiddleware({ multiples: true }))
 
 app.use('/', express.static('./client/dist'));
 
@@ -138,12 +137,17 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
 app.post(`/qa/questions/:question_id/answers`, (req, res) => {
   // console.log(`Posting answer from ${JSON.stringify(req.body.body.name)},
   // for question ${JSON.stringify(req.params.question_id)},
-  // with this as the first photo ${JSON.stringify(req.body.body.photos)}`)
+  //  with this as the first photo ${JSON.stringify(req.body.body.photos)}`)
+
   models.addAnswer(req.params.question_id, req.body.body)
     .then(() => {
+      console.log(`Succesful Posted Answer!!!`)
       res.status(200).send();
     })
-    .catch(console.log);
+    .catch( (e) => {
+      res.status(500).send(e)
+      console.log(e);
+    });
 });
 
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {
@@ -170,20 +174,20 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
   });
 });
 
+app.use(formidableMiddleware({ multiples: true }))
 
 // Takes a post request of images, uploads images to cloudinary API, once all uploads complete, returns the resultant URLs
 app.post('/upload', (req, res) => {
-//    console.log(JSON.stringify(req.files));
   const reqData = req.files.validPics;
-  const upload = {};
+  let uploads = [];
 
   if (Array.isArray(reqData)) {
-    upload.result = reqData.map(image => models.postUpload(image.path));
+    uploads = reqData.map(image => models.postUpload(image.path));
   } else {
-    upload.result = [models.postUpload(reqData.path)];
+    uploads = [models.postUpload(reqData.path)];
   }
 
-  Promise.all(upload.result)
+  Promise.all(uploads)
     .then(images => {
       const urls = images.map(({ url }) => url);
         return res.status(200).send(urls);
@@ -191,8 +195,8 @@ app.post('/upload', (req, res) => {
     .catch(error => {
       console.log(`Failed at router with: \n ${error}`);
       return res.status(500).send();
-    })
-})
+    });
+});
 
 app.listen(port, () => {
   console.log(`App listening at post:${port}`);
