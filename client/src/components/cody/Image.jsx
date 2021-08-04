@@ -82,19 +82,18 @@ const Image = (props) => {
                     return (
                       <>
                 <ImageButtonLeft type='button' disabled>🞀</ImageButtonLeft>
-                <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}} disabled>🞂</button>
+                <ImageButtonRight type='button' disabled>🞂</ImageButtonRight>
               </>
             );
           } else {
             return (
               <>
                 <ImageButtonLeft type='button' disabled>🞀</ImageButtonLeft>
-                <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}}
-                onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
+                <ImageButtonRight type='button'
                 onClick={() => {
                   setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
                   setIndex(index + 1);
-                }}>🞂</button>
+                }}>🞂</ImageButtonRight>
               </>
             );
           }
@@ -109,7 +108,7 @@ const Image = (props) => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
               }}>🞀</ImageButtonLeft>
-              <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}} disabled>🞂</button>
+              <ImageButtonRight type='button' disabled>🞂</ImageButtonRight>
             </>
           );
         } else {
@@ -123,17 +122,14 @@ const Image = (props) => {
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop -= 100;
               }}>🞀</ImageButtonLeft>
-              <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}}
-              onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
+              <ImageButtonRight type='button'
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
                 setIndex(index + 1);
                 let selected = document.getElementById('selected');
-                console.log(selected.offsetTop, 'offset top of selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
-                console.log(scrollbar.scrollTop, 'top scroll');
                 scrollbar.scrollTop += 100;
-            }}>🞂</button>
+            }}>🞂</ImageButtonRight>
             </>
           );
         }
@@ -178,19 +174,18 @@ const Image = (props) => {
             return (
               <>
                 <ImageButtonLeft type='button' disabled>🞀</ImageButtonLeft>
-                <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}} disabled>🞂</button>
+                <ImageButtonRight type='button' disabled>🞂</ImageButtonRight>
               </>
             );
           } else {
             return (
               <>
                 <ImageButtonLeft type='button' disabled>🞀</ImageButtonLeft>
-                <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}}
-                onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
+                <ImageButtonRight type='button'
                 onClick={() => {
                   setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
                   setIndex(index + 1);
-                }}>🞂</button>
+                }}>🞂</ImageButtonRight>
               </>
             );
           }
@@ -205,7 +200,7 @@ const Image = (props) => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
               }}>🞀</ImageButtonLeft>
-              <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}} disabled>🞂</button>
+              <ImageButtonRight type='button' disabled>🞂</ImageButtonRight>
             </>
           );
         } else {
@@ -219,17 +214,14 @@ const Image = (props) => {
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop -= 100;
               }}>🞀</ImageButtonLeft>
-              <button type='button' style={{"padding":"0.2em", "color":"#444", "fontSize":"2em", "backgroundColor":"rgba(0, 0, 0, 0.5)", "border": "1px solid transparent", "borderRadius":"5px", "position":"absolute", "right":"0", "top": "50%"}}
-              onMouseOver={(ev) => ev.target.style.color = "#888"} onMouseOut={(ev) => ev.target.style.color = "#444"}
+              <ImageButtonRight type='button'
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
                 setIndex(index + 1);
                 let selected = document.getElementById('selected');
-                console.log(selected.offsetTop, 'offset top of selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
-                console.log(scrollbar.scrollTop, 'top scroll');
                 scrollbar.scrollTop += 100;
-            }}>🞂</button>
+            }}>🞂</ImageButtonRight>
             </>
           );
         }

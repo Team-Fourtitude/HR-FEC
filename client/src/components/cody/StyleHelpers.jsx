@@ -78,7 +78,7 @@ export const ImageButtonLeft = styled(ThumbnailsButton)`
 export const ImageButtonRight = styled(ThumbnailsButton)`
   top: 50%;
   right: 0;
-  background-color: red;
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 0.2em;
   border-radius: 5px;
 `;
