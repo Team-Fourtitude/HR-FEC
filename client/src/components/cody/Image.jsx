@@ -34,7 +34,7 @@ const Image = (props) => {
             <img id="imgRatio" src={props.current.url} style={{
               "position": "absolute",
               "visibility": "hidden",
-            }} />
+            }} alt="image for getting test ratio"/>
             <div style={{
               "width": "100%",
               "height": "600px",
@@ -158,7 +158,7 @@ const Image = (props) => {
               "width": "100%",
               "height":"600px",
               "objectFit":"cover",
-            }} src={props.current.url} alt={props.current.name} onClick={ () => {
+            }} src={props.current.url} alt={props.current.name || 'picture'} onClick={ () => {
               if (size) {
                 setZoom(false);
                 setSize(false);

@@ -25,6 +25,7 @@ const Rating = () => {
     })
     .catch( (e) => {
       console.log('rating fetcher had problems', e);
+      setRatings(0);
     })
   }, [productId]);
   return (

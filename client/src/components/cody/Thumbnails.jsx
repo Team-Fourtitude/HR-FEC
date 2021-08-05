@@ -51,7 +51,7 @@ const Thumbnails = () => {
                         setCurrentPic({url:photo.url, name:`${index}`, style:curStyle.style.style_id});
                         setIndex(index);
                       }}>
-                        <ThumbnailImage src={photo.thumbnail_url} alt={`${index}`} faded/>
+                        <ThumbnailImage src={photo.thumbnail_url} alt={`${index || 'picture'}`} faded/>
                       </ThumbnailsImageWrapper>
                     );
                   } else {
@@ -60,7 +60,7 @@ const Thumbnails = () => {
                         setCurrentPic({url:photo.url, name:`${index}`, style:curStyle.style.style_id});
                         setIndex(index);
                       }}>
-                        <ThumbnailImage src={photo.thumbnail_url} alt={`${index}`} />
+                        <ThumbnailImage src={photo.thumbnail_url} alt={`${index || 'picture'}`} />
                       </ThumbnailsImageWrapper>
                     );
                   }
