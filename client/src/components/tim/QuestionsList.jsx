@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { FaPlus } from 'react-icons/fa';
 
 import Modal from './Modal.jsx';
-import AddQuestion from './AddQuestion.jsx';
 import SubmissionPost from './SubmissionPost.jsx';
 import QuestionItem from './QuestionItem.jsx';
 import QuestionSearch from './QuestionSearch.jsx'

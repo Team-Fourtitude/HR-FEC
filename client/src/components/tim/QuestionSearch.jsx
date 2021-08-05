@@ -25,6 +25,7 @@ const QuestionSearch = () => {
           value={query}
           style={{
             "width": "80%",
+            "maxHeight": "1vh",
           }}
           onChange={e => {setQuery(e.target.value)}}
           placeholder='Have a question? Search for answers…'/>

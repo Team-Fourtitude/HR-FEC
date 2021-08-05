@@ -15,7 +15,6 @@ export const ModalInput = styled.input`
 `;
 
 export const ModalTextArea = styled.textarea`
-  grid: 2 / 3;
   resize: vertical;
   position: relative;
   max-width: 95%;
@@ -131,6 +130,14 @@ export const CloseIcon = styled(RiCloseFill)`
   height: 30px;
   cursor:pointer;
 `;
+
+/////////////////////////////////////////////////////
+// Helpful FeedBack
+/////////////////////////////////////////////////////
+export const HelpfulYes = styled.u`
+  cursor: $(props => props.helped ? pointer : auto);
+`;
+
 
 // Buttons
 export const LoadMoreAnswersButton = styled.button`

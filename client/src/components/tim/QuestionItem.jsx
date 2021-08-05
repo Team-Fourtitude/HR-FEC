@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 //import ReactDOM from 'react-dom';
 
 import Modal from './Modal.jsx';
-import AddAnswer from './AddAnswer.jsx';
 import AnswerItem from './AnswerItem.jsx';
 import SubmissionPost from './SubmissionPost.jsx';
 import { ImArrowUp } from 'react-icons/im';
@@ -44,11 +43,17 @@ const QuestionItem = () => {
   }, [question])
 
   useEffect(() => {
+    if (hasHelped) {
+      setQuestion({...question, helpfulness: question.question_helpfulness++});
+      questionUpdaters.markQuestionHelpful(currentQuestion.question_id, hasHelped);
+    }
+  }, [hasHelped])
+
+  useEffect(() => {
     if (isBtnHidden && allAns.length !== question.answers.length) setBtnToHide(false);
   }, [allAns.length])
 
   const loadMoreAnswers = () => {
-     //console.log(`This is the current question: ${JSON.stringify(question)}`)
     const newMax = maxAnsCount + 2;
     if (newMax < allAns.length) {
       setMaxAnsCount(newMax)
@@ -83,8 +88,6 @@ const QuestionItem = () => {
   }
 
   const markHelpful = () => {
-    setQuestion({...question, helpfulness: question.question_helpfulness++})
-    questionUpdaters.markQuestionHelpful(currentQuestion.question_id, hasHelped);
     setHasHelped(true);
   }
 
@@ -96,8 +99,8 @@ const QuestionItem = () => {
         <div className="question-sub-text">
           by {question.asker_name} | Helpful?  {!hasHelped ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}<u
           onClick={() => { markHelpful() }}
-          style={{cursor: "pointer"}}>
-            Yes</u>
+          style={{cursor: !hasHelped && 'pointer'}}>
+          Yes</u>
             {' '} ({currentQuestion.question_helpfulness}) | {' '}
           <u className="add-answer-link"
             style={{cursor: "pointer"}}

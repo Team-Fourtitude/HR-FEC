@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 import axios from 'axios';
 
 import QuestionContext from './QuestionContext.jsx';
@@ -18,16 +18,10 @@ export const useAnswersUpdate = () => {
 
 export const AnswersProvider = ({children}) => {
   const [answers, setAnswers] = useState([]);
-  // const [questionLoad, setQuestionLoaded] = useState(false);
 
   const question = useContext(QuestionContext);
   const question_id = question.question_id;
   const updateQuestions = useQuestionsUpdate();
-
-  // Verify current Question context
-  // useEffect(() => {
-  //   question_id ? setQuestionLoaded(true) : setQuestionLoaded(false);
-  // }, [question_id])
 
   const markAnswerHelpful = (answer_id, hasHelped) => {
     // PUT upvoteed question
@@ -48,12 +42,11 @@ export const AnswersProvider = ({children}) => {
       console.log(`Added Answer from ${newAnswer.name}`)
     })
     .catch(error => console.log(error));
-    //setAnswers(newAnswer)
   }
 
   return (
     <AnswersContext.Provider value={
-      {answers}}>
+      {answers, setAnswers}}>
         <AnswersUpdateContext.Provider value={{
           markAnswerHelpful,
           submitAnswer,
