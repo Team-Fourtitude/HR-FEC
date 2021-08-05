@@ -9,7 +9,7 @@ import QuestionContext from './QuestionContext.jsx';
 
 import { useQuestions, useQuestionsUpdate } from './QuestionsContext.jsx';
 import { AnswersProvider } from './AnswersContext.jsx';
-import { QuestionAnimationButton, QuestionsListHeader } from './StyleHelpers.jsx';
+import { QuestionAnimationButton, QuestionsListHeader, QuestionsListWrapper } from './StyleHelpers.jsx';
 
 
 const QuestionsList = () => {
@@ -36,63 +36,53 @@ const QuestionsList = () => {
 // need a wrapper around items
 
   return (
-    <div className="questions-list"
-      style={{
-        "gridColumn": "2",
-        "verticalAlign" : "center",
-        "width": "100%",
-        "height": "90vh",
+    <QuestionsListWrapper>
+        <QuestionsListHeader>
+          <h3>QUESTIONS & ANSWERS</h3>
+          <QuestionSearch />
+        </QuestionsListHeader>
+       <div style={{
+        "overflowY": "auto",
+        "height": "100%",
         "display": "grid",
-    }}>
-      <QuestionsListHeader>
-        <h3>QUESTIONS & ANSWERS</h3>
-        <QuestionSearch style={{
-          "display": "flex",
-          "alignItems": "center",
-        }}/>
-      </QuestionsListHeader>
-    <div style={{
-      "overflowY": "auto",
-      "height": "100%",
-      "display": "grid",
-      "overflowX": "hidden",
-  }}>
-      { questionsList &&
-         questionsList.slice(0, maxListCount).map((item) =>
-          <QuestionContext.Provider value={item} key={item.question_id}>
-            <AnswersProvider value={item} key={item.question_id}>
-              <QuestionItem question={item} key={item.question_id}/>
-            </AnswersProvider>
-          </QuestionContext.Provider>
-      )}</div>
-      <div>
-      <QuestionAnimationButton
-          className="more-question-btn"
-          onClick={ () => loadMoreQuestions() }>
-          <FaPlus style={{
+        "overflowX": "hidden",
+        }}>
+        { questionsList &&
+          questionsList.slice(0, maxListCount).map((item) =>
+            <QuestionContext.Provider value={item} key={item.question_id}>
+              <AnswersProvider value={item} key={item.question_id}>
+                <QuestionItem question={item} key={item.question_id}/>
+              </AnswersProvider>
+            </QuestionContext.Provider>
+        )}</div>
+        <div>
+        <QuestionAnimationButton
+            className="more-question-btn"
+            onClick={ () => loadMoreQuestions() }>
+            <FaPlus style={{
+              "position": "relative",
+              "marginRight" : "7px",
+              }}/>
+              MORE ANSWERED QUESTIONS
+        </QuestionAnimationButton>
+        <QuestionAnimationButton
+          className="add-question-btn"
+          onClick={ () => setOpen(true) }>
+            <FaPlus style={{
             "position": "relative",
-             "marginRight" : "7px",
+            "marginRight" : "7px",
             }}/>
-            MORE ANSWERED QUESTIONS
-      </QuestionAnimationButton>
-      <QuestionAnimationButton
-        className="add-question-btn"
-        onClick={ () => setOpen(true) }>
-          <FaPlus style={{
-          "position": "relative",
-           "marginRight" : "7px",
-          }}/>
-          ADD A QUESTION
-      </QuestionAnimationButton>
-      <div className="add-question-modal">
-        <Modal
-          isOpen={ isOpen }
-          close={ () => setOpen(false) }>
-            <SubmissionPost close={ () => setOpen(false) } submitAction={addQuestion}/>
-        </Modal>
-      </div>
-      </div>
-    </div>
+            ADD A QUESTION
+        </QuestionAnimationButton>
+        <div className="add-question-modal">
+          <Modal
+            isOpen={ isOpen }
+            close={ () => setOpen(false) }>
+              <SubmissionPost close={ () => setOpen(false) } submitAction={addQuestion}/>
+          </Modal>
+        </div>
+        </div>
+    </QuestionsListWrapper>
   );
 }
 

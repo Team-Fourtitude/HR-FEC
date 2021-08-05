@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuestionsUpdate } from './QuestionsContext.jsx'
+import { QuestionsSearchBar, QuestionSearchWrapper } from './StyleHelpers.jsx'
 
 const QuestionSearch = () => {
   const [query, setQuery] = useState('');
@@ -12,24 +13,14 @@ const QuestionSearch = () => {
 
   return (
     <div className="question-search">
-      <div className="question-search-bar"
-        style={{
-          "display": "flex",
-          "width": "100%",
-          "justifyContent": "center",
-          "height": "10%",
-      }}>
-        <input
+      <QuestionSearchWrapper>
+        <QuestionsSearchBar
           type='text'
           className='question-search-input'
           value={query}
-          style={{
-            "width": "80%",
-            "maxHeight": "1vh",
-          }}
           onChange={e => {setQuery(e.target.value)}}
           placeholder='Have a question? Search for answers…'/>
-      </div>
+      </QuestionSearchWrapper>
     </div>
   )
 }

@@ -72,6 +72,10 @@ export const ModalBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  justify-content: space-evenly;
+  justify-items: center;
+  align-content: space-evenly;
+  align-items: center;
 `;
 
 export const ModalContent = styled.div`
@@ -181,19 +185,63 @@ export const UploadThumbnailImage = styled.image`
   }
 `;
 
-// Divs and Wrappers
+/////////////////////////////////////////////////////
+// Module Headers
+/////////////////////////////////////////////////////
 
-export const QuestionsList = styled.div`
-  grid-column: 2;
+export const QuestionsListHeader = styled.div`
+  margin: 1%;
+  margin-left: 0;
+`;
+
+export const QuestionsSearchBar = styled.input`
+  width: 90%;
+  border: 2px solid black;
+`;
+
+export const QuestionSearchWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: right;
+  height: 60%;
+  max-height: 10vh;
+`;
+
+
+/////////////////////////////////////////////////////
+// Wrappers and Divs
+/////////////////////////////////////////////////////
+export const ModuleWrapper = styled.div`
+  padding-top: 2vh;
+  padding-bottom: 1vh;
+  position: relative;
+  margin: auto;
+  width: 100%;
+  max-width: 1800px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+
+`;
+
+export const QuestionsAnswersWrapper = styled.div`
+  grid-column-start: 2;
+  grid-column-end: 5;
+  display: grid;
+  width: 100%;
+  background-color: whitesmoke;
+  padding: 5%;
+`;
+
+
+export const QuestionsListWrapper = styled.div`
   vertical-align: center;
   width: 100%;
   overflow: auto;
   height: 90vh
-`;
-
-export const QuestionsListHeader = styled.div`
-  margin: 1%;
-  margin-top: none;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: auto;
 `;
 
 export const QuestionList = styled.div`

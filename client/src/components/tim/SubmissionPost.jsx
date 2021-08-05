@@ -240,7 +240,7 @@ const SubmissionPost = ({ close, submitAction, question_body }) => {
         }
       </label>
       <SecurityAdvisory>
-        For privacy reasons, do not use your full name or email address
+        For privacy reasons, do not use your full name or email address.
       </SecurityAdvisory>
       <label>Your Email* :
         <ModalInput
@@ -256,7 +256,7 @@ const SubmissionPost = ({ close, submitAction, question_body }) => {
         }
       </label>
       <SecurityAdvisory>
-        For authentication reasons, you will not be emailed
+        For authentication reasons, you will not be emailed.
       </SecurityAdvisory>
 
       {/* For answers only */}
