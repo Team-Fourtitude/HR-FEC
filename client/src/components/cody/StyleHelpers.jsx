@@ -59,6 +59,18 @@ export const ThumbnailsButtonDown = styled(ThumbnailsButton)`
   left: 30%;
 `;
 
+export const ThumbnailsContainer = styled.div`
+  width: 75px;
+  max-height: 400px;
+  height: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 export const ImageButton = styled(ThumbnailsButton)`
   top: 0;
   right: 0;
