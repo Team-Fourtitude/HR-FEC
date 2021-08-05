@@ -3,11 +3,12 @@ import { FaPlus } from 'react-icons/fa';
 
 import Modal from './Modal.jsx';
 import AddQuestion from './AddQuestion.jsx';
+import SubmissionPost from './SubmissionPost.jsx';
 import QuestionItem from './QuestionItem.jsx';
 import QuestionSearch from './QuestionSearch.jsx'
 import QuestionContext from './QuestionContext.jsx';
 
-import { useQuestions } from './QuestionsContext.jsx';
+import { useQuestions, useQuestionsUpdate } from './QuestionsContext.jsx';
 import { AnswersProvider } from './AnswersContext.jsx';
 import { QuestionAnimationButton, QuestionsListHeader } from './StyleHelpers.jsx';
 
@@ -18,6 +19,7 @@ const QuestionsList = () => {
   const [isOpen, setOpen] = useState(false);
 
   const { filteredQuestions } = useQuestions();
+  const { addQuestion } = useQuestionsUpdate();
 
   useEffect(() => {
     setQuestionsList(filteredQuestions);
@@ -87,7 +89,7 @@ const QuestionsList = () => {
         <Modal
           isOpen={ isOpen }
           close={ () => setOpen(false) }>
-            <AddQuestion close={ () => setOpen(false) }/>
+            <SubmissionPost close={ () => setOpen(false) } submitAction={addQuestion}/>
         </Modal>
       </div>
       </div>
