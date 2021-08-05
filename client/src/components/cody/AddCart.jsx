@@ -20,20 +20,20 @@ const AddCart = () => {
       for (let i = 1; i < 16; i++) {
         options.push(<option value={i} key={i}>{i}</option>);
       }
-      quantity = <CartButtonWrapper30 as='select' className='quantity'>{options}</CartButtonWrapper30>;
+      quantity = <CartButtonWrapper30 as='select' id='quantity'>{options}</CartButtonWrapper30>;
     } else if (max > 0) {
       let options = [];
       for (let i = 1; i < max + 1; i++) {
         options.push(<option value={i} key={i}>{i}</option>);
       }
-      quantity = <CartButtonWrapper30 as='select' className='quantity'>{options}</CartButtonWrapper30>;
+      quantity = <CartButtonWrapper30 as='select' id='quantity'>{options}</CartButtonWrapper30>;
     } else {
       let options = [<option key='0' value='0'>-</option>];
-      quantity = <CartButtonWrapper30 as='select' className='quantity' disabled>{options}</CartButtonWrapper30>;
+      quantity = <CartButtonWrapper30 as='select' id='quantity' disabled>{options}</CartButtonWrapper30>;
     }
   } else {
     quantity = (
-      <CartButtonWrapper30 as='select' className='quantity' value='null' disabled>
+      <CartButtonWrapper30 as='select' id='quantity' value='null' disabled>
       <option value='null'>-</option>
     </CartButtonWrapper30>
     );
@@ -44,13 +44,16 @@ const AddCart = () => {
   return (
     <div style={{"width":"100%"}}>
       <form id='cartData' style={{"display":"flex", "flexDirection":"column"}}>
-        <div style={{"display":"flex", "justifyContent":"space-between"}}>
+        <div style={{"display":"flex", "justifyContent":"space-between", "position":"relative", "height":"50px", "marginBottom":"0.5em"}}>
           {(() => {
             if (styleSizes) {
               if (styleSizes[0] !== 'null') {
                 return (
-                  <CartButtonWrapper60 as='select' className='size' value={currentSize ? currentSize : 'null'} onChange={(ev) => {
+                  <CartButtonWrapper60 as='select' id='size' value={currentSize ? currentSize : 'null'} onChange={(ev) => {
                     setCurrentSize(ev.target.value);
+                    ev.target.removeAttribute('size');
+                    ev.target.style.position = 'static';
+                    ev.target.style.height = '50px';
                     ev.target.parentElement.children[1].value = 1;
                   }}>
                     {<option value='null'>SELECT SIZE</option>}
@@ -62,7 +65,7 @@ const AddCart = () => {
                   </CartButtonWrapper60>
                 );
               } else {
-                return <CartButtonWrapper60 as='select' className='size' value='null' disabled><option value='null'>OUT OF STOCK</option></CartButtonWrapper60>;
+                return <CartButtonWrapper60 as='select' id='size' value='null' disabled><option value='null'>OUT OF STOCK</option></CartButtonWrapper60>;
               }
             }
           })()}
@@ -80,6 +83,12 @@ const AddCart = () => {
                     console.log(ev.target.parentElement.parentElement.children[0].children[0].value);
                     console.log(ev.target.parentElement.parentElement.children[0].children[1].value);
                   } else {
+                    let sizeSelector = document.getElementById('size');
+                    let totalSizes = sizeSelector.children.length;
+                    sizeSelector.setAttribute('size', totalSizes);
+                    sizeSelector.style.position = 'absolute';
+                    sizeSelector.style.height = 'max-content';
+                    sizeSelector.focus();
                     console.log('please select a size');
                   }
                 }}>ADD TO BAG</CartButtonWrapper75>

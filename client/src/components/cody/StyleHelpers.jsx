@@ -97,10 +97,15 @@ export const CartButtonWrapper = styled.div`
 
 export const CartButtonWrapper30 = styled(CartButtonWrapper)`
   width: 30%;
+  position: absolute;
+  right: 0;
 `;
 
 export const CartButtonWrapper60 = styled(CartButtonWrapper)`
-  width: 60%;
+width: 60%;
+&::-webkit-scrollbar {
+  display: none;
+}
 `;
 
 export const CartButtonWrapper75 = styled(CartButtonWrapper)`
