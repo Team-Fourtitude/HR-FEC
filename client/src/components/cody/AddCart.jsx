@@ -101,7 +101,6 @@ const AddCart = () => {
                     sizeSelector.style.position = 'absolute';
                     sizeSelector.style.height = 'max-content';
                     sizeSelector.focus();
-                    console.log('please select a size');
                   }
                 }}>ADD TO BAG</CartButtonWrapper75>
                 <CartButtonWrapper as='button' type='submit' onClick={ (ev) => {

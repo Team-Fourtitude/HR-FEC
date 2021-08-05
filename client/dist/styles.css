@@ -1,104 +1,4 @@
 
-div {
-  outline-style: none;
-}
-img {
-  outline-style: none;
-}
-
-
-h4 {
-  position: relative;
-  margin: 0;
-  left: 3%;
-}
-
-caption {
-  position: relative;
-  padding-bottom: 5%;
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.tbl-container {
-  background-color: rgba(255, 255, 255, 0.884);
-  position: relative;
-  align-content: center;
-  width: 75%;
-  left: 10%;
-  padding: 15px;
-  border: 1px solid white;
-  opacity: 5;
-  pointer-events: auto;
-  transition: 0.4s;
-  overflow-y: scroll;
-}
-
-table {
-  position:static;
-  overflow-y: scroll;
-  max-width: 100%;
-}
-
-tbody {
-  font-size: small;
-}
-
-table, th, td {
-  text-align: center;
-  border: 1px solid black;
-}
-
-th, td {
-  padding: 15px;
-}
-
-
-
-
-.container {
-  display: flex;
-  flex-direction: row;
-  width: 75%;
-  padding: 20px;
-  position: relative;
-  left: 10%;
-  right:10%;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-}
-
-.column {
-  width: 275px;
-  height: 400px;
-  background-color: whitesmoke;
-  text-align: justify;
-  margin: 20px;
-  /* border: 2px solid lightgrey; */
-  box-sizing: border-box;
-}
-
-p.info {
-  position: relative;
-  padding-left: 2%;
-  bottom: 6%;
-}
-
-span.cat,
-span.price {
-  font-size: xx-small;
-}
-
-span.cat {
-  top: 0%;
-}
-
-.starRating {
-  position: relative;
-  padding-left: 2%;
-  bottom: 3%;
-}
-
 .next, .prev {
   position: relative;
   top: 25%;
@@ -110,6 +10,7 @@ span.cat {
   transition-duration: 0.2s;
 
 }
+
 .next {
   left: 85%;
 }
@@ -165,49 +66,7 @@ span.cat {
   color: goldenrod;
 }
 
-.square {
-  position: relative;
-  top: 1%;
-  width: 270px;
-  height: 183px;
-  overflow: hidden;
-}
 
-.relImg {
-  position: absolute;
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate( -50%, -50%);
-}
-
-
-.add-outfit-card-container {
-  display: flex;
-  flex-direction: row;
-  width: 75%;
-  padding: 20px;
-  position: relative;
-  left: 10%;
-  right:10%;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-
-}
-
-.add-card {
-  position: relative;
-  top: 10%;
-  min-width: 200px;
-  height: 200px;
-  background-color: whitesmoke;
-  text-align: justify;
-  margin: 20px;
-  border: 2px solid black;
-  box-sizing: border-box;
-}
 
 
 #add {
@@ -220,40 +79,17 @@ span.cat {
   left: 37%;
 }
 
-.add-to-outfit {
-  position: relative;
-  left: 19%;
-  top: 30%;
+#delete {
+  position: sticky;
+  left: 89%;
+  top: 3%;
+  color: darkgray;
 }
 
-
-
-.outfit-card {
-  min-width: 275px;
-  height: 300px;
-  text-align: justify;
-  margin: 20px;
-  background-color: whitesmoke;
-  /* border: 2px solid black; */
-  box-sizing: border-box;
-  overflow-y: scroll;
+#delete:hover {
+  color: black;
 }
 
-.outfit-img {
-  position: absolute;
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate( -50%, -50%);
-}
-
-
-
-.delete {
-  align-self: flex-end;
-}
 
 @keyframes fadein {
   from {
@@ -374,19 +210,10 @@ span.cat {
   transform: scale(1.05);
   background-color: rgb(198, 214, 219, 0.5);
 }
-p.outfit-info {
-  position: relative;
-  padding-left: 2%;
-  bottom: 5%;
-}
 
-#delete {
-  position: sticky;
-  left: 89%;
-  top: 3%;
-  color: darkgray;
-}
 
+<<<<<<< HEAD
+=======
 #delete:hover {
   color: black;
 }
@@ -394,3 +221,4 @@ p.outfit-info {
 #thumbnailScroll::-webkit-scrollbar {
   display:none;
 }
+>>>>>>> cd74e97b5cf04c587fdc33dfc54d461a8cab47b6
