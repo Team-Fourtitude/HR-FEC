@@ -53,23 +53,29 @@ const AddAnswer = ({ close }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validAnswer = {};
+
+    let name = nickname;
+    const validAnswer = {body, name, email};
 
     if (isValid()) {
-      getCloudinaryUrl(filesData)
-        .then(data => {
-          console.log(`Success, got cloudy with a chance of urls: ${JSON.stringify(data.data)}`)
-          validAnswer.body = body;
-          validAnswer.name = nickname;
-          validAnswer.email = email;
-          validAnswer.photos = data.data;
-          answerUpdaters.submitAnswer(validAnswer)
-        })
-        .then(() => {
-          terminate();
-        })
-        .catch(e => console.log(e));
 
+      if (filesData) {
+        getCloudinaryUrl(filesData)
+          .then(data => {
+            console.log(`Success, got cloudy with a chance of urls: ${JSON.stringify(data.data)}`)
+
+            validAnswer.photos = data.data;
+            answerUpdaters.submitAnswer(validAnswer)
+          })
+          .then(() => {
+            terminate();
+          })
+          .catch(e => console.log(e));
+      } else {
+        validAnswer.photos = [];
+        answerUpdaters.submitAnswer(validAnswer)
+        terminate();
+      }
 
     } else {
       console.log(`Not Valid`)

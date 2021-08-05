@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ModalInput, ModalForm, ModalTextArea, ModalErrorText } from './StyleHelpers.jsx';
-
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
 
 /* eslint react/prop-types: 0 */
@@ -11,6 +10,9 @@ const AddQuestion = ({ close }) => {
   const [email, setEmail] = useState('');
   const [badInputResponse, setBadInputResponse] = useState({});
   const [canSubmit, setCanSubmit] = useState(true);
+  const [inputs, setInputs] = useState({});
+
+
 
   const questionUpdaters = useQuestionsUpdate();
 
@@ -20,16 +22,24 @@ const AddQuestion = ({ close }) => {
     e.preventDefault();
 
     if (isValid()) {
+      console.log(JSON.stringify(inputs));
       validQuestion.body = body;
       validQuestion.name = nickname;
       validQuestion.email = email;
-      questionUpdaters.addQuestion(validQuestion);
+      questionUpdaters.addQuestion(inputs);
       close();
     } else {
       console.log(`Not Valid`)
       setCanSubmit(false);
     }
     console.log(validQuestion)
+  }
+
+
+  const handleInputs = (event) => {
+    const { name, value } = event.target;
+    setInputs({...inputs, [name]: value})
+    console.log(inputs);
   }
 
   useEffect(() => {
@@ -100,10 +110,14 @@ const AddQuestion = ({ close }) => {
       <ModalForm onSubmit={e => handleSubmit(e)}>
         Your Question* :
           <ModalTextArea
+            name="body"
             type='text'
             value={body}
             rows='10'
-            onChange={e => setBody(e.target.value)}
+            onChange={e => {
+              setBody(e.target.value)
+              handleInputs(e)
+            }}
           />
         {badInputResponse.body &&
         <ModalErrorText>{badInputResponse.body}</ModalErrorText>
@@ -111,10 +125,14 @@ const AddQuestion = ({ close }) => {
       <label>Your Nickname* :
         <ModalInput
           type='text'
+          name="name"
           maxlength='60'
           value={nickname}
           placeholder='jack543!'
-          onChange={e => setNickname(e.target.value)}
+          onChange={e => {
+            setNickname(e.target.value)
+            handleInputs(e)
+          }}
         />
         {badInputResponse.nickname &&
         <ModalErrorText>{badInputResponse.nickname}</ModalErrorText>
@@ -123,10 +141,14 @@ const AddQuestion = ({ close }) => {
       <label>Your Email* :
         <ModalInput
           type='text'
+          name="email"
           maxlength='60'
           value={email}
           placeholder='Example: jack@email.com'
-          onChange={e => setEmail(e.target.value)}
+          onChange={e => {
+            setEmail(e.target.value)
+            handleInputs(e)
+          }}
         />
         {badInputResponse.email &&
         <ModalErrorText>{badInputResponse.email}</ModalErrorText>
