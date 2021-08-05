@@ -12,7 +12,7 @@ const StyleSelector = () => {
   if (curStyle.style) {
     const current = curStyle.style;
     if (current.sale_price) {
-      price = <p style={styler}><s style={{"color": "red"}}>{'$' + curStyle.style.original_price}</s><span>{'$' + curStyle.style.sale_price}</span></p>
+      price = <p style={styler}><s style={{"color": "red", "marginRight":"0.5em"}}>{'$' + curStyle.style.original_price}</s><span>{'$' + curStyle.style.sale_price}</span></p>
     } else {
       price = <p style={styler}><span>{'$' + curStyle.style.original_price}</span></p>
     }

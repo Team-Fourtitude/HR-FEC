@@ -13,15 +13,15 @@ const Thumbnails = () => {
   useEffect( () => {
     if (currentPic.url === undefined && curStyle.style) {
       if (curStyle.style.photos) {
-        setCurrentPic({url:curStyle.style.photos[0].thumbnail_url, name:`0`, style:curStyle.style.style_id});
+        setCurrentPic({url:curStyle.style.photos[0].url, name:`0`, style:curStyle.style.style_id});
       }
     } else if (currentPic.style && curStyle.style) {
       let photoMax = curStyle.style.photos.length - 1;
       if (currentPic.style !== curStyle.style.style_id) {
         if (curStyle.style.photos[index]) {
-          setCurrentPic({url:curStyle.style.photos[index].thumbnail_url, name:`${index}`, style:curStyle.style.style_id});
+          setCurrentPic({url:curStyle.style.photos[index].url, name:`${index}`, style:curStyle.style.style_id});
         } else {
-          setCurrentPic({url:curStyle.style.photos[photoMax].thumbnail_url, name:`${photoMax}`, style:curStyle.style.style_id});
+          setCurrentPic({url:curStyle.style.photos[photoMax].url, name:`${photoMax}`, style:curStyle.style.style_id});
           setIndex(photoMax);
         }
       } else {
@@ -48,7 +48,7 @@ const Thumbnails = () => {
                   if (currentPic.name == index) {
                     return (
                       <ThumbnailsImageWrapper id="selected" key={index} onClick={ () => {
-                        setCurrentPic({url:photo.thumbnail_url, name:`${index}`, style:curStyle.style.style_id});
+                        setCurrentPic({url:photo.url, name:`${index}`, style:curStyle.style.style_id});
                         setIndex(index);
                       }}>
                         <ThumbnailImage src={photo.thumbnail_url} alt={`${index}`} faded/>
@@ -57,7 +57,7 @@ const Thumbnails = () => {
                   } else {
                     return (
                       <ThumbnailsImageWrapper key={index} onClick={ () => {
-                        setCurrentPic({url:photo.thumbnail_url, name:`${index}`, style:curStyle.style.style_id});
+                        setCurrentPic({url:photo.url, name:`${index}`, style:curStyle.style.style_id});
                         setIndex(index);
                       }}>
                         <ThumbnailImage src={photo.thumbnail_url} alt={`${index}`} />
@@ -81,7 +81,7 @@ const Thumbnails = () => {
                             <ThumbnailsButtonUp type='button' disabled>🞁</ThumbnailsButtonUp>
                             <ThumbnailsButtonDown type='button'
                             onClick={() => {
-                              setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
+                              setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                               setIndex(index + 1);
                             }}>🞃</ThumbnailsButtonDown>
                           </>
@@ -95,7 +95,7 @@ const Thumbnails = () => {
                         <>
                           <ThumbnailsButtonUp type='button'
                           onClick={() => {
-                            setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
+                            setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                             setIndex(index - 1);
                           }}>🞁</ThumbnailsButtonUp>
                           <ThumbnailsButtonDown type='button' disabled>🞃</ThumbnailsButtonDown>
@@ -106,12 +106,12 @@ const Thumbnails = () => {
                         <>
                           <ThumbnailsButtonUp type='button'
                           onClick={() => {
-                            setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
+                            setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                             setIndex(index - 1);
                           }}>🞁</ThumbnailsButtonUp>
                           <ThumbnailsButtonDown
                           onClick={() => {
-                            setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
+                            setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                             setIndex(index + 1);
                         }}>🞃</ThumbnailsButtonDown>
                         </>

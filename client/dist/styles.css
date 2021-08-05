@@ -1,5 +1,10 @@
 
-
+div {
+  outline-style: none;
+}
+img {
+  outline-style: none;
+}
 
 
 h4 {
