@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
 import Image from './Image.jsx';
-import { ThumbnailsImageWrapper, ThumbnailImage, ThumbnailsButtonUp, ThumbnailsButtonDown } from './StyleHelpers.jsx';
+import { ThumbnailsContainer, ThumbnailsImageWrapper, ThumbnailImage, ThumbnailsButtonUp, ThumbnailsButtonDown } from './StyleHelpers.jsx';
 
 const thumbnailContainerStyles = {"width":"75px", "maxHeight": "475px","height":"max-content", "position":"absolute", "top":"10%", "left":"1%", "display":"block", "backgroundColor":"rgba(0, 0, 0, 0.5)", "padding":"2.5em 1em", "borderRadius":"10px", "zIndex":"1000"};
-const thumbnailScrollStyles = {"width":"75px", "maxHeight": "400px","height":"80%", "overflowY":"auto", "overflowX":"hidden"};
 
 const Thumbnails = () => {
   const curStyle = useContext(StyleContext);
@@ -43,7 +42,7 @@ const Thumbnails = () => {
             <div style={{"position":"relative"}}>
             <Image current={currentPic ? currentPic : {url: '#', name: 'alt-name'}} context={curStyle} index={{index, setIndex}} currentPicture={{currentPic, setCurrentPic}}/>
             <div style={thumbnailContainerStyles}>
-              <div id="thumbnailScroll" style={thumbnailScrollStyles}>
+              <ThumbnailsContainer id="thumbnailScroll">
                 {curStyle.style ? curStyle.style.photos.map( (photo, index) => {
                   if (currentPic.name == index) {
                     return (
@@ -119,7 +118,7 @@ const Thumbnails = () => {
                     }
                   }
                 })()}
-              </div>
+              </ThumbnailsContainer>
             </div>
             </div>
             </>
