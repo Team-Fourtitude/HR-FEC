@@ -103,7 +103,11 @@ const SubmissionPost = ({ close, submitAction, question_body }) => {
     const currentResponse = badInputResponse;
 
     // Email regex formatting
-    if (!/^[^@]+@\w+(\.\w+)+\w$/.test(inputs.email)) {
+    if (!inputs.email) {
+      currentResponse.email = `email is a mandatory field`;
+      setBadInputResponse(currentResponse)
+      valid = false;
+    } else if (!/^[^@]+@\w+(\.\w+)+\w$/.test(inputs.email)) {
       console.log(inputs.email);
       currentResponse.email = `Bad email: Format should be aaa@bbb.ccc`;
       setBadInputResponse(currentResponse)
@@ -115,23 +119,23 @@ const SubmissionPost = ({ close, submitAction, question_body }) => {
     }
 
     // Name formating
-    if (inputs.name.length > 60) {
-      currentResponse.name = `Bad Nickname: Must be under 60 characters`;
+    if (!inputs.name) {
+      currentResponse.name = `Nickname is a mandatory field`;
       setBadInputResponse(currentResponse)
       valid = false;
-    } else if (!inputs.name.length) {
-      currentResponse.name = `Nickname is a mandatory field`;
+    } else if (inputs.name.length > 60) {
+      currentResponse.name = `Bad Nickname: Must be under 60 characters`;
       setBadInputResponse(currentResponse)
       valid = false;
     }
 
     // Body formatting
-    if (inputs.body.length > 1000 && inputs.body.length ) {
-      currentResponse.body = `Bad Body Length: Must be under 1000 characters`;
+    if (!inputs.body) {
+      currentResponse.body = `Body is a mandatory field`;
       setBadInputResponse(currentResponse)
       valid = false;
-    } else if (!inputs.body.length) {
-      currentResponse.body = `Body is a mandatory field`;
+    } else if (inputs.body.length > 1000) {
+      currentResponse.body = `Bad Body Length: Must be under 1000 characters`;
       setBadInputResponse(currentResponse)
       valid = false;
     }
