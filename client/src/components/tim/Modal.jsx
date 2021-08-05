@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { RiCloseCircleFill } from 'react-icons/ri';
 import { ModalChildWrapper, ModalBackground, ModalContent, ModalHeaderRow, CloseIcon, CloseWrapper } from './StyleHelpers.jsx';
-/* eslint react/prop-types: 0 */
+/* eslint react/parsing-error: 0 */
 
 const portal = document.getElementById('portal');
 const appStyle = document.getElementById('app').style
