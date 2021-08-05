@@ -94,7 +94,7 @@ const Image = (props) => {
                 <ImageButtonLeft type='button' disabled>🞀</ImageButtonLeft>
                 <ImageButtonRight type='button'
                 onClick={() => {
-                  setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
+                  setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                   setIndex(index + 1);
                 }}>🞂</ImageButtonRight>
               </>
@@ -108,7 +108,7 @@ const Image = (props) => {
             <>
               <ImageButtonLeft type='button'
               onClick={() => {
-                setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
+                setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
               }}>🞀</ImageButtonLeft>
               <ImageButtonRight type='button' disabled>🞂</ImageButtonRight>
@@ -119,7 +119,7 @@ const Image = (props) => {
             <>
               <ImageButtonLeft type='button'
               onClick={() => {
-                setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
+                setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
                 let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
@@ -127,7 +127,7 @@ const Image = (props) => {
               }}>🞀</ImageButtonLeft>
               <ImageButtonRight type='button'
               onClick={() => {
-                setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
+                setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                 setIndex(index + 1);
                 let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
@@ -191,7 +191,7 @@ const Image = (props) => {
                 <ImageButtonLeft type='button' disabled>🞀</ImageButtonLeft>
                 <ImageButtonRight type='button'
                 onClick={() => {
-                  setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
+                  setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                   setIndex(index + 1);
                 }}>🞂</ImageButtonRight>
               </>
@@ -205,7 +205,7 @@ const Image = (props) => {
             <>
               <ImageButtonLeft type='button'
               onClick={() => {
-                setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
+                setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
               }}>🞀</ImageButtonLeft>
               <ImageButtonRight type='button' disabled>🞂</ImageButtonRight>
@@ -216,7 +216,7 @@ const Image = (props) => {
             <>
               <ImageButtonLeft type='button'
               onClick={() => {
-                setCurrentPic({url:curStyle.style.photos[index - 1].thumbnail_url, name:`${index - 1}`, style:curStyle.style.style_id});
+                setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
                 let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
@@ -224,7 +224,7 @@ const Image = (props) => {
               }}>🞀</ImageButtonLeft>
               <ImageButtonRight type='button'
               onClick={() => {
-                setCurrentPic({url:curStyle.style.photos[index + 1].thumbnail_url, name:`${index + 1}`, style:curStyle.style.style_id});
+                setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                 setIndex(index + 1);
                 let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
