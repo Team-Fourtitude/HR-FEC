@@ -29,7 +29,7 @@ export const ThumbnailImage = styled.img`
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: ${(props) => props.faded ? '0.5' : '1'};
+  opacity: ${(props) => props.faded ? '0.2' : '1'};
 `;
 
 export const ThumbnailsButton = styled.button`

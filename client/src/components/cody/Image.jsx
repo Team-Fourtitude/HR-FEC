@@ -15,7 +15,7 @@ const Image = (props) => {
     {(() => {
       if (size) {
         return (
-          <div style={{
+          <div tabIndex='0' style={{
             "display": "flex",
             "position": "relative",
             "justifyContent": "center",
@@ -25,6 +25,11 @@ const Image = (props) => {
             "overflow": "hidden",
             "cursor": zoom ? "url(\"https://i.imgur.com/spnFx5r.png\"), auto" : 'crosshair',
             "zIndex": "100",
+          }} onKeyDown={ (e) => {
+            if (e.which === 27) {
+              setZoom(false);
+              setSize(false);
+            }
           }}>
             <img id="imgRatio" src={props.current.url} style={{
               "position": "absolute",
@@ -63,9 +68,7 @@ const Image = (props) => {
                 e.target.style.backgroundPositionX = (-e.nativeEvent.offsetX * 1.5) + "px";
                 e.target.style.backgroundPositionY = (-e.nativeEvent.offsetY * scaleY) + "px";
               }
-            }}
-            // src={props.current.url} alt={props.current.name}
-            />
+            }}/>
             <ImageButton type='button'
             onClick={ () => {
               if (size) {
@@ -139,12 +142,17 @@ const Image = (props) => {
         );
       } else {
         return (
-          <div style={{
+          <div tabindex='0' style={{
             "width": "65%",
             "maxHeight": "600px",
             "overflow":"hidden",
             "cursor": "zoom-in",
             "position":"relative",
+          }} onKeyDown={ (e) => {
+            if (e.which === 27) {
+              setZoom(false);
+              setSize(false);
+            }
           }}>
             <img style={{
               "width": "100%",
