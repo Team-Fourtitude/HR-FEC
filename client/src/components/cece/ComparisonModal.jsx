@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-// import ProductContext from '../context/ProductContext.jsx';
+import { Caption, TblContainer, Table, TblBody } from './Styled/Comparison.jsx';
 import { FaCheck } from 'react-icons/fa';
 
 
@@ -52,9 +52,12 @@ const ComparisonModal = (props) => {
 
 
   return (
-    <div className="tbl-container" >
-      <table>
-      <caption>Comparing</caption>
+    <TblContainer >
+      <Table>
+        <Caption>
+        Comparing
+        </Caption>
+
       <thead>
         <tr>
           <th>{style.name}</th>
@@ -62,11 +65,9 @@ const ComparisonModal = (props) => {
           <th>{compare.current.name}</th>
         </tr>
       </thead>
-      <tbody>
         {compareFeature.map(renderComparison)}
-      </tbody>
-      </table>
-    </div>
+      </Table>
+    </TblContainer>
   );
 }
 

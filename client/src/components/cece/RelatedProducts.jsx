@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { RelatedBody } from './Styled/Related.jsx';
 import axios from 'axios';
 import ProductContext from '../context/ProductContext.jsx';
 import StylesContext from '../context/StylesContext.jsx';
@@ -104,17 +105,15 @@ const RelatedProducts = () => {
       getInitialData();
     }, [product])
 
-
   return(
-    <div className="related" style={{"position":"relative", "height": "1000px"}}>
+    <RelatedBody>
       <RelatedProductContext.Provider value={[relatedProduct, setRelatedProduct]}>
         <RelatedStylesContext.Provider value={[relatedStyles, setRelatedStyles]}>
-          <RelatedProductList initData={getInitialData}/>
+          <RelatedProductList />
           <OutfitList />
         </RelatedStylesContext.Provider>
       </RelatedProductContext.Provider>
-
-    </div>
+    </RelatedBody>
   )
 }
 
