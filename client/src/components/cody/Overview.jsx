@@ -8,7 +8,7 @@ import StyleSelector from './StyleSelector.jsx';
 const Overview = () => {
   return (
     <div style={{"display":"flex", "flexDirection":"column", "maxWidth":"1250px", "overflowX":"hidden", "margin":"0 auto"}}>
-      <div style={{"position":"relative"}}>
+      <div style={{"position":"relative", "minHeight":"600px"}}>
         <div style={{"width":"100%"}}>
           <Thumbnails />
         </div>
