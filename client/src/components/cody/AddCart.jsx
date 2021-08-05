@@ -55,6 +55,11 @@ const AddCart = () => {
                     ev.target.style.position = 'static';
                     ev.target.style.height = '50px';
                     ev.target.parentElement.children[1].value = 1;
+                  }}
+                  onBlur={(ev) => {
+                    ev.target.removeAttribute('size');
+                    ev.target.style.position = 'static';
+                    ev.target.style.height = '50px';
                   }}>
                     {<option value='null'>SELECT SIZE</option>}
                     {styleSizes ? styleSizes.map( (sizeID) => {
