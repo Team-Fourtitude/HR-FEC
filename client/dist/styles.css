@@ -1,4 +1,14 @@
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
+/*
+font-family: 'Georama', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Noto Sans', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Ubuntu', sans-serif; */
+
 .next, .prev {
   position: relative;
   top: 25%;
@@ -212,8 +222,6 @@
 }
 
 
-<<<<<<< HEAD
-=======
 #delete:hover {
   color: black;
 }
@@ -221,4 +229,3 @@
 #thumbnailScroll::-webkit-scrollbar {
   display:none;
 }
->>>>>>> cd74e97b5cf04c587fdc33dfc54d461a8cab47b6

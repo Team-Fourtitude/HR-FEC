@@ -6,7 +6,7 @@ import ProductContext from '../context/ProductContext.jsx';
 import RelatedProductContext from '../context/RelatedProductContext.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import Modal from '../Tim/Modal.jsx';
-import { v4 as uuidv4 } from 'uuid';
+import { v1 as uuidv1 } from 'uuid';
 
 
 
@@ -15,6 +15,7 @@ const ProductCard = ({ item }) => {
   const { product, setProduct } = useContext(ProductContext);
   const [ viewModal, setViewModal ] = useState(false);
   const [isOpen, setOpen] = useState(false);
+  let key = uuidv1();
 
 
 
@@ -56,7 +57,7 @@ const ProductCard = ({ item }) => {
             if (Number(item.product_id) === data.id) {
               return (
                 <>
-                <CatAndPrice key={uuidv4()}>
+                <CatAndPrice key={key}>
                   [ {data.category} ]
                 </CatAndPrice><br /><br />
                 {data.name}<br />
