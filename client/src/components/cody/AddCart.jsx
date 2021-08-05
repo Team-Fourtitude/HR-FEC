@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
-import { CartButtonWrapper, CartButtonWrapper30, CartButtonWrapper60, CartButtonWrapper75 } from './StyleHelpers.jsx';
+import { CartButtonWrapper, CartButtonWrapper30, CartButtonWrapper60, CartButtonWrapper75, PopUp } from './StyleHelpers.jsx';
 
 const AddCart = () => {
   const curStyle = useContext(StyleContext);
   const [fav, setFav] = useState(false);
   const [currentSize, setCurrentSize] = useState(null);
+  const [prompt, setPrompt] = useState(null);
   let styleSizes;
   if (curStyle.style) {
     if (curStyle.style.skus) {
@@ -49,14 +50,17 @@ const AddCart = () => {
             if (styleSizes) {
               if (styleSizes[0] !== 'null') {
                 return (
+                  <>
                   <CartButtonWrapper60 as='select' id='size' value={currentSize ? currentSize : 'null'} onChange={(ev) => {
                     setCurrentSize(ev.target.value);
+                    setPrompt(null);
                     ev.target.removeAttribute('size');
                     ev.target.style.position = 'static';
                     ev.target.style.height = '50px';
                     ev.target.parentElement.children[1].value = 1;
                   }}
                   onBlur={(ev) => {
+                    setPrompt(null);
                     ev.target.removeAttribute('size');
                     ev.target.style.position = 'static';
                     ev.target.style.height = '50px';
@@ -68,6 +72,8 @@ const AddCart = () => {
                         );
                       }) : null}
                   </CartButtonWrapper60>
+                  <PopUp prompt={prompt}><b>Please select size</b></PopUp>
+                  </>
                 );
               } else {
                 return <CartButtonWrapper60 as='select' id='size' value='null' disabled><option value='null'>OUT OF STOCK</option></CartButtonWrapper60>;
@@ -90,6 +96,7 @@ const AddCart = () => {
                   } else {
                     let sizeSelector = document.getElementById('size');
                     let totalSizes = sizeSelector.children.length;
+                    setPrompt('true');
                     sizeSelector.setAttribute('size', totalSizes);
                     sizeSelector.style.position = 'absolute';
                     sizeSelector.style.height = 'max-content';
@@ -105,6 +112,7 @@ const AddCart = () => {
                     setFav(true);
                   }
                   console.log(curStyle.style.name);
+                  console.log('prompt: ', prompt);
                 }}>{ fav ? '★' : '☆'}</CartButtonWrapper>
                 </div>
               );

@@ -112,3 +112,29 @@ export const CartButtonWrapper75 = styled(CartButtonWrapper)`
   display: ${props => props.disabled ? 'none' : 'block'};
   width: 75%;
 `;
+
+export const PopUp = styled.p`
+  position: absolute;
+  top: -100%;
+  left: 0;
+  padding: 0.5em;
+  margin: 0;
+  display: ${props => props.prompt === 'true' ? 'block' : 'none'};
+  color: purple;
+  background-color: #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+
+  &::before {
+    content:'';
+    display: block;
+    position: absolute;
+    bottom: -30%;
+    left: 35%;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #ccc;
+  }
+`;
