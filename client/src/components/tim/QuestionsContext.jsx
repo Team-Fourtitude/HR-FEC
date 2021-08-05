@@ -27,6 +27,7 @@ export const QuestionsProvider = ({children}) => {
 
   useEffect(() => {
     if (product.id) getQuestions(product.id)
+    setQuery('');
   }, [product])
 
   // get new set of questions

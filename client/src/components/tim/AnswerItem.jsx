@@ -3,31 +3,46 @@ import { ImArrowUp } from 'react-icons/im';
 
 import PictureGallery from './PictureGallery.jsx';
 
-import AnswerContext from './AnswerContext.jsx';
+import { useAnswersUpdate } from './AnswersContext.jsx'
 import QuestionContext from './QuestionContext.jsx';
-import { useAnswersUpdate } from './AnswersContext.jsx';
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
+import AnswerItemContext from './AnswerItemContext.jsx';
 
 
 /* eslint react/prop-types: 0 */
 
 const AnswerItem = () => {
-  const [answer, setAnswer] = useState({});
+  const [currentAnswer, setCurrentAnswer] = useState({});
   const [isHelpful, setHelped] = useState(false);
   const [reported, setReported] = useState(false);
   const [willReport, setWillReport] = useState(false);
 
-  const currentAnswer = useContext(AnswerContext);
+  const answer = useContext(AnswerItemContext);
   const { markAnswerHelpful } = useAnswersUpdate();
   const currentQuestion = useContext(QuestionContext);
   const reportCurrentAnswer = useQuestionsUpdate().reportAnswer;
 
 
+  // on context change I need to update local answer state
   useEffect(() => {
-    if (currentAnswer !== undefined) {
-      setAnswer(currentAnswer);
+    if (answer !== undefined) {
+      console.log(`This Answer is loaded!!! ${answer}`);
+      setCurrentAnswer(answer);
     }
-  }, [currentAnswer])
+  }, [answer])
+
+  useEffect(() => {
+    if (isHelpful) {
+      setCurrentAnswer({...currentAnswer, helpfulness: answer.helpfulness++})
+      markAnswerHelpful(currentAnswer.id)
+    }
+  }, [isHelpful])
+
+  useEffect(() => {
+    if (reported) {
+      reportCurrentAnswer(currentAnswer.id, currentQuestion.id)
+    }
+  }, [reported])
 
   const convertDate = (date) => {
     const dateFormat = {
@@ -40,9 +55,9 @@ const AnswerItem = () => {
   }
 
   const markHelpful = () => {
-    setAnswer({...answer, helpfulness: answer.helpfulness++})
-    markAnswerHelpful(currentAnswer.id, isHelpful)
-    setHelped(true);
+    if (!isHelpful) {
+      setHelped(true);
+    }
   }
 
   const markReported = () => {
@@ -54,18 +69,18 @@ const AnswerItem = () => {
     <div className="answer-item"> {!reported &&
       <div className={`answer-container${willReport && !isHelpful ? "-reportable" : "" || isHelpful ? "-helpful" : ""}`}>
         <div className="answer-body">
-          <strong>A:</strong> {currentAnswer.body}
+          <strong>A:</strong> {answer.body}
         </div>
         <div
           className="answer-sub-text"
           style={{margin: 10}}>
-          by {currentAnswer.answerer_name}, {convertDate(currentAnswer.date)} | Helpful? {!isHelpful ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}
+          by {answer.answerer_name}, {convertDate(answer.date)} | Helpful? {!isHelpful ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}
           <u
             onClick={() => { markHelpful() }}
             style={{cursor: !isHelpful && 'pointer'}}>
             Yes
           </u> {' '}
-          ({currentAnswer.helpfulness})
+          ({answer.helpfulness})
           {' | '}
           <u
             style={{cursor: 'pointer'}}
@@ -75,7 +90,7 @@ const AnswerItem = () => {
             Report
           </u>
         </div>
-        <PictureGallery photos={currentAnswer.photos ? currentAnswer.photos : []}/>
+        <PictureGallery photos={answer.photos ? answer.photos : []}/>
       </div> }
     </div>
   )

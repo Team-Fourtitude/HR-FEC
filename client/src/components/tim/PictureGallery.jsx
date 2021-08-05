@@ -7,6 +7,18 @@ import Modal from './Modal.jsx';
 const PictureGallery = (props) => {
   const [isOpen, setOpen] = useState(false);
   const [popSrc, setPopped] = useState('');
+  const [photos, setPhotos] = useState([]);
+
+  useEffect(() => {
+    if (!isOpen && popSrc !== '') {
+      console.log(`Closed ${popSrc}`)
+      setPopped('')
+    }
+  }, [isOpen])
+
+  useEffect(() => {
+    setPhotos([...props.photos])
+  }, [props.photos])
 
   const style = {
     height: "auto",
@@ -17,34 +29,30 @@ const PictureGallery = (props) => {
     margin: "5px",
   }
 
-  const popImage = (src) => {
+  const popImage = (target) => {
     console.log(`Opened ${popSrc}`)
-    setPopped(src)
+    setPopped(target.src)
     setOpen(true)
   }
 
-  useEffect(() => {
-    if (!isOpen && popSrc !== '') {
-      console.log(`Closed ${popSrc}`)
-      setPopped('')
-    }
-  }, [isOpen])
+  const removeImage = (target) => {
+    props.remove(target.src)
+    console.log(`Bubbled ${target.src}`)
+  }
+  // popImage(event.target)
 
-  // useEffect(() => {
-  //   console.log('Popped')
-  // }, [popSrc])
-
-  // modal is set to false currently for pictures hard crash
   return (
   <div className='AnsPhotos'>
-    {props.photos.map((link, index) => {
+    {photos.map((link, index) => {
       return (
         <img
           className='AnsPhoto'
           src={link}
           key={index}
           style={style}
-          onClick={() => {popImage(event.target.src)}}
+          onClick={(event) => {
+            props.remove ? removeImage(event.target) : popImage(event.target)
+          }}
         ></img>
       )}
     )}

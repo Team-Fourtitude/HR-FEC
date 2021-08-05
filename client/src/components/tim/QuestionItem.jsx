@@ -2,14 +2,15 @@ import React, { useState, useEffect, useContext } from 'react';
 //import ReactDOM from 'react-dom';
 
 import Modal from './Modal.jsx';
-import AddAnswer from './AddAnswer.jsx';
 import AnswerItem from './AnswerItem.jsx';
+import SubmissionPost from './SubmissionPost.jsx';
 import { ImArrowUp } from 'react-icons/im';
 import { LoadMoreAnswersButton } from './StyleHelpers.jsx'
 
-import AnswerContext from './AnswerContext.jsx';
 import QuestionContext from './QuestionContext.jsx';
+import AnswerItemContext from './AnswerItemContext.jsx';
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
+import { useAnswersUpdate } from './AnswersContext.jsx'
 
 //import {QuestionsProvider} from './QuestionsContext.jsx'
 
@@ -26,6 +27,8 @@ const QuestionItem = () => {
 
   const currentQuestion = useContext(QuestionContext);
 
+  const submitAnswer = useAnswersUpdate().submitAnswer;
+
   useEffect(() => {
     if (currentQuestion !== undefined) {
       setLoaded(true);
@@ -40,11 +43,17 @@ const QuestionItem = () => {
   }, [question])
 
   useEffect(() => {
+    if (hasHelped) {
+      setQuestion({...question, helpfulness: question.question_helpfulness++});
+      questionUpdaters.markQuestionHelpful(currentQuestion.question_id, hasHelped);
+    }
+  }, [hasHelped])
+
+  useEffect(() => {
     if (isBtnHidden && allAns.length !== question.answers.length) setBtnToHide(false);
   }, [allAns.length])
 
   const loadMoreAnswers = () => {
-     //console.log(`This is the current question: ${JSON.stringify(question)}`)
     const newMax = maxAnsCount + 2;
     if (newMax < allAns.length) {
       setMaxAnsCount(newMax)
@@ -79,8 +88,6 @@ const QuestionItem = () => {
   }
 
   const markHelpful = () => {
-    setQuestion({...question, helpfulness: question.question_helpfulness++})
-    questionUpdaters.markQuestionHelpful(currentQuestion.question_id, hasHelped);
     setHasHelped(true);
   }
 
@@ -92,8 +99,8 @@ const QuestionItem = () => {
         <div className="question-sub-text">
           by {question.asker_name} | Helpful?  {!hasHelped ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}<u
           onClick={() => { markHelpful() }}
-          style={{cursor: "pointer"}}>
-            Yes</u>
+          style={{cursor: !hasHelped && 'pointer'}}>
+          Yes</u>
             {' '} ({currentQuestion.question_helpfulness}) | {' '}
           <u className="add-answer-link"
             style={{cursor: "pointer"}}
@@ -107,9 +114,9 @@ const QuestionItem = () => {
       className="answer-list"
       style={{margin: 10}}>
         { allAns.slice(0, maxAnsCount).map((id) =>
-        <AnswerContext.Provider value={question.answers[id]} key={id}>
+        <AnswerItemContext.Provider value={question.answers[id]} key={id}>
             <AnswerItem key={id} />
-        </AnswerContext.Provider>
+        </AnswerItemContext.Provider>
         )}
       {(!isBtnHidden && allAns.length > 2) &&
       <LoadMoreAnswersButton
@@ -123,7 +130,7 @@ const QuestionItem = () => {
         <Modal
           isOpen={ isOpen }
           close={ () => setOpen(false) }>
-            <AddAnswer close={ () => setOpen(false) }/>
+            <SubmissionPost close={ () => setOpen(false) } submitAction={submitAnswer} question_body={question.question_body}/>
         </Modal>
       </div>
     </div>
@@ -131,16 +138,3 @@ const QuestionItem = () => {
 }
 
 export default QuestionItem;
-
-// {props.questions.answers && Object.keys(props.questions.answers).map((answer) => <AnswerItem answer={answer} key={answer.id} />)}
-
-{/* <div style={{ transform: "translateX(50px)" }}>
-  <Modal
-    isOpen={ isOpen }
-    close={ () => setOpen(false) }>
-      <AddAnswer />
-  </Modal>
-</div> */}
-
-{/* <HelpfulFeedback helpCount={props.question.question_helpfulness} increaseHelp={() => {questionUpdaters.markQuestionHelpful(props.question.question_id)}}/> */}
-// questionUpdaters.reportQuestion(props.question.question_id)
