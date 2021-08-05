@@ -142,7 +142,7 @@ const Image = (props) => {
         );
       } else {
         return (
-          <div tabindex='0' style={{
+          <div tabIndex='0' style={{
             "width": "65%",
             "maxHeight": "600px",
             "overflow":"hidden",

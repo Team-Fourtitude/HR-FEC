@@ -5,8 +5,10 @@ import axios from 'axios';
 const Rating = () => {
   const [ratings, setRatings] = useState(0);
   const curProduct = useContext(ProductContext);
+  const productId = curProduct.product.id;
   useEffect( () => {
-    axios.get(`http://localhost:3000/reviews/meta/25171`)
+    console.log('useEffect from ratings: ', productId);
+    axios.get(`http://localhost:3000/reviews/meta/${productId}`)
     .then( (data) => {
       console.log('axios data for ratings', data.data.ratings);
       const scores = data.data.ratings;
@@ -24,7 +26,7 @@ const Rating = () => {
     .catch( (e) => {
       console.log('rating fetcher had problems', e);
     })
-  }, []);
+  }, [productId]);
   return (
       <>
       {/* current css settings: first space 6px, 15px to fill a star, space between next star 17px */}
