@@ -18,7 +18,7 @@ const StyleSelector = () => {
     price = <p style={{"padding":"0","margin":"1em 0"}}>null price</p>
   }
   return (
-  <div style={{"width":"100%", "marginBottom":"1.5em"}}>
+  <div style={{"width":"100%", "marginBottom":"1.5em"}} onClick={ () => {console.log(currentProduct.product)}}>
     <div style={{"marginBottom": "1em"}}>{currentProduct.product.category}</div>
     <h1 style={{"margin":"0", "padding":"0"}}>{currentProduct.product.name}</h1>
     {price || null}
