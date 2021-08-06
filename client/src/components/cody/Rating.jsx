@@ -10,7 +10,7 @@ const Rating = () => {
   const productId = curProduct.product.id;
   useEffect( () => {
     console.log('useEffect from ratings: ', productId);
-    axios.get(`http://localhost:3000/reviews/meta/${productId}`)
+    axios.get(`/reviews/meta/${productId}`)
     .then( (data) => {
       console.log('axios data for ratings', data.data.ratings);
       const scores = data.data.ratings;
