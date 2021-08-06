@@ -18,7 +18,7 @@ const App = () => {
 
 
   useEffect( () => {
-    axios.get('http://localhost:3000/products/25171')
+    axios.get('/products/25171')
     .then( (data) => {
       if (product.id !== data.data.id) {
         console.log(data.data);
@@ -29,7 +29,7 @@ const App = () => {
       }
     })
     .then( (id) => {
-      axios.get(`http://localhost:3000/products/${id}/styles`)
+      axios.get(`/products/${id}/styles`)
       .then( (data) => {
         if (styles.product_id !== data.data.product_id) {
           console.log(data.data);
@@ -54,10 +54,10 @@ const App = () => {
       <StylesContext.Provider value={{styles, setStyles}}>
         <StyleContext.Provider value={{style, setStyle}}>
           <Overview />
-          {/* <RelatedProducts />
+          <RelatedProducts />
           <div>
             <QuestionsAnswers />
-          </div> */}
+          </div>
         </StyleContext.Provider>
       </StylesContext.Provider>
     </ProductContext.Provider>
