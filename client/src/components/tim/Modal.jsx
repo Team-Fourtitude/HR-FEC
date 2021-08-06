@@ -1,9 +1,6 @@
 import React, { useEffect, useRef} from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components';
-import { RiCloseCircleFill } from 'react-icons/ri';
 import { ModalChildWrapper, ModalBackground, ModalContent, ModalHeaderRow, CloseIcon, CloseWrapper } from './StyleHelpers.jsx';
-/* eslint react/parsing-error: 0 */
 
 const portal = document.getElementById('portal');
 const appStyle = document.getElementById('app').style
@@ -16,7 +13,9 @@ const Modal = ({isOpen, close, children, title}) => {
     if (!isOpen) return;
 
     let listener = (evt) => {
-      if (contentRef.current?.contains(evt.target)) return;
+      if (contentRef.current) {
+        if (contentRef.current.contains(evt.target)) return;
+      }
       close();
     }
 

@@ -1,36 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'
+import { HelpfulFeedbackWrapper, ActionLink, DividerBar } from './StyleHelpers.jsx'
+import { ImArrowUp } from 'react-icons/im';
 /* eslint react/prop-types: 0 */
 
-const HelpfulFeedback = (props) => {
+const HelpfulFeedback = ({ help, helpCount, action, actionType }) => {
   const [hasHelped, setHelped] = useState(false);
+  const [hasActed, setActed] = useState(false);
+  const [count, setCount] = useState(0);
 
-  const style = {
-    cursor: 'pointer',
-    position: 'relative',
-    underline: {textDecorationLine: 'underline'},
-  }
+  useEffect(() => {
+    setCount(helpCount);
+  }, [helpCount])
 
-  const updateHelpful = (e) => {
-    if (!hasHelped) {
-      setHelped(true);
-      // invoke provider call passed from props
-      props.increaseHelp();
-      e.target.style({cursor: 'default'})
-      console.log('Yes Im helping')
+  useEffect(() => {
+    if (hasHelped) {
+      setCount((count + 1));
+      help();
     }
-  }
+    if (hasActed) {
+      action(true);
+    }
+
+  }, [hasHelped, hasActed])
 
   return (
-    <div className="helpful-feedback">
-      <span>Helpful? :</span>
-      <p
-      className="helpful-increase"
-      onClick={e => {updateHelpful(e)}}
-      style={style}
-      >Yes</p>
-      <span>({props.helpCount})</span>
-    </div>
+      <HelpfulFeedbackWrapper>
+        {' Helpful? '} &nbsp;
+        { !hasHelped ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}
+        <ActionLink
+          enabled={!hasHelped}
+          onClick={() => { setHelped(true) }}>
+          Yes
+        </ActionLink> {`(${count}) `}
+        <DividerBar>
+          &nbsp; | &nbsp;
+        </DividerBar>
+        <ActionLink
+          enabled={ !hasActed }
+          onClick={() => { setActed(true) }}>
+          { actionType }
+        </ActionLink>
+      </HelpfulFeedbackWrapper>
   )
 }
 
 export default HelpfulFeedback;
+
+
+
+{/* <div className="question-sub-text">
+          by {question.asker_name} | Helpful?  {!hasHelped ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}<u
+          onClick={() => { markHelpful() }}
+          style={{cursor: !hasHelped && 'pointer'}}>
+          Yes</u>
+            {' '} ({currentQuestion.question_helpfulness}) | {' '}
+          <u className="add-answer-link"
+            style={{cursor: "pointer"}}
+            onClick={ () => setOpen(true) }
+          >Add Answer</u> */}

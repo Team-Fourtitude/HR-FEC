@@ -4,8 +4,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import Modal from './Modal.jsx';
 import AnswerItem from './AnswerItem.jsx';
 import SubmissionPost from './SubmissionPost.jsx';
-import { ImArrowUp } from 'react-icons/im';
-import { LoadMoreAnswersButton } from './StyleHelpers.jsx'
+import HelpfulFeedback from './HelpfulFeedback.jsx'
+import { LoadMoreAnswersButton, QuestionTitleWrapper, QuestionHeaderContainer, QuestionHelpfulContainer, QuestionPosterContainer } from './StyleHelpers.jsx'
 
 import QuestionContext from './QuestionContext.jsx';
 import AnswerItemContext from './AnswerItemContext.jsx';
@@ -23,7 +23,7 @@ const QuestionItem = () => {
   const [isBtnHidden, setBtnToHide] = useState(false);
   const [isOpen, setOpen] = useState(false);
 
-  const questionUpdaters = useQuestionsUpdate();
+  const { markQuestionHelpful } = useQuestionsUpdate();
 
   const currentQuestion = useContext(QuestionContext);
 
@@ -44,8 +44,8 @@ const QuestionItem = () => {
 
   useEffect(() => {
     if (hasHelped) {
-      setQuestion({...question, helpfulness: question.question_helpfulness++});
-      questionUpdaters.markQuestionHelpful(currentQuestion.question_id, hasHelped);
+      setQuestion({...question, helpfulness: question.question_helpfulness + 1});
+      markQuestionHelpful(currentQuestion.question_id, hasHelped);
     }
   }, [hasHelped])
 
@@ -91,41 +91,41 @@ const QuestionItem = () => {
     setHasHelped(true);
   }
 
+  const addAnswer = () => {
+    setOpen(true);
+  }
+
   return(
   <div className="question-item">
     <div className={`question-container${ hasHelped ? "-helpful" : ""}`}>
-      <div className="question-title">
-        <h3>Q: {question.question_body}</h3>
-        <div className="question-sub-text">
-          by {question.asker_name} | Helpful?  {!hasHelped ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}<u
-          onClick={() => { markHelpful() }}
-          style={{cursor: !hasHelped && 'pointer'}}>
-          Yes</u>
-            {' '} ({currentQuestion.question_helpfulness}) | {' '}
-          <u className="add-answer-link"
-            style={{cursor: "pointer"}}
-            onClick={ () => setOpen(true) }
-          >Add Answer</u>
-        </div>
+      {isLoaded && <QuestionTitleWrapper>
+        <QuestionHeaderContainer>
+          <h3>Q: {question.question_body}</h3>
+        </QuestionHeaderContainer>
+        <QuestionPosterContainer>
+          by {question.asker_name}
+        </QuestionPosterContainer>
+        <QuestionHelpfulContainer>
+          <HelpfulFeedback help={markHelpful} helpCount={question.question_helpfulness} action={addAnswer} actionType={'Add Answer'} />
+        </QuestionHelpfulContainer>
+      </QuestionTitleWrapper>}
+      {' '}
+      <div
+        className="answer-list"
+        style={{margin: 10}}>
+          { allAns.slice(0, maxAnsCount).map((id) =>
+          <AnswerItemContext.Provider value={question.answers[id]} key={id}>
+              <AnswerItem key={id} />
+          </AnswerItemContext.Provider>
+          )}
+        {(!isBtnHidden && allAns.length > 2) &&
+        <LoadMoreAnswersButton
+          onClick={() => loadMoreAnswers()}
+          style={{"cursor": "pointer",
+          "fontWeight": "bold"}}>
+          LOAD MORE ANSWERS
+        </LoadMoreAnswersButton>}
       </div>
-    {' '}
-
-    <div
-      className="answer-list"
-      style={{margin: 10}}>
-        { allAns.slice(0, maxAnsCount).map((id) =>
-        <AnswerItemContext.Provider value={question.answers[id]} key={id}>
-            <AnswerItem key={id} />
-        </AnswerItemContext.Provider>
-        )}
-      {(!isBtnHidden && allAns.length > 2) &&
-      <LoadMoreAnswersButton
-        onClick={() => loadMoreAnswers()}
-        style={{"cursor": "pointer",
-        "fontWeight": "bold"}}>
-        LOAD MORE ANSWERS
-      </LoadMoreAnswersButton>}
-    </div>
     <div className="add-answer-modal">
         <Modal
           isOpen={ isOpen }

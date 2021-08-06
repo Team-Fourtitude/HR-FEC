@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { FaPlus } from 'react-icons/fa';
 
 import Modal from './Modal.jsx';
 import SubmissionPost from './SubmissionPost.jsx';
@@ -9,7 +8,7 @@ import QuestionContext from './QuestionContext.jsx';
 
 import { useQuestions, useQuestionsUpdate } from './QuestionsContext.jsx';
 import { AnswersProvider } from './AnswersContext.jsx';
-import { QuestionAnimationButton, QuestionsListHeader, QuestionsListWrapper } from './StyleHelpers.jsx';
+import { QuestionAnimationButton, QuestionsListHeader, QuestionsListWrapper, PlusIcon } from './StyleHelpers.jsx';
 
 
 const QuestionsList = () => {
@@ -59,29 +58,24 @@ const QuestionsList = () => {
         <QuestionAnimationButton
             className="more-question-btn"
             onClick={ () => loadMoreQuestions() }>
-            <FaPlus style={{
-              "position": "relative",
-              "marginRight" : "7px",
-              }}/>
-              MORE ANSWERED QUESTIONS
+            <PlusIcon /> {' '}
+            MORE ANSWERED QUESTIONS
         </QuestionAnimationButton>
         <QuestionAnimationButton
           className="add-question-btn"
           onClick={ () => setOpen(true) }>
-            <FaPlus style={{
-            "position": "relative",
-            "marginRight" : "7px",
-            }}/>
+            <PlusIcon />{' '}
             ADD A QUESTION
         </QuestionAnimationButton>
         <div className="add-question-modal">
           <Modal
             isOpen={ isOpen }
             close={ () => setOpen(false) }>
-              <SubmissionPost close={ () => setOpen(false) } submitAction={addQuestion}/>
+              <SubmissionPost
+              close={ () => setOpen(false) } submitAction={addQuestion}/>
           </Modal>
         </div>
-        </div>
+      </div>
     </QuestionsListWrapper>
   );
 }

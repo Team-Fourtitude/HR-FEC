@@ -1,6 +1,8 @@
 
 import styled from 'styled-components';
 import { RiCloseFill } from 'react-icons/ri';
+import { FaPlus } from 'react-icons/fa';
+import { ImArrowUp } from 'react-icons/im';
 
 
 
@@ -138,12 +140,33 @@ export const CloseIcon = styled(RiCloseFill)`
 /////////////////////////////////////////////////////
 // Helpful FeedBack
 /////////////////////////////////////////////////////
-export const HelpfulYes = styled.u`
-  cursor: $(props => props.helped ? pointer : auto);
+
+export const ActionLink = styled.u`
+  cursor: ${props => props.enabled ? 'pointer' : 'default'};
 `;
 
 
+export const HelpfulFeedbackWrapper = styled.div`
+  display: flex;
+  font-size: smaller;
+  color: gray;
+  padding-top 5%;
+`;
+
+export const Upvote = styled(ImArrowUp)`
+  fill: orange;
+  opacity: 1;
+  animation: fade 2s linear;
+`;
+
 // Buttons
+export const PlusIcon = styled(FaPlus)`
+  position: relative;
+  vertical-align: middle;
+  padding-right: 2%;
+`;
+
+
 export const LoadMoreAnswersButton = styled.button`
   background:transparent;
   border: none;
@@ -160,6 +183,8 @@ export const QuestionAnimationButton = styled.button`
   display: inline-block;
   margin: 5px;
   cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
   &:hover {
     background-color: white;
     color: black;
@@ -281,6 +306,40 @@ export const AnswerIcon = styled.button`
 // export const QuestionWrapper = styled.div`
 
 // `;
+
+export const DividerBar = styled.div`
+  font-size: small;
+`;
+
+export const QuestionTitleWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 2fr 1fr;
+  max-height: 20%;
+`;
+
+export const QuestionHeaderContainer = styled.div`
+  grid-column: 1 / 5;
+  grid-row: 1;
+  text-align: left;
+  display: grid;
+`;
+
+export const QuestionHelpfulContainer = styled.div`
+  grid-row: 1;
+  grid-column-start: 6;
+  grid-column-end: span 2;
+  display: flex;
+  vertical-align: middle;
+  font-size: smaller;
+  font color: gray;
+`;
+
+export const QuestionPosterContainer = styled.div`
+  grid-column: 1;
+  grid-row: 2;
+  display: grid;
+`;
 
 export const QuestionIcon = styled.div`
   background-color: black;
