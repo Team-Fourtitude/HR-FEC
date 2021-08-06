@@ -2,51 +2,58 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
-/*
-font-family: 'Georama', sans-serif;
-font-family: 'Montserrat', sans-serif;
-font-family: 'Noto Sans', sans-serif;
-font-family: 'Roboto', sans-serif;
-font-family: 'Ubuntu', sans-serif; */
 
-.next, .prev {
-  position: absolute;
-  top: 25%;
-  padding: 10px;
+.next,
+.prev {
+  /* position: relative; */
+  /* top: 25%; */
+  padding: 15px;
   font-size: 16px;
   width: 30px;
-  height: 30px;
+  height: 20px;
+  margin: auto 15px;
   border-radius: 50%;
+  background-color: whitesmoke;
   transition-duration: 0.2s;
   cursor: pointer;
 }
 
-/* .next {
-  left: 100%;
-} */
-
 .next {
-  right: 0;
+  /* right: 0; */
 }
 
 .prev {
-<<<<<<< HEAD
-  left:
-=======
-  left:0;
->>>>>>> 77ceb8ed026dfa5047bd1223a18b3488f6a28f32
+  /* left:0; */
 }
 
 .prev:hover,
 .next:hover {
-  background-color: grey;
+  background-color: rgba(2, 2, 2, 0.473);
+
 }
 
 
 .prev#disabled,
 .next#disabled {
-  visibility: hidden;
+  /* position:relative; */
+  /* left: 85%;
+  top: 25%; */
+  /* padding: 10px;
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  background-color: grey;
+  border-radius: 50%;
+  pointer-events:none; */
+  /* color: darkgray; */
+  /* visibility: hidden; */
 }
+
+
+/* .prev#disabled,
+.next#disabled {
+  visibility: hidden;
+} */
 
 
 .compare {

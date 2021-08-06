@@ -9,7 +9,7 @@ const Rating = ({ item }) => {
 
 
   useEffect( () => {
-    console.log('useEffect from ratings: ', productId);
+    // console.log('useEffect from ratings: ', productId);
     axios.get(`http://localhost:3000/reviews/meta/${productId}`)
     .then( (data) => {
       // console.log('axios data for ratings', data.data.ratings);
@@ -29,7 +29,7 @@ const Rating = ({ item }) => {
       console.log('rating fetcher had problems', e);
       setRatings(0);
     })
-  }, [productId]);
+  }, []);
   return (
       <>
       {/* current css settings: each star = 16px with 2px border edges on each side, hence 12px of free space*/}

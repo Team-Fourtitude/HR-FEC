@@ -47,6 +47,7 @@ export const StarRating = styled.div`
 
 export const OutFitTitle = styled.h4`
   position: relative;
+  align-self: flex-start;
   margin: 0;
   left: 3%;
 `;

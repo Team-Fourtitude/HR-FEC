@@ -74,8 +74,10 @@ const ref = useRef(null);
 
   return (
     <>
-      <FaAngleLeft className="prev" id={left} onClick={() => handleArrowClick('left')} />
-      <FaAngleRight className="next" id={right} onClick={() => handleArrowClick('right')} />
+      {/* <div className="prev next">
+        <FaAngleLeft className="prev" id={left} onClick={() => handleClick('left')} />
+        <FaAngleRight className="next" id={right} onClick={() => handleClick('right')}/>
+      </div> */}
       <OutFitTitle>Your Outfit</OutFitTitle>
       <OutFitContainer ref={ref}>
         <AddCard onClick={handleClick}>

@@ -23,12 +23,11 @@ export const RelatedImg = styled.img`
   cursor: pointer;
 `;
 
-export const RelatedContainer = styled.div`
+export const RelatedCarousel = styled.div`
   display: flex;
   flex-direction: row;
-  max-width: 700px;
+  max-width: auto 100%;
   padding: 20px;
-  position: relative;
   left: 40px;
   overflow-x: scroll;
   scroll-behavior: smooth;
@@ -37,12 +36,32 @@ export const RelatedContainer = styled.div`
 }
 `;
 
+export const RelatedCarouselContainer = styled.div`
+  position:relative;
+  display:flex;
+  align-items:center;
+  max-width:100%;
+  margin: auto;
+  overflow:hidden;
+`;
+
+export const RelatedProductsRoot = styled.div`
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  max-width: 80%;
+`;
+
+
+
 export const RelatedBody = styled.div`
   position: relative;
-  height: 1000px;
-  /* display:flex;
-  flex-direction:column; */
-  /* max-width:1250px; */
-  /* overflow-x:hidden; */
-  /* margin:0 auto; */
+  /* height: 1000px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width:1250px;
+  overflow-x:hidden;
+  margin:0 auto;
+  border: 1px solid red;
 `;
