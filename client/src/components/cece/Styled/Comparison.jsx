@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 
 export const Caption = styled.caption`
@@ -16,6 +16,7 @@ export const TblContainer = styled.div`
   left: 10%;
   padding: 15px;
   border: 1px solid white;
+  border-radius: 5px;
   opacity: 5;
   pointer-events: auto;
   transition: 0.4s;
@@ -29,6 +30,7 @@ export const Table = styled.table`
   font-size: small;
   text-align: center;
   border: 1px solid black;
+  border-radius: 5px;
   padding: 15px;
 `;
 

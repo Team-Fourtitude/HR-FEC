@@ -15,7 +15,7 @@ const Styles = () => {
   }}>
     {(oneStyle.style && allStyles.styles.results) ? allStyles.styles.results.map( (style) => {
       if (style.style_id === oneStyle.style.style_id) {
-        return (<StylesImageWrapper key={style.style_id}><ThumbnailImage src={style.photos[0].thumbnail_url} alt={style.name}/></StylesImageWrapper>)
+        return (<StylesImageWrapper key={style.style_id}><ThumbnailImage src={style.photos[0].thumbnail_url} alt={style.name} noClick/></StylesImageWrapper>)
       } else {
         return (<StylesImageWrapper onClick={
           () => {

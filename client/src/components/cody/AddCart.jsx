@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
-import { CartButtonWrapper, CartButtonWrapper30, CartButtonWrapper60, CartButtonWrapper75, PopUp } from './StyleHelpers.jsx';
+import { CartButtonWrapper15, CartButtonWrapper30, CartButtonWrapper60, CartButtonWrapper75, PopUp } from './StyleHelpers.jsx';
+import {FaStar, FaRegStar} from 'react-icons/fa';
 
 const AddCart = () => {
   const curStyle = useContext(StyleContext);
@@ -103,7 +104,7 @@ const AddCart = () => {
                     sizeSelector.focus();
                   }
                 }}>ADD TO BAG</CartButtonWrapper75>
-                <CartButtonWrapper as='button' type='submit' onClick={ (ev) => {
+                <CartButtonWrapper15 as='button' type='submit' onClick={ (ev) => {
                   ev.preventDefault();
                   if (fav) {
                     setFav(false);
@@ -112,14 +113,14 @@ const AddCart = () => {
                   }
                   console.log(curStyle.style.name);
                   console.log('prompt: ', prompt);
-                }}>{ fav ? '★' : '☆'}</CartButtonWrapper>
+                }}>{ fav ? <FaStar style={{"color":"goldenrod"}} /> : <FaRegStar style={{"color":"grey"}} />}</CartButtonWrapper15>
                 </div>
               );
             } else {
               return (
                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
                 <CartButtonWrapper75 as='button' type='submit' disabled>ADD TO BAG</CartButtonWrapper75>
-                <CartButtonWrapper as='button' type='submit' disabled>☆</CartButtonWrapper>
+                <CartButtonWrapper15 as='button' type='submit' disabled></CartButtonWrapper15>
                 </div>
               );
               }

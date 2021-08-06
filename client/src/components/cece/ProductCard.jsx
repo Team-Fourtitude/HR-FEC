@@ -7,6 +7,7 @@ import RelatedProductContext from '../context/RelatedProductContext.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import Modal from '../Tim/Modal.jsx';
 import { v1 as uuidv1 } from 'uuid';
+import Rating from './RelatedRatings.jsx';
 
 
 
@@ -79,11 +80,12 @@ const ProductCard = ({ item }) => {
           {!styleDefault ? <CatAndPrice>{item.results[0].original_price}</CatAndPrice> : null}
         </OutFitInfo>
         <StarRating>
-          <FaStar />
+          {/* <FaStar />
           <FaStar />
           <FaStar />
           <FaStarHalfAlt />
-          <FaRegStar />
+          <FaRegStar /> */}
+          <Rating item={item}/>
         </StarRating>
       </RelatedCard>
     </>

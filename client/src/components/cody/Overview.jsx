@@ -20,7 +20,7 @@ const Overview = () => {
           </div>
         </div>
       </div>
-      <div style={{"backgroundColor":"whitesmoke", "borderRadius":"5px", "padding":"1em"}}>
+      <div style={{"backgroundColor":"whitesmoke", "borderRadius":"5px", "padding":"1em", "border":"1px solid #ddd"}}>
         <Description />
       </div>
     </div>

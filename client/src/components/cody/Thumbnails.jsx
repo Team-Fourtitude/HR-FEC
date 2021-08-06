@@ -50,7 +50,7 @@ const Thumbnails = () => {
                         setCurrentPic({url:photo.url, name:`${index}`, style:curStyle.style.style_id});
                         setIndex(index);
                       }}>
-                        <ThumbnailImage src={photo.thumbnail_url} alt={`${index || 'picture'}`} faded/>
+                        <ThumbnailImage src={photo.thumbnail_url} alt={`${index || 'picture'}`} faded noClick/>
                       </ThumbnailsImageWrapper>
                     );
                   } else {
