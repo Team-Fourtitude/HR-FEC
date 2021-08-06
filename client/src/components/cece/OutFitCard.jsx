@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaStar, FaStarHalfAlt, FaRegStar, FaRegWindowClose } from 'react-icons/fa';
 import { OFCard, ImageView, OutFitImg, OutFitInfo, CatAndPrice, StarRating } from './Styled/Outfit.jsx';
+import Rating from '../cody/Rating.jsx';
 
 
 const OutFitCard = ({ style }) => {
@@ -34,11 +35,7 @@ const OutFitCard = ({ style }) => {
         </CatAndPrice>
       </OutFitInfo>
       <StarRating>
-        <FaStar />
-        <FaStar />
-        <FaStar />
-        <FaStarHalfAlt />
-        <FaRegStar />
+        <Rating />
       </StarRating>
     </OFCard>
     : null}
