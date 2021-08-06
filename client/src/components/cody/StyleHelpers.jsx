@@ -156,9 +156,11 @@ export const CartButtonWrapper75 = styled(CartButtonWrapper)`
 export const ShareIconWrapper = styled.div`
   width: 40px;
   height: max-content;
+  transition: transform 0.2s;
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.2);
   }
 `;
 
