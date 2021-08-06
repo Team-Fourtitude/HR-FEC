@@ -10,7 +10,7 @@ font-family: 'Roboto', sans-serif;
 font-family: 'Ubuntu', sans-serif; */
 
 .next, .prev {
-  position: relative;
+  position: absolute;
   top: 25%;
   padding: 10px;
   font-size: 16px;
@@ -18,48 +18,32 @@ font-family: 'Ubuntu', sans-serif; */
   height: 30px;
   border-radius: 50%;
   transition-duration: 0.2s;
-
+  cursor: pointer;
 }
 
+/* .next {
+  left: 100%;
+} */
+
 .next {
-  left: 85%;
+  right: 0;
 }
 
 .prev {
-  left:
+  left:0;
+}
 
 .prev:hover,
 .next:hover {
   background-color: grey;
 }
 
+
+.prev#disabled,
 .next#disabled {
-  position:relative;
-  left: 85%;
-  top: 25%;
-  padding: 10px;
-  font-size: 16px;
-  width: 30px;
-  height: 30px;
-  background-color: grey;
-  border-radius: 50%;
-  pointer-events:none;
-  /* color: darkgray; */
+  visibility: hidden;
 }
 
-.prev#disabled {
-  position:relative;
-  top: 25%;
-  left: 20px;
-  padding: 10px;
-  font-size: 16px;
-  width: 30px;
-  height: 30px;
-  background-color: grey;
-  border-radius: 50%;
-  pointer-events: none;
-  /* color: darkgray; */
-}
 
 .compare {
   position: relative;
@@ -73,6 +57,7 @@ font-family: 'Ubuntu', sans-serif; */
 
 .compare:hover {
   color: goldenrod;
+  cursor: pointer;
 }
 
 
@@ -97,6 +82,7 @@ font-family: 'Ubuntu', sans-serif; */
 
 #delete:hover {
   color: black;
+  cursor: pointer;
 }
 
 
@@ -173,6 +159,7 @@ font-family: 'Ubuntu', sans-serif; */
   background-color: rgb(228, 222, 222);
   background: rgba(228, 222, 222, 0.4);
   padding: 2.5%;
+  border-radius: 5px;
   min-height: 60vh;
   min-width: 60vw;
   transition: all .1s ease-in-out;
@@ -181,38 +168,38 @@ font-family: 'Ubuntu', sans-serif; */
 .question-container-helpful {
   background-color: lightgreen;
   padding: 15px;
+  border-radius: 5px;
   animation-name: greenpop;
   animation-duration: 2s;
 }
 
 .answer-container {
-  background-color: lightgrey;
+  background-color: lightsmoke;
   padding: 15px;
+  margin: 1%;
+  border-radius: 5px;
   transition: all .1s ease-in-out;
 }
 
 .answer-container-helpful {
   background-color: rgba(53, 141, 53, 0.815);
   padding: 15px;
+  border-radius: 5px;
   transition: all .1s ease-in-out;
 }
 
 .answer-container-helpful:hover {
-  background-color: rgb(80, 177, 80);
-  padding: 15px;
-  animation-name: greenBreath;
-  animation-duration: 2s;
-  animation-iteration-count:infinite;
+
 }
 
 .answer-container-reportable {
   background-color: lightgrey;
   padding: 15px;
+  border-radius: 5px;
   transition: all .1s ease-in-out;
 }
 .answer-container-reportable:hover {
-  transform: scale(1.05);
-  background-color: rgb(214, 47, 47);
+
 }
 
 .answer-container:hover {

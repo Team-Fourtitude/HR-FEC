@@ -30,6 +30,12 @@ export const ThumbnailImage = styled.img`
   object-fit: cover;
   object-position: center;
   opacity: ${(props) => props.faded ? '0.2' : '1'};
+  transition: opacity 0.2s;
+
+  &:hover {
+    cursor: ${props => props.noClick ? "default" : "pointer"};
+    opacity: ${props => props.noClick ? props.faded ? "0.2" : "1" : "0.3"};
+  }
 `;
 
 export const ThumbnailsButton = styled.button`
@@ -46,6 +52,7 @@ export const ThumbnailsButton = styled.button`
   &:hover {
     color: #888;
     transform: scale(1.2);
+    cursor: pointer;
   }
 `;
 
@@ -105,6 +112,20 @@ export const CartButtonWrapper = styled.div`
   color: #333;
   font-size: 1em;
   font-weight: bold;
+
+  &:hover {
+    cursor: ${props => props.disabled ? 'default' : 'pointer'};
+  }
+`;
+
+export const CartButtonWrapper15 = styled(CartButtonWrapper)`
+  display: ${props => props.disabled ? 'none' : 'inline-block'};
+  background-color: whitesmoke;
+  border: 1px solid #ddd;
+
+  &:hover {
+    box-shadow: inset 0 0 5px rgba(100,100,100,0.1);
+  }
 `;
 
 export const CartButtonWrapper30 = styled(CartButtonWrapper)`
@@ -122,7 +143,29 @@ width: 60%;
 
 export const CartButtonWrapper75 = styled(CartButtonWrapper)`
   display: ${props => props.disabled ? 'none' : 'block'};
+  color: white;
+  border: 1px solid FireBrick;
+  background-color: crimson;
   width: 75%;
+
+  &:hover {
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  }
+`;
+
+export const ShareIconWrapper = styled.div`
+  width: 40px;
+  height: max-content;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const Star = styled.div`
+  display: inline-block;
+  width: max-content;
+  height: max-content;
 `;
 
 export const PopUp = styled.p`
@@ -132,7 +175,7 @@ export const PopUp = styled.p`
   padding: 0.5em;
   margin: 0;
   display: ${props => props.prompt === 'true' ? 'block' : 'none'};
-  color: purple;
+  color: crimson;
   background-color: #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 3px rgba(0,0,0,0.2);

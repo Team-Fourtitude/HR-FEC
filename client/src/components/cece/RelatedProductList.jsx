@@ -29,6 +29,10 @@ const RelatedProductList = () => {
     } else {
       setRight('next');
     }
+    console.log(ref)
+    console.log(ref.current.scrollLeft, 'left')
+    console.log(ref.current.scrollWidth, 'width')
+
 
     if (!ref.current.scrollLeft) {
       setLeft('disabled')
@@ -37,12 +41,13 @@ const RelatedProductList = () => {
     }
   }
 
-
+  console.log('ref', ref)
   return (
     <>
       <FaAngleLeft className="prev" id={left} onClick={() => handleClick('left')} />
       <FaAngleRight className="next" id={right} onClick={() => handleClick('right')} />
-      <OutFitTitle>Related Products</OutFitTitle>
+
+      <OutFitTitle style={{'paddingTop': '20px'}}>Related Products</OutFitTitle>
       <RelatedContainer ref={ref} >
         {relatedStyles.related ? relatedStyles.related.map((item, index) => {
           return (

@@ -6,7 +6,7 @@ export const OFCard = styled.div`
   text-align: justify;
   margin: 20px;
   background-color: whitesmoke;
-  /* border: 2px solid black; */
+  border-radius: 5px;
   box-sizing: border-box;
   overflow-y: scroll;
 `;
@@ -54,13 +54,16 @@ export const OutFitTitle = styled.h4`
 export const OutFitContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 75%;
+  max-width: 700px;
   padding: 20px;
   position: relative;
   left: 10%;
   right:10%;
   overflow-x: scroll;
   scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+  display: none;
+}
 `;
 
 export const AddCard = styled.div`
@@ -69,9 +72,11 @@ export const AddCard = styled.div`
   height: 200px;
   background-color: whitesmoke;
   text-align: justify;
-  margin: 11% 20px 20px 20px;
-  border: 2px solid black;
+  margin: 65px 20px 20px 20px;
+  border: 2px solid darkgrey;
+  border-radius: 5px;
   box-sizing: border-box;
+  cursor: pointer;
 `;
 
 export const AddText = styled.div`

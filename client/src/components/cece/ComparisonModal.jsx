@@ -39,13 +39,13 @@ const ComparisonModal = (props) => {
     let currentFeat = compare.current.features.find(({ value }) => {return value === feature.value});
     let relatedFeat = style.features.find(({ value }) => {return value === feature.value});
     return(
-      <tr>
+      <tbody>
       {relatedFeat ?
           <td><FaCheck style={{color: 'green'}}/></td> : <td></td>}
         <td>{`${feature.feature}: ${feature.value}`}</td>
       {currentFeat ?
         <td><FaCheck style={{color: 'green'}}/>  </td> : <td></td>}
-      </tr>
+      </tbody>
     )
   }
 
@@ -59,11 +59,11 @@ const ComparisonModal = (props) => {
         </Caption>
 
       <thead>
-        <tr>
+
           <th>{style.name}</th>
           <th>Features</th>
           <th>{compare.current.name}</th>
-        </tr>
+
       </thead>
         {compareFeature.map(renderComparison)}
       </Table>
