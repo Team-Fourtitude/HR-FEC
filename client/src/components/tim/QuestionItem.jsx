@@ -103,7 +103,7 @@ const QuestionItem = () => {
           <h3>Q: {question.question_body}</h3>
         </QuestionHeaderContainer>
         <QuestionPosterContainer>
-          by {question.asker_name}
+          <span>by {question.asker_name}</span>
         </QuestionPosterContainer>
         <QuestionHelpfulContainer>
           <HelpfulFeedback help={markHelpful} helpCount={question.question_helpfulness} action={addAnswer} actionType={'Add Answer'} />
