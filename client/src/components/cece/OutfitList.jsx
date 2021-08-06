@@ -84,9 +84,11 @@ const ref = useRef(null);
             id={left}
             onClick={() => handleArrowClick('left')} />
           <OutFitCarousel ref={ref}>
-            <AddCard onClick={handleClick}>
-              <FaPlus id="add" />
-              <AddText>Add To Outfit</AddText>
+            <AddCard >
+              <FaPlus id="add" onClick={handleClick}/>
+              <AddText onClick={handleClick}>
+                Add To Outfit
+              </AddText>
             </AddCard>
               {card.map(renderOutfit)}
           </OutFitCarousel>

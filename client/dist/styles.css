@@ -5,8 +5,6 @@ body {
 
 .next,
 .prev {
-  /* position: relative; */
-  /* top: 25%; */
   padding: 15px;
   font-size: 16px;
   width: 30px;
@@ -18,14 +16,6 @@ body {
   cursor: pointer;
 }
 
-.next {
-  /* right: 0; */
-}
-
-.prev {
-  /* left:0; */
-}
-
 .prev:hover,
 .next:hover {
   background-color: rgba(2, 2, 2, 0.473);
@@ -35,25 +25,9 @@ body {
 
 .prev#disabled,
 .next#disabled {
-  /* position:relative; */
-  /* left: 85%;
-  top: 25%; */
-  /* padding: 10px;
-  font-size: 16px;
-  width: 30px;
-  height: 30px;
-  background-color: grey;
-  border-radius: 50%;
-  pointer-events:none; */
-  /* color: darkgray; */
   visibility: hidden;
 }
 
-
-/* .prev#disabled,
-.next#disabled {
-  visibility: hidden;
-} */
 
 
 .compare {
@@ -61,17 +35,13 @@ body {
   top: 2%;
   left: 89%;
   color: rgb(167, 167, 167);
-  /* border: 1px solid lightgrey; */
   transition-duration: 0.2s;
-
 }
 
 .compare:hover {
   color: goldenrod;
   cursor: pointer;
 }
-
-
 
 
 #add {
