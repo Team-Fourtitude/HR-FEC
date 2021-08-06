@@ -25,7 +25,7 @@ const RelatedProducts = () => {
       let id = product.id;
 
       //re-renders styles
-      axios.get(`http://localhost:3000/products/${id}/styles`)
+      axios.get(`/products/${id}/styles`)
       .then( (data) => {
         if (styles.product_id !== data.data.product_id) {
           // console.log(data.data);
@@ -39,7 +39,7 @@ const RelatedProducts = () => {
       .catch( (e) => console.error(e) );
 
 
-      let relatedUrl = `http://localhost:3000/products/${id}/related`;
+      let relatedUrl = `/products/${id}/related`;
       const relatedInfo = axios.get(relatedUrl)
       axios.all([relatedInfo]).then(axios.spread((responses) => {
         // console.log('IDS', responses);
@@ -54,7 +54,7 @@ const RelatedProducts = () => {
   const getRelatedData = () => {
     if (relatedIds.length) {
       const relUrl = relatedIds.map((id) => {
-        let url = `http://localhost:3000/products/${id}`;
+        let url = `/products/${id}`;
         return url;
       })
 

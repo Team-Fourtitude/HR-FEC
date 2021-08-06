@@ -49,8 +49,8 @@ const ProductCard = ({ item }) => {
 
          <ImageView onClick={() => navToProduct(item.product_id)}>
           {item && styleDefault ?
-            <RelatedImg src={styleDefault.photos[0].thumbnail_url} />
-            : <RelatedImg src={item.results[0].photos[0].thumbnail_url} />}
+            <RelatedImg src={styleDefault.photos[0].thumbnail_url} alt="related"/>
+            : <RelatedImg src={item.results[0].photos[0].thumbnail_url} alt="related" />}
           </ImageView>
 
         <OutFitInfo onClick={() => navToProduct(item.product_id)}>

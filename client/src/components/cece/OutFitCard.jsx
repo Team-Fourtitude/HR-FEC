@@ -22,7 +22,7 @@ const OutFitCard = ({ style }) => {
       <FaRegWindowClose id="delete" onClick={handleDelete}/>
       {outfit && outfit.style.photos ?
       <ImageView>
-        <OutFitImg src={outfit.style.photos[0].thumbnail_url} />
+        <OutFitImg src={outfit.style.photos[0].thumbnail_url} alt="main" />
       </ImageView>
       : null}
       <OutFitInfo>
