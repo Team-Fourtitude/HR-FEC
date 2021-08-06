@@ -5,7 +5,7 @@ import { ImageView, OutFitInfo, CatAndPrice, StarRating } from './Styled/Outfit.
 import ProductContext from '../context/ProductContext.jsx';
 import RelatedProductContext from '../context/RelatedProductContext.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
-import Modal from '../Tim/Modal.jsx';
+import Modal from '../tim/Modal.jsx';
 import { v1 as uuidv1 } from 'uuid';
 import Rating from './RelatedRatings.jsx';
 

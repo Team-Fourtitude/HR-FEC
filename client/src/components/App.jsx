@@ -54,10 +54,10 @@ const App = () => {
       <StylesContext.Provider value={{styles, setStyles}}>
         <StyleContext.Provider value={{style, setStyle}}>
           <Overview />
-          <RelatedProducts />
+          {/* <RelatedProducts />
           <div>
             <QuestionsAnswers />
-          </div>
+          </div> */}
         </StyleContext.Provider>
       </StylesContext.Provider>
     </ProductContext.Provider>

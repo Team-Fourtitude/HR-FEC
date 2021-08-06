@@ -1,9 +1,10 @@
 const express = require('express');
-
+const compression = require('compression');
 const app = express();
 const port = 3000;
 const models = require('./models.js');
 
+app.use(compression());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
