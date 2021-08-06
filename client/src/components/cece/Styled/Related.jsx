@@ -63,5 +63,4 @@ export const RelatedBody = styled.div`
   max-width:1250px;
   overflow-x:hidden;
   margin:0 auto;
-  border: 1px solid red;
 `;

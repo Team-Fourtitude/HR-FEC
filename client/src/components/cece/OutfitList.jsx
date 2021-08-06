@@ -3,7 +3,7 @@ import ProductContext from '../context/ProductContext.jsx';
 import StylesContext from '../context/StylesContext.jsx';
 import OutFitCard from './OutFitCard.jsx';
 import { FaPlus, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-import { OutFitTitle, OutFitContainer, AddCard, AddText } from './Styled/Outfit.jsx';
+import { OutfitRoot, OutFitTitle, OutFitCarousel, OutfitCarouselContainer, AddCard, AddText } from './Styled/Outfit.jsx';
 
 
 const OutfitList = () => {
@@ -74,18 +74,25 @@ const ref = useRef(null);
 
   return (
     <>
-      {/* <div className="prev next">
-        <FaAngleLeft className="prev" id={left} onClick={() => handleClick('left')} />
-        <FaAngleRight className="next" id={right} onClick={() => handleClick('right')}/>
-      </div> */}
-      <OutFitTitle>Your Outfit</OutFitTitle>
-      <OutFitContainer ref={ref}>
-        <AddCard onClick={handleClick}>
-          <FaPlus id="add" />
-          <AddText>Add To Outfit</AddText>
-        </AddCard>
-          {card.map(renderOutfit)}
-      </OutFitContainer>
+     <OutfitRoot>
+        <OutFitTitle>
+          Your Outfit
+        </OutFitTitle>
+        <OutfitCarouselContainer>
+          <FaAngleLeft
+            className="prev"
+            id={left}
+            onClick={() => handleArrowClick('left')} />
+          <OutFitCarousel ref={ref}>
+            <AddCard onClick={handleClick}>
+              <FaPlus id="add" />
+              <AddText>Add To Outfit</AddText>
+            </AddCard>
+              {card.map(renderOutfit)}
+          </OutFitCarousel>
+          <FaAngleRight className="next" id={right} onClick={() => handleClick('right')}/>
+        </OutfitCarouselContainer>
+      </OutfitRoot>
     </>
   );
 }
