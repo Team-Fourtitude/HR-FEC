@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
-import ProductContext from '../context/ProductContext.jsx';
 import { FaStar, FaRegStar } from 'react-icons/fa';
-import {Star} from './StyleHelpers.jsx';
+import {Star} from '../cody/StyleHelpers.jsx';
 import axios from 'axios';
 
-const Rating = () => {
+const Rating = ({ item }) => {
   const [ratings, setRatings] = useState(0);
-  const curProduct = useContext(ProductContext);
-  const productId = curProduct.product.id;
+  const productId = item.product_id;
+
+
   useEffect( () => {
     console.log('useEffect from ratings: ', productId);
     axios.get(`http://localhost:3000/reviews/meta/${productId}`)
     .then( (data) => {
-      console.log('axios data for ratings', data.data.ratings);
+      // console.log('axios data for ratings', data.data.ratings);
       const scores = data.data.ratings;
       let total = 0;
       let divider = 0;
@@ -39,14 +39,14 @@ const Rating = () => {
         <div style={{"display":"flex", "overflow":"hidden", "position":"absolute", "width":`${ Math.floor(ratings) * 16 + 2 + (ratings - Math.floor(ratings)) * 12}px`}}>
           {[1,2,3,4,5].map(num => (
             <Star key={num}>
-              <FaStar style={{'color': 'goldenrod'}} />
+              <FaStar style={{'color': 'goldenrod'}}/>
             </Star>
           ))}
         </div>
         <div style={{"display":"flex", "position":"absolute"}}>
           {[6,7,8,9,10].map(num => (
             <Star key={num}>
-              <FaRegStar style={{"color":"goldenrod"}} />
+              <FaRegStar style={{'color': 'goldenrod'}}/>
             </Star>
           ))}
         </div>

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import ProductContext from '../context/ProductContext.jsx';
+import { ShareIconWrapper } from './StyleHelpers.jsx';
 
 const Description = () => {
   const currentProduct = useContext(ProductContext);
@@ -16,21 +17,21 @@ const Description = () => {
       </ul>
     </div>
     <div style={{"display":"flex", "justifyContent":"space-between", "width":"30%"}}>
-      <div style={{"width":"50px"}} onClick={ () => {
+      <ShareIconWrapper onClick={ () => {
         console.log('');
       }}>
         <img style={{"width":"100%"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Twitter3_colored_svg-512.png' alt='twitter icon' />
-      </div>
-      <div style={{"width":"50px"}} onClick={ () => {
+      </ShareIconWrapper>
+      <ShareIconWrapper onClick={ () => {
         console.log('');
       }}>
         <img style={{"width":"100%"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Facebook_colored_svg_copy-512.png' alt='facebook icon' />
-      </div>
-      <div style={{"width":"50px"}} onClick={ () => {
+      </ShareIconWrapper>
+      <ShareIconWrapper onClick={ () => {
         console.log('');
       }}>
         <img style={{"width":"100%"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Pinterest_colored_svg-512.png' alt='pinterest icon' />
-      </div>
+      </ShareIconWrapper>
     </div>
   </div>
   );
