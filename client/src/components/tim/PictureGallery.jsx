@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Modal from './Modal.jsx';
 
+import { ThumbnailImg, ThumbnailContainer, PictureGalleryWrapper } from './StyleHelpers.jsx'
+
 /* eslint react/prop-types: 0 */
 
 
@@ -20,15 +22,6 @@ const PictureGallery = (props) => {
     setPhotos([...props.photos])
   }, [props.photos])
 
-  const style = {
-    height: "auto",
-    width: 100,
-    cursor: "pointer",
-    borderRadius: "5px",
-    border: "2px solid gray",
-    margin: "5px",
-  }
-
   const popImage = (target) => {
     console.log(`Opened ${popSrc}`)
     setPopped(target.src)
@@ -43,20 +36,23 @@ const PictureGallery = (props) => {
 
   return (
   <div className='AnsPhotos'>
-    {photos.map((link, index) => {
-      return (
-        <img
-          className='AnsPhoto'
-          src={link}
-          key={index}
-          style={style}
-          onClick={(event) => {
-            props.remove ? removeImage(event.target) : popImage(event.target)
-          }}
-        ></img>
+    <PictureGalleryWrapper>
+      {photos.map((link, index) => {
+        return (
+          <ThumbnailContainer key={index}>
+            <ThumbnailImg
+              className="AnsPhoto"
+              src={link}
+              key={index}
+              onClick={(event) => {
+                props.remove ? removeImage(event.target) : popImage(event.target)
+              }}
+            ></ThumbnailImg>
+          </ThumbnailContainer >
+        )}
       )}
-    )}
-    <div style={{ transform: "translateX(50px)" }}>
+    </PictureGalleryWrapper>
+    <div>
       <Modal isOpen={isOpen} close={() => {setOpen(false)}}>
         <img
           className="AnsPhoto"
@@ -76,3 +72,5 @@ const PictureGallery = (props) => {
 }
 
 export default PictureGallery;
+
+// style={{ transform: "translateX(50px)" }}

@@ -3,6 +3,8 @@ import { ImArrowUp } from 'react-icons/im';
 
 import PictureGallery from './PictureGallery.jsx';
 
+import { AnswerWrapper } from './styleHelpers.jsx'
+
 import { useAnswersUpdate } from './AnswersContext.jsx'
 import QuestionContext from './QuestionContext.jsx';
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
@@ -64,11 +66,12 @@ const AnswerItem = () => {
     reportCurrentAnswer(currentAnswer.id, currentQuestion.id)
     setReported(true);
   }
+  // div className={`answer-container${willReport && !isHelpful ? "-reportable" : "" || isHelpful ? "-helpful" : ""}`}
 
   return (
-    <div className="answer-item"> {!reported &&
-      <div className={`answer-container${willReport && !isHelpful ? "-reportable" : "" || isHelpful ? "-helpful" : ""}`}>
-        <div className="answer-body">
+    <div> {!reported &&
+      <AnswerWrapper>
+        <div>
           <strong>A:</strong> {answer.body}
         </div>
         <div
@@ -91,7 +94,7 @@ const AnswerItem = () => {
           </u>
         </div>
         <PictureGallery photos={answer.photos ? answer.photos : []}/>
-      </div> }
+      </AnswerWrapper> }
     </div>
   )
 }
