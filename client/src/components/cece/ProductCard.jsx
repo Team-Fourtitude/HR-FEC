@@ -12,7 +12,7 @@ import Rating from './RelatedRatings.jsx';
 
 
 const ProductCard = ({ item }) => {
-  const [ relatedProduct, setRelatedProduct] = useContext(RelatedProductContext);
+  const [ relatedProduct ] = useContext(RelatedProductContext);
   const { product, setProduct } = useContext(ProductContext);
   const [ viewModal, setViewModal ] = useState(false);
   const [isOpen, setOpen] = useState(false);

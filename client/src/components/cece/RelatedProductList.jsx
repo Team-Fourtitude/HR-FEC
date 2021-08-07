@@ -2,7 +2,6 @@ import React, { useState, useRef, useContext } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { RelatedCarousel, RelatedCarouselContainer, RelatedProductsRoot } from './Styled/Related.jsx';
 import { OutFitTitle } from './Styled/Outfit.jsx';
-import { v4 as uuidv4 } from 'uuid';
 import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
 import ProductCard from './ProductCard.jsx';
 import { Next } from './Styled/Icons.jsx';
@@ -11,14 +10,13 @@ import { Next } from './Styled/Icons.jsx';
 
 
 const RelatedProductList = () => {
-  const [ relatedStyles, setRelatedStyles ] = useContext(RelatedStylesContext);
+  const [ relatedStyles ] = useContext(RelatedStylesContext);
   const [ left, setLeft] = useState('disabled');
   const [ right, setRight] = useState('');
-  let key = uuidv4();
   const ref = useRef(null);
 
   const handleClick = (direction) => {
-    console.log('WHY DONT YOU WORK', direction)
+    console.log(ref)
     if (direction === 'left') {
       ref.current.scrollLeft -= 200;
     } else {
@@ -30,10 +28,6 @@ const RelatedProductList = () => {
     } else {
       setRight('next');
     }
-    console.log(ref)
-    console.log(ref.current.scrollLeft, 'left')
-    console.log(ref.current.scrollWidth, 'width')
-
 
     if (!ref.current.scrollLeft) {
       setLeft('disabled')
@@ -42,7 +36,6 @@ const RelatedProductList = () => {
     }
   }
 
-  console.log('ref', ref)
   return (
     <RelatedProductsRoot>
       <OutFitTitle style={{'paddingTop': '25px'}}>
