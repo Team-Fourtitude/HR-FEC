@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import ProductContext from '../context/ProductContext.jsx';
+import DarkModeContext from '../context/DarkModeContext.jsx';
 import { ShareIconWrapper } from './StyleHelpers.jsx';
 
 const Description = () => {
   const currentProduct = useContext(ProductContext);
+  const { darkMode } = useContext(DarkModeContext);
   return (
   <div style={{"display":"flex", "flexDirection":"column", "width":"80%", "margin":"0 auto"}}>
     <div style={{"display":"flex"}}>
@@ -11,7 +13,7 @@ const Description = () => {
         <h2>{currentProduct.product.slogan || null}</h2>
         <p>{currentProduct.product.description || null}</p>
       </div>
-      <div style={{"border": "1px solid gray", "margin": "0 1em", "height":"100px", "alignSelf":"center"}}></div>
+      <div style={{"border": `${darkMode ? "1px solid #eee" : "1px solid gray"}`, "margin": "0 1em", "height":"100px", "alignSelf":"center"}}></div>
       <ul>
         {currentProduct.product.features ? currentProduct.product.features.map( (feature, index) => <li style={{"marginBottom":"0.5em"}} key={index}>{feature.value ? feature.value : null} {feature.feature}</li>) : null}
       </ul>
