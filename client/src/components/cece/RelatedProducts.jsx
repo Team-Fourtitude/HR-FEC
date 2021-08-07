@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { RelatedBody, theme } from './Styled/Related.jsx';
-import { GlobalStyles } from './Styled/global.jsx';
 import axios from 'axios';
 import ProductContext from '../context/ProductContext.jsx';
 import StylesContext from '../context/StylesContext.jsx';

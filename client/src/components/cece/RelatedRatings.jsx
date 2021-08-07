@@ -12,8 +12,6 @@ const Rating = ({ item }) => {
   } else {
     productId = item.id;
   }
-  // console.log('what shape', item)
-
 
   useEffect( () => {
     if (productId) {

@@ -85,8 +85,7 @@ let key = uuidv4();
         </OutFitTitle>
         <OutfitCarouselContainer>
           <Prev>
-            <FaAngleLeft
-              id={left}
+            <FaAngleLeft id={left}
               onClick={() => handleArrowClick('left')} />
           </Prev>
           <OutFitCarousel ref={ref}>
@@ -101,8 +100,7 @@ let key = uuidv4();
               {card.map(renderOutfit)}
           </OutFitCarousel>
           <Next>
-            <FaAngleRight
-              d={right}
+            <FaAngleRight id={right}
               onClick={() => handleArrowClick('right')}/>
           </Next>
         </OutfitCarouselContainer>
