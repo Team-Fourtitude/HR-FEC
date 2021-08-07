@@ -20,17 +20,17 @@ const Description = () => {
       <ShareIconWrapper onClick={ () => {
         console.log('');
       }}>
-        <img style={{"width":"25px", "height":"25px"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Twitter3_colored_svg-512.png' alt='twitter icon' />
+        <img style={{"width":"40px", "height":"40px"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Twitter3_colored_svg-512.png' alt='twitter icon' />
       </ShareIconWrapper>
       <ShareIconWrapper onClick={ () => {
         console.log('');
       }}>
-        <img style={{"width":"25px", "height":"25px"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Facebook_colored_svg_copy-512.png' alt='facebook icon' />
+        <img style={{"width":"40px", "height":"40px"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Facebook_colored_svg_copy-512.png' alt='facebook icon' />
       </ShareIconWrapper>
       <ShareIconWrapper onClick={ () => {
         console.log('');
       }}>
-        <img style={{"width":"25px", "height":"25px"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Pinterest_colored_svg-512.png' alt='pinterest icon' />
+        <img style={{"width":"40px", "height":"40px"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Pinterest_colored_svg-512.png' alt='pinterest icon' />
       </ShareIconWrapper>
     </div>
   </div>
