@@ -5,31 +5,38 @@ import axios from 'axios';
 
 const Rating = ({ item }) => {
   const [ratings, setRatings] = useState(0);
-  const productId = item.product_id;
+  let productId;
+  if (item.product_id) {
+    productId = item.product_id;
+  } else {
+    productId = item.id;
+  }
+  // console.log('what shape', item)
 
 
   useEffect( () => {
-    // console.log('useEffect from ratings: ', productId);
-    axios.get(`/reviews/meta/${productId}`)
-    .then( (data) => {
-      // console.log('axios data for ratings', data.data.ratings);
-      const scores = data.data.ratings;
-      let total = 0;
-      let divider = 0;
-      for (let score of Object.keys(scores)) {
-        total += Number(score) * Number(scores[score]);
-        divider += Number(scores[score]);
-      }
-      return total/divider;
-    })
-    .then( (avgRating) => {
-      setRatings(avgRating);
-    })
-    .catch( (e) => {
-      console.log('rating fetcher had problems', e);
-      setRatings(0);
-    })
+    if (productId) {
+      axios.get(`/reviews/meta/${productId}`)
+      .then( (data) => {
+        const scores = data.data.ratings;
+        let total = 0;
+        let divider = 0;
+        for (let score of Object.keys(scores)) {
+          total += Number(score) * Number(scores[score]);
+          divider += Number(scores[score]);
+        }
+        return total/divider;
+      })
+      .then( (avgRating) => {
+        setRatings(avgRating);
+      })
+      .catch( (e) => {
+        console.log('rating fetcher had problems', e);
+        setRatings(0);
+      })
+    }
   }, []);
+
   return (
       <>
       {/* current css settings: each star = 16px with 2px border edges on each side, hence 12px of free space*/}

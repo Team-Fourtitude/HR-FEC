@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Caption, TblContainer, Table, TblBody } from './Styled/Comparison.jsx';
+import { Caption, TblContainer, Table } from './Styled/Comparison.jsx';
 import { FaCheck } from 'react-icons/fa';
 
 
@@ -23,7 +23,6 @@ const ComparisonModal = (props) => {
 
   //local variable for related style
   const style = getRelatedStyle(compare.related);
-
 
   const getFeatures = () => {
     if (style.features) {
