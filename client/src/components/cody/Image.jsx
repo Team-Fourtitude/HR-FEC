@@ -76,7 +76,7 @@ const Image = (props) => {
               } else {
                 setSize(true);
               }
-            }}>{size ? '⛶' : '⛶'}</ImageButton>
+            }}><img src='assets/collapse.png' alt='collapse button' style={{"width":"25px"}}/></ImageButton>
             {(() => {
               if (index === 0) {
                 if (curStyle.style) {
@@ -173,7 +173,7 @@ const Image = (props) => {
               } else {
                 setSize(true);
               }
-            }}>{size ? '⛶' : '⛶'}</ImageButton>
+            }}><img src='assets/expand.png' alt='expand button' style={{"width":"25px"}}/></ImageButton>
             {(() => {
       if (index === 0) {
         if (curStyle.style) {

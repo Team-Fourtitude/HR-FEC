@@ -82,7 +82,9 @@ export const ThumbnailsContainer = styled.div`
 export const ImageButton = styled(ThumbnailsButton)`
   top: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
+  height: max-content;
+  width: max-content;
   padding: 0.2em;
   border-radius: 5px;
 `;
