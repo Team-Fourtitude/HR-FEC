@@ -1,9 +1,31 @@
 
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { RiCloseFill } from 'react-icons/ri';
 import { FaPlus } from 'react-icons/fa';
 import { ImArrowUp } from 'react-icons/im';
 
+/////////////////////////////////////////////////////
+// DarkMode
+/////////////////////////////////////////////////////
+
+// const blackBckgrd = '#18191A';
+// const darkWrapper = '#242526';
+// const darkContainer = '#3A3BC';
+// const darkPriText = '#E4E6EB';
+// const darkSecText = '#B3B3B3';
+
+/////////////////////////////////////////////////////
+// Fade
+/////////////////////////////////////////////////////
+
+const fadeIn = keyframes`
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+`
+
+export const Faded = styled.div`
+  animation: ${props => props.show ? fadeIn : ''} 1s;
+`;
 
 
 /////////////////////////////////////////////////////
@@ -28,7 +50,6 @@ export const ModalForm = styled.form`
   grid-template-rows: 1fr;
   grid-gap: 20px;
 `;
-//  grid-template-columns: 3fr;
 
 export const ModalErrorText = styled.div`
   color: red;
@@ -150,12 +171,15 @@ export const HelpfulFeedbackWrapper = styled.div`
   display: flex;
   font-size: smaller;
   align-items: center;
+  justify-content: center;
+  width: 90%
 `;
 
 export const Upvote = styled(ImArrowUp)`
   fill: orange;
   opacity: 1;
   animation: fade 2s linear;
+  padding-right: 1%;
 `;
 
 // Buttons
@@ -228,6 +252,7 @@ export const QuestionsSearchBar = styled.input`
   padding: 3%;
 `;
 
+
 export const QuestionSearchWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -247,32 +272,6 @@ export const AnswerWrapper = styled.div`
   border-radius: 15px;
 `;
 
-// export const AnswerBodyWrapper = styled.div`
-//   background-color: lightsmoke;
-//   padding: 15px;
-//   margin: 1%;
-//   border-radius: 15px;
-
-//   &:hover {
-//     background-color: rgb(198, 214, 219, 0.5);
-//     transform: scale(1.05);
-//   }
-// `;
-
-// export const AnswerBodyWrapper = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(10, 1fr);
-//   max-height: 10vh;
-//   &:hover {
-  // transition: all .1s ease-in-out;
-//     background-color: rgb(198, 214, 219, 0.5);
-//     transform: scale(1.05);
-//   }
-// `;
-
-//   &:hover {
-//   background-color: rgb(198, 214, 219, 0.5);
-// }
 
 export const AnswerBodyText = styled.div`
   grid-column-start: 1;
@@ -301,6 +300,10 @@ export const AnswerIcon = styled.button`
 /////////////////////////////////////////////////////
 // Question
 /////////////////////////////////////////////////////
+
+export const QuestionItemContainer = styled.div`
+
+`;
 
 export const DividerBar = styled.div`
   font-size: small;
@@ -390,7 +393,6 @@ export const PreviewImg = styled.img`
   }
 `;
 
-
 /////////////////////////////////////////////////////
 // Wrappers and Divs
 /////////////////////////////////////////////////////
@@ -411,7 +413,8 @@ export const QuestionsAnswersWrapper = styled.div`
   grid-column-end: 9;
   min-height: 60vh;
   display: grid;
-  background-color: ${props => props.dark ? 'black': 'whitesmoke'};
+  background-color: ${props => props.mode ? darkWrapper: 'whitesmoke'};
+  border-radius: 5px;
   padding: 5%;
 `;
 
@@ -436,3 +439,4 @@ export const QuestionList = styled.div`
 export const SecurityAdvisory = styled.span`
   font-size: smaller;
 `;
+

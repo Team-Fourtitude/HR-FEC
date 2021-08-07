@@ -8,7 +8,7 @@ import { useAnswersUpdate } from './AnswersContext.jsx'
 import QuestionContext from './QuestionContext.jsx';
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
 import AnswerItemContext from './AnswerItemContext.jsx';
-
+import Fade from "./Fade.jsx";
 
 /* eslint react/prop-types: 0 */
 
@@ -65,8 +65,10 @@ const AnswerItem = () => {
     setReported(true);
   }
 
+
+
   return (
-    <div> {!reported &&
+    <Fade show={!reported}> {!reported &&
       <AnswerWrapper>
         <div>
           <strong>A:</strong> {answer.body}
@@ -85,7 +87,7 @@ const AnswerItem = () => {
         </div>
         <PictureGallery photos={answer.photos ? answer.photos : []}/>
       </AnswerWrapper> }
-    </div>
+    </Fade>
   )
 }
 

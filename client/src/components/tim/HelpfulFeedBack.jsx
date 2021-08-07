@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { HelpfulFeedbackWrapper, ActionLink, DividerBar } from './StyleHelpers.jsx'
-import { ImArrowUp } from 'react-icons/im';
+import { HelpfulFeedbackWrapper, ActionLink, DividerBar, Upvote } from './StyleHelpers.jsx'
+
 /* eslint react/prop-types: 0 */
 
 const HelpfulFeedback = ({ help, helpCount, action, actionType, name, date }) => {
@@ -32,7 +32,7 @@ const HelpfulFeedback = ({ help, helpCount, action, actionType, name, date }) =>
         { (hasUserInfo !== '') &&
           <span>{hasUserInfo} &nbsp;</span>
         }
-        { !hasHelped ? '  ' : <ImArrowUp style={{fill: "orange"}}/>}
+        { !hasHelped ? '  ' : <Upvote />}
         {' Helpful? '}
         &nbsp;
         <ActionLink

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 //import ReactDOM from 'react-dom';
 
+import Fade from "./Fade.jsx";
 import Modal from './Modal.jsx';
 import AnswerItem from './AnswerItem.jsx';
 import SubmissionPost from './SubmissionPost.jsx';
@@ -97,7 +98,7 @@ const QuestionItem = () => {
 
   return(
   <div className="question-item">
-    <div className={`question-container${ hasHelped ? "-helpful" : ""}`}>
+    <Fade show={isLoaded}>
       {isLoaded && <QuestionTitleWrapper>
         <QuestionHeaderContainer>
           <h2>Q: {question.question_body}</h2>
@@ -137,7 +138,7 @@ const QuestionItem = () => {
             <SubmissionPost close={ () => setOpen(false) } submitAction={submitAnswer} question_body={question.question_body}/>
         </Modal>
       </div>
-    </div>
+    </Fade>
   </div>)
 }
 
