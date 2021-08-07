@@ -56,17 +56,19 @@ const App = () => {
       <ProductContext.Provider value={{product, setProduct}}>
         <StylesContext.Provider value={{styles, setStyles}}>
           <StyleContext.Provider value={{style, setStyle}}>
-            <button type='button' onClick={ () => {
-              if (darkMode) {
-                setDarkMode(null);
-              } else {
-                setDarkMode(true);
-              }
-            }}>mysterious button</button>
-            <Overview />
-            <RelatedProducts />
-            <div>
-              <QuestionsAnswers />
+            <div style={{"width": "100%", "backgroundImage":`${darkMode ? 'linear-gradient(-60deg, rgba(41,41,41,1) 0%, rgba(147,138,138,1) 49%, rgba(47,47,47,1) 100%)' : ''}`}}>
+              <button type='button' onClick={ () => {
+                if (darkMode) {
+                  setDarkMode(null);
+                } else {
+                  setDarkMode(true);
+                }
+              }}>mysterious button</button>
+              <Overview />
+              <RelatedProducts />
+              <div>
+                <QuestionsAnswers />
+              </div>
             </div>
           </StyleContext.Provider>
         </StylesContext.Provider>
