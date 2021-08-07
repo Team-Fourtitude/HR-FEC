@@ -100,7 +100,7 @@ const QuestionItem = () => {
     <div className={`question-container${ hasHelped ? "-helpful" : ""}`}>
       {isLoaded && <QuestionTitleWrapper>
         <QuestionHeaderContainer>
-          <h3>Q: {question.question_body}</h3>
+          <h2>Q: {question.question_body}</h2>
         </QuestionHeaderContainer>
         <QuestionPosterContainer>
           <span>by {question.asker_name}</span>

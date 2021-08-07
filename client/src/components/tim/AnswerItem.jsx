@@ -3,8 +3,8 @@ import { ImArrowUp } from 'react-icons/im';
 
 import PictureGallery from './PictureGallery.jsx';
 
-import { AnswerWrapper } from './styleHelpers.jsx'
-
+import { AnswerWrapper } from './styleHelpers.jsx';
+import HelpfulFeedback from './HelpfulFeedback.jsx';
 import { useAnswersUpdate } from './AnswersContext.jsx'
 import QuestionContext from './QuestionContext.jsx';
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
@@ -52,8 +52,8 @@ const AnswerItem = () => {
       month: 'long',
       day: '2-digit',
      }
-    let newdate = new Date(date).toLocaleDateString('en-gb', dateFormat).split(' ')
-    return `${newdate[1]} ${newdate[0]} ${newdate[2]}`;
+    let newdate = new Date(date).toLocaleDateString('en-us', dateFormat).split(' ').join(' ')
+    return `${newdate}`;
   }
 
   const markHelpful = () => {

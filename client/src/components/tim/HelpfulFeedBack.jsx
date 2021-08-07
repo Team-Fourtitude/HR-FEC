@@ -25,15 +25,16 @@ const HelpfulFeedback = ({ help, helpCount, action, actionType }) => {
 
   return (
       <HelpfulFeedbackWrapper>
-        {' Helpful? '} &nbsp;
-        { !hasHelped ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}
+        { !hasHelped ? '  ' : <ImArrowUp style={{fill: "orange"}}/>}
+        {' Helpful? '}
+        &nbsp;
         <ActionLink
           enabled={!hasHelped}
           onClick={() => { setHelped(true) }}>
           Yes
-        </ActionLink> {`(${count}) `}
+        </ActionLink> {' '} {`(${count}) `}
         <DividerBar>
-          &nbsp; | &nbsp;
+          &nbsp; {' | '} &nbsp;
         </DividerBar>
         <ActionLink
           enabled={ !hasActed }

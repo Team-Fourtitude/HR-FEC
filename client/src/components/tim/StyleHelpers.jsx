@@ -149,8 +149,7 @@ export const ActionLink = styled.u`
 export const HelpfulFeedbackWrapper = styled.div`
   display: flex;
   font-size: smaller;
-  color: gray;
-  padding-top 5%;
+  align-items: center;
 `;
 
 export const Upvote = styled(ImArrowUp)`
@@ -222,7 +221,7 @@ export const QuestionsListHeader = styled.div`
 export const QuestionsSearchBar = styled.input`
   width: 90%;
   border: 2px solid;
-  border-color: rgba(228, 222, 222, 0.9);
+  border-color: darkgrey;
   height:100%;
   border-radius: 5px;
   outline: none;
@@ -303,10 +302,6 @@ export const AnswerIcon = styled.button`
 // Question
 /////////////////////////////////////////////////////
 
-// export const QuestionWrapper = styled.div`
-
-// `;
-
 export const DividerBar = styled.div`
   font-size: small;
 `;
@@ -314,31 +309,35 @@ export const DividerBar = styled.div`
 export const QuestionTitleWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 2fr 1fr;
+  grid-template-rows: 1.5fr 1fr;
   max-height: 20%;
 `;
 
 export const QuestionHeaderContainer = styled.div`
-  grid-column: 1 / 5;
+  grid-column-start: 1;
+  grid-column-end: span 4;
   grid-row: 1;
   text-align: left;
   display: grid;
 `;
 
 export const QuestionHelpfulContainer = styled.div`
-  grid-row: 1;
-  grid-column-start: 6;
-  grid-column-end: span 2;
+  grid-row: 1 ;
+  grid-column-start: 5;
+  grid-column-end: span 3;
   display: flex;
+  justify-content: center;
   vertical-align: middle;
   font-size: smaller;
   font color: gray;
+  min-width: 90px
 `;
 
 export const QuestionPosterContainer = styled.div`
-  grid-column: 1;
+  grid-column: 1 / 3;
   grid-row: 2;
   display: grid;
+  padding-left: 5%;
 `;
 
 export const QuestionIcon = styled.div`
@@ -380,6 +379,7 @@ export const ThumbnailImg = styled.img`
 export const PictureGalleryWrapper = styled.div`
   display: flex;
   height: 50%;
+  justify-content: center;
 `;
 
 export const PreviewImg = styled.img`
@@ -409,17 +409,17 @@ export const ModuleWrapper = styled.div`
   position: relative;
   margin: auto;
   width: 100%;
-  max-width: 1800px;
+  max-width: 1250px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   grid-template-rows: auto;
 `;
 
 export const QuestionsAnswersWrapper = styled.div`
   grid-column-start: 2;
-  grid-column-end: 5;
+  grid-column-end: 9;
+  min-height: 60vh;
   display: grid;
-  width: 100%;
   background-color: whitesmoke;
   padding: 5%;
 `;
@@ -438,10 +438,10 @@ export const QuestionsListWrapper = styled.div`
 export const QuestionList = styled.div`
   background: rgba(167, 167, 167, 0.4);
   padding: 2.5%;
-  min-height: 60vh;
   min-width: 60vw;
 `;
 
+//min-height: 60vh;
 export const SecurityAdvisory = styled.span`
   font-size: smaller;
 `;
