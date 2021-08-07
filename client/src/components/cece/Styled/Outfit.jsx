@@ -5,10 +5,12 @@ export const OFCard = styled.div`
   height: 300px;
   text-align: justify;
   margin: 20px;
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   border-radius: 5px;
   box-sizing: border-box;
   overflow-y: scroll;
+  background-color: ${props => props.theme.bg};
+  color: ${props => props.theme.text};
 `;
 
 export const ImageView = styled.div`
@@ -85,13 +87,15 @@ export const AddCard = styled.div`
   position: relative;
   min-width: 200px;
   height: 200px;
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   text-align: justify;
   margin: 45px 20px 20px 20px;
   border: 2px solid darkgrey;
   border-radius: 5px;
   box-sizing: border-box;
   cursor: pointer;
+  background-color: ${props => props.theme.bg};
+  color: ${props => props.theme.text};
 `;
 
 export const AddText = styled.div`

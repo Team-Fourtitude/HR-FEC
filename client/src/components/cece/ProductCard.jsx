@@ -8,6 +8,7 @@ import ComparisonModal from './ComparisonModal.jsx';
 import Modal from '../tim/Modal.jsx';
 import { v1 as uuidv1 } from 'uuid';
 import Rating from './RelatedRatings.jsx';
+import { Compare } from './Styled/Icons.jsx';
 
 
 
@@ -39,7 +40,9 @@ const ProductCard = ({ item }) => {
   return (
     <>
       <RelatedCard>
-         <FaStar className="compare" onClick={modalInfoClick}/>
+          <Compare>
+            <FaStar onClick={modalInfoClick}/>
+          </Compare>
          <Modal isOpen={isOpen} close={() => {setOpen(false)}}>
            <ComparisonModal
             id={item.product_id}
@@ -54,7 +57,7 @@ const ProductCard = ({ item }) => {
           </ImageView>
 
         <OutFitInfo onClick={() => navToProduct(item.product_id)}>
-          {relatedProduct&& relatedProduct[0] ? relatedProduct.map((data, index) => {
+          {relatedProduct&& relatedProduct[0] ? relatedProduct.map((data) => {
             if (Number(item.product_id) === data.id) {
               return (
                 <span key={key}>

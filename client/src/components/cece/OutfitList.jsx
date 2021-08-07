@@ -4,6 +4,7 @@ import StylesContext from '../context/StylesContext.jsx';
 import OutFitCard from './OutFitCard.jsx';
 import { FaPlus, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { OutfitRoot, OutFitTitle, OutFitCarousel, OutfitCarouselContainer, AddCard, AddText } from './Styled/Outfit.jsx';
+import { Add, Next, Prev } from './Styled/Icons.jsx';
 import {v4 as uuidv4} from 'uuid';
 
 
@@ -76,7 +77,6 @@ let key = uuidv4();
     renderOutfit();
   }, [card])
 
-  console.log('parent', card)
   return (
     <>
      <OutfitRoot>
@@ -84,22 +84,27 @@ let key = uuidv4();
           Your Outfit
         </OutFitTitle>
         <OutfitCarouselContainer>
-          <FaAngleLeft
-            className="prev"
-            id={left}
-            onClick={() => handleArrowClick('left')} />
+          <Prev>
+            <FaAngleLeft
+              id={left}
+              onClick={() => handleArrowClick('left')} />
+          </Prev>
           <OutFitCarousel ref={ref}>
             <AddCard >
-              <FaPlus id="add" onClick={handleClick}/>
+              <Add>
+                <FaPlus onClick={handleClick}/>
+              </Add>
               <AddText onClick={handleClick}>
                 Add To Outfit
               </AddText>
             </AddCard>
               {card.map(renderOutfit)}
           </OutFitCarousel>
-          <FaAngleRight className="next"
-            d={right}
-            onClick={() => handleArrowClick('right')}/>
+          <Next>
+            <FaAngleRight
+              d={right}
+              onClick={() => handleArrowClick('right')}/>
+          </Next>
         </OutfitCarouselContainer>
       </OutfitRoot>
     </>
