@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import DarkModeContext from '../context/DarkModeContext.jsx';
 import AddCart from './AddCart.jsx';
 import Thumbnails from './Thumbnails.jsx';
 import Rating from './Rating.jsx';
 import Description from './Description.jsx';
 import StyleSelector from './StyleSelector.jsx';
 
+
 const Overview = () => {
+  const {darkMode} = useContext(DarkModeContext);
   return (
-    <div style={{"display":"flex", "flexDirection":"column", "maxWidth":"1250px", "overflowX":"hidden", "margin":"0 auto"}}>
+    <div style={{"display":"flex", "flexDirection":"column", "maxWidth":"1250px", "overflowX":"hidden", "margin":"0 auto", "backgroundColor": `${darkMode ? '#333' : 'whitesmoke'}`}}>
       <div style={{"position":"relative", "minHeight":"600px"}}>
         <div style={{"width":"100%"}}>
           <Thumbnails />
@@ -20,7 +23,7 @@ const Overview = () => {
           </div>
         </div>
       </div>
-      <div style={{"backgroundColor":"whitesmoke", "borderRadius":"5px", "padding":"1em", "border":"1px solid #ddd"}}>
+      <div style={{"backgroundColor":`${darkMode ? '#222' : 'whitesmoke'}`, "color":`${darkMode ? '#eee' : '#111'}`, "borderRadius":"5px", "padding":"1em", "border": `${darkMode ? "1px solid #111" : "1px solid #ddd"}`}}>
         <Description />
       </div>
     </div>

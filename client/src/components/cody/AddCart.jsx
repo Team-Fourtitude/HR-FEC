@@ -2,9 +2,11 @@ import React, { useState, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
 import { CartButtonWrapper15, CartButtonWrapper30, CartButtonWrapper60, CartButtonWrapper75, PopUp } from './StyleHelpers.jsx';
 import {FaStar, FaRegStar} from 'react-icons/fa';
+import DarkModeContext from '../context/DarkModeContext.jsx';
 
 const AddCart = () => {
   const curStyle = useContext(StyleContext);
+  const { darkMode } = useContext(DarkModeContext);
   const [fav, setFav] = useState(false);
   const [currentSize, setCurrentSize] = useState(null);
   const [prompt, setPrompt] = useState(null);
@@ -22,20 +24,20 @@ const AddCart = () => {
       for (let i = 1; i < 16; i++) {
         options.push(<option value={i} key={i}>{i}</option>);
       }
-      quantity = <CartButtonWrapper30 as='select' id='quantity'>{options}</CartButtonWrapper30>;
+      quantity = <CartButtonWrapper30 as='select' id='quantity' dark={darkMode}>{options}</CartButtonWrapper30>;
     } else if (max > 0) {
       let options = [];
       for (let i = 1; i < max + 1; i++) {
         options.push(<option value={i} key={i}>{i}</option>);
       }
-      quantity = <CartButtonWrapper30 as='select' id='quantity'>{options}</CartButtonWrapper30>;
+      quantity = <CartButtonWrapper30 as='select' id='quantity' dark={darkMode}>{options}</CartButtonWrapper30>;
     } else {
       let options = [<option key='0' value='0'>-</option>];
-      quantity = <CartButtonWrapper30 as='select' id='quantity' disabled>{options}</CartButtonWrapper30>;
+      quantity = <CartButtonWrapper30 as='select' id='quantity' dark={darkMode} disabled>{options}</CartButtonWrapper30>;
     }
   } else {
     quantity = (
-      <CartButtonWrapper30 as='select' id='quantity' value='null' disabled>
+      <CartButtonWrapper30 as='select' id='quantity' dark={darkMode} value='null' disabled>
       <option value='null'>-</option>
     </CartButtonWrapper30>
     );
@@ -52,7 +54,7 @@ const AddCart = () => {
               if (styleSizes[0] !== 'null') {
                 return (
                   <>
-                  <CartButtonWrapper60 as='select' id='size' value={currentSize ? currentSize : 'null'} onChange={(ev) => {
+                  <CartButtonWrapper60 as='select' id='size' dark={darkMode} value={currentSize ? currentSize : 'null'} onChange={(ev) => {
                     setCurrentSize(ev.target.value);
                     setPrompt(null);
                     ev.target.removeAttribute('size');
@@ -77,7 +79,7 @@ const AddCart = () => {
                   </>
                 );
               } else {
-                return <CartButtonWrapper60 as='select' id='size' value='null' disabled><option value='null'>OUT OF STOCK</option></CartButtonWrapper60>;
+                return <CartButtonWrapper60 as='select' id='size' dark={darkMode} value='null' disabled><option value='null'>OUT OF STOCK</option></CartButtonWrapper60>;
               }
             }
           })()}
@@ -88,7 +90,7 @@ const AddCart = () => {
             if (styleSizes[0] !== 'null') {
               return (
                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
-                <CartButtonWrapper75 as='button' type='submit' onClick={ (ev) => {
+                <CartButtonWrapper75 as='button' type='submit' dark={darkMode} onClick={ (ev) => {
                   ev.preventDefault();
                   let size = ev.target.parentElement.parentElement.children[0].children[0].value;
                   if (size !== 'null') {
@@ -104,7 +106,7 @@ const AddCart = () => {
                     sizeSelector.focus();
                   }
                 }}>ADD TO BAG</CartButtonWrapper75>
-                <CartButtonWrapper15 as='button' type='submit' onClick={ (ev) => {
+                <CartButtonWrapper15 as='button' type='submit' dark={darkMode} onClick={ (ev) => {
                   ev.preventDefault();
                   if (fav) {
                     setFav(false);
@@ -119,8 +121,8 @@ const AddCart = () => {
             } else {
               return (
                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
-                <CartButtonWrapper75 as='button' type='submit' disabled>ADD TO BAG</CartButtonWrapper75>
-                <CartButtonWrapper15 as='button' type='submit' disabled></CartButtonWrapper15>
+                <CartButtonWrapper75 as='button' type='submit' dark={darkMode} disabled>ADD TO BAG</CartButtonWrapper75>
+                <CartButtonWrapper15 as='button' type='submit' dark={darkMode} disabled></CartButtonWrapper15>
                 </div>
               );
               }

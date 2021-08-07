@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import DarkModeContext from './context/DarkModeContext.jsx';
 import ProductContext from './context/ProductContext.jsx';
 import StylesContext from './context/StylesContext.jsx';
 import StyleContext from './context/StyleContext.jsx';
@@ -12,6 +13,7 @@ import RelatedProducts from './cece/RelatedProducts.jsx';
 import Overview from './cody/Overview.jsx';
 
 const App = () => {
+  const [darkMode, setDarkMode] = useState(null);
   const [product, setProduct] = useState({});
   const [styles, setStyles] = useState({});
   const [style, setStyle] = useState({});
@@ -50,17 +52,32 @@ const App = () => {
   return (
     // Our context.Providers 'values' are linked to an object that contains our state hooks.
     // Thus when the state changes, all children using that context value will rerender with the newly set state value.
-    <ProductContext.Provider value={{product, setProduct}}>
-      <StylesContext.Provider value={{styles, setStyles}}>
-        <StyleContext.Provider value={{style, setStyle}}>
-          <Overview />
-          <RelatedProducts />
-          <div>
-            <QuestionsAnswers />
-          </div>
-        </StyleContext.Provider>
-      </StylesContext.Provider>
-    </ProductContext.Provider>
+    <DarkModeContext.Provider value={{darkMode, setDarkMode}}>
+      <ProductContext.Provider value={{product, setProduct}}>
+        <StylesContext.Provider value={{styles, setStyles}}>
+          <StyleContext.Provider value={{style, setStyle}}>
+            <div style={{"width": "100%", "backgroundImage":`${darkMode ? 'linear-gradient(-60deg, rgba(41,41,41,1) 0%, rgba(147,138,138,1) 49%, rgba(47,47,47,1) 100%)' : ''}`}}>
+              <button type='button' style={{
+                "position": "fixed",
+                "top":"1%",
+                "right":"5%",
+              }} onClick={ () => {
+                if (darkMode) {
+                  setDarkMode(null);
+                } else {
+                  setDarkMode(true);
+                }
+              }}>mysterious button</button>
+              <Overview />
+              <RelatedProducts />
+              <div>
+                <QuestionsAnswers />
+              </div>
+            </div>
+          </StyleContext.Provider>
+        </StylesContext.Provider>
+      </ProductContext.Provider>
+    </DarkModeContext.Provider>
   );
 }
 

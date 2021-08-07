@@ -12,6 +12,7 @@ export const StylesImageWrapper = styled.div.attrs((props) => ({
   height: 75px;
   border-radius: 50px;
   overflow: hidden;
+  background-color: ${props => props.dark ? '#444' : '#ddd'};
 `;
 
 export const ThumbnailsImageWrapper = styled.div.attrs((props) => ({
@@ -120,22 +121,27 @@ export const CartButtonWrapper = styled.div`
 
 export const CartButtonWrapper15 = styled(CartButtonWrapper)`
   display: ${props => props.disabled ? 'none' : 'inline-block'};
-  background-color: whitesmoke;
-  border: 1px solid #ddd;
+  background-color: ${props => props.dark ? '#666' : 'whitesmoke'};
+  border: 1px solid ${props => props.dark ? '#555' : '#ddd'};
 
   &:hover {
-    box-shadow: inset 0 0 5px rgba(100,100,100,0.1);
+    box-shadow: inset 0 0 5px rgba(100,100,100,0.2);
   }
 `;
 
 export const CartButtonWrapper30 = styled(CartButtonWrapper)`
   width: 30%;
+  color: ${props => props.dark ? 'white' : '#333'};
+  background-color: ${props => props.dark ? '#777' : 'whitesmoke'};
   position: absolute;
   right: 0;
 `;
 
 export const CartButtonWrapper60 = styled(CartButtonWrapper)`
 width: 60%;
+z-index: 15;
+color: ${props => props.dark ? 'white' : '#333'};
+background-color: ${props => props.dark ? '#777' : 'whitesmoke'};
 &::-webkit-scrollbar {
   display: none;
 }
@@ -146,6 +152,7 @@ export const CartButtonWrapper75 = styled(CartButtonWrapper)`
   color: white;
   border: 1px solid FireBrick;
   background-color: crimson;
+  opacity: 0.9;
   width: 75%;
 
   &:hover {
@@ -154,11 +161,14 @@ export const CartButtonWrapper75 = styled(CartButtonWrapper)`
 `;
 
 export const ShareIconWrapper = styled.div`
+  display: block;
   width: 40px;
   height: max-content;
+  transition: transform 0.2s;
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.2);
   }
 `;
 
