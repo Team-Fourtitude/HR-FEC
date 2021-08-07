@@ -36,7 +36,6 @@ export const Prev = styled.div`
 export const StarsContainer = styled.div`
   position: relative;
   display: inline-block;
-  /* height: 25px; */
   margin: 1em 0 0.5em 0;
 `;
 

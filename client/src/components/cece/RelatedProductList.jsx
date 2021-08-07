@@ -38,7 +38,7 @@ const RelatedProductList = () => {
 
   return (
     <RelatedProductsRoot>
-      <OutFitTitle style={{'paddingTop': '25px'}}>
+      <OutFitTitle relP >
         Related Products
       </OutFitTitle>
       <RelatedCarouselContainer>

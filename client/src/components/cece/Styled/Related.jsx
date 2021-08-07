@@ -73,18 +73,18 @@ export const RelatedBody = styled.div`
 
 
 //maroon
-// export const theme = {
-//   dark: {
-//     bg: `#734046`,
-//     text: `#dd715c`,
-//     main: '#321F28',
-//   },
-//   light: {
-//     bg: `whitesmoke`,
-//     text: `black`,
-//     main: 'white',
-//   }
-// }
+export const theme = {
+  dark: {
+    bg: `#734046`,
+    text: `#dd715c`,
+    main: '#321F28',
+  },
+  light: {
+    bg: `whitesmoke`,
+    text: `black`,
+    main: 'white',
+  }
+}
 
 //dark blue
 // export const theme = {
@@ -115,15 +115,15 @@ export const RelatedBody = styled.div`
 // }
 
 //black
-export const theme = {
-    dark: {
-      bg: `grey`,
-      text: `whitesmoke`,
-      main: 'black',
-    },
-    light: {
-      bg: `whitesmoke`,
-      text: `black`,
-      main: 'white',
-    }
-  }
+// export const theme = {
+//     dark: {
+//       bg: `grey`,
+//       text: `whitesmoke`,
+//       main: 'black',
+//     },
+//     light: {
+//       bg: `whitesmoke`,
+//       text: `black`,
+//       main: 'white',
+//     }
+//   }

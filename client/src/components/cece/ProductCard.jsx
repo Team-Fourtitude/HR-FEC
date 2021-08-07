@@ -72,7 +72,7 @@ const ProductCard = ({ item }) => {
           {styleDefault && !styleDefault.sale_price ? <CatAndPrice>{styleDefault.original_price}</CatAndPrice> : null}
           {styleDefault && styleDefault.sale_price ?
             <>
-            <CatAndPrice style={{'text-decoration': 'line-through', 'text-decoration-color': 'red'}}>
+            <CatAndPrice sale>
               {styleDefault.original_price}
             </CatAndPrice><br/>
             <CatAndPrice style={{'color': 'red'}}>
