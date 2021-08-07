@@ -120,7 +120,7 @@ export const CartButtonWrapper = styled.div`
 
 export const CartButtonWrapper15 = styled(CartButtonWrapper)`
   display: ${props => props.disabled ? 'none' : 'inline-block'};
-  background-color: whitesmoke;
+  background-color: ${props => props.dark ? 'purple' : 'whitesmoke'};
   border: 1px solid #ddd;
 
   &:hover {
