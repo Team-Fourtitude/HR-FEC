@@ -23,7 +23,7 @@ const Image = (props) => {
             "maxHeight": "600px",
             "backgroundColor": "black",
             "overflow": "hidden",
-            "cursor": zoom ? "url(\"https://i.imgur.com/spnFx5r.png\"), auto" : 'crosshair',
+            "cursor": zoom ? "url(\"assets/minusCursor.png\"), auto" : 'crosshair',
             "zIndex": "100",
           }} onKeyDown={ (e) => {
             if (e.which === 27) {
