@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import ProductContext from '../context/ProductContext.jsx';
 import DarkModeContext from '../context/DarkModeContext.jsx';
-import { ShareIconWrapper } from './StyleHelpers.jsx';
+import { ShareIconWrapper } from './StyleHelpers.js';
 
 const Description = () => {
   const currentProduct = useContext(ProductContext);

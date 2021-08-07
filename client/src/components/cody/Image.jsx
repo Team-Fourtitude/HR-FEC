@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-import { ImageButton, ImageButtonLeft, ImageButtonRight} from './StyleHelpers.jsx';
+import { ImageButton, ImageButtonLeft, ImageButtonRight} from './StyleHelpers.js';
 
 const Image = (props) => {
   const [size, setSize] = useState(false);

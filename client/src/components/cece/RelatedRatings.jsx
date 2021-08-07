@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { FaStar, FaRegStar } from 'react-icons/fa';
-import {Star} from '../cody/StyleHelpers.jsx';
+import {Star} from '../cody/StyleHelpers.js';
 import axios from 'axios';
 
 const Rating = ({ item }) => {

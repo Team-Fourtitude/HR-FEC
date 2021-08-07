@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
-import { CartButtonWrapper15, CartButtonWrapper30, CartButtonWrapper60, CartButtonWrapper75, PopUp } from './StyleHelpers.jsx';
+import { CartButtonWrapper15, CartButtonWrapper30, CartButtonWrapper60, CartButtonWrapper75, PopUp } from './StyleHelpers.js';
 import {FaStar, FaRegStar} from 'react-icons/fa';
 import DarkModeContext from '../context/DarkModeContext.jsx';
 

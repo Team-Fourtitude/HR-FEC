@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
 import Image from './Image.jsx';
-import { ThumbnailsContainer, ThumbnailsImageWrapper, ThumbnailImage, ThumbnailsButtonUp, ThumbnailsButtonDown } from './StyleHelpers.jsx';
+import { ThumbnailsContainer, ThumbnailsImageWrapper, ThumbnailImage, ThumbnailsButtonUp, ThumbnailsButtonDown } from './StyleHelpers.js';
 
 const thumbnailContainerStyles = {"width":"75px", "maxHeight": "475px","height":"max-content", "position":"absolute", "top":"10%", "left":"1%", "display":"block", "backgroundColor":"rgba(0, 0, 0, 0.5)", "padding":"2.5em 1em", "borderRadius":"10px", "zIndex":"1000"};
 
