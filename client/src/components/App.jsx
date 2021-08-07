@@ -50,6 +50,7 @@ const App = () => {
   return (
     // Our context.Providers 'values' are linked to an object that contains our state hooks.
     // Thus when the state changes, all children using that context value will rerender with the newly set state value.
+
     <ProductContext.Provider value={{product, setProduct}}>
       <StylesContext.Provider value={{styles, setStyles}}>
         <StyleContext.Provider value={{style, setStyle}}>
