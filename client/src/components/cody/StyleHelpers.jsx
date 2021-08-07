@@ -12,7 +12,7 @@ export const StylesImageWrapper = styled.div.attrs((props) => ({
   height: 75px;
   border-radius: 50px;
   overflow: hidden;
-  background-color: ${props => props.dark ? '#666' : '#ddd'};
+  background-color: ${props => props.dark ? '#444' : '#ddd'};
 `;
 
 export const ThumbnailsImageWrapper = styled.div.attrs((props) => ({
