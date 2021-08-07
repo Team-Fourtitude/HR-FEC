@@ -1,5 +1,25 @@
 import styled from 'styled-components';
 
+export const DescriptionBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+`;
+
+export const DescriptionSplit = styled.div`
+  border: ${props => props.dark ? '1px solid #eee' : '1px solid gray'};
+  margin: 0 1em;
+  height: 100px;
+  align-self: center;
+`;
+
+export const DescriptionShareBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+`;
+
 export const StyleSelectorTextWrapper = styled.p`
   margin: 1em 0;
   padding: 0;
