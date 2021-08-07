@@ -11,12 +11,12 @@ import OutfitList from './OutfitList.jsx';
 
 
 const RelatedProducts = () => {
-  const { product, setProduct } = useContext(ProductContext);
+  const { product } = useContext(ProductContext);
   const [relatedIds, setRelatedIds] = useState([]);
   const [relatedProduct, setRelatedProduct] = useState([]);
   const [relatedStyles, setRelatedStyles] = useState([]);
   const { styles, setStyles } = useContext(StylesContext);
-  const { style, setStyle } = useContext(StyleContext);
+  const { setStyle } = useContext(StyleContext);
 
 
   //initial Data
@@ -28,7 +28,6 @@ const RelatedProducts = () => {
       axios.get(`/products/${id}/styles`)
       .then( (data) => {
         if (styles.product_id !== data.data.product_id) {
-          console.log(data.data);
           setStyles(data.data);
           return data.data.results[0];
         } else {
@@ -42,7 +41,6 @@ const RelatedProducts = () => {
       let relatedUrl = `/products/${id}/related`;
       const relatedInfo = axios.get(relatedUrl)
       axios.all([relatedInfo]).then(axios.spread((responses) => {
-        // console.log('IDS', responses);
         const relatedSet = [...new Set(responses.data)]
         setRelatedIds(relatedSet);
       }))
@@ -70,7 +68,6 @@ const RelatedProducts = () => {
 
 
       axios.all(relatedData).then(axios.spread((...res) => {
-        // console.log(res)
         let relatedDataMap = res.map((data) => {
           return data.data;
         })

@@ -2,40 +2,24 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
-/*
-font-family: 'Georama', sans-serif;
-font-family: 'Montserrat', sans-serif;
-font-family: 'Noto Sans', sans-serif;
-font-family: 'Roboto', sans-serif;
-font-family: 'Ubuntu', sans-serif; */
 
-.next, .prev {
-  position: absolute;
-  top: 25%;
-  padding: 10px;
+.next,
+.prev {
+  padding: 15px;
   font-size: 16px;
   width: 30px;
-  height: 30px;
+  height: 20px;
+  margin: auto 15px;
   border-radius: 50%;
+  background-color: whitesmoke;
   transition-duration: 0.2s;
   cursor: pointer;
 }
 
-/* .next {
-  left: 100%;
-} */
-
-.next {
-  right: 0;
-}
-
-.prev {
-  left:0;
-}
-
 .prev:hover,
 .next:hover {
-  background-color: grey;
+  background-color: rgba(2, 2, 2, 0.473);
+
 }
 
 
@@ -45,22 +29,19 @@ font-family: 'Ubuntu', sans-serif; */
 }
 
 
+
 .compare {
   position: relative;
   top: 2%;
   left: 89%;
   color: rgb(167, 167, 167);
-  /* border: 1px solid lightgrey; */
   transition-duration: 0.2s;
-
 }
 
 .compare:hover {
   color: goldenrod;
   cursor: pointer;
 }
-
-
 
 
 #add {

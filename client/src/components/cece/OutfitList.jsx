@@ -3,7 +3,8 @@ import ProductContext from '../context/ProductContext.jsx';
 import StylesContext from '../context/StylesContext.jsx';
 import OutFitCard from './OutFitCard.jsx';
 import { FaPlus, FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-import { OutFitTitle, OutFitContainer, AddCard, AddText } from './Styled/Outfit.jsx';
+import { OutfitRoot, OutFitTitle, OutFitCarousel, OutfitCarouselContainer, AddCard, AddText } from './Styled/Outfit.jsx';
+import {v4 as uuidv4} from 'uuid';
 
 
 const OutfitList = () => {
@@ -13,6 +14,7 @@ const [ left, setLeft] = useState('disabled');
 const [ right, setRight] = useState('');
 const [card, setCard] = useState([]);
 const ref = useRef(null);
+let key = uuidv4();
 
 
   //sets state if localStorage has properties
@@ -22,6 +24,8 @@ const ref = useRef(null);
       setCard(card.concat(items));
     }
   }, []);
+
+
 
 
   const handleClick = () => {
@@ -43,6 +47,7 @@ const ref = useRef(null);
   }
 
   const handleArrowClick = (direction) => {
+    console.log(ref)
     if (direction === 'left') {
       ref.current.scrollLeft -= 200;
     } else {
@@ -64,26 +69,39 @@ const ref = useRef(null);
 
 
   const renderOutfit = (outfitCard) => {
-      return <OutFitCard key={product.id} product={outfitCard} style={outfitCard} card={card} setCard={setCard}/>
+      return <OutFitCard key={key} style={outfitCard} card={card} setCard={setCard}/>
   }
 
   useEffect( () => {
     renderOutfit();
   }, [card])
 
-
+  console.log('parent', card)
   return (
     <>
-      <FaAngleLeft className="prev" id={left} onClick={() => handleArrowClick('left')} />
-      <FaAngleRight className="next" id={right} onClick={() => handleArrowClick('right')} />
-      <OutFitTitle>Your Outfit</OutFitTitle>
-      <OutFitContainer ref={ref}>
-        <AddCard onClick={handleClick}>
-          <FaPlus id="add" />
-          <AddText>Add To Outfit</AddText>
-        </AddCard>
-          {card.map(renderOutfit)}
-      </OutFitContainer>
+     <OutfitRoot>
+        <OutFitTitle>
+          Your Outfit
+        </OutFitTitle>
+        <OutfitCarouselContainer>
+          <FaAngleLeft
+            className="prev"
+            id={left}
+            onClick={() => handleArrowClick('left')} />
+          <OutFitCarousel ref={ref}>
+            <AddCard >
+              <FaPlus id="add" onClick={handleClick}/>
+              <AddText onClick={handleClick}>
+                Add To Outfit
+              </AddText>
+            </AddCard>
+              {card.map(renderOutfit)}
+          </OutFitCarousel>
+          <FaAngleRight className="next"
+            d={right}
+            onClick={() => handleArrowClick('right')}/>
+        </OutfitCarouselContainer>
+      </OutfitRoot>
     </>
   );
 }

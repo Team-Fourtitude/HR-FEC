@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { RelatedCard, RelatedImg } from './Styled/Related.jsx';
-import { FaRegStar, FaStar, FaStarHalfAlt } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
 import { ImageView, OutFitInfo, CatAndPrice, StarRating } from './Styled/Outfit.jsx';
 import ProductContext from '../context/ProductContext.jsx';
 import RelatedProductContext from '../context/RelatedProductContext.jsx';
@@ -12,7 +12,7 @@ import Rating from './RelatedRatings.jsx';
 
 
 const ProductCard = ({ item }) => {
-  const [ relatedProduct, setRelatedProduct] = useContext(RelatedProductContext);
+  const [ relatedProduct ] = useContext(RelatedProductContext);
   const { product, setProduct } = useContext(ProductContext);
   const [ viewModal, setViewModal ] = useState(false);
   const [isOpen, setOpen] = useState(false);
@@ -49,20 +49,20 @@ const ProductCard = ({ item }) => {
 
          <ImageView onClick={() => navToProduct(item.product_id)}>
           {item && styleDefault ?
-            <RelatedImg src={styleDefault.photos[0].thumbnail_url} />
-            : <RelatedImg src={item.results[0].photos[0].thumbnail_url} />}
+            <RelatedImg src={styleDefault.photos[0].thumbnail_url} alt="related"/>
+            : <RelatedImg src={item.results[0].photos[0].thumbnail_url} alt="related" />}
           </ImageView>
 
         <OutFitInfo onClick={() => navToProduct(item.product_id)}>
           {relatedProduct&& relatedProduct[0] ? relatedProduct.map((data, index) => {
             if (Number(item.product_id) === data.id) {
               return (
-                <>
-                <CatAndPrice key={key}>
+                <span key={key}>
+                <CatAndPrice >
                   [ {data.category} ]
                 </CatAndPrice><br /><br />
                 {data.name}<br />
-                </>
+                </span>
               )
             }
           }) : null}
@@ -80,11 +80,6 @@ const ProductCard = ({ item }) => {
           {!styleDefault ? <CatAndPrice>{item.results[0].original_price}</CatAndPrice> : null}
         </OutFitInfo>
         <StarRating>
-          {/* <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStarHalfAlt />
-          <FaRegStar /> */}
           <Rating item={item}/>
         </StarRating>
       </RelatedCard>
