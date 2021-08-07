@@ -23,7 +23,7 @@ const Overview = () => {
           </div>
         </div>
       </div>
-      <div style={{"backgroundColor":`${darkMode ? '#333' : 'whitesmoke'}`, "color":`${darkMode ? '#eee' : '#222'}`, "borderRadius":"5px", "padding":"1em", "border": `${darkMode ? "1px solid #111" : "1px solid #ddd"}`}}>
+      <div style={{"backgroundColor":`${darkMode ? '#222' : 'whitesmoke'}`, "color":`${darkMode ? '#eee' : '#111'}`, "borderRadius":"5px", "padding":"1em", "border": `${darkMode ? "1px solid #111" : "1px solid #ddd"}`}}>
         <Description />
       </div>
     </div>
