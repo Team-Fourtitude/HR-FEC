@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaRegWindowClose } from 'react-icons/fa';
 import { OFCard, ImageView, OutFitImg, OutFitInfo, CatAndPrice, StarRating } from './Styled/Outfit.jsx';
 import Rating from './RelatedRatings.jsx';
+import { Delete } from './Styled/Icons.jsx';
 
 
 const OutFitCard = ({ style, card, setCard }) => {
@@ -22,7 +23,10 @@ const OutFitCard = ({ style, card, setCard }) => {
     <>
     {toggle ?
     <OFCard>
-      <FaRegWindowClose id="delete" onClick={handleDelete}/>
+      <Delete>
+        <FaRegWindowClose onClick={handleDelete}/>
+
+      </Delete>
       {outfit && outfit.style.photos ?
       <ImageView>
         <OutFitImg src={outfit.style.photos[0].thumbnail_url} alt="main" />
