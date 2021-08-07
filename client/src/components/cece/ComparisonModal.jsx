@@ -6,7 +6,6 @@ import { FaCheck } from 'react-icons/fa';
 const ComparisonModal = (props) => {
   const [compare] = useState(props);
   const [compareFeature, setCompareFeature] = useState([]);
-  // console.log(compare)
 
 
   useEffect( () => {

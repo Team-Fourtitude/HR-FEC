@@ -3,30 +3,6 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.next,
-.prev {
-  padding: 15px;
-  font-size: 16px;
-  width: 30px;
-  height: 20px;
-  margin: auto 15px;
-  border-radius: 50%;
-  background-color: whitesmoke;
-  transition-duration: 0.2s;
-  cursor: pointer;
-}
-
-.prev:hover,
-.next:hover {
-  background-color: rgba(2, 2, 2, 0.473);
-
-}
-
-
-.prev#disabled,
-.next#disabled {
-  visibility: hidden;
-}
 
 
 
