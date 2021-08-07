@@ -40,86 +40,89 @@ const Thumbnails = () => {
           return (
             <>
             <div style={{"position":"relative"}}>
-            <Image current={currentPic ? currentPic : {url: '#', name: 'alt-name'}} context={curStyle} index={{index, setIndex}} currentPicture={{currentPic, setCurrentPic}}/>
-            <div style={thumbnailContainerStyles}>
-              <ThumbnailsContainer id="thumbnailScroll">
-                {curStyle.style ? curStyle.style.photos.map( (photo, index) => {
-                  if (currentPic.name == index) {
-                    return (
-                      <ThumbnailsImageWrapper id="selected" key={index} onClick={ () => {
-                        setCurrentPic({url:photo.url, name:`${index}`, style:curStyle.style.style_id});
-                        setIndex(index);
-                      }}>
-                        <ThumbnailImage src={photo.thumbnail_url} alt={`${index || 'picture'}`} faded noClick/>
-                      </ThumbnailsImageWrapper>
-                    );
-                  } else {
-                    return (
-                      <ThumbnailsImageWrapper key={index} onClick={ () => {
-                        setCurrentPic({url:photo.url, name:`${index}`, style:curStyle.style.style_id});
-                        setIndex(index);
-                      }}>
-                        <ThumbnailImage src={photo.thumbnail_url} alt={`${index || 'picture'}`} />
-                      </ThumbnailsImageWrapper>
-                    );
-                  }
-                }) : null}
-                {(() => {
-                  if (index === 0) {
-                    if (curStyle.style) {
-                      if (curStyle.style.photos.length === 1) {
+              <Image current={currentPic ? currentPic : {url: '#', name: 'alt-name'}} context={curStyle} index={{index, setIndex}} currentPicture={{currentPic, setCurrentPic}}/>
+              <div style={thumbnailContainerStyles}>
+                <ThumbnailsContainer id="thumbnailScroll">
+                  {/* maps out individual thumbnails into Thumbnails container */}
+                  {curStyle.style ? curStyle.style.photos.map( (photo, index) => {
+                    if (currentPic.name == index) {
+                      return (
+                        <ThumbnailsImageWrapper id="selected" key={index} onClick={ () => {
+                          setCurrentPic({url:photo.url, name:`${index}`, style:curStyle.style.style_id});
+                          setIndex(index);
+                        }}>
+                          <ThumbnailImage src={photo.thumbnail_url} alt={`${index || 'picture'}`} faded noClick/>
+                        </ThumbnailsImageWrapper>
+                      );
+                    } else {
+                      return (
+                        <ThumbnailsImageWrapper key={index} onClick={ () => {
+                          setCurrentPic({url:photo.url, name:`${index}`, style:curStyle.style.style_id});
+                          setIndex(index);
+                        }}>
+                          <ThumbnailImage src={photo.thumbnail_url} alt={`${index || 'picture'}`} />
+                        </ThumbnailsImageWrapper>
+                      );
+                    }
+                  }) : null}
+
+                  {/* returns 2 buttons with different states */}
+                  {(() => {
+                    if (index === 0) {
+                      if (curStyle.style) {
+                        if (curStyle.style.photos.length === 1) {
+                          return (
+                            <>
+                              <ThumbnailsButtonUp type='button' disabled>🞁</ThumbnailsButtonUp>
+                              <ThumbnailsButtonDown type='button' disabled>🞃</ThumbnailsButtonDown>
+                            </>
+                          );
+                        } else {
+                          return (
+                            <>
+                              <ThumbnailsButtonUp type='button' disabled>🞁</ThumbnailsButtonUp>
+                              <ThumbnailsButtonDown type='button'
+                              onClick={() => {
+                                setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
+                                setIndex(index + 1);
+                              }}>🞃</ThumbnailsButtonDown>
+                            </>
+                          );
+                        }
+                      }
+                    } else if (curStyle.style) {
+                      let photoMax = curStyle.style.photos.length - 1;
+                      if (index === photoMax) {
                         return (
                           <>
-                            <ThumbnailsButtonUp type='button' disabled>🞁</ThumbnailsButtonUp>
+                            <ThumbnailsButtonUp type='button'
+                            onClick={() => {
+                              setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
+                              setIndex(index - 1);
+                            }}>🞁</ThumbnailsButtonUp>
                             <ThumbnailsButtonDown type='button' disabled>🞃</ThumbnailsButtonDown>
                           </>
                         );
                       } else {
                         return (
                           <>
-                            <ThumbnailsButtonUp type='button' disabled>🞁</ThumbnailsButtonUp>
-                            <ThumbnailsButtonDown type='button'
+                            <ThumbnailsButtonUp type='button'
+                            onClick={() => {
+                              setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
+                              setIndex(index - 1);
+                            }}>🞁</ThumbnailsButtonUp>
+                            <ThumbnailsButtonDown
                             onClick={() => {
                               setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                               setIndex(index + 1);
-                            }}>🞃</ThumbnailsButtonDown>
+                          }}>🞃</ThumbnailsButtonDown>
                           </>
                         );
                       }
                     }
-                  } else if (curStyle.style) {
-                    let photoMax = curStyle.style.photos.length - 1;
-                    if (index === photoMax) {
-                      return (
-                        <>
-                          <ThumbnailsButtonUp type='button'
-                          onClick={() => {
-                            setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
-                            setIndex(index - 1);
-                          }}>🞁</ThumbnailsButtonUp>
-                          <ThumbnailsButtonDown type='button' disabled>🞃</ThumbnailsButtonDown>
-                        </>
-                      );
-                    } else {
-                      return (
-                        <>
-                          <ThumbnailsButtonUp type='button'
-                          onClick={() => {
-                            setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
-                            setIndex(index - 1);
-                          }}>🞁</ThumbnailsButtonUp>
-                          <ThumbnailsButtonDown
-                          onClick={() => {
-                            setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
-                            setIndex(index + 1);
-                        }}>🞃</ThumbnailsButtonDown>
-                        </>
-                      );
-                    }
-                  }
-                })()}
-              </ThumbnailsContainer>
-            </div>
+                  })()}
+                </ThumbnailsContainer>
+              </div>
             </div>
             </>
           );

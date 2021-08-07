@@ -17,7 +17,7 @@ const Description = () => {
       </ul>
     </div>
     <div style={{"display":"flex", "justifyContent":"space-between", "width":"30%"}}>
-      <ShareIconWrapper as='a' className="twitter-share-button" href="https://twitter.com/intent/tweet" target='_blank'>
+      <ShareIconWrapper as='a' className="twitter-share-button" href="https://twitter.com/intent/tweet" target='_blank' rel='noopener'>
         <img style={{"width":"40px", "height":"40px"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Twitter3_colored_svg-512.png' alt='twitter icon' />
       </ShareIconWrapper>
       <ShareIconWrapper onClick={ () => {
@@ -29,7 +29,7 @@ const Description = () => {
       }}>
         <img style={{"width":"40px", "height":"40px"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Facebook_colored_svg_copy-512.png' alt='facebook icon' />
       </ShareIconWrapper>
-      <ShareIconWrapper as='a' href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" target='_blank'>
+      <ShareIconWrapper as='a' href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" target='_blank' rel='noopener'>
         <img style={{"width":"40px", "height":"40px"}} src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Pinterest_colored_svg-512.png' alt='pinterest icon' />
       </ShareIconWrapper>
     </div>

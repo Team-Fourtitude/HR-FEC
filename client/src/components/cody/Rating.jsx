@@ -10,25 +10,28 @@ const Rating = () => {
   const productId = curProduct.product.id;
   useEffect( () => {
     console.log('useEffect from ratings: ', productId);
-    axios.get(`/reviews/meta/${productId}`)
-    .then( (data) => {
-      console.log('axios data for ratings', data.data.ratings);
-      const scores = data.data.ratings;
-      let total = 0;
-      let divider = 0;
-      for (let score of Object.keys(scores)) {
-        total += Number(score) * Number(scores[score]);
-        divider += Number(scores[score]);
-      }
-      return total/divider;
-    })
-    .then( (avgRating) => {
-      setRatings(avgRating);
-    })
-    .catch( (e) => {
-      console.log('rating fetcher had problems', e);
-      setRatings(0);
-    })
+
+    if (typeof productId === 'number') {
+      axios.get(`/reviews/meta/${productId}`)
+      .then( (data) => {
+        console.log('axios data for ratings', data.data.ratings);
+        const scores = data.data.ratings;
+        let total = 0;
+        let divider = 0;
+        for (let score of Object.keys(scores)) {
+          total += Number(score) * Number(scores[score]);
+          divider += Number(scores[score]);
+        }
+        return total/divider;
+      })
+      .then( (avgRating) => {
+        setRatings(avgRating);
+      })
+      .catch( (e) => {
+        console.log('rating fetcher had problems', e);
+        setRatings(0);
+      });
+    }
   }, [productId]);
   return (
       <>
