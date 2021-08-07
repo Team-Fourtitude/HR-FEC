@@ -68,7 +68,7 @@ const Image = (props) => {
                 e.target.style.backgroundPositionY = (-e.nativeEvent.offsetY * scaleY) + "px";
               }
             }}/>
-            <ImageButton type='button'
+            <ImageButton type='button' name='button-image'
             onClick={ () => {
               if (size) {
                 setZoom(false);
@@ -83,19 +83,19 @@ const Image = (props) => {
                   if (curStyle.style.photos.length === 1) {
                     return (
                       <>
-                <ImageButtonLeft type='button' disabled><FaAngleLeft /></ImageButtonLeft>
-                <ImageButtonRight type='button' disabled><FaAngleRight /></ImageButtonRight>
+                <ImageButtonLeft type='button' name='button-left' disabled><FaAngleLeft /></ImageButtonLeft>
+                <ImageButtonRight type='button' name='button-right' disabled><FaAngleRight name='fangle-right' /></ImageButtonRight>
               </>
             );
           } else {
             return (
               <>
-                <ImageButtonLeft type='button' disabled><FaAngleLeft /></ImageButtonLeft>
-                <ImageButtonRight type='button'
+                <ImageButtonLeft type='button' name='button-left' disabled><FaAngleLeft /></ImageButtonLeft>
+                <ImageButtonRight type='button' name='button-right'
                 onClick={() => {
                   setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                   setIndex(index + 1);
-                }}><FaAngleRight /></ImageButtonRight>
+                }}><FaAngleRight name='fangle-right' /></ImageButtonRight>
               </>
             );
           }
@@ -106,32 +106,32 @@ const Image = (props) => {
           return (
             <>
               <ImageButtonLeft type='button'
-              onClick={() => {
+name='button-left'               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
               }}><FaAngleLeft /></ImageButtonLeft>
-              <ImageButtonRight type='button' disabled><FaAngleRight /></ImageButtonRight>
+              <ImageButtonRight type='button' name='button-right' disabled><FaAngleRight name='fangle-right' /></ImageButtonRight>
             </>
           );
         } else {
           return (
             <>
               <ImageButtonLeft type='button'
-              onClick={() => {
+name='button-left'               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
                 let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop -= 100;
               }}><FaAngleLeft /></ImageButtonLeft>
-              <ImageButtonRight type='button'
+              <ImageButtonRight type='button' name='button-right'
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                 setIndex(index + 1);
                 let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop += 100;
-            }}><FaAngleRight /></ImageButtonRight>
+            }}><FaAngleRight name='fangle-right' /></ImageButtonRight>
             </>
           );
         }
@@ -165,7 +165,7 @@ const Image = (props) => {
                 setSize(true);
               }
             }}/>
-            <ImageButton type='button'
+            <ImageButton type='button' name='button-image'
             onClick={ () => {
               if (size) {
                 setZoom(false);
@@ -180,19 +180,19 @@ const Image = (props) => {
           if (curStyle.style.photos.length === 1) {
             return (
               <>
-                <ImageButtonLeft type='button' disabled><FaAngleLeft /></ImageButtonLeft>
-                <ImageButtonRight type='button' disabled><FaAngleRight /></ImageButtonRight>
+                <ImageButtonLeft type='button' name='button-left' disabled><FaAngleLeft /></ImageButtonLeft>
+                <ImageButtonRight type='button' name='button-right' disabled><FaAngleRight name='fangle-right' /></ImageButtonRight>
               </>
             );
           } else {
             return (
               <>
-                <ImageButtonLeft type='button' disabled><FaAngleLeft /></ImageButtonLeft>
-                <ImageButtonRight type='button'
+                <ImageButtonLeft type='button' name='button-left' disabled><FaAngleLeft /></ImageButtonLeft>
+                <ImageButtonRight type='button' name='button-right'
                 onClick={() => {
                   setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                   setIndex(index + 1);
-                }}><FaAngleRight /></ImageButtonRight>
+                }}><FaAngleRight name='fangle-right' /></ImageButtonRight>
               </>
             );
           }
@@ -203,32 +203,32 @@ const Image = (props) => {
           return (
             <>
               <ImageButtonLeft type='button'
-              onClick={() => {
+name='button-left'               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
-              }}><FaAngleLeft /></ImageButtonLeft>
-              <ImageButtonRight type='button' disabled><FaAngleRight /></ImageButtonRight>
+              }}><FaAngleLeft name='fangle-left'/></ImageButtonLeft>
+              <ImageButtonRight type='button' name='button-right' disabled><FaAngleRight name='fangle-right' /></ImageButtonRight>
             </>
           );
         } else {
           return (
             <>
               <ImageButtonLeft type='button'
-              onClick={() => {
+name='button-left'               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
                 let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop -= 100;
               }}><FaAngleLeft /></ImageButtonLeft>
-              <ImageButtonRight type='button'
+              <ImageButtonRight type='button' name='button-right'
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                 setIndex(index + 1);
                 let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop += 100;
-            }}><FaAngleRight /></ImageButtonRight>
+            }}><FaAngleRight name='fangle-right' /></ImageButtonRight>
             </>
           );
         }

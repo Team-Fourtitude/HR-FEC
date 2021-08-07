@@ -115,7 +115,7 @@ const AddCart = () => {
                   }
                   console.log(curStyle.style.name);
                   console.log('prompt: ', prompt);
-                }}>{ fav ? <FaStar style={{"color":"goldenrod"}} /> : <FaRegStar style={{"color":"grey"}} />}</CartButtonWrapper15>
+                }}>{ fav ? <FaStar style={{"color":"goldenrod"}} name='star-filled' /> : <FaRegStar style={{"color":"grey"}} name='star-empty' />}</CartButtonWrapper15>
                 </div>
               );
             } else {

@@ -73,15 +73,15 @@ const Thumbnails = () => {
                         if (curStyle.style.photos.length === 1) {
                           return (
                             <>
-                              <ThumbnailsButtonUp type='button' disabled>🞁</ThumbnailsButtonUp>
-                              <ThumbnailsButtonDown type='button' disabled>🞃</ThumbnailsButtonDown>
+                              <ThumbnailsButtonUp type='button' name='button-up' disabled>🞁</ThumbnailsButtonUp>
+                              <ThumbnailsButtonDown type='button' name='button-down' disabled>🞃</ThumbnailsButtonDown>
                             </>
                           );
                         } else {
                           return (
                             <>
-                              <ThumbnailsButtonUp type='button' disabled>🞁</ThumbnailsButtonUp>
-                              <ThumbnailsButtonDown type='button'
+                              <ThumbnailsButtonUp type='button' name='button-up' disabled>🞁</ThumbnailsButtonUp>
+                              <ThumbnailsButtonDown type='button' name='button-down'
                               onClick={() => {
                                 setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                                 setIndex(index + 1);
@@ -95,23 +95,23 @@ const Thumbnails = () => {
                       if (index === photoMax) {
                         return (
                           <>
-                            <ThumbnailsButtonUp type='button'
+                            <ThumbnailsButtonUp type='button' name='button-up'
                             onClick={() => {
                               setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                               setIndex(index - 1);
                             }}>🞁</ThumbnailsButtonUp>
-                            <ThumbnailsButtonDown type='button' disabled>🞃</ThumbnailsButtonDown>
+                            <ThumbnailsButtonDown type='button' name='button-down' disabled>🞃</ThumbnailsButtonDown>
                           </>
                         );
                       } else {
                         return (
                           <>
-                            <ThumbnailsButtonUp type='button'
+                            <ThumbnailsButtonUp type='button' name='button-up'
                             onClick={() => {
                               setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                               setIndex(index - 1);
                             }}>🞁</ThumbnailsButtonUp>
-                            <ThumbnailsButtonDown
+                            <ThumbnailsButtonDown type='button' name='button-down'
                             onClick={() => {
                               setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                               setIndex(index + 1);
