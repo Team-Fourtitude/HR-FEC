@@ -45,13 +45,13 @@ export const ThumbnailsButton = styled.button`
   padding: 0;
   border: 1px solid transparent;
   background-color: transparent;
-  transition: color 0.2s transform 0.2s;
+  transition: transform 0.2s;
 
-  color: #444;
+  mix-blend-mode: difference;
+  filter: invert(1);
   font-size: 2em;
 
   &:hover {
-    color: #888;
     transform: scale(1.2);
     cursor: pointer;
   }
@@ -90,17 +90,15 @@ export const ImageButton = styled(ThumbnailsButton)`
 export const ImageButtonLeft = styled(ThumbnailsButton)`
   top: 50%;
   left: 17%;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 0.2em;
-  border-radius: 5px;
+  height: max-content;
+  width: max-content;
 `;
 
 export const ImageButtonRight = styled(ThumbnailsButton)`
   top: 50%;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 0.2em;
-  border-radius: 5px;
+  height: max-content;
+  width: max-content;
 `;
 
 

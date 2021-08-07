@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { ImageButton, ImageButtonLeft, ImageButtonRight} from './StyleHelpers.jsx';
 
 const Image = (props) => {
   const [size, setSize] = useState(false);
   const [zoom, setZoom] = useState(false);
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
   const curStyle = props.context;
   const {index, setIndex} = props.index;
   const {currentPic, setCurrentPic} = props.currentPicture;
@@ -84,19 +83,19 @@ const Image = (props) => {
                   if (curStyle.style.photos.length === 1) {
                     return (
                       <>
-                <ImageButtonLeft type='button' disabled>🞀</ImageButtonLeft>
-                <ImageButtonRight type='button' disabled>🞂</ImageButtonRight>
+                <ImageButtonLeft type='button' disabled><FaAngleLeft /></ImageButtonLeft>
+                <ImageButtonRight type='button' disabled><FaAngleRight /></ImageButtonRight>
               </>
             );
           } else {
             return (
               <>
-                <ImageButtonLeft type='button' disabled>🞀</ImageButtonLeft>
+                <ImageButtonLeft type='button' disabled><FaAngleLeft /></ImageButtonLeft>
                 <ImageButtonRight type='button'
                 onClick={() => {
                   setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                   setIndex(index + 1);
-                }}>🞂</ImageButtonRight>
+                }}><FaAngleRight /></ImageButtonRight>
               </>
             );
           }
@@ -110,8 +109,8 @@ const Image = (props) => {
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
-              }}>🞀</ImageButtonLeft>
-              <ImageButtonRight type='button' disabled>🞂</ImageButtonRight>
+              }}><FaAngleLeft /></ImageButtonLeft>
+              <ImageButtonRight type='button' disabled><FaAngleRight /></ImageButtonRight>
             </>
           );
         } else {
@@ -124,7 +123,7 @@ const Image = (props) => {
                 let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop -= 100;
-              }}>🞀</ImageButtonLeft>
+              }}><FaAngleLeft /></ImageButtonLeft>
               <ImageButtonRight type='button'
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
@@ -132,7 +131,7 @@ const Image = (props) => {
                 let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop += 100;
-            }}>🞂</ImageButtonRight>
+            }}><FaAngleRight /></ImageButtonRight>
             </>
           );
         }
@@ -181,19 +180,19 @@ const Image = (props) => {
           if (curStyle.style.photos.length === 1) {
             return (
               <>
-                <ImageButtonLeft type='button' disabled>🞀</ImageButtonLeft>
-                <ImageButtonRight type='button' disabled>🞂</ImageButtonRight>
+                <ImageButtonLeft type='button' disabled><FaAngleLeft /></ImageButtonLeft>
+                <ImageButtonRight type='button' disabled><FaAngleRight /></ImageButtonRight>
               </>
             );
           } else {
             return (
               <>
-                <ImageButtonLeft type='button' disabled>🞀</ImageButtonLeft>
+                <ImageButtonLeft type='button' disabled><FaAngleLeft /></ImageButtonLeft>
                 <ImageButtonRight type='button'
                 onClick={() => {
                   setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                   setIndex(index + 1);
-                }}>🞂</ImageButtonRight>
+                }}><FaAngleRight /></ImageButtonRight>
               </>
             );
           }
@@ -207,8 +206,8 @@ const Image = (props) => {
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
-              }}>🞀</ImageButtonLeft>
-              <ImageButtonRight type='button' disabled>🞂</ImageButtonRight>
+              }}><FaAngleLeft /></ImageButtonLeft>
+              <ImageButtonRight type='button' disabled><FaAngleRight /></ImageButtonRight>
             </>
           );
         } else {
@@ -221,7 +220,7 @@ const Image = (props) => {
                 let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop -= 100;
-              }}>🞀</ImageButtonLeft>
+              }}><FaAngleLeft /></ImageButtonLeft>
               <ImageButtonRight type='button'
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
@@ -229,7 +228,7 @@ const Image = (props) => {
                 let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop += 100;
-            }}>🞂</ImageButtonRight>
+            }}><FaAngleRight /></ImageButtonRight>
             </>
           );
         }
