@@ -309,7 +309,7 @@ export const DividerBar = styled.div`
 export const QuestionTitleWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 1.5fr 1fr;
+  grid-template-rows: 1.5fr .5fr;
   max-height: 20%;
 `;
 
@@ -379,7 +379,6 @@ export const ThumbnailImg = styled.img`
 export const PictureGalleryWrapper = styled.div`
   display: flex;
   height: 50%;
-  justify-content: center;
 `;
 
 export const PreviewImg = styled.img`
@@ -390,14 +389,6 @@ export const PreviewImg = styled.img`
     transform: scale(1.05);
   }
 `;
-
-
-// export const SpinnerLoad = styled.img`
-// `;
-
-// export const UpvoteWrapper = styled.div`
-//   color: orange;
-// `;
 
 
 /////////////////////////////////////////////////////
@@ -420,7 +411,7 @@ export const QuestionsAnswersWrapper = styled.div`
   grid-column-end: 9;
   min-height: 60vh;
   display: grid;
-  background-color: whitesmoke;
+  background-color: ${props => props.dark ? 'black': 'whitesmoke'};
   padding: 5%;
 `;
 

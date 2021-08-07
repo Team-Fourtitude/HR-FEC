@@ -106,7 +106,11 @@ const QuestionItem = () => {
           <span>by {question.asker_name}</span>
         </QuestionPosterContainer>
         <QuestionHelpfulContainer>
-          <HelpfulFeedback help={markHelpful} helpCount={question.question_helpfulness} action={addAnswer} actionType={'Add Answer'} />
+          <HelpfulFeedback
+          help={markHelpful}
+          helpCount={question.question_helpfulness}
+          action={addAnswer}
+          actionType={'Add Answer'} />
         </QuestionHelpfulContainer>
       </QuestionTitleWrapper>}
       {' '}

@@ -3,10 +3,11 @@ import { HelpfulFeedbackWrapper, ActionLink, DividerBar } from './StyleHelpers.j
 import { ImArrowUp } from 'react-icons/im';
 /* eslint react/prop-types: 0 */
 
-const HelpfulFeedback = ({ help, helpCount, action, actionType }) => {
+const HelpfulFeedback = ({ help, helpCount, action, actionType, name, date }) => {
   const [hasHelped, setHelped] = useState(false);
   const [hasActed, setActed] = useState(false);
   const [count, setCount] = useState(0);
+  const [hasUserInfo, setHasUserInfo] = useState('');
 
   useEffect(() => {
     setCount(helpCount);
@@ -20,11 +21,17 @@ const HelpfulFeedback = ({ help, helpCount, action, actionType }) => {
     if (hasActed) {
       action(true);
     }
-
   }, [hasHelped, hasActed])
+
+  useEffect(() => {
+    if (name && date) setHasUserInfo(`By ${name}, ${date}`);
+  }, [name, date])
 
   return (
       <HelpfulFeedbackWrapper>
+        { (hasUserInfo !== '') &&
+          <span>{hasUserInfo} &nbsp;</span>
+        }
         { !hasHelped ? '  ' : <ImArrowUp style={{fill: "orange"}}/>}
         {' Helpful? '}
         &nbsp;
@@ -46,16 +53,3 @@ const HelpfulFeedback = ({ help, helpCount, action, actionType }) => {
 }
 
 export default HelpfulFeedback;
-
-
-
-{/* <div className="question-sub-text">
-          by {question.asker_name} | Helpful?  {!hasHelped ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}<u
-          onClick={() => { markHelpful() }}
-          style={{cursor: !hasHelped && 'pointer'}}>
-          Yes</u>
-            {' '} ({currentQuestion.question_helpfulness}) | {' '}
-          <u className="add-answer-link"
-            style={{cursor: "pointer"}}
-            onClick={ () => setOpen(true) }
-          >Add Answer</u> */}

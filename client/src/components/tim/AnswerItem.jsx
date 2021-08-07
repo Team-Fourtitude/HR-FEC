@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ImArrowUp } from 'react-icons/im';
 
 import PictureGallery from './PictureGallery.jsx';
 
@@ -17,7 +16,6 @@ const AnswerItem = () => {
   const [currentAnswer, setCurrentAnswer] = useState({});
   const [isHelpful, setHelped] = useState(false);
   const [reported, setReported] = useState(false);
-  const [willReport, setWillReport] = useState(false);
 
   const answer = useContext(AnswerItemContext);
   const { markAnswerHelpful } = useAnswersUpdate();
@@ -29,13 +27,13 @@ const AnswerItem = () => {
   useEffect(() => {
     if (answer !== undefined) {
       console.log(`This Answer is loaded!!! ${answer}`);
-      setCurrentAnswer(answer);
+      setCurrentAnswer({...answer});
     }
   }, [answer])
 
   useEffect(() => {
     if (isHelpful) {
-      setCurrentAnswer({...currentAnswer, helpfulness: answer.helpfulness++})
+      setCurrentAnswer({...currentAnswer, helpfulness: currentAnswer.helpfulness + 1})
       markAnswerHelpful(currentAnswer.id)
     }
   }, [isHelpful])
@@ -66,7 +64,6 @@ const AnswerItem = () => {
     reportCurrentAnswer(currentAnswer.id, currentQuestion.id)
     setReported(true);
   }
-  // div className={`answer-container${willReport && !isHelpful ? "-reportable" : "" || isHelpful ? "-helpful" : ""}`}
 
   return (
     <div> {!reported &&
@@ -77,21 +74,14 @@ const AnswerItem = () => {
         <div
           className="answer-sub-text"
           style={{margin: 10}}>
-          by {answer.answerer_name}, {convertDate(answer.date)} | Helpful? {!isHelpful ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}
-          <u
-            onClick={() => { markHelpful() }}
-            style={{cursor: !isHelpful && 'pointer'}}>
-            Yes
-          </u> {' '}
-          ({answer.helpfulness})
-          {' | '}
-          <u
-            style={{cursor: 'pointer'}}
-            onMouseEnter={() => {setWillReport(true)}}
-            onMouseLeave={() => {setWillReport(false)}}
-            onClick={() => { markReported() }}>
-            Report
-          </u>
+          <HelpfulFeedback
+            help={markHelpful}
+            helpCount={currentAnswer.helpfulness}
+            action={markReported}
+            actionType={'Report'}
+            name={currentAnswer.answerer_name}
+            date={convertDate(currentAnswer.date)}
+          />
         </div>
         <PictureGallery photos={answer.photos ? answer.photos : []}/>
       </AnswerWrapper> }
