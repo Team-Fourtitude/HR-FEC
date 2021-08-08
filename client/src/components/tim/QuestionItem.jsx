@@ -5,7 +5,7 @@ import Fade from "./Fade.jsx";
 import Modal from './Modal.jsx';
 import AnswerItem from './AnswerItem.jsx';
 import SubmissionPost from './SubmissionPost.jsx';
-import HelpfulFeedback from './HelpfulFeedback.jsx'
+import HelpfulFeedback from './HelpfulFeedBack.jsx'
 import { LoadMoreAnswersButton, QuestionTitleWrapper, QuestionHeaderContainer, QuestionHelpfulContainer, QuestionPosterContainer } from './StyleHelpers.jsx'
 
 import QuestionContext from './QuestionContext.jsx';
