@@ -6,14 +6,11 @@ import StylesContext from './context/StylesContext.jsx';
 import StyleContext from './context/StyleContext.jsx';
 import QuestionsAnswers from './tim/QuestionsAnswers.jsx'
 import RelatedProducts from './cece/RelatedProducts.jsx';
+import Overview from './cody/Overview.jsx';
 import { GlobalStyle } from './GlobalStyle.jsx';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './cece/Styled/Related.jsx';
 
-
-
-// this file shows how to use context in your component
-import Overview from './cody/Overview.jsx';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(null);
@@ -76,9 +73,7 @@ const App = () => {
               }}>mysterious button</button>
               <Overview />
               <RelatedProducts />
-              <div>
-                <QuestionsAnswers />
-              </div>
+              <QuestionsAnswers />
             </div>
           </StyleContext.Provider>
         </StylesContext.Provider>
