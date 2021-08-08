@@ -1,18 +1,14 @@
 import styled from 'styled-components';
 
-
-
 export const RelatedCard = styled.div`
   width: 275px;
   height: 400px;
   border-radius: 5px;
-  /* background-color: whitesmoke; */
   text-align: justify;
   margin: 20px;
-  /* border: 2px solid lightgrey; */
   box-sizing: border-box;
   cursor: pointer;
-  background-color: ${props => props.theme.bg};
+  background-color: ${props => props.theme.fg};
   color: ${props => props.theme.text};
 `;
 
@@ -57,73 +53,87 @@ export const RelatedProductsRoot = styled.div`
 `;
 
 
-
 export const RelatedBody = styled.div`
   position: relative;
-  /* height: 1000px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width:1250px;
   overflow-x:hidden;
   margin:0 auto;
-  background-color: ${props => props.theme.main};
+  background-color: ${props => props.theme.bg};
   color: ${props => props.theme.text};
 `;
 
 
 //maroon
-export const theme = {
-  dark: {
-    bg: `#734046`,
-    text: `#dd715c`,
-    main: '#321F28',
-  },
-  light: {
-    bg: `whitesmoke`,
-    text: `black`,
-    main: 'white',
-  }
-}
+// export const theme = {
+//   dark: {
+//     fg: `#734046`,
+//     text: `#dd715c`,
+//     bg: '#321F28',
+//     border: '1px solid #111',
+//     bkgImg: 'linear-gradient(-60deg, rgba(41,41,41,1) 0%, rgba(147,138,138,1) 49%, rgba(47,47,47,1) 100%)',
+//   },
+//   light: {
+//     fg: `whitesmoke`,
+//     text: `black`,
+//     bg: 'white',
+//     border: '1px solid #ddd',
+//     bkgImg: 'white',
+//   }
+// }
 
 //dark blue
 // export const theme = {
 //   dark: {
-//     bg: `#3C415C`,
+//     fg: `#3C415C`,
 //     text: `#B4A5A5`,
-//     main: '#151515',
+//     bg: '#151515',
+//     border: '1px solid #111',
+//     bkgImg: 'linear-gradient(-60deg, rgba(41,41,41,1) 0%, rgba(147,138,138,1) 49%, rgba(47,47,47,1) 100%)',
 //   },
 //   light: {
-//     bg: `whitesmoke`,
+//     fg: `whitesmoke`,
 //     text: `black`,
-//     main: 'white',
+//     bg: 'white',
+//     border: '1px solid #ddd',
+//     bkgImg: 'white',
 //   }
 // }
 
 //brown
-// export const theme = {
-//   dark: {
-//     bg: `#5C3D2E`,
-//     text: `#E0C097`,
-//     main: '#2D2424',
-//   },
-//   light: {
-//     bg: `whitesmoke`,
-//     text: `black`,
-//     main: 'white',
-//   }
-// }
+export const theme = {
+  dark: {
+    fg: `#5C3D2E`,
+    text: `#E0C097`,
+    bg: '#2D2424',
+    border: '1px solid #111',
+    bkgImg: 'linear-gradient(-60deg, #221818 0%, #866f6f 49%, #412f2f 100%)',
+  },
+  light: {
+    fg: `whitesmoke`,
+    text: `black`,
+    bg: 'white',
+    border: '1px solid #ddd',
+    bkgImg: 'white',
+  }
+}
 
 //black
 // export const theme = {
 //     dark: {
-//       bg: `grey`,
+//       fg: `grey`,
 //       text: `whitesmoke`,
-//       main: 'black',
+//       bg: 'black',
+//       border: '1px solid #111',
+//       bkgImg: 'linear-gradient(-60deg, rgba(41,41,41,1) 0%, rgba(147,138,138,1) 49%, rgba(47,47,47,1) 100%)',
 //     },
 //     light: {
-//       bg: `whitesmoke`,
+//       fg: `whitesmoke`,
 //       text: `black`,
-//       main: 'white',
-//     }
-//   }
+  //     bg: 'white',
+  //     border: '1px solid #ddd',
+  //     bkgImg: 'white',
+  //   }
+  // }

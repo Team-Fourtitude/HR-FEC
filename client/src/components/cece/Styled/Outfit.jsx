@@ -8,7 +8,7 @@ export const OFCard = styled.div`
   border-radius: 5px;
   box-sizing: border-box;
   overflow-y: scroll;
-  background-color: ${props => props.theme.bg};
+  background-color: ${props => props.theme.fg};
   color: ${props => props.theme.text};
 `;
 
