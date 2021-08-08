@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ProductContext from '../context/ProductContext.jsx';
 import { FaStar, FaRegStar } from 'react-icons/fa';
-import {Star} from './StyleHelpers.jsx';
+import {Star} from './StyleHelpers.js';
 import axios from 'axios';
 
 const Rating = () => {
