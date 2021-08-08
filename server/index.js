@@ -1,10 +1,13 @@
 const express = require('express');
+const formidableMiddleware = require('express-formidable');
+
 const compression = require('compression');
 const app = express();
 const port = 3000;
 const models = require('./models.js');
 
 app.use(compression());
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -85,7 +88,6 @@ app.get('/qa/questions/:id', (req, res) => {
 });
 
 app.post('/qa/questions/', (req, res) => {
-  //console.log(`Posting question for product: ${JSON.stringify(req.body)}`)
   models.addQuestion(req.body.body)
   .then(() => {
     res.status(201).send();
@@ -108,9 +110,9 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
     console.log(e);
   });
 });
-
+//
 app.put('/qa/questions/:question_id/report', (req, res) => {
-  //console.log(`Put question as reported: ${req.params.question_id}`)
+
   models.putQuestionReport(req.params.question_id)
   .then(() => {
     res.status(204).send();
@@ -122,7 +124,7 @@ app.put('/qa/questions/:question_id/report', (req, res) => {
 });
 
 app.get('/qa/questions/:question_id/answers', (req, res) => {
-  //console.log(`Getting answers: ${req.params.question_id}`)
+
   models.getAnswers(req.params.question_id)
   .then((data) => {
     res.status(200).send(data.data);
@@ -134,18 +136,19 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
 });
 
 app.post(`/qa/questions/:question_id/answers`, (req, res) => {
-  // console.log(`Posting answer from ${JSON.stringify(req.body.body.name)},
-  // for question ${JSON.stringify(req.params.question_id)},
-  // with this as the first photo ${JSON.stringify(req.body.body.photos)}`)
+
   models.addAnswer(req.params.question_id, req.body.body)
     .then(() => {
+      console.log(`Succesful Posted Answer!!!`)
       res.status(200).send();
     })
-    .catch(console.log);
+    .catch((e) => {
+      console.log(e);
+    });
 });
 
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {
-  //console.log(`Put Answer as helpful: ${req.params.answer_id}`)
+
   models.putAnswerHelp(req.params.answer_id)
   .then(() => {
     res.status(204).send();
@@ -157,7 +160,7 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
 });
 
 app.put('/qa/answers/:answer_id/report', (req, res) => {
-  //console.log(`Put Answer as reported: ${req.params.answer_id}`)
+
   models.putAnswerReport(req.params.answer_id)
   .then(() => {
     res.status(204).send();
@@ -168,17 +171,28 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
   });
 });
 
+app.use(formidableMiddleware({ multiples: true }))
+// Takes a post request of images, uploads images to cloudinary API, once all uploads complete, returns the resultant URLs
 app.post('/upload', (req, res) => {
-  //req.body.body.src
-  models.postUpload()
-    .then((image) => {
+  const reqData = req.files.validPics;
+  let uploads = [];
 
-      res.status(201).send(`Success! Here is the image: ${image.url}`);
+  if (Array.isArray(reqData)) {
+    uploads = reqData.map(image => models.postUpload(image.path));
+  } else {
+    uploads = [models.postUpload(reqData.path)];
+  }
+
+  Promise.all(uploads)
+    .then(images => {
+      const urls = images.map(({ url }) => url);
+        return res.status(200).send(urls);
     })
-    .catch((e) => {
-      console.log(e);
-    })
-})
+    .catch(error => {
+      console.log(`Failed at router with: \n ${error}`);
+      return res.status(500).send();
+    });
+});
 
 app.listen(port, () => {
   console.log(`App listening at post:${port}`);

@@ -1,40 +1,48 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ImArrowUp } from 'react-icons/im';
 
 import PictureGallery from './PictureGallery.jsx';
 
-import AnswerContext from './AnswerContext.jsx';
+import { AnswerWrapper } from './styleHelpers.jsx';
+import HelpfulFeedback from './HelpfulFeedback.jsx';
+import { useAnswersUpdate } from './AnswersContext.jsx'
 import QuestionContext from './QuestionContext.jsx';
-import { useAnswersUpdate } from './AnswersContext.jsx';
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
-
+import AnswerItemContext from './AnswerItemContext.jsx';
+import Fade from "./Fade.jsx";
 
 /* eslint react/prop-types: 0 */
 
 const AnswerItem = () => {
-  const [answer, setAnswer] = useState({});
+  const [currentAnswer, setCurrentAnswer] = useState({});
   const [isHelpful, setHelped] = useState(false);
   const [reported, setReported] = useState(false);
-  const [willReport, setWillReport] = useState(false);
 
-  const currentAnswer = useContext(AnswerContext);
+  const answer = useContext(AnswerItemContext);
   const { markAnswerHelpful } = useAnswersUpdate();
   const currentQuestion = useContext(QuestionContext);
-  const getQuestions = useQuestionsUpdate().getQuestions;
   const reportCurrentAnswer = useQuestionsUpdate().reportAnswer;
 
 
+  // on context change I need to update local answer state
   useEffect(() => {
-    if (currentAnswer !== undefined) {
-      setAnswer(currentAnswer);
+    if (answer !== undefined) {
+      console.log(`This Answer is loaded!!! ${answer}`);
+      setCurrentAnswer({...answer});
     }
-  }, [currentAnswer])
+  }, [answer])
 
   useEffect(() => {
     if (isHelpful) {
-      //getQuestions();
+      setCurrentAnswer({...currentAnswer, helpfulness: currentAnswer.helpfulness + 1})
+      markAnswerHelpful(currentAnswer.id)
     }
   }, [isHelpful])
+
+  useEffect(() => {
+    if (reported) {
+      reportCurrentAnswer(currentAnswer.id, currentQuestion.id)
+    }
+  }, [reported])
 
   const convertDate = (date) => {
     const dateFormat = {
@@ -42,14 +50,14 @@ const AnswerItem = () => {
       month: 'long',
       day: '2-digit',
      }
-    let newdate = new Date(date).toLocaleDateString('en-gb', dateFormat).split(' ')
-    return `${newdate[1]} ${newdate[0]} ${newdate[2]}`;
+    let newdate = new Date(date).toLocaleDateString('en-us', dateFormat).split(' ').join(' ')
+    return `${newdate}`;
   }
 
   const markHelpful = () => {
-    setAnswer({...answer, helpfulness: answer.helpfulness++})
-    markAnswerHelpful(currentAnswer.id, isHelpful)
-    setHelped(true);
+    if (!isHelpful) {
+      setHelped(true);
+    }
   }
 
   const markReported = () => {
@@ -57,34 +65,29 @@ const AnswerItem = () => {
     setReported(true);
   }
 
+
+
   return (
-    <div className="answer-item"> {!reported &&
-      <div className={`answer-container${willReport && !isHelpful ? "-reportable" : "" || isHelpful ? "-helpful" : ""}`}>
-        <div className="answer-body">
-          <strong>A:</strong> {currentAnswer.body}
+    <Fade show={!reported}> {!reported &&
+      <AnswerWrapper>
+        <div>
+          <strong>A:</strong> {answer.body}
         </div>
         <div
           className="answer-sub-text"
           style={{margin: 10}}>
-          by {currentAnswer.answerer_name}, {convertDate(currentAnswer.date)} | Helpful? {!isHelpful ? ' ' : <ImArrowUp style={{fill: "orange"}}/>}
-          <u
-            onClick={() => { markHelpful() }}
-            style={{cursor: !isHelpful && 'pointer'}}>
-            Yes
-          </u> {' '}
-          ({currentAnswer.helpfulness})
-          {' '} | {' '}
-          <u
-            style={{cursor: 'pointer'}}
-            onMouseEnter={() => {setWillReport(true)}}
-            onMouseLeave={() => {setWillReport(false)}}
-            onClick={() => { markReported() }}>
-            Report
-          </u>
+          <HelpfulFeedback
+            help={markHelpful}
+            helpCount={currentAnswer.helpfulness}
+            action={markReported}
+            actionType={'Report'}
+            name={currentAnswer.answerer_name}
+            date={convertDate(currentAnswer.date)}
+          />
         </div>
-        <PictureGallery photos={currentAnswer.photos ? currentAnswer.photos : []}/>
-      </div> }
-    </div>
+        <PictureGallery photos={answer.photos ? answer.photos : []}/>
+      </AnswerWrapper> }
+    </Fade>
   )
 }
 

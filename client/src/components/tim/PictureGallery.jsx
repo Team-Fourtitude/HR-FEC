@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Modal from './Modal.jsx';
-import { Fade } from './StyleHelpers.jsx'
+
+import { ThumbnailImg, ThumbnailContainer, PictureGalleryWrapper } from './StyleHelpers.jsx'
+
+/* eslint react/prop-types: 0 */
 
 
 const PictureGallery = (props) => {
   const [isOpen, setOpen] = useState(false);
   const [popSrc, setPopped] = useState('');
-
-  const style = {
-    height: "auto",
-    width: 100,
-    cursor: "pointer",
-    borderRadius: "5px",
-    border: "2px solid gray",
-    margin: "5px",
-  }
-
-  const popImage = (src) => {
-    console.log(`Opened ${popSrc}`)
-    setPopped(src)
-    setOpen(true)
-  }
+  const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
     if (!isOpen && popSrc !== '') {
@@ -29,25 +18,41 @@ const PictureGallery = (props) => {
     }
   }, [isOpen])
 
-  // useEffect(() => {
-  //   console.log('Popped')
-  // }, [popSrc])
+  useEffect(() => {
+    setPhotos([...props.photos])
+  }, [props.photos])
 
-  // modal is set to false currently for pictures hard crash
+  const popImage = (target) => {
+    console.log(`Opened ${popSrc}`)
+    setPopped(target.src)
+    setOpen(true)
+  }
+
+  const removeImage = (target) => {
+    props.remove(target.src)
+    console.log(`Bubbled ${target.src}`)
+  }
+  // popImage(event.target)
+
   return (
   <div className='AnsPhotos'>
-    {props.photos.map((link, index) => {
-      return (
-        <img
-          className='AnsPhoto'
-          src={link}
-          key={index}
-          style={style}
-          onClick={() => {popImage(event.target.src)}}
-        ></img>
+    <PictureGalleryWrapper>
+      {photos.map((link, index) => {
+        return (
+          <ThumbnailContainer key={index}>
+            <ThumbnailImg
+              className="AnsPhoto"
+              src={link}
+              key={index}
+              onClick={(event) => {
+                props.remove ? removeImage(event.target) : popImage(event.target)
+              }}
+            ></ThumbnailImg>
+          </ThumbnailContainer >
+        )}
       )}
-    )}
-    <div style={{ transform: "translateX(50px)" }}>
+    </PictureGalleryWrapper>
+    <div>
       <Modal isOpen={isOpen} close={() => {setOpen(false)}}>
         <img
           className="AnsPhoto"
@@ -67,3 +72,5 @@ const PictureGallery = (props) => {
 }
 
 export default PictureGallery;
+
+// style={{ transform: "translateX(50px)" }}

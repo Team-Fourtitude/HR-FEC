@@ -1,31 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import QuestionsList from './QuestionsList.jsx';
 import { QuestionsProvider } from './QuestionsContext.jsx'
+import { ModuleBackground, QuestionsAnswersWrapper, ModuleWrapper } from './StyleHelpers.jsx'
 
 // Main
 const QuestionsAnswers = () => {
 
   return (
-    <div style={
-      {"paddingTop": "2vh",
-      "paddingBottom": "1vh",
-      "position": "relative",
-      "margin": "auto",
-      "width": "100%",
-      "maxWidth": "1800px",
-      "display": "grid",
-      "gridTemplateColumns": "repeat(5, 1fr)","gridTemplateRows": "auto",}
-    }>
-      <div className="questions-answers-module" style={{
-        "gridColumn": "3 / 4",
-        "display": "grid",
-        "width": "100%",
-        }}>
-          <QuestionsProvider>
-            <QuestionsList />
-          </QuestionsProvider>
-      </div>
-    </div>
+    <ModuleBackground>
+      <ModuleWrapper>
+        <QuestionsAnswersWrapper>
+            <QuestionsProvider>
+              <QuestionsList />
+            </QuestionsProvider>
+        </QuestionsAnswersWrapper>
+      </ModuleWrapper>
+    </ModuleBackground>
   )
 }
 
