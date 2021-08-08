@@ -32,7 +32,7 @@ const HelpfulFeedback = ({ help, helpCount, action, actionType, name, date }) =>
         { (hasUserInfo !== '') &&
           <span>{hasUserInfo} &nbsp;</span>
         }
-        { !hasHelped ? '  ' : <Upvote />}
+        { !hasHelped ? <Upvote style={{opacity: 0}}/> : <Upvote />}
         {' Helpful? '}
         &nbsp;
         <ActionLink

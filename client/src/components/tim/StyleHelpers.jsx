@@ -5,16 +5,6 @@ import { FaPlus } from 'react-icons/fa';
 import { ImArrowUp } from 'react-icons/im';
 
 /////////////////////////////////////////////////////
-// DarkMode
-/////////////////////////////////////////////////////
-
-// const blackBckgrd = '#18191A';
-// const darkWrapper = '#242526';
-// const darkContainer = '#3A3BC';
-// const darkPriText = '#E4E6EB';
-// const darkSecText = '#B3B3B3';
-
-/////////////////////////////////////////////////////
 // Fade
 /////////////////////////////////////////////////////
 
@@ -102,7 +92,7 @@ export const ModalBackground = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  background-color: rgb(228, 222, 222, 0.8);
+  background-color: ${props => props.theme.fg};
   padding: 30px;
   border-radius: 30px;
   max-width: 90vw;
@@ -171,8 +161,10 @@ export const HelpfulFeedbackWrapper = styled.div`
   display: flex;
   font-size: smaller;
   align-items: center;
-  justify-content: center;
-  width: 90%
+  width: 100%;
+  min
+  margin-left: 5%;
+  overflow-x: hidden;
 `;
 
 export const Upvote = styled(ImArrowUp)`
@@ -196,11 +188,12 @@ export const LoadMoreAnswersButton = styled.button`
   margin: auto;
   outline:none;
   position:relative;
+  color: ${props => props.theme.text};
 `;
 
 export const QuestionAnimationButton = styled.button`
-  background-color: black;
-  color: white;
+  background-color: ${props => props.theme.bg};
+  color: ${props => props.theme.text};
   padding: 10px;
   border: .1rem solid;
   display: inline-block;
@@ -209,8 +202,8 @@ export const QuestionAnimationButton = styled.button`
   text-align: center;
   white-space: nowrap;
   &:hover {
-    background-color: white;
-    color: black;
+    background-color: ${props => props.theme.text};
+    color: ${props => props.theme.bg};
     border: .1rem solid;
   }
 `;
@@ -240,6 +233,7 @@ export const UploadThumbnailImage = styled.image`
 export const QuestionsListHeader = styled.div`
   margin: 1%;
   margin-left: 0;
+  color: ${props => props.theme.text};
 `;
 
 export const QuestionsSearchBar = styled.input`
@@ -259,6 +253,7 @@ export const QuestionSearchWrapper = styled.div`
   justify-content: left;
   height: 40%;
   max-height: 15vh;
+  color: ${props => props.theme.text};
 `;
 
 /////////////////////////////////////////////////////
@@ -266,10 +261,15 @@ export const QuestionSearchWrapper = styled.div`
 /////////////////////////////////////////////////////
 
 export const AnswerWrapper = styled.div`
-  background-color: lightsmoke;
+  background-color: ${props => props.theme.fg};
   padding: 15px;
   margin: 1%;
   border-radius: 15px;
+  color: ${props => props.theme.text};
+  &:hover {
+    transition: all .2s ease-in-out;
+    background-color: ${props => props.theme.bg};
+  }
 `;
 
 
@@ -295,6 +295,11 @@ export const AnswerIcon = styled.button`
   }
 `;
 
+export const AnswerPosterText = styled.div`
+  display: grid;
+  grid-template-columns: min-content 1r;
+  margin-left: 2%;
+`;
 
 
 /////////////////////////////////////////////////////
@@ -302,7 +307,14 @@ export const AnswerIcon = styled.button`
 /////////////////////////////////////////////////////
 
 export const QuestionItemContainer = styled.div`
-
+  border-radius: 5px;
+  padding: 2%;
+  &:hover {
+    transition: all .2s ease-in-out;
+    background-color: ${props => props.theme.bg};
+    border-radius: 5px;
+    padding: 2%;
+  }
 `;
 
 export const DividerBar = styled.div`
@@ -322,18 +334,21 @@ export const QuestionHeaderContainer = styled.div`
   grid-row: 1;
   text-align: left;
   display: grid;
+  color: ${props => props.theme.text};
+  width: 100%;
 `;
 
 export const QuestionHelpfulContainer = styled.div`
   grid-row: 1 ;
-  grid-column-start: 5;
-  grid-column-end: span 3;
+  grid-column-start: 6;
+  grid-column-end: span 2;
   display: flex;
-  justify-content: center;
+  text-align: center;
+  justify-content: flex-end;
   vertical-align: middle;
   font-size: smaller;
-  font color: gray;
-  min-width: 90px
+  color: ${props => props.theme.text};;
+  width: 100%;
 `;
 
 export const QuestionPosterContainer = styled.div`
@@ -341,6 +356,7 @@ export const QuestionPosterContainer = styled.div`
   grid-row: 2;
   display: grid;
   padding-left: 5%;
+  color: ${props => props.theme.text};
 `;
 
 export const QuestionIcon = styled.div`
@@ -352,7 +368,7 @@ export const QuestionIcon = styled.div`
   margin: 5px;
   cursor: pointer;
   &:hover {
-    background-color: white;
+    background-color: ${props => props.theme.bg};
     color: black;
     border: .1rem solid;
   }
@@ -371,8 +387,9 @@ export const ThumbnailImg = styled.img`
   export const ThumbnailContainer = styled.div`
   max-width: 100px;
   height: 100%;
-  border: 3px solid gray;
-  background-color: gray;
+  border: 5px;
+  border-color: ${props => props.theme.text};
+  background-color: ${props => props.theme.text};
   border-radius: 1%;
   display: flex;
   object-fit: contain;
@@ -388,7 +405,7 @@ export const PreviewImg = styled.img`
   height: auto;
   maxWidth: 500px;
   cursor: pointer;
-  $:hover {
+  &:hover {
     transform: scale(1.05);
   }
 `;
@@ -396,6 +413,10 @@ export const PreviewImg = styled.img`
 /////////////////////////////////////////////////////
 // Wrappers and Divs
 /////////////////////////////////////////////////////
+export const ModuleBackground = styled.div`
+background-color: ${props => props.theme.bg};
+`;
+
 export const ModuleWrapper = styled.div`
   padding-top: 2vh;
   padding-bottom: 1vh;
@@ -413,7 +434,7 @@ export const QuestionsAnswersWrapper = styled.div`
   grid-column-end: 9;
   min-height: 60vh;
   display: grid;
-  background-color: ${props => props.mode ? darkWrapper: 'whitesmoke'};
+  background-color: ${props => props.theme.fg};
   border-radius: 5px;
   padding: 5%;
 `;
@@ -423,6 +444,9 @@ export const QuestionsListWrapper = styled.div`
   vertical-align: center;
   width: 100%;
   overflow: auto;
+  &:-webkit-scrollbar-track {
+    background: ${props => props.theme.fg};
+  }
   height: 90vh
   display: grid;
   grid-template-columns: repeat(10, 1fr);
