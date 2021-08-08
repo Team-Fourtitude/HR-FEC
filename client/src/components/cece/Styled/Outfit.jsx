@@ -1,14 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const OFCard = styled.div`
   min-width: 275px;
   height: 300px;
   text-align: justify;
   margin: 20px;
-  background-color: whitesmoke;
   border-radius: 5px;
   box-sizing: border-box;
   overflow-y: scroll;
+  background-color: ${props => props.theme.fg};
+  color: ${props => props.theme.text};
 `;
 
 export const ImageView = styled.div`
@@ -25,7 +26,7 @@ export const OutFitImg = styled.img`
   width: auto;
   height: auto;
   top: 50%;
-  left: 50%;
+  left: 52%;
   transform: translate( -50%, -50%);
 `;
 
@@ -37,6 +38,9 @@ export const OutFitInfo = styled.p`
 
 export const CatAndPrice = styled.span`
   font-size: xx-small;
+  ${props => props.sale && css`
+   text-decoration: line-through;
+   text-decoration-color: red; `}
 `;
 
 export const StarRating = styled.div`
@@ -50,6 +54,8 @@ export const OutFitTitle = styled.h4`
   align-self: flex-start;
   margin: 0;
   left: 3%;
+  ${props => props.relP && css`
+    padding-top: 5%;` }
 `;
 
 export const OutFitCarousel = styled.div`
@@ -85,13 +91,14 @@ export const AddCard = styled.div`
   position: relative;
   min-width: 200px;
   height: 200px;
-  background-color: whitesmoke;
   text-align: justify;
   margin: 45px 20px 20px 20px;
   border: 2px solid darkgrey;
   border-radius: 5px;
   box-sizing: border-box;
   cursor: pointer;
+  background-color: ${props => props.theme.bg};
+  color: ${props => props.theme.text};
 `;
 
 export const AddText = styled.div`

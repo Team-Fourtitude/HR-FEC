@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaStar, FaRegStar } from 'react-icons/fa';
-import {Star} from '../cody/StyleHelpers.js';
+import { Star } from '../cody/StyleHelpers.js';
+import { StarsContainer, StarOverlay } from './Styled/Icons.jsx';
 import axios from 'axios';
 
 const Rating = ({ item }) => {
@@ -11,8 +12,6 @@ const Rating = ({ item }) => {
   } else {
     productId = item.id;
   }
-  // console.log('what shape', item)
-
 
   useEffect( () => {
     if (productId) {
@@ -40,24 +39,24 @@ const Rating = ({ item }) => {
   return (
       <>
       {/* current css settings: each star = 16px with 2px border edges on each side, hence 12px of free space*/}
-      <div style={{"position":"relative", "display":"inline-block", "height":"25px", "margin":"1em 0 0.5em 0"}} onClick={ () => {
+      <StarsContainer onClick={ () => {
           console.log('Jump to reviews!');
       }}>
-        <div style={{"display":"flex", "overflow":"hidden", "position":"absolute", "width":`${ Math.floor(ratings) * 16 + 2 + (ratings - Math.floor(ratings)) * 12}px`}}>
+        <StarOverlay style={{"width":`${ Math.floor(ratings) * 16 + 2 + (ratings - Math.floor(ratings)) * 12}px`}}>
           {[1,2,3,4,5].map(num => (
             <Star key={num}>
-              <FaStar style={{'color': 'goldenrod'}}/>
+              <FaStar />
             </Star>
           ))}
-        </div>
-        <div style={{"display":"flex", "position":"absolute"}}>
+        </StarOverlay>
+        <StarOverlay >
           {[6,7,8,9,10].map(num => (
             <Star key={num}>
-              <FaRegStar style={{'color': 'goldenrod'}}/>
+              <FaRegStar />
             </Star>
           ))}
-        </div>
-      </div>
+        </StarOverlay>
+      </StarsContainer>
       </>
   );
 };

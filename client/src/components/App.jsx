@@ -6,6 +6,9 @@ import StylesContext from './context/StylesContext.jsx';
 import StyleContext from './context/StyleContext.jsx';
 import QuestionsAnswers from './tim/QuestionsAnswers.jsx'
 import RelatedProducts from './cece/RelatedProducts.jsx';
+import { GlobalStyle } from './GlobalStyle.jsx';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './cece/Styled/Related.jsx';
 
 
 
@@ -53,6 +56,9 @@ const App = () => {
     // Our context.Providers 'values' are linked to an object that contains our state hooks.
     // Thus when the state changes, all children using that context value will rerender with the newly set state value.
     <DarkModeContext.Provider value={{darkMode, setDarkMode}}>
+      <ThemeProvider theme={darkMode ? theme.dark : theme.light}>
+        <>
+      <GlobalStyle />
       <ProductContext.Provider value={{product, setProduct}}>
         <StylesContext.Provider value={{styles, setStyles}}>
           <StyleContext.Provider value={{style, setStyle}}>
@@ -77,6 +83,8 @@ const App = () => {
           </StyleContext.Provider>
         </StylesContext.Provider>
       </ProductContext.Provider>
+      </>
+      </ThemeProvider>
     </DarkModeContext.Provider>
   );
 }

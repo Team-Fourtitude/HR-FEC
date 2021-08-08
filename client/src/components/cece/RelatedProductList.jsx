@@ -4,7 +4,7 @@ import { RelatedCarousel, RelatedCarouselContainer, RelatedProductsRoot } from '
 import { OutFitTitle } from './Styled/Outfit.jsx';
 import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
 import ProductCard from './ProductCard.jsx';
-import { Next } from './Styled/Icons.jsx';
+import { Next, Prev } from './Styled/Icons.jsx';
 
 
 
@@ -38,17 +38,23 @@ const RelatedProductList = () => {
 
   return (
     <RelatedProductsRoot>
-      <OutFitTitle style={{'paddingTop': '25px'}}>
+      <OutFitTitle relP >
         Related Products
       </OutFitTitle>
       <RelatedCarouselContainer>
-        <FaAngleLeft className="prev" id={left} onClick={() => handleClick('left')} />
+        <Prev>
+          <FaAngleLeft id={left} onClick={() => handleClick('left')} />
+
+        </Prev>
         <RelatedCarousel ref={ref} >
         {relatedStyles.related ? relatedStyles.related.map((item, index) => {
         return <ProductCard item={item} key={index}/>})
         : null}
         </RelatedCarousel>
-        <FaAngleRight className="next" id={right} onClick={() => handleClick('right')}/>
+        <Next>
+          <FaAngleRight id={right} onClick={() => handleClick('right')}/>
+
+        </Next>
       </RelatedCarouselContainer>
     </RelatedProductsRoot>
   );

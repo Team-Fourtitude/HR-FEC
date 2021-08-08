@@ -21,6 +21,7 @@ export const TblContainer = styled.div`
   pointer-events: auto;
   transition: 0.4s;
   overflow-y: scroll;
+
 `;
 
 export const Table = styled.table`
@@ -33,6 +34,8 @@ export const Table = styled.table`
   border-radius: 5px;
   padding: 15px;
 `;
+
+
 
 
 
