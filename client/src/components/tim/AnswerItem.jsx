@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import PictureGallery from './PictureGallery.jsx';
 
-import { AnswerWrapper } from './styleHelpers.jsx';
-import HelpfulFeedback from './HelpfulFeedback.jsx';
+import { AnswerWrapper } from './StyleHelpers.jsx';
+import HelpfulFeedback from './HelpfulFeedBack.jsx';
 import { useAnswersUpdate } from './AnswersContext.jsx'
 import QuestionContext from './QuestionContext.jsx';
 import { useQuestionsUpdate } from './QuestionsContext.jsx';
