@@ -57,8 +57,8 @@ export const ModalFormWrapper = styled.div`
 `;
 
 export const ModalFormSubmit = styled.button`
-background-color: black;
-color: white;
+background-color: ${props => props.theme.bg};
+color: ${props => props.theme.text};
 padding: 10px;
 max-width: 95%;
 border: .1rem solid;
@@ -66,8 +66,8 @@ display: inline-block;
 margin: 5px;
 cursor: pointer;
 &:hover {
-  background-color: white;
-  color: black;
+  background-color: ${props => props.theme.text};
+  color: ${props => props.theme.bg};
   border: .1rem solid;
 }
 `;
@@ -93,6 +93,7 @@ export const ModalBackground = styled.div`
 
 export const ModalContent = styled.div`
   background-color: ${props => props.theme.fg};
+  color: ${props => props.theme.text};
   padding: 30px;
   border-radius: 30px;
   max-width: 90vw;
@@ -323,7 +324,7 @@ export const DividerBar = styled.div`
 
 export const QuestionTitleWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   grid-template-rows: 1.5fr .5fr;
   max-height: 20%;
 `;
@@ -340,8 +341,8 @@ export const QuestionHeaderContainer = styled.div`
 
 export const QuestionHelpfulContainer = styled.div`
   grid-row: 1 ;
-  grid-column-start: 6;
-  grid-column-end: span 2;
+  grid-column-start: 7;
+  grid-column-end: span 3;
   display: flex;
   text-align: center;
   justify-content: flex-end;
@@ -387,7 +388,7 @@ export const ThumbnailImg = styled.img`
   export const ThumbnailContainer = styled.div`
   max-width: 100px;
   height: 100%;
-  border: 5px;
+  border: 2px solid;
   border-color: ${props => props.theme.text};
   background-color: ${props => props.theme.text};
   border-radius: 1%;

@@ -30,7 +30,7 @@ const HelpfulFeedback = ({ help, helpCount, action, actionType, name, date }) =>
   return (
       <HelpfulFeedbackWrapper>
         { (hasUserInfo !== '') &&
-          <span>{hasUserInfo} &nbsp;</span>
+          <span>{hasUserInfo} </span>
         }
         { !hasHelped ? <Upvote style={{opacity: 0}}/> : <Upvote />}
         {' Helpful? '}
@@ -38,13 +38,13 @@ const HelpfulFeedback = ({ help, helpCount, action, actionType, name, date }) =>
         <ActionLink
           enabled={!hasHelped}
           onClick={() => { setHelped(true) }}>
-          Yes
-        </ActionLink> {' '} {`(${count}) `}
+          {' '} Yes
+        </ActionLink> &nbsp; {`(${count}) `}
         <DividerBar>
           &nbsp; {' | '} &nbsp;
         </DividerBar>
         <ActionLink
-          enabled={ !hasActed }
+          enabled={ !hasActed || !name }
           onClick={() => { setActed(true) }}>
           { actionType }
         </ActionLink>
