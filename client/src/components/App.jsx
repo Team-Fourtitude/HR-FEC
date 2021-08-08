@@ -67,6 +67,9 @@ const App = () => {
                 "position": "fixed",
                 "top":"1%",
                 "right":"5%",
+                "border":"1px solid green",
+                "padding":"1em",
+                "zIndex":"5000",
               }} onClick={ () => {
                 if (darkMode) {
                   setDarkMode(null);
