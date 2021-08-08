@@ -444,9 +444,6 @@ export const QuestionsListWrapper = styled.div`
   vertical-align: center;
   width: 100%;
   overflow: auto;
-  &:-webkit-scrollbar-track {
-    background: ${props => props.theme.fg};
-  }
   height: 90vh
   display: grid;
   grid-template-columns: repeat(10, 1fr);
