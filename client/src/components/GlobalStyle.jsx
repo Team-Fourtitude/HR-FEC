@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 body {
  font-family: 'Roboto', sans-serif;
  width: 100%;
- background-image: ${({ theme }) => console.log(theme)}
+ background-image: ${({ theme }) => theme.bkgImg}
 };
 background-color: ${({ theme }) => theme.bg};
 color: ${({ theme }) => theme.text};
