@@ -99,6 +99,35 @@ export const ThumbnailsContainer = styled.div`
   }
 `;
 
+export const ImageContainerMin = styled.div`
+  width: 65%;
+  position: relative;
+  max-height: 600px;
+  overflow: hidden;
+  cursor: zoom-in;
+`;
+
+export const ImageContainerMax = styled(ImageContainerMin)`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: black;
+  overflow: hidden;
+  cursor: ${props => props.zoom ? "url(\"assets/minusCursor.png\"), auto" : 'crosshair'};
+  z-index: 100;
+`;
+
+export const MainImageWrapper = styled.div`
+  width: 100%;
+  height: 600px;
+  object-fit: contain;
+  background-color: grey;
+  background-image: url(${props => props.url});
+  background-repeat: no-repeat;
+  background-size: ${props => props.zoom ? '250%' : '100%'};
+  background-position: center;
+`;
+
 export const ImageButton = styled(ThumbnailsButton)`
   top: 0;
   right: 0;

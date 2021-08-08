@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-import { ImageButton, ImageButtonLeft, ImageButtonRight} from './StyleHelpers.js';
+import { ImageButton, ImageButtonLeft, ImageButtonRight, MainImageWrapper, ImageContainerMin, ImageContainerMax } from './StyleHelpers.js';
 
 const Image = (props) => {
   const [size, setSize] = useState(false);
@@ -14,17 +14,8 @@ const Image = (props) => {
     {(() => {
       if (size) {
         return (
-          <div tabIndex='0' style={{
-            "display": "flex",
-            "position": "relative",
-            "justifyContent": "center",
-            "width": "100%",
-            "maxHeight": "600px",
-            "backgroundColor": "black",
-            "overflow": "hidden",
-            "cursor": zoom ? "url(\"assets/minusCursor.png\"), auto" : 'crosshair',
-            "zIndex": "100",
-          }} onKeyDown={ (e) => {
+          <ImageContainerMax tabIndex='0'
+           onKeyDown={ (e) => {
             if (e.which === 27) {
               setZoom(false);
               setSize(false);
@@ -34,16 +25,7 @@ const Image = (props) => {
               "position": "absolute",
               "visibility": "hidden",
             }} alt="image for getting test ratio"/>
-            <div style={{
-              "width": "100%",
-              "height": "600px",
-              "objectFit": "contain",
-              "backgroundColor": "grey",
-              "backgroundImage": `url(${props.current.url})`,
-              "backgroundRepeat":"no-repeat",
-              "backgroundSize": zoom ? "250%" : "100%",
-              "backgroundPosition":"center",
-            }}
+            <MainImageWrapper url={props.current.url} zoom={zoom}
             onClick={ (e) => {
               if (zoom) {
                 e.target.style.backgroundPosition = "center";
@@ -51,9 +33,7 @@ const Image = (props) => {
               } else {
                 let img = document.getElementById("imgRatio");
                 let imgRatio = img.clientHeight/img.clientWidth;
-                console.log('img ratio', imgRatio);
                 let scaleY = 3125 / 600 * imgRatio - 1;
-                console.log('scale Y: ', scaleY);
                 e.target.style.backgroundPositionX = (-e.nativeEvent.offsetX * 1.5) + "px";
                 e.target.style.backgroundPositionY = (-e.nativeEvent.offsetY * scaleY) + "px";
                 setZoom(true);
@@ -105,8 +85,8 @@ const Image = (props) => {
         if (index === photoMax) {
           return (
             <>
-              <ImageButtonLeft type='button'
-name='button-left'               onClick={() => {
+              <ImageButtonLeft type='button' name='button-left'
+              onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
               }}><FaAngleLeft /></ImageButtonLeft>
@@ -116,8 +96,8 @@ name='button-left'               onClick={() => {
         } else {
           return (
             <>
-              <ImageButtonLeft type='button'
-name='button-left'               onClick={() => {
+              <ImageButtonLeft type='button' name='button-left'
+              onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
                 let selected = document.getElementById('selected');
@@ -137,17 +117,12 @@ name='button-left'               onClick={() => {
         }
       }
     })()}
-          </div>
+          </ImageContainerMax>
         );
       } else {
         return (
-          <div tabIndex='0' style={{
-            "width": "65%",
-            "maxHeight": "600px",
-            "overflow":"hidden",
-            "cursor": "zoom-in",
-            "position":"relative",
-          }} onKeyDown={ (e) => {
+          <ImageContainerMin tabIndex='0'
+          onKeyDown={ (e) => {
             if (e.which === 27) {
               setZoom(false);
               setSize(false);
@@ -213,8 +188,8 @@ name='button-left'               onClick={() => {
         } else {
           return (
             <>
-              <ImageButtonLeft type='button'
-name='button-left'               onClick={() => {
+              <ImageButtonLeft type='button' name='button-left'
+              onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
                 let selected = document.getElementById('selected');
@@ -234,7 +209,7 @@ name='button-left'               onClick={() => {
         }
       }
     })()}
-          </div>
+          </ImageContainerMin>
         );
       }
     }) ()}
