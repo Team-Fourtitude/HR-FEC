@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaStar, FaRegStar } from 'react-icons/fa';
-import { Star } from '../cody/StyleHelpers.jsx';
+import { Star } from '../cody/StyleHelpers.js';
 import { StarsContainer, StarOverlay } from './Styled/Icons.jsx';
 import axios from 'axios';
 

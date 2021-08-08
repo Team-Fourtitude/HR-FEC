@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import StylesContext from '../context/StylesContext.jsx';
 import StyleContext from '../context/StyleContext.jsx';
 import DarkModeContext from '../context/DarkModeContext.jsx';
-import { StylesImageWrapper, ThumbnailImage } from './StyleHelpers.jsx';
+import { StylesImageWrapper, ThumbnailImage } from './StyleHelpers.js';
 
 const Styles = () => {
   const allStyles = useContext(StylesContext);

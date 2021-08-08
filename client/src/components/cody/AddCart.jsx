@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
-import { CartButtonWrapper15, CartButtonWrapper30, CartButtonWrapper60, CartButtonWrapper75, PopUp } from './StyleHelpers.jsx';
+import { CartButtonWrapper15, CartButtonWrapper30, CartButtonWrapper60, CartButtonWrapper75, PopUp } from './StyleHelpers.js';
 import {FaStar, FaRegStar} from 'react-icons/fa';
 import DarkModeContext from '../context/DarkModeContext.jsx';
 
@@ -115,7 +115,7 @@ const AddCart = () => {
                   }
                   console.log(curStyle.style.name);
                   console.log('prompt: ', prompt);
-                }}>{ fav ? <FaStar style={{"color":"goldenrod"}} /> : <FaRegStar style={{"color":"grey"}} />}</CartButtonWrapper15>
+                }}>{ fav ? <FaStar style={{"color":"goldenrod"}} name='star-filled' /> : <FaRegStar style={{"color":"grey"}} name='star-empty' />}</CartButtonWrapper15>
                 </div>
               );
             } else {
