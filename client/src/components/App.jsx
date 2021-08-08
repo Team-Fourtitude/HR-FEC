@@ -9,6 +9,7 @@ import RelatedProducts from './cece/RelatedProducts.jsx';
 import { GlobalStyle } from './GlobalStyle.jsx';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './cece/Styled/Related.jsx';
+import { LightMode, MainBackground } from './cody/StyleHelpers';
 
 
 
@@ -62,27 +63,21 @@ const App = () => {
       <ProductContext.Provider value={{product, setProduct}}>
         <StylesContext.Provider value={{styles, setStyles}}>
           <StyleContext.Provider value={{style, setStyle}}>
-            <div style={{"width": "100%", "backgroundImage":`${darkMode ? 'linear-gradient(-60deg, rgba(41,41,41,1) 0%, rgba(147,138,138,1) 49%, rgba(47,47,47,1) 100%)' : ''}`}}>
-              <button type='button' style={{
-                "position": "fixed",
-                "top":"1%",
-                "right":"5%",
-                "border":"1px solid green",
-                "padding":"1em",
-                "zIndex":"5000",
-              }} onClick={ () => {
+            <MainBackground>
+              <LightMode darkMode= {darkMode}
+              onClick={ () => {
                 if (darkMode) {
                   setDarkMode(null);
                 } else {
                   setDarkMode(true);
                 }
-              }}>mysterious button</button>
+              }}></LightMode>
               <Overview />
               <RelatedProducts />
               <div>
                 <QuestionsAnswers />
               </div>
-            </div>
+            </MainBackground>
           </StyleContext.Provider>
         </StylesContext.Provider>
       </ProductContext.Provider>

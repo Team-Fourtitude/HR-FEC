@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
 import Image from './Image.jsx';
+import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
 import { ThumbnailsContainer, ThumbnailsImageWrapper, ThumbnailImage, ThumbnailsButtonUp, ThumbnailsButtonDown } from './StyleHelpers.js';
 
 const thumbnailContainerStyles = {"width":"75px", "maxHeight": "475px","height":"max-content", "position":"absolute", "top":"10%", "left":"1%", "display":"block", "backgroundColor":"rgba(0, 0, 0, 0.5)", "padding":"2.5em 1em", "borderRadius":"10px", "zIndex":"1000"};
@@ -73,19 +74,19 @@ const Thumbnails = () => {
                         if (curStyle.style.photos.length === 1) {
                           return (
                             <>
-                              <ThumbnailsButtonUp type='button' name='button-up' disabled>🞁</ThumbnailsButtonUp>
-                              <ThumbnailsButtonDown type='button' name='button-down' disabled>🞃</ThumbnailsButtonDown>
+                              <ThumbnailsButtonUp type='button' name='button-up' disabled><FaAngleUp /></ThumbnailsButtonUp>
+                              <ThumbnailsButtonDown type='button' name='button-down' disabled><FaAngleDown /></ThumbnailsButtonDown>
                             </>
                           );
                         } else {
                           return (
                             <>
-                              <ThumbnailsButtonUp type='button' name='button-up' disabled>🞁</ThumbnailsButtonUp>
+                              <ThumbnailsButtonUp type='button' name='button-up' disabled><FaAngleUp /></ThumbnailsButtonUp>
                               <ThumbnailsButtonDown type='button' name='button-down'
                               onClick={() => {
                                 setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                                 setIndex(index + 1);
-                              }}>🞃</ThumbnailsButtonDown>
+                              }}><FaAngleDown /></ThumbnailsButtonDown>
                             </>
                           );
                         }
@@ -99,8 +100,8 @@ const Thumbnails = () => {
                             onClick={() => {
                               setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                               setIndex(index - 1);
-                            }}>🞁</ThumbnailsButtonUp>
-                            <ThumbnailsButtonDown type='button' name='button-down' disabled>🞃</ThumbnailsButtonDown>
+                            }}><FaAngleUp /></ThumbnailsButtonUp>
+                            <ThumbnailsButtonDown type='button' name='button-down' disabled><FaAngleDown /></ThumbnailsButtonDown>
                           </>
                         );
                       } else {
@@ -110,12 +111,12 @@ const Thumbnails = () => {
                             onClick={() => {
                               setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                               setIndex(index - 1);
-                            }}>🞁</ThumbnailsButtonUp>
+                            }}><FaAngleUp /></ThumbnailsButtonUp>
                             <ThumbnailsButtonDown type='button' name='button-down'
                             onClick={() => {
                               setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                               setIndex(index + 1);
-                          }}>🞃</ThumbnailsButtonDown>
+                          }}><FaAngleDown /></ThumbnailsButtonDown>
                           </>
                         );
                       }

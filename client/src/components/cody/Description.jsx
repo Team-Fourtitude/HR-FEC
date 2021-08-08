@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
 import ProductContext from '../context/ProductContext.jsx';
-import DarkModeContext from '../context/DarkModeContext.jsx';
 import { DescriptionBox, DescriptionShareBox, DescriptionSplit, ShareIconWrapper } from './StyleHelpers.js';
 
 const Description = () => {
   const currentProduct = useContext(ProductContext);
-  const { darkMode } = useContext(DarkModeContext);
   return (
   <DescriptionBox>
     <div style={{"display":"flex"}}>
@@ -13,7 +11,7 @@ const Description = () => {
         <h2>{currentProduct.product.slogan || null}</h2>
         <p>{currentProduct.product.description || null}</p>
       </div>
-      <DescriptionSplit dark={darkMode} />
+      <DescriptionSplit/>
       <ul>
         {currentProduct.product.features ? currentProduct.product.features.map( (feature, index) => <li style={{"marginBottom":"0.5em"}} key={index}>{feature.value || null} {feature.feature || null}</li>) : null}
       </ul>
