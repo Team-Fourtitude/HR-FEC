@@ -1,0 +1,14 @@
+
+/* body {
+  font-family: 'Roboto', sans-serif;
+} */
+
+
+
+#delete:hover {
+  color: black;
+}
+
+#thumbnailScroll::-webkit-scrollbar {
+  display:none;
+}
