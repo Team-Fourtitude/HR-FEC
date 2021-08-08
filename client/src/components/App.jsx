@@ -6,15 +6,12 @@ import StylesContext from './context/StylesContext.jsx';
 import StyleContext from './context/StyleContext.jsx';
 import QuestionsAnswers from './tim/QuestionsAnswers.jsx'
 import RelatedProducts from './cece/RelatedProducts.jsx';
+import Overview from './cody/Overview.jsx';
 import { GlobalStyle } from './GlobalStyle.jsx';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './cece/Styled/Related.jsx';
 import { LightMode, MainBackground } from './cody/StyleHelpers';
 
-
-
-// this file shows how to use context in your component
-import Overview from './cody/Overview.jsx';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(null);
@@ -74,6 +71,7 @@ const App = () => {
               }}></LightMode>
               <Overview />
               <RelatedProducts />
+              <QuestionsAnswers />
               <div>
                 <QuestionsAnswers />
               </div>
