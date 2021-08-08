@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { RelatedBody } from './Styled/Related.jsx';
+import { RelatedBody, theme } from './Styled/Related.jsx';
 import axios from 'axios';
 import ProductContext from '../context/ProductContext.jsx';
 import StylesContext from '../context/StylesContext.jsx';
@@ -8,15 +8,17 @@ import RelatedProductContext from '../context/RelatedProductContext.jsx';
 import RelatedStylesContext from '../context/RelatedStylesContext.jsx';
 import RelatedProductList from './RelatedProductList.jsx';
 import OutfitList from './OutfitList.jsx';
+import { ThemeProvider } from 'styled-components';
 
 
 const RelatedProducts = () => {
-  const { product, setProduct } = useContext(ProductContext);
+  const { product } = useContext(ProductContext);
   const [relatedIds, setRelatedIds] = useState([]);
   const [relatedProduct, setRelatedProduct] = useState([]);
   const [relatedStyles, setRelatedStyles] = useState([]);
   const { styles, setStyles } = useContext(StylesContext);
-  const { style, setStyle } = useContext(StyleContext);
+  const { setStyle } = useContext(StyleContext);
+  // const [dark, setDarkTheme] = useState(false);
 
 
   //initial Data
@@ -25,10 +27,9 @@ const RelatedProducts = () => {
       let id = product.id;
 
       //re-renders styles
-      axios.get(`http://localhost:3000/products/${id}/styles`)
+      axios.get(`/products/${id}/styles`)
       .then( (data) => {
         if (styles.product_id !== data.data.product_id) {
-          console.log(data.data);
           setStyles(data.data);
           return data.data.results[0];
         } else {
@@ -39,10 +40,9 @@ const RelatedProducts = () => {
       .catch( (e) => console.error(e) );
 
 
-      let relatedUrl = `http://localhost:3000/products/${id}/related`;
+      let relatedUrl = `/products/${id}/related`;
       const relatedInfo = axios.get(relatedUrl)
       axios.all([relatedInfo]).then(axios.spread((responses) => {
-        // console.log('IDS', responses);
         const relatedSet = [...new Set(responses.data)]
         setRelatedIds(relatedSet);
       }))
@@ -54,7 +54,7 @@ const RelatedProducts = () => {
   const getRelatedData = () => {
     if (relatedIds.length) {
       const relUrl = relatedIds.map((id) => {
-        let url = `http://localhost:3000/products/${id}`;
+        let url = `/products/${id}`;
         return url;
       })
 
@@ -70,7 +70,6 @@ const RelatedProducts = () => {
 
 
       axios.all(relatedData).then(axios.spread((...res) => {
-        // console.log(res)
         let relatedDataMap = res.map((data) => {
           return data.data;
         })
@@ -105,15 +104,25 @@ const RelatedProducts = () => {
       getInitialData();
     }, [product])
 
+    // const toggleTheme = () => {
+    //   setDarkTheme(dark => !dark)
+    // }
+
+
   return(
-    <RelatedBody>
-      <RelatedProductContext.Provider value={[relatedProduct, setRelatedProduct]}>
-        <RelatedStylesContext.Provider value={[relatedStyles, setRelatedStyles]}>
-          <RelatedProductList />
-          <OutfitList />
-        </RelatedStylesContext.Provider>
-      </RelatedProductContext.Provider>
-    </RelatedBody>
+    // <ThemeProvider theme={dark ? theme.dark : theme.light} >
+      <>
+      <RelatedBody>
+        <RelatedProductContext.Provider value={[relatedProduct, setRelatedProduct]}>
+          <RelatedStylesContext.Provider value={[relatedStyles, setRelatedStyles]}>
+            {/* <button onClick={toggleTheme}>DarkMode</button> */}
+            <RelatedProductList />
+            <OutfitList />
+          </RelatedStylesContext.Provider>
+        </RelatedProductContext.Provider>
+      </RelatedBody>
+    </>
+    // </ThemeProvider>
   )
 }
 

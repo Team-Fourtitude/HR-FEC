@@ -1,5 +1,25 @@
 import styled from 'styled-components';
 
+export const DescriptionBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+`;
+
+export const DescriptionSplit = styled.div`
+  border: ${props => props.dark ? '1px solid #eee' : '1px solid gray'};
+  margin: 0 1em;
+  height: 100px;
+  align-self: center;
+`;
+
+export const DescriptionShareBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+`;
+
 export const StyleSelectorTextWrapper = styled.p`
   margin: 1em 0;
   padding: 0;
@@ -12,6 +32,7 @@ export const StylesImageWrapper = styled.div.attrs((props) => ({
   height: 75px;
   border-radius: 50px;
   overflow: hidden;
+  background-color: ${props => props.dark ? '#444' : '#ddd'};
 `;
 
 export const ThumbnailsImageWrapper = styled.div.attrs((props) => ({
@@ -44,13 +65,13 @@ export const ThumbnailsButton = styled.button`
   padding: 0;
   border: 1px solid transparent;
   background-color: transparent;
-  transition: color 0.2s transform 0.2s;
+  transition: transform 0.2s;
 
-  color: #444;
+  mix-blend-mode: difference;
+  filter: invert(1);
   font-size: 2em;
 
   &:hover {
-    color: #888;
     transform: scale(1.2);
     cursor: pointer;
   }
@@ -78,10 +99,41 @@ export const ThumbnailsContainer = styled.div`
   }
 `;
 
+export const ImageContainerMin = styled.div`
+  width: 65%;
+  position: relative;
+  max-height: 600px;
+  overflow: hidden;
+  cursor: zoom-in;
+`;
+
+export const ImageContainerMax = styled(ImageContainerMin)`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: black;
+  overflow: hidden;
+  cursor: ${props => props.zoom ? "url(\"assets/minusCursor.png\"), auto" : 'crosshair'};
+  z-index: 100;
+`;
+
+export const MainImageWrapper = styled.div`
+  width: 100%;
+  height: 600px;
+  object-fit: contain;
+  background-color: grey;
+  background-image: url(${props => props.url});
+  background-repeat: no-repeat;
+  background-size: ${props => props.zoom ? '250%' : '100%'};
+  background-position: center;
+`;
+
 export const ImageButton = styled(ThumbnailsButton)`
   top: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
+  height: max-content;
+  width: max-content;
   padding: 0.2em;
   border-radius: 5px;
 `;
@@ -89,17 +141,15 @@ export const ImageButton = styled(ThumbnailsButton)`
 export const ImageButtonLeft = styled(ThumbnailsButton)`
   top: 50%;
   left: 17%;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 0.2em;
-  border-radius: 5px;
+  height: max-content;
+  width: max-content;
 `;
 
 export const ImageButtonRight = styled(ThumbnailsButton)`
   top: 50%;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 0.2em;
-  border-radius: 5px;
+  height: max-content;
+  width: max-content;
 `;
 
 
@@ -120,22 +170,27 @@ export const CartButtonWrapper = styled.div`
 
 export const CartButtonWrapper15 = styled(CartButtonWrapper)`
   display: ${props => props.disabled ? 'none' : 'inline-block'};
-  background-color: whitesmoke;
-  border: 1px solid #ddd;
+  background-color: ${props => props.dark ? '#666' : 'whitesmoke'};
+  border: 1px solid ${props => props.dark ? '#555' : '#ddd'};
 
   &:hover {
-    box-shadow: inset 0 0 5px rgba(100,100,100,0.1);
+    box-shadow: inset 0 0 5px rgba(100,100,100,0.2);
   }
 `;
 
 export const CartButtonWrapper30 = styled(CartButtonWrapper)`
   width: 30%;
+  color: ${props => props.dark ? 'white' : '#333'};
+  background-color: ${props => props.dark ? '#777' : 'whitesmoke'};
   position: absolute;
   right: 0;
 `;
 
 export const CartButtonWrapper60 = styled(CartButtonWrapper)`
 width: 60%;
+z-index: 15;
+color: ${props => props.dark ? 'white' : '#333'};
+background-color: ${props => props.dark ? '#777' : 'whitesmoke'};
 &::-webkit-scrollbar {
   display: none;
 }
@@ -146,6 +201,7 @@ export const CartButtonWrapper75 = styled(CartButtonWrapper)`
   color: white;
   border: 1px solid FireBrick;
   background-color: crimson;
+  opacity: 0.9;
   width: 75%;
 
   &:hover {
@@ -154,11 +210,14 @@ export const CartButtonWrapper75 = styled(CartButtonWrapper)`
 `;
 
 export const ShareIconWrapper = styled.div`
+  display: block;
   width: 40px;
   height: max-content;
+  transition: transform 0.2s;
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.2);
   }
 `;
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ProductContext from '../context/ProductContext.jsx';
 import { FaStar, FaRegStar } from 'react-icons/fa';
-import {Star} from './StyleHelpers.jsx';
+import {Star} from './StyleHelpers.js';
 import axios from 'axios';
 
 const Rating = () => {
@@ -10,25 +10,28 @@ const Rating = () => {
   const productId = curProduct.product.id;
   useEffect( () => {
     console.log('useEffect from ratings: ', productId);
-    axios.get(`http://localhost:3000/reviews/meta/${productId}`)
-    .then( (data) => {
-      console.log('axios data for ratings', data.data.ratings);
-      const scores = data.data.ratings;
-      let total = 0;
-      let divider = 0;
-      for (let score of Object.keys(scores)) {
-        total += Number(score) * Number(scores[score]);
-        divider += Number(scores[score]);
-      }
-      return total/divider;
-    })
-    .then( (avgRating) => {
-      setRatings(avgRating);
-    })
-    .catch( (e) => {
-      console.log('rating fetcher had problems', e);
-      setRatings(0);
-    })
+
+    if (typeof productId === 'number') {
+      axios.get(`/reviews/meta/${productId}`)
+      .then( (data) => {
+        console.log('axios data for ratings', data.data.ratings);
+        const scores = data.data.ratings;
+        let total = 0;
+        let divider = 0;
+        for (let score of Object.keys(scores)) {
+          total += Number(score) * Number(scores[score]);
+          divider += Number(scores[score]);
+        }
+        return total/divider;
+      })
+      .then( (avgRating) => {
+        setRatings(avgRating);
+      })
+      .catch( (e) => {
+        console.log('rating fetcher had problems', e);
+        setRatings(0);
+      });
+    }
   }, [productId]);
   return (
       <>

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { FaStar, FaStarHalfAlt, FaRegStar, FaRegWindowClose } from 'react-icons/fa';
+import { FaRegWindowClose } from 'react-icons/fa';
 import { OFCard, ImageView, OutFitImg, OutFitInfo, CatAndPrice, StarRating } from './Styled/Outfit.jsx';
-import Rating from '../cody/Rating.jsx';
+import Rating from './RelatedRatings.jsx';
+import { Delete } from './Styled/Icons.jsx';
 
 
-const OutFitCard = ({ style }) => {
+const OutFitCard = ({ style, card, setCard }) => {
   const [ outfit, setOutfit ] = useState({ style })
   const [ toggle, setToggle ] = useState(true);
 
@@ -13,16 +14,22 @@ const OutFitCard = ({ style }) => {
     localStorage.removeItem(Number(outfit.style.id));
     console.log('removed: ', Number(outfit.style.id))
     setToggle(false);
+    const found = card.find((id) => id.id === outfit.style.id);
+    card.splice(card.indexOf(found), 1);
+    setCard(card);
   }
 
   return(
     <>
     {toggle ?
     <OFCard>
-      <FaRegWindowClose id="delete" onClick={handleDelete}/>
+      <Delete>
+        <FaRegWindowClose onClick={handleDelete}/>
+
+      </Delete>
       {outfit && outfit.style.photos ?
       <ImageView>
-        <OutFitImg src={outfit.style.photos[0].thumbnail_url} />
+        <OutFitImg src={outfit.style.photos[0].thumbnail_url} alt="main" />
       </ImageView>
       : null}
       <OutFitInfo>
@@ -35,7 +42,7 @@ const OutFitCard = ({ style }) => {
         </CatAndPrice>
       </OutFitInfo>
       <StarRating>
-        <Rating />
+        <Rating item={outfit.style}/>
       </StarRating>
     </OFCard>
     : null}
