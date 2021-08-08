@@ -6,7 +6,7 @@ export const Next = styled.div`
   text-align: center;
   margin: auto 15px;
   border-radius: 50%;
-  background-color: ${props => props.theme.bg};
+  background-color: ${props => props.theme.fg};
   color: ${props => props.theme.text};
   transition-duration: 0.2s;
   cursor: pointer;

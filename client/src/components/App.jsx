@@ -58,11 +58,11 @@ const App = () => {
     <DarkModeContext.Provider value={{darkMode, setDarkMode}}>
       <ThemeProvider theme={darkMode ? theme.dark : theme.light}>
         <>
-        <GlobalStyle />
+      <GlobalStyle />
       <ProductContext.Provider value={{product, setProduct}}>
         <StylesContext.Provider value={{styles, setStyles}}>
           <StyleContext.Provider value={{style, setStyle}}>
-            {/* <div style={{"width": "100%", "backgroundImage":`${darkMode ? 'linear-gradient(-60deg, rgba(41,41,41,1) 0%, rgba(147,138,138,1) 49%, rgba(47,47,47,1) 100%)' : ''}`}}> */}
+            <div style={{"width": "100%", "backgroundImage":`${darkMode ? 'linear-gradient(-60deg, rgba(41,41,41,1) 0%, rgba(147,138,138,1) 49%, rgba(47,47,47,1) 100%)' : ''}`}}>
               <button type='button' style={{
                 "position": "fixed",
                 "top":"1%",
@@ -79,7 +79,7 @@ const App = () => {
               <div>
                 <QuestionsAnswers />
               </div>
-            {/* </div> */}
+            </div>
           </StyleContext.Provider>
         </StylesContext.Provider>
       </ProductContext.Provider>
