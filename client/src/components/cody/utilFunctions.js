@@ -7,3 +7,8 @@ export const averageRating = (scores) => {
   }
   return total/divider;
 };
+
+export const ratingWidth = (rating) => {
+  const integer = Math.floor(rating);
+  return integer * 16 + 2 + (rating - integer) * 12;
+};

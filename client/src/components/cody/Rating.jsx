@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ProductContext from '../context/ProductContext.jsx';
 import { FaStar, FaRegStar } from 'react-icons/fa';
-import {Star} from './StyleHelpers.js';
+import {Star, RatingContainer, StarContainer} from './StyleHelpers.js';
 import axios from 'axios';
-import { averageRating } from './utilFunctions';
+import { averageRating, ratingWidth } from './utilFunctions';
 
 const Rating = () => {
   const [ratings, setRatings] = useState(0);
@@ -14,9 +14,7 @@ const Rating = () => {
       axios.get(`/reviews/meta/${productId}`)
       .then( (data) => {
         const scores = data.data.ratings;
-        return averageRating(scores);
-      })
-      .then( (avgRating) => {
+        let avgRating = averageRating(scores);
         setRatings(avgRating);
       })
       .catch( () => {
@@ -26,14 +24,14 @@ const Rating = () => {
   }, [productId]);
   return (
       <>
-      <div style={{"position":"relative", "display":"inline-block", "height":"25px", "margin":"1em 0 0.5em 0"}}>
-        <div style={{"display":"flex", "overflow":"hidden", "position":"absolute", "width":`${ Math.floor(ratings) * 16 + 2 + (ratings - Math.floor(ratings)) * 12}px`}}>
+      <RatingContainer>
+        <StarContainer rating={ratingWidth(ratings)}>
           {[1,2,3,4,5].map(num => (
             <Star key={num}>
               <FaStar style={{'color': 'goldenrod'}} />
             </Star>
           ))}
-        </div>
+        </StarContainer>
         <div style={{"display":"flex", "position":"absolute"}}>
           {[6,7,8,9,10].map(num => (
             <Star key={num}>
@@ -41,7 +39,7 @@ const Rating = () => {
             </Star>
           ))}
         </div>
-      </div>
+      </RatingContainer>
       </>
   );
 };
