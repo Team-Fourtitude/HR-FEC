@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { ImageButton, ImageButtonLeft, ImageButtonRight, MainImageWrapper, ImageContainerMin, ImageContainerMax } from './StyleHelpers.js';
 import { imageZoomPosition } from './utilFunctions';
+import PropTypes from 'prop-types';
 
 const Image = (props) => {
   const [size, setSize] = useState(false);
   const [zoom, setZoom] = useState(false);
   const curStyle = props.context;
   const {index, setIndex} = props.index;
-  const {currentPic, setCurrentPic} = props.currentPicture;
+  const {setCurrentPic} = props.currentPicture;
 
   return (
   <>
@@ -204,6 +205,13 @@ name='button-left'               onClick={() => {
     }) ()}
   </>
   );
+};
+
+Image.propTypes = {
+  currentPicture: PropTypes.object,
+  context: PropTypes.object,
+  index: PropTypes.object,
+  current: PropTypes.object,
 };
 
 export default Image;
