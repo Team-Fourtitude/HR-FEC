@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { ImageButton, ImageButtonLeft, ImageButtonRight, MainImageWrapper, ImageContainerMin, ImageContainerMax } from './StyleHelpers.js';
+import { imageZoomPosition } from './utilFunctions';
 
 const Image = (props) => {
   const [size, setSize] = useState(false);
@@ -31,21 +32,13 @@ const Image = (props) => {
                 e.target.style.backgroundPosition = "center";
                 setZoom(false);
               } else {
-                let img = document.getElementById("imgRatio");
-                let imgRatio = img.clientHeight/img.clientWidth;
-                let scaleY = 3125 / 600 * imgRatio - 1;
-                e.target.style.backgroundPositionX = (-e.nativeEvent.offsetX * 1.5) + "px";
-                e.target.style.backgroundPositionY = (-e.nativeEvent.offsetY * scaleY) + "px";
+                imageZoomPosition(e);
                 setZoom(true);
               }
             }}
             onMouseMove={ (e) => {
               if (zoom) {
-                let img = document.getElementById("imgRatio");
-                let imgRatio = img.clientHeight/img.clientWidth;
-                let scaleY = 3125 / 600 * imgRatio - 1;
-                e.target.style.backgroundPositionX = (-e.nativeEvent.offsetX * 1.5) + "px";
-                e.target.style.backgroundPositionY = (-e.nativeEvent.offsetY * scaleY) + "px";
+                imageZoomPosition(e);
               }
             }}/>
             <ImageButton type='button' name='button-image'
