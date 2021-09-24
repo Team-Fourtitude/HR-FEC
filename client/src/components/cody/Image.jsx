@@ -9,7 +9,7 @@ const Image = (props) => {
   const [zoom, setZoom] = useState(false);
   const curStyle = props.context;
   const {index, setIndex} = props.index;
-  const {currentPic, setCurrentPic} = props.currentPicture;
+  const {setCurrentPic} = props.currentPicture;
 
   return (
   <>
