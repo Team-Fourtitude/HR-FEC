@@ -93,7 +93,6 @@ const Image = (props) => {
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
-                let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop -= 100;
               }}><FaAngleLeft /></ImageButtonLeft>
@@ -101,7 +100,6 @@ const Image = (props) => {
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                 setIndex(index + 1);
-                let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop += 100;
             }}><FaAngleRight name='fangle-right' /></ImageButtonRight>
@@ -185,7 +183,6 @@ name='button-left'               onClick={() => {
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
                 setIndex(index - 1);
-                let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop -= 100;
               }}><FaAngleLeft /></ImageButtonLeft>
@@ -193,7 +190,6 @@ name='button-left'               onClick={() => {
               onClick={() => {
                 setCurrentPic({url:curStyle.style.photos[index + 1].url, name:`${index + 1}`, style:curStyle.style.style_id});
                 setIndex(index + 1);
-                let selected = document.getElementById('selected');
                 let scrollbar = document.getElementById('thumbnailScroll');
                 scrollbar.scrollTop += 100;
             }}><FaAngleRight name='fangle-right' /></ImageButtonRight>
