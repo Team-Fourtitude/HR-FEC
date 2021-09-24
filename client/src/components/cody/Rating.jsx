@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ProductContext from '../context/ProductContext.jsx';
 import { FaStar, FaRegStar } from 'react-icons/fa';
-import {Star, RatingContainer, StarContainer} from './StyleHelpers.js';
+import {Star, RatingContainer, StarContainer, ColoredStarContainer} from './StyleHelpers.js';
 import axios from 'axios';
 import { averageRating, ratingWidth } from './utilFunctions';
 
@@ -25,20 +25,20 @@ const Rating = () => {
   return (
       <>
       <RatingContainer>
-        <StarContainer rating={ratingWidth(ratings)}>
+        <ColoredStarContainer rating={ratingWidth(ratings)}>
           {[1,2,3,4,5].map(num => (
             <Star key={num}>
               <FaStar style={{'color': 'goldenrod'}} />
             </Star>
           ))}
-        </StarContainer>
-        <div style={{"display":"flex", "position":"absolute"}}>
+        </ColoredStarContainer>
+        <StarContainer>
           {[6,7,8,9,10].map(num => (
             <Star key={num}>
               <FaRegStar style={{"color":"goldenrod"}} />
             </Star>
           ))}
-        </div>
+        </StarContainer>
       </RatingContainer>
       </>
   );

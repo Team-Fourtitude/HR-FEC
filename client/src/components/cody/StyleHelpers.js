@@ -300,8 +300,11 @@ export const RatingContainer = styled.div`
 
 export const StarContainer = styled.div`
   display: flex;
-  overflow: hidden;
   position: absolute;
+`;
+
+export const ColoredStarContainer = styled(StarContainer)`
+  overflow: hidden;
   width: ${props => (props.rating || 0) + 'px;'}
 `;
 
