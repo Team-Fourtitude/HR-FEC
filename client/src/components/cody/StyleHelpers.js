@@ -336,7 +336,7 @@ export const PopUp = styled.p`
 
 export const StylesGrid = styled.div`
   display: grid;
-  grid-template=columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   width: 60%;
 `;
