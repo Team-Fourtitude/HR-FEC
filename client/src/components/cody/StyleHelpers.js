@@ -291,6 +291,23 @@ export const Star = styled.div`
   height: max-content;
 `;
 
+export const RatingContainer = styled.div`
+  position: relative;
+  display: inline-block;
+  height: 25px;
+  margin: 1em 0 0.5em 0;
+`;
+
+export const StarContainer = styled.div`
+  display: flex;
+  position: absolute;
+`;
+
+export const ColoredStarContainer = styled(StarContainer)`
+  overflow: hidden;
+  width: ${props => (props.rating || 0) + 'px;'}
+`;
+
 export const PopUp = styled.p`
   position: absolute;
   top: -100%;
