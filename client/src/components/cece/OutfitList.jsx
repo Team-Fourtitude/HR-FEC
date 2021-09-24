@@ -21,6 +21,7 @@ let key = uuidv4();
   //sets state if localStorage has properties
   useEffect( () => {
     if (localStorage.length) {
+      // localStorage.clear(); // uncomment this line if this file was causing an error with unexpected token c in JSON object
       let items = Object.keys(localStorage).map((id) => JSON.parse(localStorage.getItem(id)));
       setCard(card.concat(items));
     }

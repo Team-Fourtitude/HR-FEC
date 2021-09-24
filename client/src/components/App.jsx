@@ -4,7 +4,7 @@ import DarkModeContext from './context/DarkModeContext.jsx';
 import ProductContext from './context/ProductContext.jsx';
 import StylesContext from './context/StylesContext.jsx';
 import StyleContext from './context/StyleContext.jsx';
-import QuestionsAnswers from './tim/QuestionsAnswers.jsx'
+import QuestionsAnswers from './tim/QuestionsAnswers.jsx';
 import RelatedProducts from './cece/RelatedProducts.jsx';
 import Overview from './cody/Overview.jsx';
 import { GlobalStyle } from './GlobalStyle.jsx';
@@ -21,7 +21,7 @@ const App = () => {
 
 
   useEffect( () => {
-    axios.get('/products/25171')
+    axios.get('/products/48432')
     .then( (data) => {
       if (product.id !== data.data.id) {
         console.log(data.data);

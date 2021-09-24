@@ -19,28 +19,28 @@ module.exports = {
       params: { page, count }
     });
   },
-  getProductById: (productId = 25168) => {
+  getProductById: (productId = 48432) => {
     return axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/${productId}`,
       method: 'get',
       headers: {Authorization: apiKey},
     });
   },
-  getStylesById: (productId = 25168) => {
+  getStylesById: (productId = 48432) => {
     return axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/${productId}/styles`,
       method: 'get',
       headers: {Authorization: apiKey},
     });
   },
-  getRelatedProducts: (productId = 25168) => {
+  getRelatedProducts: (productId = 48432) => {
     return axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/${productId}/related`,
       method: 'get',
       headers: {Authorization: apiKey},
     });
   },
-  getReviews: (page = 1, count = 3, sort = 'newest', product_id = 25168) => {
+  getReviews: (page = 1, count = 3, sort = 'newest', product_id = 48432) => {
     return axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews`,
       method: 'get',
@@ -48,7 +48,7 @@ module.exports = {
       params: {page, count, sort, product_id},
     });
   },
-  getReviewMetadata: (product_id = 25168) => {
+  getReviewMetadata: (product_id = 48432) => {
     return axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews/meta`,
       method: 'get',
@@ -56,7 +56,7 @@ module.exports = {
       params: {product_id},
     });
   },
-  getQuestions: ({product_id = 25168, page = 1, count = 20}) => {
+  getQuestions: ({product_id = 48432, page = 1, count = 20}) => {
     return axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions`,
       method: 'get',
