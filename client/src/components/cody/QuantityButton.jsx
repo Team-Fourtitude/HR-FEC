@@ -1,8 +1,7 @@
 import React from 'react';
 import {CartButtonWrapper30} from './StyleHelpers';
 
-const QuantityButton = ({sizeState, currentStyle}) => {
-  const {currentSize, setCurrentSize} = sizeState;
+const QuantityButton = ({currentSize, currentStyle}) => {
   const max = currentStyle?.style.skus?.[currentSize]?.quantity;
   const options = [];
   if (max) {

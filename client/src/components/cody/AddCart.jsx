@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
 import QuantityButton from './QuantityButton.jsx';
+import SizeSelector from './SizeSelector.jsx';
 import {
   CartButtonWrapper15,
   CartButtonWrapper30,
@@ -28,41 +29,39 @@ const AddCart = () => {
       <form id='cartData' style={{"display":"flex", "flexDirection":"column"}}>
         <SizeSelectionBox>
           {(() => {
-            if (styleSizes) {
-              if (styleSizes[0] !== 'null') {
-                return (
-                  <>
-                  <CartButtonWrapper60 as='select' id='size' dark={darkMode} value={currentSize ? currentSize : 'null'}
-                    onChange={(ev) => {
-                      setCurrentSize(ev.target.value);
-                      setPrompt(null);
-                      closeSelect(ev);
-                      ev.target.parentElement.children[1].value = 1;
-                    }}
-                    onBlur={(ev) => {
-                      setPrompt(null);
-                      closeSelect(ev);
-                  }}>
-                    {<option value='null'>SELECT SIZE</option>}
-                    {styleSizes?.map((sizeID) => {
-                      return (
-                        <option key={sizeID} value={sizeID}>{curStyle.style.skus[sizeID].size}</option>
-                        );
-                      })}
-                  </CartButtonWrapper60>
-                  <PopUp prompt={prompt}><b>Please select size</b></PopUp>
-                  </>
-                );
-              } else {
-                return <CartButtonWrapper60 as='select' id='size' dark={darkMode} value='null' disabled><option value='null'>OUT OF STOCK</option></CartButtonWrapper60>;
-              }
+            if (styleSizes && styleSizes[0] !== 'null') {
+              return (
+                <>
+                <CartButtonWrapper60 as='select' id='size' dark={darkMode} value={currentSize || 'null'}
+                  onChange={(ev) => {
+                    setCurrentSize(ev.target.value);
+                    setPrompt(null);
+                    closeSelect(ev);
+                    const quantity = document.getElementById('quantity');
+                    quantity.value = 1;
+                  }}
+                  onBlur={(ev) => {
+                    setPrompt(null);
+                    closeSelect(ev);
+                }}>
+                  {<option value='null'>SELECT SIZE</option>}
+                  {styleSizes?.map((sizeID) => {
+                    return (
+                      <option key={sizeID} value={sizeID}>{curStyle.style.skus[sizeID].size}</option>
+                      );
+                    })}
+                </CartButtonWrapper60>
+                <PopUp prompt={prompt}><b>Please select size</b></PopUp>
+                </>
+              );
+            } else {
+              return <CartButtonWrapper60 as='select' id='size' dark={darkMode} value='null' disabled><option value='null'>OUT OF STOCK</option></CartButtonWrapper60>;
             }
           })()}
-          <QuantityButton sizeState={{currentSize, setCurrentSize}} currentStyle={curStyle} />
+          <QuantityButton currentSize={currentSize} currentStyle={curStyle} />
         </SizeSelectionBox>
         {(() => {
-          if (styleSizes) {
-            if (styleSizes[0] !== 'null') {
+            if (styleSizes && styleSizes[0] !== 'null') {
               return (
                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
                 <CartButtonWrapper75 as='button' type='submit' dark={darkMode} onClick={(ev) => {
@@ -98,7 +97,7 @@ const AddCart = () => {
                 </div>
               );
               }
-            }})()}
+            })()}
       </form>
     </div>
   );
