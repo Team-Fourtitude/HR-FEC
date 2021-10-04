@@ -20,3 +20,21 @@ export const imageZoomPosition = (event) => {
   event.target.style.backgroundPositionX = (-event.nativeEvent.offsetX * 1.5) + "px";
   event.target.style.backgroundPositionY = (-event.nativeEvent.offsetY * scaleY) + "px";
 };
+
+export const closeSelect = (event) => {
+  if (event) {
+    event.target.removeAttribute('size');
+    event.target.style.position = 'static';
+    event.target.style.height = '50px';
+  }
+};
+
+export const promptSelectSize = (callback) => {
+  let sizeSelector = document.getElementById('size');
+  let totalSizes = sizeSelector.children.length;
+  callback('true'); // set prompt = 'true'
+  sizeSelector.setAttribute('size', totalSizes);
+  sizeSelector.style.position = 'absolute';
+  sizeSelector.style.height = 'max-content';
+  sizeSelector.focus();
+};
