@@ -28,18 +28,14 @@ const AddCart = () => {
     <div style={{"width":"100%"}}>
       <form id='cartData' style={{"display":"flex", "flexDirection":"column"}}>
         <SizeSelectionBox>
-          {(() => {
-            if (styleSizes && styleSizes[0] !== 'null') {
-              return (
-                <>
-                  <SizeSelector
-                    functions={{setCurrentSize, setPrompt}}
-                    data={{currentSize, styleSizes, currentStyle: curStyle}} />
-                  <PopUp prompt={prompt}><b>Please select size</b></PopUp>
-                </>
-              );
-            }
-          })()}
+          {(styleSizes && styleSizes[0] !== 'null') ?
+            <>
+              <SizeSelector
+                functions={{setCurrentSize, setPrompt}}
+                data={{currentSize, styleSizes, currentStyle: curStyle}} />
+              <PopUp prompt={prompt}><b>Please select size</b></PopUp>
+            </> : null
+          }
           <QuantityButton currentSize={currentSize} currentStyle={curStyle} />
         </SizeSelectionBox>
         {(() => {
