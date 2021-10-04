@@ -11,23 +11,15 @@ const AddCart = () => {
   const [currentSize, setCurrentSize] = useState(null);
   const [prompt, setPrompt] = useState(null);
   let styleSizes;
-  if (curStyle.style) {
-    if (curStyle.style.skus) {
-      styleSizes = Object.keys(curStyle.style.skus);
-    }
+  if (curStyle?.style?.skus) {
+    styleSizes = Object.keys(curStyle.style.skus);
   }
   let quantity;
   if (currentSize && curStyle.style.skus[currentSize]) {
     const max =  curStyle.style.skus[currentSize].quantity;
-    if (max > 15) {
+    if (max > 0) {
       let options = [];
-      for (let i = 1; i < 16; i++) {
-        options.push(<option value={i} key={i}>{i}</option>);
-      }
-      quantity = <CartButtonWrapper30 as='select' id='quantity' dark={darkMode}>{options}</CartButtonWrapper30>;
-    } else if (max > 0) {
-      let options = [];
-      for (let i = 1; i < max + 1; i++) {
+      for (let i = 1; i < Math.min(max + 1, 16); i++) {
         options.push(<option value={i} key={i}>{i}</option>);
       }
       quantity = <CartButtonWrapper30 as='select' id='quantity' dark={darkMode}>{options}</CartButtonWrapper30>;
