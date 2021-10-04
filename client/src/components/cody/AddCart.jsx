@@ -2,10 +2,9 @@ import React, { useState, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
 import QuantityButton from './QuantityButton.jsx';
 import SizeSelector from './SizeSelector.jsx';
+import AddBag from './AddBag.jsx';
 import {
   CartButtonWrapper15,
-  CartButtonWrapper30,
-  CartButtonWrapper60,
   CartButtonWrapper75,
   SizeSelectionBox,
   PopUp
@@ -42,19 +41,7 @@ const AddCart = () => {
             if (styleSizes && styleSizes[0] !== 'null') {
               return (
                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
-                <CartButtonWrapper75 as='button' type='submit' dark={darkMode} onClick={(ev) => {
-                  ev.preventDefault();
-                  const selectDropdown = document.getElementById('size');
-                  const size = selectDropdown.value;
-                  if (size !== 'null') {
-                    // add functionality to submit information into user cart
-                    console.log(ev.target.parentElement.parentElement.children[0].children[0].value);
-                    console.log(ev.target.parentElement.parentElement.children[0].children[2].value); // children[1].value returns <PopUp>
-                    console.log(document.getElementById('quantity').value);
-                  } else {
-                    promptSelectSize(setPrompt);
-                  }
-                }}>ADD TO BAG</CartButtonWrapper75>
+                <AddBag setPrompt={setPrompt} />
                 <CartButtonWrapper15 as='button' type='submit' dark={darkMode} onClick={ (ev) => {
                   ev.preventDefault();
                   if (fav) {
@@ -71,7 +58,7 @@ const AddCart = () => {
             } else {
               return (
                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
-                  <CartButtonWrapper75 as='button' type='submit' dark={darkMode} disabled>ADD TO BAG</CartButtonWrapper75>
+                  <AddBag disabled />
                   <CartButtonWrapper15 as='button' type='submit' dark={darkMode} disabled></CartButtonWrapper15>
                 </div>
               );
