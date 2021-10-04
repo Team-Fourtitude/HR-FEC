@@ -10,7 +10,7 @@ import {
   SizeSelectionBox,
   PopUp
 } from './StyleHelpers';
-import {closeSelect, promptSelectSize} from './utilFunctions';
+import {promptSelectSize} from './utilFunctions';
 import {FaStar, FaRegStar} from 'react-icons/fa';
 import DarkModeContext from '../context/DarkModeContext.jsx';
 
@@ -32,30 +32,12 @@ const AddCart = () => {
             if (styleSizes && styleSizes[0] !== 'null') {
               return (
                 <>
-                <CartButtonWrapper60 as='select' id='size' dark={darkMode} value={currentSize || 'null'}
-                  onChange={(ev) => {
-                    setCurrentSize(ev.target.value);
-                    setPrompt(null);
-                    closeSelect(ev);
-                    const quantity = document.getElementById('quantity');
-                    quantity.value = 1;
-                  }}
-                  onBlur={(ev) => {
-                    setPrompt(null);
-                    closeSelect(ev);
-                }}>
-                  {<option value='null'>SELECT SIZE</option>}
-                  {styleSizes?.map((sizeID) => {
-                    return (
-                      <option key={sizeID} value={sizeID}>{curStyle.style.skus[sizeID].size}</option>
-                      );
-                    })}
-                </CartButtonWrapper60>
-                <PopUp prompt={prompt}><b>Please select size</b></PopUp>
+                  <SizeSelector
+                    functions={{setCurrentSize, setPrompt}}
+                    data={{currentSize, styleSizes, currentStyle: curStyle}} />
+                  <PopUp prompt={prompt}><b>Please select size</b></PopUp>
                 </>
               );
-            } else {
-              return <CartButtonWrapper60 as='select' id='size' dark={darkMode} value='null' disabled><option value='null'>OUT OF STOCK</option></CartButtonWrapper60>;
             }
           })()}
           <QuantityButton currentSize={currentSize} currentStyle={curStyle} />
@@ -66,7 +48,8 @@ const AddCart = () => {
                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
                 <CartButtonWrapper75 as='button' type='submit' dark={darkMode} onClick={(ev) => {
                   ev.preventDefault();
-                  let size = ev.target.parentElement.parentElement.children[0].children[0].value;
+                  const selectDropdown = document.getElementById('size');
+                  const size = selectDropdown.value;
                   if (size !== 'null') {
                     // add functionality to submit information into user cart
                     console.log(ev.target.parentElement.parentElement.children[0].children[0].value);
