@@ -37,9 +37,9 @@ const AddCart = () => {
     }
   } else {
     quantity = (
-      <CartButtonWrapper30 as='select' id='quantity' dark={darkMode} value='null' disabled>
-      <option value='null'>-</option>
-    </CartButtonWrapper30>
+      <CartButtonWrapper30 as='select' id='quantity' dark={darkMode} disabled>
+        <option key='0' value='0'>-</option>
+      </CartButtonWrapper30>
     );
     if (currentSize) {
       setCurrentSize(null);
