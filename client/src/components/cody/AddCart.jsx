@@ -5,6 +5,7 @@ import {
   CartButtonWrapper30,
   CartButtonWrapper60,
   CartButtonWrapper75,
+  SizeSelectionBox,
   PopUp
 } from './StyleHelpers';
 import {closeSelect, promptSelectSize} from './utilFunctions';
@@ -47,7 +48,7 @@ const AddCart = () => {
   return (
     <div style={{"width":"100%"}}>
       <form id='cartData' style={{"display":"flex", "flexDirection":"column"}}>
-        <div style={{"display":"flex", "justifyContent":"space-between", "position":"relative", "height":"50px", "marginBottom":"0.5em"}}>
+        <SizeSelectionBox>
           {(() => {
             if (styleSizes) {
               if (styleSizes[0] !== 'null') {
@@ -80,7 +81,7 @@ const AddCart = () => {
             }
           })()}
           {quantity || null}
-        </div>
+        </SizeSelectionBox>
         {(() => {
           if (styleSizes) {
             if (styleSizes[0] !== 'null') {
@@ -104,6 +105,7 @@ const AddCart = () => {
                   } else {
                     setFav(true);
                   }
+                  // implement logic to add item to favorites
                   console.log(curStyle.style.name);
                   console.log('prompt: ', prompt);
                 }}>{ fav ? <FaStar style={{"color":"goldenrod"}} name='star-filled' /> : <FaRegStar style={{"color":"grey"}} name='star-empty' />}</CartButtonWrapper15>

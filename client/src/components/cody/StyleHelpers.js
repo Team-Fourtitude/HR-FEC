@@ -340,3 +340,11 @@ export const StylesGrid = styled.div`
   gap: 20px;
   width: 60%;
 `;
+
+export const SizeSelectionBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  height: 50px;
+  margin-bottom: 0.5em;
+`;
