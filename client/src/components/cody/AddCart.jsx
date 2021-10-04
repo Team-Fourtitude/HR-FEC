@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
+import QuantityButton from './QuantityButton.jsx';
 import {
   CartButtonWrapper15,
   CartButtonWrapper30,
@@ -21,29 +22,6 @@ const AddCart = () => {
   let styleSizes;
   if (curStyle?.style?.skus) {
     styleSizes = Object.keys(curStyle.style.skus);
-  }
-  let quantity;
-  if (currentSize && curStyle.style.skus[currentSize]) {
-    const max =  curStyle.style.skus[currentSize].quantity;
-    if (max > 0) {
-      let options = [];
-      for (let i = 1; i < Math.min(max + 1, 16); i++) {
-        options.push(<option value={i} key={i}>{i}</option>);
-      }
-      quantity = <CartButtonWrapper30 as='select' id='quantity' dark={darkMode}>{options}</CartButtonWrapper30>;
-    } else {
-      let options = [<option key='0' value='0'>-</option>];
-      quantity = <CartButtonWrapper30 as='select' id='quantity' dark={darkMode} disabled>{options}</CartButtonWrapper30>;
-    }
-  } else {
-    quantity = (
-      <CartButtonWrapper30 as='select' id='quantity' dark={darkMode} disabled>
-        <option key='0' value='0'>-</option>
-      </CartButtonWrapper30>
-    );
-    if (currentSize) {
-      setCurrentSize(null);
-    }
   }
   return (
     <div style={{"width":"100%"}}>
@@ -80,7 +58,7 @@ const AddCart = () => {
               }
             }
           })()}
-          {quantity || null}
+          <QuantityButton sizeState={{currentSize, setCurrentSize}} currentStyle={curStyle} />
         </SizeSelectionBox>
         {(() => {
           if (styleSizes) {
@@ -93,7 +71,8 @@ const AddCart = () => {
                   if (size !== 'null') {
                     // add functionality to submit information into user cart
                     console.log(ev.target.parentElement.parentElement.children[0].children[0].value);
-                    console.log(ev.target.parentElement.parentElement.children[0].children[1].value);
+                    console.log(ev.target.parentElement.parentElement.children[0].children[2].value); // children[1].value returns <PopUp>
+                    console.log(document.getElementById('quantity').value);
                   } else {
                     promptSelectSize(setPrompt);
                   }

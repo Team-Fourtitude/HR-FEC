@@ -1,17 +1,26 @@
 import React from 'react';
 import {CartButtonWrapper30} from './StyleHelpers';
 
-const QuantityButton = ({currentSize, setCurrentSize, currentStyle}) => {
-  const max = currentStyle?.style.skus[currentSize]?.quantity;
+const QuantityButton = ({sizeState, currentStyle}) => {
+  const {currentSize, setCurrentSize} = sizeState;
+  const max = currentStyle?.style.skus?.[currentSize]?.quantity;
   const options = [];
+//   const noStock = (cb) => {
+//     cb(null);
+//     return <option value='0'>-</option>;
+//   }
   if (max) {
     for (let i = 1; i < Math.min(max + 1, 16); i++) {
       options.push(<option value={i} key={i}>{i}</option>);
     }
   }
   return (
+    options.length ?
     <CartButtonWrapper30 as='select' id='quantity'>
-      {options.length ? options : <option value='0'>-</option>}
+      {options}
+    </CartButtonWrapper30>:
+    <CartButtonWrapper30 as='select' id='quantity' disabled>
+      <option value='0'>-</option>
     </CartButtonWrapper30>
   );
 };
