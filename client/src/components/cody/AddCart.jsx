@@ -1,6 +1,13 @@
 import React, { useState, useContext } from 'react';
 import StyleContext from '../context/StyleContext.jsx';
-import { CartButtonWrapper15, CartButtonWrapper30, CartButtonWrapper60, CartButtonWrapper75, PopUp } from './StyleHelpers.js';
+import {
+  CartButtonWrapper15,
+  CartButtonWrapper30,
+  CartButtonWrapper60,
+  CartButtonWrapper75,
+  PopUp
+} from './StyleHelpers';
+import {closeSelect} from './utilFunctions';
 import {FaStar, FaRegStar} from 'react-icons/fa';
 import DarkModeContext from '../context/DarkModeContext.jsx';
 
@@ -46,26 +53,23 @@ const AddCart = () => {
               if (styleSizes[0] !== 'null') {
                 return (
                   <>
-                  <CartButtonWrapper60 as='select' id='size' dark={darkMode} value={currentSize ? currentSize : 'null'} onChange={(ev) => {
-                    setCurrentSize(ev.target.value);
-                    setPrompt(null);
-                    ev.target.removeAttribute('size');
-                    ev.target.style.position = 'static';
-                    ev.target.style.height = '50px';
-                    ev.target.parentElement.children[1].value = 1;
-                  }}
-                  onBlur={(ev) => {
-                    setPrompt(null);
-                    ev.target.removeAttribute('size');
-                    ev.target.style.position = 'static';
-                    ev.target.style.height = '50px';
+                  <CartButtonWrapper60 as='select' id='size' dark={darkMode} value={currentSize ? currentSize : 'null'}
+                    onChange={(ev) => {
+                      setCurrentSize(ev.target.value);
+                      setPrompt(null);
+                      closeSelect(ev);
+                      ev.target.parentElement.children[1].value = 1;
+                    }}
+                    onBlur={(ev) => {
+                      setPrompt(null);
+                      closeSelect(ev);
                   }}>
                     {<option value='null'>SELECT SIZE</option>}
-                    {styleSizes ? styleSizes.map( (sizeID) => {
+                    {styleSizes?.map((sizeID) => {
                       return (
                         <option key={sizeID} value={sizeID}>{curStyle.style.skus[sizeID].size}</option>
                         );
-                      }) : null}
+                      })}
                   </CartButtonWrapper60>
                   <PopUp prompt={prompt}><b>Please select size</b></PopUp>
                   </>
