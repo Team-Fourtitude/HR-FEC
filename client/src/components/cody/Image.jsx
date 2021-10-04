@@ -169,11 +169,13 @@ const Image = (props) => {
         if (index === photoMax) {
           return (
             <>
-              <ImageButtonLeft type='button'
-name='button-left'               onClick={() => {
-                setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
-                setIndex(index - 1);
-              }}><FaAngleLeft name='fangle-left'/></ImageButtonLeft>
+              <ImageButtonLeft type='button'name='button-left'
+                onClick={() => {
+                  setCurrentPic({url:curStyle.style.photos[index - 1].url, name:`${index - 1}`, style:curStyle.style.style_id});
+                  setIndex(index - 1);
+              }}>
+                <FaAngleLeft name='fangle-left'/>
+              </ImageButtonLeft>
               <ImageButtonRight type='button' name='button-right' disabled><FaAngleRight name='fangle-right' /></ImageButtonRight>
             </>
           );

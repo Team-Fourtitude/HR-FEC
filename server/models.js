@@ -1,8 +1,8 @@
 const axios = require('axios');
-const apiKey = require('../client/env/config.js');
+// const apiKey = require('../client/env/config.js');
 const cloudinary = require("cloudinary").v2;
 require('dotenv').config()
-
+const apiKey = process.env.HR_API_KEY;
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
