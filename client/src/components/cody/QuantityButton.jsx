@@ -5,10 +5,6 @@ const QuantityButton = ({sizeState, currentStyle}) => {
   const {currentSize, setCurrentSize} = sizeState;
   const max = currentStyle?.style.skus?.[currentSize]?.quantity;
   const options = [];
-//   const noStock = (cb) => {
-//     cb(null);
-//     return <option value='0'>-</option>;
-//   }
   if (max) {
     for (let i = 1; i < Math.min(max + 1, 16); i++) {
       options.push(<option value={i} key={i}>{i}</option>);
