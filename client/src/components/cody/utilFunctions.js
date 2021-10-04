@@ -28,3 +28,13 @@ export const closeSelect = (event) => {
     event.target.style.height = '50px';
   }
 };
+
+export const promptSelectSize = (callback) => {
+  let sizeSelector = document.getElementById('size');
+  let totalSizes = sizeSelector.children.length;
+  callback('true'); // set prompt = 'true'
+  sizeSelector.setAttribute('size', totalSizes);
+  sizeSelector.style.position = 'absolute';
+  sizeSelector.style.height = 'max-content';
+  sizeSelector.focus();
+};

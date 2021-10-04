@@ -7,7 +7,7 @@ import {
   CartButtonWrapper75,
   PopUp
 } from './StyleHelpers';
-import {closeSelect} from './utilFunctions';
+import {closeSelect, promptSelectSize} from './utilFunctions';
 import {FaStar, FaRegStar} from 'react-icons/fa';
 import DarkModeContext from '../context/DarkModeContext.jsx';
 
@@ -86,20 +86,15 @@ const AddCart = () => {
             if (styleSizes[0] !== 'null') {
               return (
                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
-                <CartButtonWrapper75 as='button' type='submit' dark={darkMode} onClick={ (ev) => {
+                <CartButtonWrapper75 as='button' type='submit' dark={darkMode} onClick={(ev) => {
                   ev.preventDefault();
                   let size = ev.target.parentElement.parentElement.children[0].children[0].value;
                   if (size !== 'null') {
+                    // add functionality to submit information into user cart
                     console.log(ev.target.parentElement.parentElement.children[0].children[0].value);
                     console.log(ev.target.parentElement.parentElement.children[0].children[1].value);
                   } else {
-                    let sizeSelector = document.getElementById('size');
-                    let totalSizes = sizeSelector.children.length;
-                    setPrompt('true');
-                    sizeSelector.setAttribute('size', totalSizes);
-                    sizeSelector.style.position = 'absolute';
-                    sizeSelector.style.height = 'max-content';
-                    sizeSelector.focus();
+                    promptSelectSize(setPrompt);
                   }
                 }}>ADD TO BAG</CartButtonWrapper75>
                 <CartButtonWrapper15 as='button' type='submit' dark={darkMode} onClick={ (ev) => {
@@ -117,8 +112,8 @@ const AddCart = () => {
             } else {
               return (
                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
-                <CartButtonWrapper75 as='button' type='submit' dark={darkMode} disabled>ADD TO BAG</CartButtonWrapper75>
-                <CartButtonWrapper15 as='button' type='submit' dark={darkMode} disabled></CartButtonWrapper15>
+                  <CartButtonWrapper75 as='button' type='submit' dark={darkMode} disabled>ADD TO BAG</CartButtonWrapper75>
+                  <CartButtonWrapper15 as='button' type='submit' dark={darkMode} disabled></CartButtonWrapper15>
                 </div>
               );
               }
