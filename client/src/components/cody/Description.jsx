@@ -1,6 +1,12 @@
 import React, { useContext } from 'react';
 import ProductContext from '../context/ProductContext.jsx';
-import { DescriptionBox, DescriptionShareBox, DescriptionSplit, ShareIconWrapper } from './StyleHelpers.js';
+import {
+  DescriptionBox,
+  DescriptionShareBox,
+  DescriptionSplit,
+  ShareIconWrapper,
+  ShareIcon,
+} from './StyleHelpers.js';
 
 const Description = () => {
   const currentProduct = useContext(ProductContext);
@@ -25,15 +31,15 @@ const Description = () => {
     </div>
     <DescriptionShareBox>
       <ShareIconWrapper as='a' className="twitter-share-button" href="https://twitter.com/intent/tweet" target='_blank' rel='noopener'>
-        <img style={{"width":"40px", "height":"40px"}} src='assets/twitterIcon.png' alt='twitter icon' />
+        <ShareIcon src='assets/twitterIcon.png' alt='twitter icon' />
       </ShareIconWrapper>
       <ShareIconWrapper onClick={fbUI}>
-        <img style={{"width":"40px", "height":"40px"}} src='assets/fbIcon.png' alt='facebook icon' />
+        <ShareIcon src='assets/fbIcon.png' alt='facebook icon' />
       </ShareIconWrapper>
       <ShareIconWrapper as='a' href="https://www.pinterest.com/pin/create/button/"
         data-pin-do="buttonBookmark" target='_blank' rel='noopener'
       >
-        <img style={{"width":"40px", "height":"40px"}} src='assets/pinterestIcon.png' alt='pinterest icon' />
+        <ShareIcon src='assets/pinterestIcon.png' alt='pinterest icon' />
       </ShareIconWrapper>
     </DescriptionShareBox>
   </DescriptionBox>

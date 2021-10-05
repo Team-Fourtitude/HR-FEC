@@ -348,3 +348,8 @@ export const SizeSelectionBox = styled.div`
   height: 50px;
   margin-bottom: 0.5em;
 `;
+
+export const ShareIcon = styled.img`
+  width: 40px;
+  height: 40px;
+`;
