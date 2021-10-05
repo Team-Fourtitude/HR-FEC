@@ -3,9 +3,8 @@ import StyleContext from '../context/StyleContext.jsx';
 import QuantityButton from './QuantityButton.jsx';
 import SizeSelector from './SizeSelector.jsx';
 import AddBag from './AddBag.jsx';
+import AddFavorite from './AddFavorite.jsx';
 import {
-  CartButtonWrapper15,
-  CartButtonWrapper75,
   SizeSelectionBox,
   PopUp
 } from './StyleHelpers';
@@ -42,28 +41,14 @@ const AddCart = () => {
               return (
                 <div style={{"display":"flex", "justifyContent":"space-between"}}>
                 <AddBag setPrompt={setPrompt} />
-                <CartButtonWrapper15 as='button' type='submit' dark={darkMode} onClick={ (ev) => {
-                  ev.preventDefault();
-                  if (fav) {
-                    setFav(false);
-                  } else {
-                    setFav(true);
-                  }
-                  // implement logic to add item to favorites
-                  console.log(curStyle.style.name);
-                  console.log('prompt: ', prompt);
-                }}>{ fav ? <FaStar style={{"color":"goldenrod"}} name='star-filled' /> : <FaRegStar style={{"color":"grey"}} name='star-empty' />}</CartButtonWrapper15>
+                <AddFavorite
+                  currentStyle={curStyle}
+                  favorite={{fav, setFav}}
+                  prompt={prompt}
+                />
                 </div>
               );
-            } else {
-              return (
-                <div style={{"display":"flex", "justifyContent":"space-between"}}>
-                  <AddBag disabled />
-                  <CartButtonWrapper15 as='button' type='submit' dark={darkMode} disabled></CartButtonWrapper15>
-                </div>
-              );
-              }
-            })()}
+            }})()}
       </form>
     </div>
   );
