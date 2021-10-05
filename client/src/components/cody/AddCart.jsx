@@ -4,23 +4,16 @@ import QuantityButton from './QuantityButton.jsx';
 import SizeSelector from './SizeSelector.jsx';
 import AddBag from './AddBag.jsx';
 import AddFavorite from './AddFavorite.jsx';
-import {
-  SizeSelectionBox,
-  PopUp
-} from './StyleHelpers';
-import {promptSelectSize} from './utilFunctions';
-import {FaStar, FaRegStar} from 'react-icons/fa';
-import DarkModeContext from '../context/DarkModeContext.jsx';
+import {SizeSelectionBox, PopUp} from './StyleHelpers';
 
 const AddCart = () => {
-  const curStyle = useContext(StyleContext);
-  const { darkMode } = useContext(DarkModeContext);
+  const currentStyle = useContext(StyleContext);
   const [fav, setFav] = useState(false);
   const [currentSize, setCurrentSize] = useState(null);
   const [prompt, setPrompt] = useState(null);
   let styleSizes;
-  if (curStyle?.style?.skus) {
-    styleSizes = Object.keys(curStyle.style.skus);
+  if (currentStyle?.style?.skus) {
+    styleSizes = Object.keys(currentStyle.style.skus);
   }
   return (
     <div style={{"width":"100%"}}>
@@ -30,14 +23,14 @@ const AddCart = () => {
           <SizeSelectionBox>
             <SizeSelector
               functions={{setCurrentSize, setPrompt}}
-              data={{currentSize, styleSizes, currentStyle: curStyle}} />
+              data={{currentSize, styleSizes, currentStyle}} />
             <PopUp prompt={prompt}><b>Please select size</b></PopUp>
-            <QuantityButton currentSize={currentSize} currentStyle={curStyle} />
+            <QuantityButton currentSize={currentSize} currentStyle={currentStyle} />
           </SizeSelectionBox>
           <div style={{"display":"flex", "justifyContent":"space-between"}}>
             <AddBag setPrompt={setPrompt} />
             <AddFavorite
-              currentStyle={curStyle}
+              currentStyle={currentStyle}
               favorite={{fav, setFav}}
               prompt={prompt}
             />
