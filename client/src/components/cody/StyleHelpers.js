@@ -353,3 +353,25 @@ export const ShareIcon = styled.img`
   width: 40px;
   height: 40px;
 `;
+
+export const Container1 = styled.div`
+  position: relative;
+  min-height: 600px;
+`;
+
+export const Container2 = styled.div`
+  width: 100%;
+`;
+
+export const Container3 = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 35%;
+  height: 100%:
+`;
+
+export const Container4 = styled.div`
+  width: 90%;
+  margin: 0 auto;
+`;
