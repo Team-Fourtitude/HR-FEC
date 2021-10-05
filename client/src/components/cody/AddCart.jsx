@@ -25,30 +25,24 @@ const AddCart = () => {
   return (
     <div style={{"width":"100%"}}>
       <form id='cartData' style={{"display":"flex", "flexDirection":"column"}}>
-        <SizeSelectionBox>
-          {(styleSizes && styleSizes[0] !== 'null') ?
-            <>
-              <SizeSelector
-                functions={{setCurrentSize, setPrompt}}
-                data={{currentSize, styleSizes, currentStyle: curStyle}} />
-              <PopUp prompt={prompt}><b>Please select size</b></PopUp>
-            </> : null
-          }
-          <QuantityButton currentSize={currentSize} currentStyle={curStyle} />
-        </SizeSelectionBox>
-        {(() => {
-            if (styleSizes && styleSizes[0] !== 'null') {
-              return (
-                <div style={{"display":"flex", "justifyContent":"space-between"}}>
-                <AddBag setPrompt={setPrompt} />
-                <AddFavorite
-                  currentStyle={curStyle}
-                  favorite={{fav, setFav}}
-                  prompt={prompt}
-                />
-                </div>
-              );
-            }})()}
+        {(styleSizes && styleSizes[0] !== 'null') ?
+        <>
+          <SizeSelectionBox>
+            <SizeSelector
+              functions={{setCurrentSize, setPrompt}}
+              data={{currentSize, styleSizes, currentStyle: curStyle}} />
+            <PopUp prompt={prompt}><b>Please select size</b></PopUp>
+            <QuantityButton currentSize={currentSize} currentStyle={curStyle} />
+          </SizeSelectionBox>
+          <div style={{"display":"flex", "justifyContent":"space-between"}}>
+            <AddBag setPrompt={setPrompt} />
+            <AddFavorite
+              currentStyle={curStyle}
+              favorite={{fav, setFav}}
+              prompt={prompt}
+            />
+          </div>
+        </> : null}
       </form>
     </div>
   );
