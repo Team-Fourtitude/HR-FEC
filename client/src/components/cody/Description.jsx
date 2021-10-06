@@ -1,9 +1,22 @@
 import React, { useContext } from 'react';
 import ProductContext from '../context/ProductContext.jsx';
-import { DescriptionBox, DescriptionShareBox, DescriptionSplit, ShareIconWrapper } from './StyleHelpers.js';
+import {
+  DescriptionBox,
+  DescriptionShareBox,
+  DescriptionSplit,
+  ShareIconWrapper,
+  ShareIcon,
+} from './StyleHelpers.js';
 
 const Description = () => {
   const currentProduct = useContext(ProductContext);
+  const fbUI = () => {
+    FB.ui({
+      display: 'popup',
+      method: 'share',
+      href: 'https://developers.facebook.com/docs/',
+    }, function(response){});
+  };
   return (
   <DescriptionBox>
     <div style={{"display":"flex"}}>
@@ -18,19 +31,15 @@ const Description = () => {
     </div>
     <DescriptionShareBox>
       <ShareIconWrapper as='a' className="twitter-share-button" href="https://twitter.com/intent/tweet" target='_blank' rel='noopener'>
-        <img style={{"width":"40px", "height":"40px"}} src='assets/twitterIcon.png' alt='twitter icon' />
+        <ShareIcon src='assets/twitterIcon.png' alt='twitter icon' />
       </ShareIconWrapper>
-      <ShareIconWrapper onClick={ () => {
-        FB.ui({
-          display: 'popup',
-          method: 'share',
-          href: 'https://developers.facebook.com/docs/',
-        }, function(response){});
-      }}>
-        <img style={{"width":"40px", "height":"40px"}} src='assets/fbIcon.png' alt='facebook icon' />
+      <ShareIconWrapper onClick={fbUI}>
+        <ShareIcon src='assets/fbIcon.png' alt='facebook icon' />
       </ShareIconWrapper>
-      <ShareIconWrapper as='a' href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" target='_blank' rel='noopener'>
-        <img style={{"width":"40px", "height":"40px"}} src='assets/pinterestIcon.png' alt='pinterest icon' />
+      <ShareIconWrapper as='a' href="https://www.pinterest.com/pin/create/button/"
+        data-pin-do="buttonBookmark" target='_blank' rel='noopener'
+      >
+        <ShareIcon src='assets/pinterestIcon.png' alt='pinterest icon' />
       </ShareIconWrapper>
     </DescriptionShareBox>
   </DescriptionBox>

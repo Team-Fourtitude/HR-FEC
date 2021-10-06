@@ -4,23 +4,30 @@ import Thumbnails from './Thumbnails.jsx';
 import Rating from './Rating.jsx';
 import Description from './Description.jsx';
 import StyleSelector from './StyleSelector.jsx';
-import { OverviewMain, OverviewDescription } from './StyleHelpers';
+import {
+  Container1,
+  Container2,
+  Container3,
+  Container4,
+  OverviewMain,
+  OverviewDescription,
+} from './StyleHelpers';
 
 const Overview = () => {
   return (
     <OverviewMain>
-      <div style={{"position":"relative", "minHeight":"600px"}}>
-        <div style={{"width":"100%"}}>
+      <Container1>
+        <Container2>
           <Thumbnails />
-        </div>
-        <div style={{"position":"absolute","right":"0","top":"0", "width": "35%", "height":"100%"}}>
-          <div style={{"width":"90%", "margin":"0 auto"}}>
+        </Container2>
+        <Container3>
+          <Container4>
             <Rating />
             <StyleSelector />
             <AddCart />
-          </div>
-        </div>
-      </div>
+          </Container4>
+        </Container3>
+      </Container1>
       <OverviewDescription>
         <Description />
       </OverviewDescription>
